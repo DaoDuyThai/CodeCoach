@@ -109,8 +109,6 @@ CREATE TABLE Slot (
   endTime TIME NOT NULL
 );
 
-
-
 CREATE TABLE Booking (
   bookingId INT IDENTITY(1,1) PRIMARY KEY,
   mentorId INT NOT NULL,
@@ -119,6 +117,15 @@ CREATE TABLE Booking (
   FOREIGN KEY (mentorId) REFERENCES Mentors(mentorId),
   FOREIGN KEY (menteeId) REFERENCES Mentees(menteeId)
 );
+
+CREATE TABLE BookingDetails(
+	bookingDetailId INT IDENTITY(1,1) PRIMARY KEY,
+	bookingId INT, 
+	slotId INT,
+	[date] DATETIME,
+  FOREIGN KEY (slotId) REFERENCES Slot(slotId)
+);
+
 CREATE TABLE Feedback (
   feedbackId INT IDENTITY(1,1) PRIMARY KEY,
   menteeId INT NOT NULL,
