@@ -1,5 +1,3 @@
-
-
 CREATE TABLE tinhthanhpho (
   mattp varchar(5)  NOT NULL PRIMARY KEY,
   [name] nvarchar(100)  NOT NULL,
@@ -127,7 +125,6 @@ CREATE TABLE BookingDetails(
 	bookingId INT, 
 	slotId INT,
 	[date] DATE,
-	FOREIGN KEY (bookingId) REFERENCES Booking(bookingId),
   FOREIGN KEY (slotId) REFERENCES Slot(slotId)
 );
 
@@ -144,6 +141,21 @@ CREATE TABLE Feedback (
   FOREIGN KEY (bookingId) REFERENCES Booking(bookingId)
 );
 
+CREATE TABLE MentorAvailability (
+  availabilityId INT IDENTITY(1,1) PRIMARY KEY,
+  mentorId INT NOT NULL,
+  FOREIGN KEY (mentorId) REFERENCES Mentors(mentorId)
+);
+
+CREATE TABLE MentorAvailabilityDetails (
+  mentorAvailabilityDetailsId INT IDENTITY(1,1) PRIMARY KEY,
+  availabilityId INT NOT NULL,
+  dayOfWeek INT NOT NULL,
+  slotId INT NOT NULL,
+  FOREIGN KEY (availabilityId) REFERENCES MentorAvailability(availabilityId),
+  FOREIGN KEY (slotId) REFERENCES Slot(slotId)
+);
+
 CREATE TABLE Notifications (
   notificationId INT IDENTITY(1,1) PRIMARY KEY,
   userId INT NOT NULL,
@@ -156,13 +168,24 @@ CREATE TABLE Notifications (
   FOREIGN KEY (bookingId) REFERENCES Booking(bookingId)
 );
 
+CREATE TABLE [Messages] (
+  messageId INT IDENTITY(1,1) PRIMARY KEY,
+  senderId INT NOT NULL,
+  recipientId INT NOT NULL,
+  subject VARCHAR(100) NOT NULL,
+  content VARCHAR(MAX) NOT NULL,
+  dateTime DATETIME NOT NULL,
+  FOREIGN KEY (senderId) REFERENCES Users(userId),
+  FOREIGN KEY (recipientId) REFERENCES Users(userId)
+);
+
 CREATE TABLE ChatRoom (
   chatRoomId INT IDENTITY(1,1) PRIMARY KEY,
   chatRoomName VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE ChatRoomUsers (
-  chatRoomId INT NOT NULL,
+  chatRoomId INT IDENTITY(1,1) NOT NULL,
   userId INT NOT NULL,
   FOREIGN KEY (chatRoomId) REFERENCES ChatRoom(chatRoomId),
   FOREIGN KEY (userId) REFERENCES Users(userId)
