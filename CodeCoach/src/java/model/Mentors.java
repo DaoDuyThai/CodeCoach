@@ -1,0 +1,65 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+
+/**
+ *
+ * @author Duy Thai
+ */
+public class Mentors {
+
+    private int mentorId;
+    private int userId;
+    private String bio;
+    private String hourlyRate;
+
+    @Override
+    public String toString() {
+        return "Mentors{" + "mentorId=" + mentorId + ", userId=" + userId + ", bio=" + bio + ", hourlyRate=" + hourlyRate + '}';
+    }
+
+    public Mentors() {
+    }
+
+    public Mentors(int mentorId, int userId, String bio, String hourlyRate) {
+        this.mentorId = mentorId;
+        this.userId = userId;
+        this.bio = bio;
+        this.hourlyRate = hourlyRate;
+    }
+
+    public int getMentorId() {
+        return mentorId;
+    }
+
+    public void setMentorId(int mentorId) {
+        this.mentorId = mentorId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(String hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+
+}

@@ -13,12 +13,12 @@ VALUES
   ('Mentee');
 
 -- Insert data into Users table
-INSERT INTO Users (email, fName, lName, gender, phoneNum, roleId, statusId, address, maqh, facebook)
+INSERT INTO Users (email, password, fName, lName, gender, phoneNum, roleId, statusId, address, maqh, facebook)
 VALUES
-  ('admin@admin.com', 'Admin', 'User', 'Male', '123456', 1, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
-  ('mentor@mentor.com', 'Mentor', 'User', 'Male', '234567', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
-  ('mentee@mentee.com', 'Mentee', 'User', 'Male', '345678', 3, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
-  ('thaiddhe176315@fpt.edu.vn', N'Đào', N'Duy Thái', 'Male', '0796428094', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/');
+  ('admin@admin.com','123456' , 'Admin', 'User', 'Male', '123456', 1, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
+  ('mentor@mentor.com','123456', 'Mentor', 'User', 'Male', '234567', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
+  ('mentee@mentee.com','123456', 'Mentee', 'User', 'Male', '345678', 3, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
+  ('thaiddhe176315@fpt.edu.vn','123456', N'Đào', N'Duy Thái', 'Male', '0796428094', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/');
 
 -- Insert data into Categories table
 INSERT INTO Categories (categoryName) VALUES

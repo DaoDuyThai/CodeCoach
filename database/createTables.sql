@@ -1,5 +1,3 @@
-
-
 CREATE TABLE tinhthanhpho (
   mattp varchar(5)  NOT NULL PRIMARY KEY,
   [name] nvarchar(100)  NOT NULL,
@@ -25,6 +23,7 @@ CREATE TABLE Roles (
 CREATE TABLE Users (
   userId INT IDENTITY(1,1) PRIMARY KEY,
   email VARCHAR(50) NOT NULL,
+  [password] varchar(50) NOT NULL, 
   fName VARCHAR(50) NOT NULL,
   lName VARCHAR(50) NOT NULL,
   gender VARCHAR(10) NOT NULL,
@@ -96,9 +95,9 @@ CREATE TABLE Mentees (
 CREATE TABLE MenteeInterests (
   menteeInterestId INT IDENTITY(1,1) PRIMARY KEY,
   menteeId INT NOT NULL,
-  skillId INT NOT NULL,
-  categoryId INT NOT NULL,
-  subCategoryId INT NOT NULL,
+  categoryId INT,
+  subCategoryId INT,
+  skillId INT,
   FOREIGN KEY (menteeId) REFERENCES Mentees(menteeId),
   FOREIGN KEY (skillId) REFERENCES Skills(skillId),
   FOREIGN KEY (categoryId) REFERENCES Categories(categoryId),
@@ -136,7 +135,7 @@ CREATE TABLE Feedback (
   menteeId INT NOT NULL,
   mentorId INT NOT NULL,
   bookingId INT NOT NULL,
-  ratingId INT NOT NULL,
+  rating INT NOT NULL,
   reviewText VARCHAR(MAX) NOT NULL,
   reviewDateTime DATETIME NOT NULL,
   FOREIGN KEY (menteeId) REFERENCES Mentees(menteeId),
