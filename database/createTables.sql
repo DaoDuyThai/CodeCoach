@@ -1,3 +1,5 @@
+
+
 CREATE TABLE tinhthanhpho (
   mattp varchar(5)  NOT NULL PRIMARY KEY,
   [name] nvarchar(100)  NOT NULL,

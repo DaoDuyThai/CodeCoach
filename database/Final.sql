@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [CodeCoach]    Script Date: 21/05/2023 3:07:53 pm ******/
+/****** Object:  Database [CodeCoach]    Script Date: 21/05/2023 10:08:42 pm ******/
 CREATE DATABASE [CodeCoach]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -82,7 +82,7 @@ ALTER DATABASE [CodeCoach] SET QUERY_STORE = OFF
 GO
 USE [CodeCoach]
 GO
-/****** Object:  Table [dbo].[Booking]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Booking]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -99,7 +99,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[BookingDetails]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[BookingDetails]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -115,7 +115,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Categories]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Categories]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -129,7 +129,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ChatMessages]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[ChatMessages]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +146,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ChatRoom]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[ChatRoom]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -160,7 +160,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ChatRoomUsers]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[ChatRoomUsers]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -170,7 +170,7 @@ CREATE TABLE [dbo].[ChatRoomUsers](
 	[userId] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Experience]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Experience]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +185,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Expertise]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Expertise]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -200,7 +200,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Feedback]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Feedback]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -210,7 +210,7 @@ CREATE TABLE [dbo].[Feedback](
 	[menteeId] [int] NOT NULL,
 	[mentorId] [int] NOT NULL,
 	[bookingId] [int] NOT NULL,
-	[ratingId] [int] NOT NULL,
+	[rating] [int] NOT NULL,
 	[reviewText] [varchar](max) NOT NULL,
 	[reviewDateTime] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
@@ -219,7 +219,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MenteeInterests]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[MenteeInterests]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -227,16 +227,16 @@ GO
 CREATE TABLE [dbo].[MenteeInterests](
 	[menteeInterestId] [int] IDENTITY(1,1) NOT NULL,
 	[menteeId] [int] NOT NULL,
-	[skillId] [int] NOT NULL,
-	[categoryId] [int] NOT NULL,
-	[subCategoryId] [int] NOT NULL,
+	[categoryId] [int] NULL,
+	[subCategoryId] [int] NULL,
+	[skillId] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[menteeInterestId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Mentees]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Mentees]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -250,7 +250,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Mentors]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Mentors]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -266,7 +266,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Notifications]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Notifications]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -285,7 +285,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[quanhuyen]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[quanhuyen]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -301,7 +301,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -315,7 +315,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Skills]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Skills]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -330,7 +330,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Slot]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Slot]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -345,7 +345,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[SubCategories]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[SubCategories]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -360,7 +360,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tinhthanhpho]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[tinhthanhpho]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -375,7 +375,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -399,7 +399,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserStatus]    Script Date: 21/05/2023 3:07:54 pm ******/
+/****** Object:  Table [dbo].[UserStatus]    Script Date: 21/05/2023 10:08:42 pm ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -457,9 +457,9 @@ SET IDENTITY_INSERT [dbo].[Categories] OFF
 GO
 SET IDENTITY_INSERT [dbo].[ChatMessages] ON 
 GO
-INSERT [dbo].[ChatMessages] ([chatMessagesId], [chatRoomId], [userId], [message], [sentDateTime]) VALUES (1, 1, 1, N'Hello everyone!', CAST(N'2023-05-21T15:06:46.230' AS DateTime))
+INSERT [dbo].[ChatMessages] ([chatMessagesId], [chatRoomId], [userId], [message], [sentDateTime]) VALUES (1, 1, 1, N'Hello everyone!', CAST(N'2023-05-21T22:08:07.267' AS DateTime))
 GO
-INSERT [dbo].[ChatMessages] ([chatMessagesId], [chatRoomId], [userId], [message], [sentDateTime]) VALUES (2, 1, 2, N'Hi there!', CAST(N'2023-05-21T15:06:46.230' AS DateTime))
+INSERT [dbo].[ChatMessages] ([chatMessagesId], [chatRoomId], [userId], [message], [sentDateTime]) VALUES (2, 1, 2, N'Hi there!', CAST(N'2023-05-21T22:08:07.267' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[ChatMessages] OFF
 GO
@@ -523,13 +523,13 @@ SET IDENTITY_INSERT [dbo].[Expertise] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Feedback] ON 
 GO
-INSERT [dbo].[Feedback] ([feedbackId], [menteeId], [mentorId], [bookingId], [ratingId], [reviewText], [reviewDateTime]) VALUES (1, 1, 1, 1, 5, N'Great mentor!', CAST(N'2023-05-21T15:06:46.230' AS DateTime))
+INSERT [dbo].[Feedback] ([feedbackId], [menteeId], [mentorId], [bookingId], [rating], [reviewText], [reviewDateTime]) VALUES (1, 1, 1, 1, 5, N'Great mentor!', CAST(N'2023-05-21T22:08:07.263' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[Feedback] OFF
 GO
 SET IDENTITY_INSERT [dbo].[MenteeInterests] ON 
 GO
-INSERT [dbo].[MenteeInterests] ([menteeInterestId], [menteeId], [skillId], [categoryId], [subCategoryId]) VALUES (1, 1, 3, 2, 3)
+INSERT [dbo].[MenteeInterests] ([menteeInterestId], [menteeId], [categoryId], [subCategoryId], [skillId]) VALUES (1, 1, 2, 3, 3)
 GO
 SET IDENTITY_INSERT [dbo].[MenteeInterests] OFF
 GO
@@ -549,7 +549,7 @@ SET IDENTITY_INSERT [dbo].[Mentors] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Notifications] ON 
 GO
-INSERT [dbo].[Notifications] ([notificationId], [userId], [bookingId], [content], [dateTime], [type], [status]) VALUES (1, 1, 1, N'New booking request', CAST(N'2023-05-21T15:06:46.230' AS DateTime), N'Booking', N'Pending')
+INSERT [dbo].[Notifications] ([notificationId], [userId], [bookingId], [content], [dateTime], [type], [status]) VALUES (1, 1, 1, N'New booking request', CAST(N'2023-05-21T22:08:07.263' AS DateTime), N'Booking', N'Pending')
 GO
 SET IDENTITY_INSERT [dbo].[Notifications] OFF
 GO

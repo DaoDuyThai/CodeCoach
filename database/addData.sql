@@ -141,7 +141,7 @@ VALUES
   (5, 3, '2023-05-06');
 
   -- Insert data into Feedback table
-INSERT INTO Feedback (menteeId, mentorId, bookingId, ratingId, reviewText, reviewDateTime)
+INSERT INTO Feedback (menteeId, mentorId, bookingId, rating, reviewText, reviewDateTime)
 VALUES
   (1, 1, 1, 5, 'Great mentor!', GETDATE());
 
