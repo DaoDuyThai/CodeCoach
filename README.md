@@ -9,3 +9,4 @@ the second commit
 =======
 huhujhuuh
 >>>>>>> 326003378a3bc8d0d38f6ceac2f1f7d3ffa5f6b4
+Nghia commit the third 
