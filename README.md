@@ -1,4 +1,2 @@
 # CodeCoach
-New commit
-
-cidifi6
+commit minor details
