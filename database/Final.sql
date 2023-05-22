@@ -2,12 +2,6 @@ USE [master]
 GO
 /****** Object:  Database [CodeCoach]    Script Date: 21/05/2023 10:08:42 pm ******/
 CREATE DATABASE [CodeCoach]
- CONTAINMENT = NONE
- ON  PRIMARY 
-( NAME = N'CodeCoach', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.DUYTHAI\MSSQL\DATA\CodeCoach.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
- LOG ON 
-( NAME = N'CodeCoach_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.DUYTHAI\MSSQL\DATA\CodeCoach_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
- WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
 ALTER DATABASE [CodeCoach] SET COMPATIBILITY_LEVEL = 150
 GO
