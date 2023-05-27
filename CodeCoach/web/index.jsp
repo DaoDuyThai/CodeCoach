@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : 27-May-2023, 18:40:44
+    Author     : ADMIN
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +12,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Mentoring</title>
+    <title>Codecoach</title>
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 
@@ -37,13 +44,13 @@
                                 <span></span>
                             </span>
                         </a>
-                        <a href="index.html" class="navbar-brand logo">
+                        <a href="index.jsp" class="navbar-brand logo">
                             <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
                         </a>
                     </div>
                     <div class="main-menu-wrapper">
                         <div class="menu-header">
-                            <a href="index.html" class="menu-logo">
+                            <a href="index.jsp" class="menu-logo">
                                 <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
                             </a>
                             <a id="menu_close" class="menu-close" href="javascript:void(0);">
@@ -51,24 +58,15 @@
                             </a>
                         </div>
                         <ul class="main-nav">
-                                <a href="index.html">Home <i class="fas fa-chevron-down"></i></a>
+                                <a href="index.jsp">Home</a>
                             <li class="has-submenu">
                                 <a href>Mentor <i class="fas fa-chevron-down"></i></a>
                                 <ul class="submenu">
-                                    <li><a href="dashboard.html">Mentor Dashboard</a></li>
-                                    <li><a href="bookings.html">Bookings</a></li>
-                                    <li><a href="schedule-timings.html">Schedule Timing</a></li>
-                                    <li><a href="mentee-list.html">Mentee List</a></li>
-                                    <li><a href="profile-mentee.html">Mentee Profile</a></li>
-                                    <li class="has-submenu">
-                                        <a href="blog.html">Blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-details.html">Blog View</a></li>
-                                            <li><a href="add-blog.html">Add Blog</a></li>
-                                            <li><a href="edit-blog.html">Edit Blog</a></li>
-                                        </ul>
-                                    </li>
+                                    <li><a href="dashboard.jsp">Mentor Dashboard</a></li>
+                                    <li><a href="bookings.jsp">Bookings</a></li>
+                                    <li><a href="schedule-timings.jsp">Schedule Timing</a></li>
+                                    <li><a href="mentee-list.jsp">Mentee List</a></li>
+                                    <li><a href="profile-mentee.jsp">Mentee Profile</a></li>
                                     <li><a href="chat.html">Chat</a></li>
                                     <li><a href="invoices.html">Invoices</a></li>
                                     <li><a href="profile-settings.html">Profile Settings</a></li>
@@ -95,7 +93,7 @@
                                     <li><a href="favourites.html">Favourites</a></li>
                                     <li><a href="chat-mentee.html">Chat</a></li>
                                     <li><a href="profile-settings-mentee.html">Profile Settings</a></li>
-                                    <li><a href="change-password.html">Change Password</a></li>
+                                    <li><a href="changepassword.jsp">Change Password</a></li>
                                 </ul>
                             </li>
                             <li class="has-submenu">
@@ -113,30 +111,22 @@
                                         </ul>
                                     </li>
                                     <li><a href="blank-page.html">Starter Page</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/login">Login</a></li>
+                                    <li><a href="Register.jsp">Register</a></li>
                                     <li><a href="forgot-password.html">Forgot Password</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-submenu">
-                                <a href>Blog <i class="fas fa-chevron-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="blog-list.html">Blog List</a></li>
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="admin/index.html" target="_blank">Admin</a>
                             </li>
                             <li class="login-link">
-                                <a href="login.html">Login / Signup</a>
+                                <a href="<%=request.getContextPath()%>/login">Login / Signup</a>
                             </li>
                         </ul>
                     </div>
                     <ul class="nav header-navbar-rht">
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Login</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/login">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link header-login" href="register.html">Register</a>
@@ -964,6 +954,5 @@
     <script src="assets/js/script.js"></script>
 </body>
 
-<!-- Mirrored from mentoring.dreamguystech.com/html/template/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:29:08 GMT -->
 
 </html>

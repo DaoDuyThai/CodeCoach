@@ -37,24 +37,31 @@
                                 <h3>Login <span>CodeCoach</span></h3>
                                 <p class="text-muted">Access to our dashboard</p>
                             </div>
-                            <form action="index.jsp">
+                            <form action="<%=request.getContextPath()%>/login" method="post">
                                 <div class="form-group">
                                     <label class="form-control-label">Email Address</label>
-                                    <input type="email" class="form-control">
+                                    <input type="email" name= "email" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label class="form-control-label">Password</label>
                                     <div class="pass-group">
-                                        <input type="password" class="form-control pass-input">
+                                        <input type="password" name="password" class="form-control pass-input">
                                         <span class="fas fa-eye toggle-password"></span>
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
+                                    <a class="forgot-link" href="forgot password.jsp">Forgot Password ?</a>
                                 </div>
-                                <button class="btn btn-primary login-btn" type="submit">Login</button>
+                                <button class="btn btn-primary login-btn" type="submit" value ="login">Login</button>
+                                <%
+                                    String error =(String)request.getAttribute("error");
+                                    if (error != null){
+                                    %>
+                                    <div style="color: red"><%=error%></div>
+                                    <%}
+                                %>
                                 <div class="text-center dont-have">Don’t have an account? <a
-                                        href="register.html">Register</a></div>
+                                        href="register.jsp">Register</a></div>
                             </form>
                         </div>
                     </div>
