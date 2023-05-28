@@ -58,10 +58,9 @@ public class ChangePassword extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
                UserDAO ud = new UserDAO()   ;
-               String u = request.getParameter("username"); 
-               String p = request.getParameter("opas");
-               String password = request.getParameter("password");
-               Users u = ud.checkLogin(email, password);
+               String e = request.getParameter("email"); 
+               String op = request.getParameter("opass");
+               Users u = ud.checkLogin(e, op);
     } 
 
     /** 
