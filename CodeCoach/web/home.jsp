@@ -419,7 +419,7 @@
             </div>
             <div class="learning-path-col">
                 <div class="container">
-                    <div class="row">
+                    <div id="skills" class="row">
 
                         <!-- categories/subcategories/skills -->
                         <c:forEach items="${skillList}" var="o">
@@ -444,10 +444,20 @@
             </div>
         </section>
         
+<!--        ajax use to load more skills-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script>
             funtion loadMore(){
-                
+                $.ajax({
+                    url: "codecoach/loadskills",
+                    type: "get",
+                    success: function(data){
+                        const skills = document.getElementById("skills")
+                    },
+                    error: function (xhr){
+                        
+                    }
+                });
             }
         </script>
 

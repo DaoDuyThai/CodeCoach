@@ -2,7 +2,7 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-    <c:set var="users" value="${requestScope.users}"/>
+    <c:set var="users" value="${sessionScope.users}"/>
     <div class="main-wrapper">
         <header class="header">
             <div class="header-fixed">
