@@ -93,7 +93,7 @@
                                     <li><a href="favourites.html">Favourites</a></li>
                                     <li><a href="chat-mentee.html">Chat</a></li>
                                     <li><a href="profile-settings-mentee.html">Profile Settings</a></li>
-                                    <li><a href="changepassword.jsp">Change Password</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/changepassword">Change Password</a></li>
                                 </ul>
                             </li>
                             <li class="has-submenu">
