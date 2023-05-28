@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Users;
-import dal.DAOUsers;
+import dal.UsersDAO;
 import java.util.List;
 import model.TinhThanhPho;
 
@@ -20,7 +20,7 @@ import model.TinhThanhPho;
  *
  * @author NGHIA
  */
-public class Register extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -89,7 +89,7 @@ public class Register extends HttpServlet {
         String create = request.getParameter("create");
         Users user = new Users(fName, lName, gender, email, phoneNum, address, facebook, password);    
         user.setMaqh(maqh);
-        DAOUsers cdb = new DAOUsers();
+        UsersDAO cdb = new UsersDAO();
         if (create != null) {
             cdb.insert(user);
         }

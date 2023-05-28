@@ -28,7 +28,13 @@
                 });
             });
         </script>
+        <style>
+            p {
+                margin-top: 10px;
+                color: red;
+            }
 
+        </style>
     </head>
 
     <body class="account-page">
@@ -46,26 +52,26 @@
                                     <p class="text-muted">Access to our dashboard</p>
                                 </div>
 
-                                <form action="register" method="post">
+                                <form action="register" method="post" onsubmit="return validatePassword()"> 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">First Name</label>
-                                                <input id="first-name" type="text" class="form-control" name="first_name"
+                                                <input id="first-name" type="text" class="form-control" name="first_name" required
                                                        autofocus>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Last Name</label>
-                                                <input id="last-name" type="text" class="form-control" name="last_name">
+                                                <input id="last-name" type="text" class="form-control" name="last_name" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" >
                                         Gender :
                                         <label for="male">Male</label>
-                                        <input type="radio" id="male" name="gender" value="male">
+                                        <input type="radio" id="male" name="gender" value="male" required >
 
                                         <label for="female">Female</label>
                                         <input type="radio" id="female" name="gender" value="female">
@@ -73,21 +79,21 @@
 
                                     <div class="form-group">
                                         <label class="form-control-label">Email Address</label>
-                                        <input id="email" type="email" class="form-control" name="email">
+                                        <input id="email" type="email" class="form-control" name="email" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Phone Number</label>
-                                        <input id="phonenumber" type="text" class="form-control" name="phone_number">
+                                        <input id="phonenumber" type="text" class="form-control" name="phone_number" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Address</label>
-                                        <input id="address" type="text" class="form-control" name="address">
+                                        <input id="address" type="text" class="form-control" name="address" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">City</label>
-                                                <select name="" id="cityList" onchange="changeCity()">
+                                                <select name="" id="cityList" onchange="changeCity()" required>
                                                     <option value="" selected=""></option>
                                                     <c:forEach items="${requestScope.listCity}" var="i">
                                                         <option value="${i.mattp}">${i.name}</option>
@@ -99,7 +105,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">District</label>
                                                 <br>
-                                                <select name="district" id="district" style="display: none">
+                                                <select name="district" id="district" style="display: none" required>
 
                                                 </select>
                                             </div>
@@ -107,20 +113,20 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Facebook</label>
-                                        <input id="facebook" type="text" class="form-control" name="facebook">
+                                        <input id="facebook" type="text" class="form-control" name="facebook" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Password</label>
-                                                <input id="password" type="password" class="form-control" name="password">
+                                                <input id="password" type="password" class="form-control" name="password" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Confirm Password</label>
                                                 <input id="password-confirm" type="password" class="form-control"
-                                                       name="password_confirmation">
+                                                       name="password_confirmation"  required>
                                             </div>
                                         </div>
                                     </div>
@@ -133,8 +139,9 @@
                                                 Policy</a> &amp; <a tabindex="-1" href="javascript:void(0);"> Terms.</a>
                                         </div>
                                     </div>
-                                    <button class="btn btn-primary login-btn" type="submit" name="create">Create
+                                    <button  class="btn btn-primary login-btn" type="submit" name="create">Create
                                         Account</button>
+                                    <p id="message"></p>
                                     <div class="account-footer text-center mt-3">
                                         Already have an account? <a class="forgot-link mb-0" href="login.html">Login</a>
                                     </div>
@@ -158,11 +165,10 @@
                     },
                     url: '${pageContext.request.contextPath}/chooseDistrict',
                     success: function (data, textStatus, jqXHR) {
-                        if($('#cityList').val() !== ''){
-                            $('#district').css("display","inline");
-                        }
-                        else{
-                            $('#district').css("display","none");
+                        if ($('#cityList').val() !== '') {
+                            $('#district').css("display", "inline");
+                        } else {
+                            $('#district').css("display", "none");
                         }
                         $('#district').html(data)
                     }
@@ -171,6 +177,23 @@
             }
         </script>
 
+        <script>
+            function validatePassword() {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("password-confirm").value;
+                var message = document.getElementById("message");
+
+                if (password === confirmPassword) {
+                    message.style.color = "green";
+                    message.innerHTML = "Password match!";
+                    return true; // Cho phép g?i form
+                } else {
+                    message.style.color = "red";
+                    message.innerHTML = "Password incorrect! Please re-enter.";
+                    return false; // Ng?n ch?n g?i form
+                }
+            }
+        </script>
         <script src="assets/js/jquery-3.6.0.min.js"></script>
 
         <script src="assets/js/bootstrap.bundle.min.js"></script>

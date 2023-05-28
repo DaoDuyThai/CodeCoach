@@ -13,7 +13,7 @@ import java.sql.ResultSet;
  *
  * @author NGHIA
  */
-public class DAOUsers extends DBContext {
+public class UsersDAO extends DBContext {
 
     Connection conn = null;
     PreparedStatement ps = null;
