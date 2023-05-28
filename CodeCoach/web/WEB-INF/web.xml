@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>PrivacyPolicyandTermsController</servlet-name>
-        <servlet-class>PrivacyPolicyandTermsController</servlet-class>
+        <servlet-class>controller.PrivacyPolicyandTermsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>FAQController</servlet-name>
