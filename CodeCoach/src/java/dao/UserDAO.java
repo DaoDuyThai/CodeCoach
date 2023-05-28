@@ -13,7 +13,7 @@ import java.sql.ResultSet;
  *
  * @author ADMIN
  */
-public class UserDAO {
+public class UserDAO extends DBContext {
     Connection c = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -36,4 +36,16 @@ public class UserDAO {
         }
         return null;
         }
+    public void changePassword(Users u){
+        String upd = "Update Users where password= ? where email= ?";
+        try{
+        PreparedStatement st = c.prepareStatement(upd);
+        st.setString(1, u.getEmail());
+        st.setString(2, u.getPassword());
+        st.executeUpdate();
     }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}

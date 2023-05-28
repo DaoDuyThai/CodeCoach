@@ -13,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Set;
 import model.Users;
 
 /**
@@ -57,10 +60,7 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-               UserDAO ud = new UserDAO()   ;
-               String e = request.getParameter("email"); 
-               String op = request.getParameter("opass");
-               Users u = ud.checkLogin(e, op);
+            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,7 +73,26 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        UserDAO ud = new UserDAO()   ;
+               String e = request.getParameter("email"); 
+               String op = request.getParameter("opass");
+               String p = request.getParameter("rpass");
+               Users u = ud.checkLogin(e, op);
+               if (u == null){
+                   //if old password is wrong
+                   String message = "Old password is incorrect";
+                   request.setAttribute("ms", message);
+                   request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+               }
+               else{
+                   //If the old password is correct
+                   Users uc = new Users(u.getUserId(), e, p, u.getfName(), u.getlName(), u.getGender(), u.getPhoneNum(), u.getRoleId(), u.getStatusId(), u.getAddress(), u.getMaqh(), u.getFacebook());
+                   ud.changePassword(uc);
+                   HttpSession session = request.getSession();
+                   session.setAttribute("user", u);
+                   response.sendRedirect("index.jsp");
+                   
+               }
     }
 
     /** 

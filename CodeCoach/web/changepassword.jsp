@@ -252,6 +252,13 @@
                                                 <input type="password" name="opass" class="form-control">
                                                 <input type="hidden" name="email" value="${sessionScope.Users.email}">
                                             </div>
+                                            <%
+                                             String ms =(String)request.getAttribute("ms");
+                                             if (ms != null){
+                                            %>
+                                            <div style="color: red"><%=ms%></div>
+                                            <%}
+                                            %>
                                             <div class="form-group">
                                                 <label>New Password</label>
                                                 <input type="password" name="pass" class="form-control">
