@@ -23,6 +23,21 @@ public class Users {
     private String maqh;
     private String facebook;
 
+    public Users(String fName, String lName, String gender, String email, String phoneNum, String address, String facebook,String password) {
+        this.email = email;
+        this.password = password;
+        this.fName = fName;
+        this.lName = lName;
+        this.gender = gender;
+        this.phoneNum = phoneNum;
+        this.address = address;
+        this.facebook = facebook;
+    }
+
+    
+
+   
+
     public Users(int userId, String email, String password, String fName, String lName, String gender, String phoneNum, int roleId, int statusId, String address, String maqh, String facebook) {
         this.userId = userId;
         this.email = email;
