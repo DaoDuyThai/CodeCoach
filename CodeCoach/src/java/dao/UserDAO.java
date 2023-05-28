@@ -8,20 +8,39 @@ import model.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import model.Roles;
 
 /**
  *
  * @author ADMIN
  */
 public class UserDAO extends DBContext {
-    Connection c = null;
+    Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    public List<Roles> getAll() {
+        List<Roles> list = new ArrayList<>();
+        String querry = "select * from roles";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Roles(rs.getInt(1), rs.getString(2)));
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
+
     public Users checkLogin(String email, String password){
         try {
-        String query = "Select * from Users where email = ? and password = ?";
-        c = new DBContext().getConnection();
-        ps = c.prepareStatement(query);
+        String query = "Select * from Users where email =? and password =?";
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(query);
         ps.setString(1, email);
         ps.setString(2, password);
         rs = ps.executeQuery();
@@ -37,11 +56,13 @@ public class UserDAO extends DBContext {
         return null;
         }
     public void changePassword(Users u){
-        String upd = "Update Users where password= ? where email= ?";
+        
+        String upd = "Update Users sets password=? where email=?";
         try{
-        PreparedStatement st = c.prepareStatement(upd);
-        st.setString(1, u.getEmail());
-        st.setString(2, u.getPassword());
+        conn = new DBContext().getConnection();
+        PreparedStatement st = conn.prepareStatement(upd);
+        st.setString(1, u.getPassword());
+        st.setString(2, u.getEmail());
         st.executeUpdate();
     }
         catch (Exception e){

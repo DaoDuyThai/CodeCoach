@@ -5,7 +5,7 @@
 
 package controller;
 
-import dao.UserDAO;
+import dal.SkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,17 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.Set;
-import model.Users;
+import java.util.List;
+import model.Skills;
 
 /**
  *
- * @author ADMIN
+ * @author Duy Thai
  */
-@WebServlet(name="ChangePassword", urlPatterns={"/changepassword"})
-public class ChangePassword extends HttpServlet {
+@WebServlet(name="HomeController", urlPatterns={"/home"})
+public class HomeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class ChangePassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePassword</title>");  
+            out.println("<title>Servlet HomeController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePassword at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet HomeController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +58,10 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
+        SkillDAO skillDao = new SkillDAO();
+        List<Skills> skillList = skillDao.getTop8();
+        request.setAttribute("skillList", skillList);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,26 +74,7 @@ public class ChangePassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDAO ud = new UserDAO()   ;
-               String e = request.getParameter("email"); 
-               String op = request.getParameter("opass");
-               String p = request.getParameter("rpass");
-               Users u = ud.checkLogin(e, op);
-               if (u == null){
-                   //if old password is wrong
-                   String message = "Old password is incorrect";
-                   request.setAttribute("ms", message);
-                   request.getRequestDispatcher("changepassword.jsp").forward(request, response);
-               }
-               else{
-                   //If the old password is correct
-                   Users uc = new Users(u.getUserId(), e, p, u.getfName(), u.getlName(), u.getGender(), u.getPhoneNum(), u.getRoleId(), u.getStatusId(), u.getAddress(), u.getMaqh(), u.getFacebook());
-                   ud.changePassword(uc);
-                   HttpSession session = request.getSession();
-                   session.setAttribute("user", u);
-                   response.sendRedirect("index.jsp");
-                   
-               }
+        processRequest(request, response);
     }
 
     /** 
