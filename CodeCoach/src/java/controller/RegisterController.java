@@ -96,7 +96,7 @@ public class RegisterController extends HttpServlet {
         if (create != null) {
             cdb.insert(user);
         }
-
+        response.sendRedirect("login");
     }
 
     /**

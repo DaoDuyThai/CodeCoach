@@ -117,7 +117,7 @@
                                 <a class="nav-link" href="login.html">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link header-login" href="register.html">Register</a>
+                                <a class="nav-link header-login" href="register">Register</a>
                             </li>
 
                         </ul>

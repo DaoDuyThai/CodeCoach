@@ -46,7 +46,7 @@
                             <ul>
                                 <li><a href="">Search Mentors</a></li>
                                 <li><a href="">Login</a></li>
-                                <li><a href="">Register</a></li>
+                                <li><a href="register">Register</a></li>
                                 <li><a href="">Booking</a></li>
                                 <li><a href="">Mentee Dashboard</a></li>
                             </ul>
@@ -61,7 +61,7 @@
                                 <li><a href="">Appointments</a></li>
                                 <li><a href="">Chat</a></li>
                                 <li><a href="">Login</a></li>
-                                <li><a href="">Register</a></li>
+                                <li><a href="register">Register</a></li>
                                 <li><a href="">Mentor Dashboard</a></li>
                             </ul>
                         </div>

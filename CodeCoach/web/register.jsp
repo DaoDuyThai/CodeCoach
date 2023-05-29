@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from mentoring.dreamguystech.com/html/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:30 GMT -->
 
     <head>
         <meta charset="utf-8">
@@ -42,13 +41,15 @@
         <div class="main-wrapper">
 
             <div class="bg-pattern-style bg-pattern-style-register">
-                <div class="content">
+                <center>
 
+                </center>
+                <div class="w-100 p-3 d-flex align-items-center justify-content-center">
                     <div class="account-content">
                         <div class="account-box">
                             <div class="login-right">
                                 <div class="login-header">
-                                    <h3><span>Mentoring</span> Register</h3>
+                                    <h3><span>CodeCoach</span> Register</h3>
                                     <p class="text-muted">Access to our dashboard</p>
                                 </div>
 
@@ -71,7 +72,7 @@
                                     <div class="form-group" >
                                         Gender :
                                         <label for="male">Male</label>
-                                        <input type="radio" id="male" name="gender" value="male" required >
+                                        <input type="radio" id="male" name="gender" value="male" checked >
 
                                         <label for="female">Female</label>
                                         <input type="radio" id="female" name="gender" value="female">
@@ -83,17 +84,13 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Phone Number</label>
-                                        <input id="phonenumber" type="text" class="form-control" name="phone_number" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label">Address</label>
-                                        <input id="address" type="text" class="form-control" name="address" required>
+                                        <input id="phonenumber" type="number" class="form-control" name="phone_number" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">City</label>
-                                                <select name="" id="cityList" onchange="changeCity()" required>
+                                                <select class="form-select" name="" id="cityList" onchange="changeCity()" required>
                                                     <option value="" selected=""></option>
                                                     <c:forEach items="${requestScope.listCity}" var="i">
                                                         <option value="${i.mattp}">${i.name}</option>
@@ -101,16 +98,22 @@
                                                 </select>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">District</label>
-                                                <br>
-                                                <select name="district" id="district" style="display: none" required>
+                                                <select class="form-select" name="district" id="district" style="display: none" required>
 
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="form-control-label">Address</label>
+                                        <input id="address" type="text" class="form-control" name="address" required>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="form-control-label">Facebook</label>
                                         <input id="facebook" type="text" class="form-control" name="facebook" required>
@@ -133,10 +136,10 @@
                                     <div class="form-group">
                                         <div class="form-check form-check-xs custom-checkbox">
                                             <input type="checkbox" class="form-check-input" name="agreeCheckboxUser"
-                                                   id="agree_checkbox_user">
+                                                   id="agree_checkbox_user" required>
                                             <label class="form-check-label" for="agree_checkbox_user">I agree to
-                                                Mentoring</label> <a tabindex="-1" href="javascript:void(0);">Privacy
-                                                Policy</a> &amp; <a tabindex="-1" href="javascript:void(0);"> Terms.</a>
+                                                CodeCoach</label> <a tabindex="-1" href="privacypolicyandterms">Privacy
+                                                Policy and Terms </a> 
                                         </div>
                                     </div>
                                     <button  class="btn btn-primary login-btn" type="submit" name="create">Create
@@ -202,6 +205,5 @@
 
     </body>
 
-    <!-- Mirrored from mentoring.dreamguystech.com/html/template/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:30 GMT -->
 
 </html>
