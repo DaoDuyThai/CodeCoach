@@ -30,7 +30,7 @@
                         </div>
                         <ul class="main-nav">
                             <li class="has-submenu">
-                                <a href="">Home <i class="fas"></i></a>
+                                <a href="home">Home <i class="fas"></i></a>
                             </li>
                             <li class="has-submenu">
                                 <a href>Mentor <i class="fas fa-chevron-down"></i></a>
@@ -99,7 +99,7 @@
                                     </div>
                                     <a class="dropdown-item" href="">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
-                                    <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
+                                    <a class="dropdown-item" href="changepassword">Change Password</a>
                                     <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
                                 </div>
                             </li>

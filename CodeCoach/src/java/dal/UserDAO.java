@@ -38,39 +38,41 @@ public class UserDAO {
 
         return list;
     }
-    public Users checkLogin(String email, String password){
+
+    public Users checkLogin(String email, String password) {
         try {
-        String query = "Select * from Users where email =? and password =?";
-        conn = new DBContext().getConnection();
-        ps = conn.prepareStatement(query);
-        ps.setString(1, email);
-        ps.setString(2, password);
-        rs = ps.executeQuery();
+            String query = "Select * from Users where email =? and password =?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                Users u = new Users(rs.getInt(1) ,rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),rs.getString(6), rs.getString(7),
-                                    rs.getInt(8),rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                Users u = new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+                        rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
                 return u;
             }
-            }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-        }
-    public void changePassword(Users u) throws Exception{
-        
+    }
+
+    public void changePassword(Users u) throws Exception {
+
         String upd = "Update Users set password=?"
                 + " where email=?";
-        try{
-        conn = new DBContext().getConnection();
-        PreparedStatement st = conn.prepareStatement(upd);
-        st.setString(1, u.getPassword());
-        st.setString(2, u.getEmail());
-        st.executeUpdate();
-    }
-        catch (SQLException e){
-               System.out.println(e);
+        try {
+            conn = new DBContext().getConnection();
+            PreparedStatement st = conn.prepareStatement(upd);
+            st.setString(1, u.getPassword());
+            st.setString(2, u.getEmail());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
         }
     }
+    
+    
 
 }
