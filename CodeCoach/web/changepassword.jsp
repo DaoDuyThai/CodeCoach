@@ -36,7 +36,6 @@
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                             </ol>
                         </nav>
                         <h2 class="breadcrumb-title">Change Password</h2>
@@ -121,6 +120,13 @@
                                                 <label>Confirm Password</label>
                                                 <input type="password" name="rpass" class="form-control">
                                             </div>
+                                             <%
+                                             String err1 =(String)request.getAttribute("err1");
+                                             if (err1 != null){
+                                            %>
+                                            <div style="color: red"><%=err1%></div>
+                                            <%}
+                                            %>
                                             
                                             <div class="submit-section">
                                                 <button type="submit" class="btn btn-primary submit-btn" value="change">Save

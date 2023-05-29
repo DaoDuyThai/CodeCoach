@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Roles;
 
 /**
@@ -58,7 +60,7 @@ public class UserDAO extends DBContext {
         }
     public void changePassword(Users u) throws Exception{
         
-        String upd = "Update Users sets password=?"
+        String upd = "Update Users set password=?"
                 + " where email=?";
         try{
         conn = new DBContext().getConnection();
@@ -71,4 +73,14 @@ public class UserDAO extends DBContext {
                System.out.println(e);
         }
     }
+//    public static void main(String[] args) {
+//        
+//        Users u = new Users();
+//        UserDAO dao = new UserDAO();
+//        try {
+//            dao.changePassword(u);
+//        } catch (Exception ex) {
+//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }
