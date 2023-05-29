@@ -8,6 +8,7 @@ import model.Users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Roles;
@@ -55,9 +56,10 @@ public class UserDAO extends DBContext {
         }
         return null;
         }
-    public void changePassword(Users u){
+    public void changePassword(Users u) throws Exception{
         
-        String upd = "Update Users sets password=? where email=?";
+        String upd = "Update Users sets password=?"
+                + " where email=?";
         try{
         conn = new DBContext().getConnection();
         PreparedStatement st = conn.prepareStatement(upd);
@@ -65,8 +67,8 @@ public class UserDAO extends DBContext {
         st.setString(2, u.getEmail());
         st.executeUpdate();
     }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (SQLException e){
+               System.out.println(e);
         }
     }
 }

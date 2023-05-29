@@ -107,10 +107,10 @@
                                                 <input type="hidden" name="email" value="${sessionScope.users.email}">
                                             </div>
                                             <%
-                                             String ms =(String)request.getAttribute("ms");
-                                             if (ms != null){
+                                             String error =(String)request.getAttribute("error");
+                                             if (error != null){
                                             %>
-                                            <div style="color: red"><%=ms%></div>
+                                            <div style="color: red"><%=error%></div>
                                             <%}
                                             %>
                                             <div class="form-group">
@@ -121,6 +121,7 @@
                                                 <label>Confirm Password</label>
                                                 <input type="password" name="rpass" class="form-control">
                                             </div>
+                                            
                                             <div class="submit-section">
                                                 <button type="submit" class="btn btn-primary submit-btn" value="change">Save
                                                     Changes</button>
