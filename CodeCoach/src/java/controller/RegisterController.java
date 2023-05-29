@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Users;
 import dal.UsersDAO;
+import jakarta.servlet.annotation.WebServlet;
 import java.util.List;
 import model.TinhThanhPho;
 
@@ -20,6 +21,8 @@ import model.TinhThanhPho;
  *
  * @author NGHIA
  */
+@WebServlet(name="RegisterController", urlPatterns={"/register"})
+
 public class RegisterController extends HttpServlet {
 
     /**
