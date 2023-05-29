@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="assets/plugins/aos/aos.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -419,13 +420,14 @@
             </div>
             <div class="learning-path-col">
                 <div class="container">
-                    <div id="skills" class="row">
+                    
+                    <div id="skillslist" class="row">
 
                         <!-- categories/subcategories/skills -->
                         <c:forEach items="${skillList}" var="o">
-                            <div class="col-12 col-md-4 col-lg-3">
+                            <div class="countskills col-12 col-md-4 col-lg-3">
                                 <div class="large-col aos" data-aos="fade-up">
-                                    <a href="search.html" class="large-col-image">
+                                    <a href="" class="large-col-image">
                                         <div class="image-col-merge">
                                             <img src="assets/images/skills/${o.skillId}.png" alt>
                                             <div class="text-col">
@@ -437,28 +439,34 @@
                             </div>
                         </c:forEach>
                         <!-- end of categories/subcategories/skills -->
-                        
+
                     </div>
-                    <div class="view-all text-center aos" data-aos="fade-up"><button onclick="loadMore()" class="btn btn-primary">Load more</button></div>
+                    <div class="view-all text-center aos" data-aos="fade-up">
+                        <button onclick="loadMore()" class="btn btn-primary">Load more</button>
+                    </div>
                 </div>
             </div>
         </section>
+        <!--        ajax use to load more skills-->
         
-<!--        ajax use to load more skills-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script>
-            funtion loadMore(){
-                $.ajax({
-                    url: "codecoach/loadskills",
-                    type: "get",
-                    success: function(data){
-                        const skills = document.getElementById("skills")
-                    },
-                    error: function (xhr){
-                        
-                    }
-                });
-            }
+                            function loadMore() {
+                                var amount = document.getElementsByClassName("countskills").length;
+                                $.ajax({
+                                    url: "/codecoach/loadskills",
+                                    type: 'get',
+                                    data: {
+                                        exist: amount
+                                    },
+                                    success: function (data) {
+                                        var skillslist = document.getElementById("skillslist");
+                                        skillslist.innerHTML += data;
+                                    },
+                                    error: function (xhr) {
+                                        //Do Something to handle error
+                                    }
+                                });
+                            }
         </script>
 
         <!-- Pre footer -->
