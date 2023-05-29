@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.DAO;
+import dal.TinhThanhPhoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -36,7 +36,7 @@ public class ChooseDistrictController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String id = request.getParameter("id");
-            DAO dao = new DAO();
+            TinhThanhPhoDAO dao = new TinhThanhPhoDAO();
             List<QuanHuyen> list = dao.getDistrictByCityID(id);
             for(QuanHuyen i : list)
             {

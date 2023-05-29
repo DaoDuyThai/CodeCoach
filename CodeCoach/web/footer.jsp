@@ -69,24 +69,14 @@
                     </div>
                     <div class="col-lg-3 col-md-6">
 
-                        <div class="footer-widget footer-contact">
-                            <h2 class="footer-title">Contact Us</h2>
-                            <div class="footer-contact-info">
-                                <div class="footer-address">
-                                    <span><i class="fas fa-map-marker-alt"></i></span>
-                                    <p>FPT University<br>Thach That, Hanoi, Vietnam</p>
-                                </div>
-                                <p>
-                                    <i class="fas fa-phone-alt"></i>
-                                    +84 79 6428 094
-                                </p>
-                                <ul>
-                                    <li class="list-unstyled "><p></p>Email</li>
-                                    <li class="list-unstyled"><p>codecoach.project@gmail.com</p></li>
-                                </ul>
-
-
-                            </div>
+                        <div class="footer-widget footer-menu">
+                            <h2 class="footer-title">About</h2>
+                            <ul>
+                                <li><a href="privacypolicyandterms">Privacy policy & terms</a></li>
+                                <li><a href="aboutus">About us</a></li>
+                                <li><a href="contactus">Contact us</a></li>
+                                <li><a href="faq">FAQ</a></li>
+                            </ul>
                         </div>
 
                     </div>

@@ -29,15 +29,14 @@
 
         <div class="bg-pattern-style">
             <div class="content">
-
                 <div class="account-content">
                     <div class="account-box">
                         <div class="login-right">
                             <div class="login-header">
                                 <h3>Login <span>CodeCoach</span></h3>
-                                <p class="text-muted">Access to our dashboard</p>
+                                <p class="text-muted">Access to our dashboard to explore endless possibility</p>
                             </div>
-                            <form action="<%=request.getContextPath()%>/login" method="post">
+                            <form action="login" method="post">
                                 <div class="form-group">
                                     <label class="form-control-label">Email Address</label>
                                     <input type="email" name= "email" class="form-control">
@@ -50,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <a class="forgot-link" href="forgot password.jsp">Forgot Password ?</a>
+                                    <a class="forgot-link" href="forgotpassword">Forgot Password ?</a>
                                 </div>
                                 <button class="btn btn-primary login-btn" type="submit" value ="login">Login</button>
                                 <%
@@ -61,7 +60,7 @@
                                     <%}
                                 %>
                                 <div class="text-center dont-have">Don’t have an account? <a
-                                        href="register.jsp">Register</a></div>
+                                        href="register">Register</a></div>
                             </form>
                         </div>
                     </div>

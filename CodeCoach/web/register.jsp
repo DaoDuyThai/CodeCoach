@@ -50,7 +50,7 @@
                             <div class="login-right">
                                 <div class="login-header">
                                     <h3><span>CodeCoach</span> Register</h3>
-                                    <p class="text-muted">Access to our dashboard</p>
+                                    
                                 </div>
 
                                 <form action="register" method="post" onsubmit="return validatePassword()"> 
@@ -81,6 +81,21 @@
                                     <div class="form-group">
                                         <label class="form-control-label">Email Address</label>
                                         <input id="email" type="email" class="form-control" name="email" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Password</label>
+                                                <input id="password" type="password" class="form-control" name="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Confirm Password</label>
+                                                <input id="password-confirm" type="password" class="form-control"
+                                                       name="password_confirmation"  required>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Phone Number</label>
@@ -118,21 +133,7 @@
                                         <label class="form-control-label">Facebook</label>
                                         <input id="facebook" type="text" class="form-control" name="facebook" required>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Password</label>
-                                                <input id="password" type="password" class="form-control" name="password" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Confirm Password</label>
-                                                <input id="password-confirm" type="password" class="form-control"
-                                                       name="password_confirmation"  required>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                     <div class="form-group">
                                         <div class="form-check form-check-xs custom-checkbox">
                                             <input type="checkbox" class="form-check-input" name="agreeCheckboxUser"

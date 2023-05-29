@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.DAO;
+import dal.TinhThanhPhoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -21,7 +21,7 @@ import model.TinhThanhPho;
  *
  * @author NGHIA
  */
-@WebServlet(name="RegisterController", urlPatterns={"/register"})
+@WebServlet(name = "RegisterController", urlPatterns = {"/register"})
 
 public class RegisterController extends HttpServlet {
 
@@ -63,7 +63,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAO dao = new DAO();
+        TinhThanhPhoDAO dao = new TinhThanhPhoDAO();
         List<TinhThanhPho> list = dao.getAllTinhThanhPho();
         request.setAttribute("listCity", list);
         request.getRequestDispatcher("register.jsp").forward(request, response);
@@ -90,7 +90,7 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String maqh = request.getParameter("district");
         String create = request.getParameter("create");
-        Users user = new Users(fName, lName, gender, email, phoneNum, address, facebook, password);    
+        Users user = new Users(fName, lName, gender, email, phoneNum, address, facebook, password);
         user.setMaqh(maqh);
         UserDAO cdb = new UserDAO();
         if (create != null) {

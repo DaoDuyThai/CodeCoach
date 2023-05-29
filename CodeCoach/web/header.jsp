@@ -82,19 +82,19 @@
                             <li class="nav-item dropdown nav has-arrow logged-item header-navbar-rht">
                                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img class="rounded-circle" src="assets/img/user/user.jpg" width="31"
+                                        <img class="rounded-circle" src="assets/images/users/${users.userId}.png" width="31"
                                              alt="Darren Elder">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="user-header">
                                         <div class="avatar avatar-sm">
-                                            <img src="assets/img/user/user.jpg" alt="User Image"
+                                            <img src="assets/images/users/${users.userId}.png" alt="User Image"
                                                  class="avatar-img rounded-circle">
                                         </div>
                                         <div class="user-text">
-                                            <h6>Jonathan Doe</h6>
-                                            <p class="text-muted mb-0">Mentor</p>
+                                            <h6>${users.fName} ${users.lName}</h6>
+                                            <p class="text-muted mb-0"></p>
                                         </div>
                                     </div>
                                     <a class="dropdown-item" href="">Dashboard</a>
