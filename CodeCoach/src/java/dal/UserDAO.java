@@ -72,7 +72,38 @@ public class UserDAO {
             System.out.println(e);
         }
     }
-    
-    
+
+    public void insert(Users user) {
+        String sql = "INSERT INTO [dbo].[Users]\n"
+                + "           ([email]\n"
+                + "           ,[password]\n"
+                + "           ,[fName]\n"
+                + "           ,[lName]\n"
+                + "           ,[gender]\n"
+                + "           ,[phoneNum]\n"
+                + "           ,[roleId]\n"
+                + "           ,[statusId]\n"
+                + "           ,[address]\n"
+                + "           ,[maqh]\n"
+                + "           ,[facebook])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,1,1,?,?,?)";
+        try {
+            conn = new DBContext().getConnection();
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(3, user.getfName());
+            st.setString(4, user.getlName());
+            st.setString(5, user.getGender());
+            st.setString(1, user.getEmail());
+            st.setString(6, user.getPhoneNum());
+            st.setString(7, user.getAddress());
+            st.setString(9, user.getFacebook());
+            st.setString(2, user.getPassword());
+            st.setString(8, user.getMaqh());
+            st.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

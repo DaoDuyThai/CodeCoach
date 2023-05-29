@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Users;
-import dal.UsersDAO;
+import dal.UserDAO;
 import jakarta.servlet.annotation.WebServlet;
 import java.util.List;
 import model.TinhThanhPho;
@@ -92,7 +92,7 @@ public class RegisterController extends HttpServlet {
         String create = request.getParameter("create");
         Users user = new Users(fName, lName, gender, email, phoneNum, address, facebook, password);    
         user.setMaqh(maqh);
-        UsersDAO cdb = new UsersDAO();
+        UserDAO cdb = new UserDAO();
         if (create != null) {
             cdb.insert(user);
         }
