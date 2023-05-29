@@ -70,7 +70,7 @@
                             <!--end of Admin button-->
 
                             <li class="login-link">
-                                <a href="login.html">Login / Signup</a>
+                                <a href="login">Login / Signup</a>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +99,7 @@
                                     </div>
                                     <a class="dropdown-item" href="">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
-                                    <a class="dropdown-item" href="changepassword">Change Password</a>
+                                    <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
                                     <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
                                 </div>
                             </li>
@@ -114,7 +114,7 @@
                         <ul class="nav header-navbar-rht">
 
                             <li class="nav-item">
-                                <a class="nav-link" href="login.html">Login</a>
+                                <a class="nav-link" href="login">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link header-login" href="register">Register</a>
