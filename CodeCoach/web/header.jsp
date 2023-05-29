@@ -99,8 +99,8 @@
                                     </div>
                                     <a class="dropdown-item" href="">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
-                                    <a class="dropdown-item" href="">Change Password</a>
-                                    <a class="dropdown-item" href="">Logout</a>
+                                    <a class="dropdown-item" href="changepassword">Change Password</a>
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
                                 </div>
                             </li>
 
