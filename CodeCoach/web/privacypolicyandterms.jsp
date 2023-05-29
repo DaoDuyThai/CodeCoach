@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from mentoring.dreamguystech.com/html/template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:30 GMT -->
     <head>
         <meta charset="utf-8">
         <title>Mentoring</title>
@@ -24,7 +23,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body class="account-page">
-        <form action="PrivacyPolicyTermsController" method="post">
+        <!-- Header is placed here -->
+        <%@include file="header.jsp" %>
+        <!--End of header-->
         <div class="main-wrapper">
             <div class="content">
                 <h1 style="font-weight: bold; text-align: center;">Privacy Policy & Terms</h1>
@@ -116,7 +117,9 @@
                     </div>
                 </div>
             </div>
-            </form>
+            <!-- end of Pre footer -->
+            <%@include file="footer.jsp" %>
+            <!-- footer is place here -->
 
             <script src="assets/js/jquery-3.6.0.min.js"></script>
 
@@ -125,5 +128,4 @@
             <script src="assets/js/script.js"></script>
     </body>
 
-    <!-- Mirrored from mentoring.dreamguystech.com/html/template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:30 GMT -->
 </html>

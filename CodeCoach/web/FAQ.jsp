@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <!-- Mirrored from mentoring.dreamguystech.com/html/template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:30 GMT -->
     <head>
         <meta charset="utf-8">
         <title>FAQ</title>
@@ -23,6 +22,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body class="account-page">
+        <!-- Header is placed here -->
+        <%@include file="header.jsp" %>
+        <!--End of header-->
 
         <div class="main-wrapper">
             <div class="content">
@@ -31,42 +33,9 @@
                 <br>
                 <div class="account-box">              
                     <div class="login-right">
-                        <!--                        <h1>Privacy Policy:</h1>
-                                                <br>
-                                                <h3>1. How do I register and create a tutor account on this website?:</h3>
-                                                <br>
-                                              
-                                                <h3>2. How do I search and select a tutor that fits my needs?</h3>
-                                                <br>
-                                                
-                                                <h3>3. How can I view detailed information about a specific tutor, including their experience, qualifications, teaching fees, ratings from other students, etc.?</h3>
-                                                <br>
-                                                
-                                                <h3>4. How do I contact and schedule lessons with a chosen tutor?</h3>
-                                                <br>
-                                                
-                                                <h3>5. Does the tutor guarantee teaching quality? Do they have any relevant qualifications or certifications?</h3>
-                                                <br>
-                                                
-                                                <h3>6. How do I make payments for the tutoring fees? Are there different payment methods available?</h3>
-                                                <br>
-                                                
-                                     
-                                                <h3>7.What are the conditions and policies for canceling scheduled lessons?</h3>
-                                                <br>
-                                               
-                                                <h3>8. Does the website provide customer support or assistance? How can I contact them?</h3>
-                                                <br>
-                                                
-                                                <h3>9. How can I provide feedback and reviews about a tutor after completing a course?</h3>
-                                                <br>
-                                               
-                                                <h3>10. What is the website's privacy policy? How is my personal information protected?</h3>
-                                                <br>
-                                               
-                                                <br><br>-->
+
                         <div class="accordion" id="accordionExample">
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -79,7 +48,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -92,7 +61,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
@@ -105,7 +74,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingFive">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
@@ -118,7 +87,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingSix">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
@@ -131,7 +100,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingSeven">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
@@ -156,6 +125,7 @@
 
             <script src="assets/js/script.js"></script>
     </body>
-
-    <!-- Mirrored from mentoring.dreamguystech.com/html/template/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:30 GMT -->
+    <!-- end of Pre footer -->
+    <%@include file="footer.jsp" %>
+    <!-- footer is place here -->
 </html>
