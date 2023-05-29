@@ -2,7 +2,7 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-    <c:set var="users" value="${requestScope.users}"/>
+    <c:set var="users" value="${sessionScope.users}"/>
     <div class="main-wrapper">
         <header class="header">
             <div class="header-fixed">
@@ -97,9 +97,10 @@
                                             <p class="text-muted mb-0">Mentor</p>
                                         </div>
                                     </div>
-                                    <a class="dropdown-item" href="dashboard.html">Dashboard</a>
-                                    <a class="dropdown-item" href="profile-settings.html">Profile Settings</a>
-                                    <a class="dropdown-item" href="login.html">Logout</a>
+                                    <a class="dropdown-item" href="">Dashboard</a>
+                                    <a class="dropdown-item" href="">Profile Settings</a>
+                                    <a class="dropdown-item" href="">Change Password</a>
+                                    <a class="dropdown-item" href="">Logout</a>
                                 </div>
                             </li>
 
