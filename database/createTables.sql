@@ -179,3 +179,16 @@ CREATE TABLE ChatMessages (
   FOREIGN KEY (chatRoomId) REFERENCES ChatRoom(chatRoomId),
   FOREIGN KEY (userId) REFERENCES Users(userId)
 );
+
+Create table FAQ (
+	id int IDENTITY(1,1),
+	question varchar(255),
+	answer varchar(255),
+);
+
+Create table PrivacyPolicyAndTerms(
+   id int,	
+   type int,
+   summary varchar(255),
+   content varchar(500)
+);
