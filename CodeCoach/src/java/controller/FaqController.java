@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.FaqDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Faq;
 
 /**
  *
@@ -55,6 +58,9 @@ public class FaqController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        FaqDAO d = new FaqDAO();
+        List<Faq> listFaq = d.getAll();
+        request.setAttribute("listFaq", listFaq);
         request.getRequestDispatcher("faq.jsp").forward(request, response);
     } 
 
