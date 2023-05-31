@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
     <meta charset="utf-8">
-    <title>CodeCoach</title>
+    <title>Change Password</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -24,7 +24,7 @@
 
     <div class="main-wrapper">
 
-       <!-- Header is placed here -->
+        <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
 
@@ -33,11 +33,7 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            </ol>
-                        </nav>
+
                         <h2 class="breadcrumb-title">Change Password</h2>
                     </div>
                 </div>
@@ -48,7 +44,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    
+
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <div class="card">
                             <div class="card-body">
@@ -62,8 +58,8 @@
                                                 <input type="hidden" name="email" value="${sessionScope.users.email}">
                                             </div>
                                             <%
-                                             String error =(String)request.getAttribute("error");
-                                             if (error != null){
+                                                String error = (String) request.getAttribute("error");
+                                                if (error != null) {
                                             %>
                                             <div style="color: red"><%=error%></div>
                                             <%}
@@ -76,14 +72,14 @@
                                                 <label>Confirm Password</label>
                                                 <input type="password" name="rpass" class="form-control">
                                             </div>
-                                             <%
-                                             String err1 =(String)request.getAttribute("err1");
-                                             if (err1 != null){
+                                            <%
+                                                String err1 = (String) request.getAttribute("err1");
+                                                if (err1 != null) {
                                             %>
                                             <div style="color: red"><%=err1%></div>
                                             <%}
                                             %>
-                                            
+
                                             <div class="submit-section">
                                                 <button type="submit" class="btn btn-primary submit-btn" value="change">Save
                                                     Changes</button>
@@ -99,10 +95,11 @@
             </div>
         </div>
 
-
-       <!-- end of Pre footer -->
-        <%@include file="footer.jsp" %>
         <!-- footer is place here -->
+
+        <%@include file="footer.jsp" %>
+        <!-- end of footer -->
+
 
     </div>
 
