@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Users;
 
 /**
  *
- * @author ADMIN
+ * @author Duy Thai
  */
-@WebServlet(name="LoginController", urlPatterns={"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name="logoutController", urlPatterns={"/logout"})
+public class logoutController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,7 +31,18 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet logoutController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet logoutController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,7 +56,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        response.sendRedirect(request.getContextPath());
     } 
 
     /** 
@@ -60,22 +73,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try{   
-               UserDAO ud = new UserDAO()   ;
-               String email = request.getParameter("email");
-               String password = request.getParameter("password");
-               Users u = ud.checkLogin(email, password);
-               if(u != null){
-                HttpSession session = request.getSession();
-                session.setAttribute("users", u);
-                response.sendRedirect(request.getContextPath()+"/home");
-        } else {
-            request.setAttribute("error", "Unable to login. Check your password or email address");
-            request.getRequestDispatcher("login.jsp").forward(request,response);
-        }
-        }
-         catch (Exception e){
-        }
+        processRequest(request, response);
     }
 
     /** 

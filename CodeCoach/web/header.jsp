@@ -32,17 +32,21 @@
                             <li class="has-submenu">
                                 <a href="home">Home <i class="fas"></i></a>
                             </li>
-                            <li class="has-submenu">
-                                <a href>Mentor <i class="fas fa-chevron-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="">Mentor Dashboard</a></li>
-                                    <li><a href="">Notification</a></li>
-                                    <li><a href="">View Booking</a></li>
-                                    <li><a href="">Review</a></li>
-                                    <li><a href="">Invoices</a></li>
-                                    <li><a href="">Profile Settings</a></li>
-                                </ul>
-                            </li>
+                            
+                            <c:if test="${users.roleId == 1 || users.roleId == 2}">
+                                <li class="has-submenu">
+                                    <a href>Mentor <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="">Mentor Dashboard</a></li>
+                                        <li><a href="">Notification</a></li>
+                                        <li><a href="">View Booking</a></li>
+                                        <li><a href="">Review</a></li>
+                                        <li><a href="">Invoices</a></li>
+                                        <li><a href="">Profile Settings</a></li>
+                                    </ul>
+                                </li>
+                            </c:if>
+
                             <li class="has-submenu">
                                 <a href>Mentee <i class="fas fa-chevron-down"></i></a>
                                 <ul class="submenu">
@@ -64,7 +68,7 @@
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">
                                 <li>
-                                    <a href="admin/index.html" target="_blank">Admin</a>
+                                    <a href="" target="_blank">Admin</a>
                                 </li>
                             </c:if>
                             <!--end of Admin button-->
@@ -100,7 +104,7 @@
                                     <a class="dropdown-item" href="">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
                                     <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Logout</a>
                                 </div>
                             </li>
 

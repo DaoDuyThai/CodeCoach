@@ -70,7 +70,7 @@ public class SkillDAO {
     
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        List<Skills> list = dao.getNext8(5);
+        List<Skills> list = dao.getTop8();
         for (Skills s : list) {
             System.out.println(s);
         }
