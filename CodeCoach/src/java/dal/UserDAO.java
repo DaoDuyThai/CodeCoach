@@ -86,6 +86,21 @@ public class UserDAO {
             System.out.println(e);
         }
     }
+    
+    public void changePasswordWhenForget(String email, String password) throws Exception {
+
+        String upd = "Update Users set password=?"
+                + " where email=?";
+        try {
+            conn = new DBContext().getConnection();
+            PreparedStatement st = conn.prepareStatement(upd);
+            st.setString(1, password);
+            st.setString(2, email);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
     public void insert(Users user) {
         String sql = "INSERT INTO [dbo].[Users]\n"

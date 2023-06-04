@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
 
 import dal.UserDAO;
 import java.io.IOException;
@@ -15,14 +14,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.MessagingException;
 
 /**
  *
  * @author Duy Thai
  */
-@WebServlet(name = "ForgotPasswordController", urlPatterns = {"/forgotpassword"})
-public class ForgotPasswordController extends HttpServlet {
+@WebServlet(urlPatterns = {"/changepasswordwhenforget"})
+public class ChangePassWordWhenForgetController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +39,10 @@ public class ForgotPasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgotPasswordController</title>");
+            out.println("<title>Servlet ChangePassWordWhenForgetController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ForgotPasswordController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePassWordWhenForgetController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +60,7 @@ public class ForgotPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
+        request.getRequestDispatcher("changepasswordwhenforget.jsp").forward(request, response);
     }
 
     /**
@@ -76,24 +74,16 @@ public class ForgotPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String email = (String) session.getAttribute("email");
+        String password = request.getParameter("password");
         UserDAO userDao = new UserDAO();
-        String email = request.getParameter("email");
-        if (userDao.checkEmailExist(email)) {
-            EmailSender es = new EmailSender();
-            String otp = es.getRandom();
-            try {
-                es.sendEmail(email, otp);
-                HttpSession session = request.getSession();
-                session.setAttribute("otp", otp);
-                session.setAttribute("email", email);
-                request.getRequestDispatcher("otp.jsp").forward(request, response);
-            } catch (MessagingException ex) {
-                Logger.getLogger(OtpController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            String error = "We couldn't find your account, please enter your email again";
-            request.setAttribute("error", error);
-            request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
+        try {
+            userDao.changePasswordWhenForget(email, password);
+            session.invalidate();
+            response.sendRedirect("login");
+        } catch (Exception ex) {
+            Logger.getLogger(ChangePassWordWhenForgetController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

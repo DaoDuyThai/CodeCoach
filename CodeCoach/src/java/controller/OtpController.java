@@ -12,6 +12,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -61,7 +62,7 @@ public class OtpController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.getRequestDispatcher("otp.jsp").forward(request, response);
     }
 
     /**
@@ -75,15 +76,17 @@ public class OtpController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String otp = (String) request.getAttribute("otp");
-        String email = (String) request.getAttribute("email");
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        String otp = (String)session.getAttribute("otp");
+        String email = (String)session.getAttribute("email");
         String inputOtp = request.getParameter("inputOtp");
-        if (otp.equals(inputOtp)) {
-            request.getRequestDispatcher("home").forward(request, response);
-        } else {
+        if(inputOtp.equals(otp)){
+            response.sendRedirect("changepasswordwhenforget.jsp");
+        }else{
             String error = "Wrong OTP, please try again!";
             request.setAttribute("error", error);
-            request.getRequestDispatcher("otp.jsp");
+            request.getRequestDispatcher("otp.jsp").forward(request, response);
         }
     }
 

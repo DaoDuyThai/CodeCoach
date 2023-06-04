@@ -1,6 +1,6 @@
 <%-- 
-    Document   : otp
-    Created on : Jun 1, 2023, 3:58:15 PM
+    Document   : changepasswordwhenforget
+    Created on : Jun 4, 2023, 11:08:16 PM
     Author     : Duy Thai
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>OTP</title>
+        <title>Change Password</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -34,7 +34,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-12 col-12">
 
-                            <h2 class="breadcrumb-title">Forgot Password?</h2>
+                            <h2 class="breadcrumb-title">Change Password</h2>
                             <p>Change your password in three easy steps. This will help you to secure your password!</p>
                             <p>1. Enter your email address below</p>
                             <p>2. Our system will send you an OTP to your email</p>
@@ -55,10 +55,10 @@
                                     <div class="row ">
                                         <div class="col-md-12 col-lg-12">
 
-                                            <form action="otp" method="post">
+                                            <form action="changepasswordwhenforget" method="post">
                                                 <div class="form-group">
-                                                    <label>Enter OTP code sent to your email</label>
-                                                    <input type="text" name="inputOtp" class="form-control" required>
+                                                    <label>Change</label>
+                                                    <input type="text" name="password" class="form-control" required="">
                                                 </div>
                                                 <%
                                                     String error = (String) request.getAttribute("error");
