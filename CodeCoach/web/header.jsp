@@ -32,21 +32,17 @@
                             <li class="has-submenu">
                                 <a href="home">Home <i class="fas"></i></a>
                             </li>
-                            
-                            <c:if test="${users.roleId == 1 || users.roleId == 2}">
-                                <li class="has-submenu">
-                                    <a href>Mentor <i class="fas fa-chevron-down"></i></a>
-                                    <ul class="submenu">
-                                        <li><a href="">Mentor Dashboard</a></li>
-                                        <li><a href="">Notification</a></li>
-                                        <li><a href="">View Booking</a></li>
-                                        <li><a href="">Review</a></li>
-                                        <li><a href="">Invoices</a></li>
-                                        <li><a href="">Profile Settings</a></li>
-                                    </ul>
-                                </li>
-                            </c:if>
-
+                            <li class="has-submenu">
+                                <a href>Mentor <i class="fas fa-chevron-down"></i></a>
+                                <ul class="submenu">
+                                    <li><a href="">Mentor Dashboard</a></li>
+                                    <li><a href="">Notification</a></li>
+                                    <li><a href="">View Booking</a></li>
+                                    <li><a href="">Review</a></li>
+                                    <li><a href="">Invoices</a></li>
+                                    <li><a href="">Profile Settings</a></li>
+                                </ul>
+                            </li>
                             <li class="has-submenu">
                                 <a href>Mentee <i class="fas fa-chevron-down"></i></a>
                                 <ul class="submenu">
@@ -68,7 +64,7 @@
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">
                                 <li>
-                                    <a href="" target="_blank">Admin</a>
+                                    <a href="admin/index.html" target="_blank">Admin</a>
                                 </li>
                             </c:if>
                             <!--end of Admin button-->
@@ -86,25 +82,25 @@
                             <li class="nav-item dropdown nav has-arrow logged-item header-navbar-rht">
                                 <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img class="rounded-circle" src="assets/images/users/${users.userId}.png" width="31"
+                                        <img class="rounded-circle" src="assets/img/user/user.jpg" width="31"
                                              alt="Darren Elder">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="user-header">
                                         <div class="avatar avatar-sm">
-                                            <img src="assets/images/users/${users.userId}.png" alt="User Image"
+                                            <img src="assets/img/user/user.jpg" alt="User Image"
                                                  class="avatar-img rounded-circle">
                                         </div>
                                         <div class="user-text">
-                                            <h6>${users.fName} ${users.lName}</h6>
-                                            <p class="text-muted mb-0"></p>
+                                            <h6>Jonathan Doe</h6>
+                                            <p class="text-muted mb-0">Mentor</p>
                                         </div>
                                     </div>
                                     <a class="dropdown-item" href="">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
-                                    <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Logout</a>
+                                    <a class="dropdown-item" href="changepassword">Change Password</a>
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
                                 </div>
                             </li>
 

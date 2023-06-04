@@ -4,7 +4,8 @@
  */
 package controller;
 
-import dal.TinhThanhPhoDAO;
+import dal.DAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Users;
-import dal.UserDAO;
 import jakarta.servlet.annotation.WebServlet;
 import java.util.List;
 import model.TinhThanhPho;
@@ -63,7 +63,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TinhThanhPhoDAO dao = new TinhThanhPhoDAO();
+        DAO dao = new DAO();
         List<TinhThanhPho> list = dao.getAllTinhThanhPho();
         request.setAttribute("listCity", list);
         request.getRequestDispatcher("register.jsp").forward(request, response);
@@ -80,6 +80,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        UserDAO cdb = new UserDAO();
         String fName = request.getParameter("first_name");
         String lName = request.getParameter("last_name");
         String gender = request.getParameter("gender");
@@ -92,7 +93,6 @@ public class RegisterController extends HttpServlet {
         String create = request.getParameter("create");
         Users user = new Users(fName, lName, gender, email, phoneNum, address, facebook, password);
         user.setMaqh(maqh);
-        UserDAO cdb = new UserDAO();
         if (create != null) {
             cdb.insert(user);
         }

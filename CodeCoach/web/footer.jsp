@@ -6,7 +6,7 @@
         <div class="footer-top aos" data-aos="fade-up">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-9 col-md-6">
+                    <div class="col-lg-3 col-md-6">
 
                         <div class="footer-widget footer-about">
                             <div class="footer-logo">
@@ -39,17 +39,54 @@
                         </div>
 
                     </div>
-                    
                     <div class="col-lg-3 col-md-6">
 
                         <div class="footer-widget footer-menu">
-                            <h2 class="footer-title">About</h2>
+                            <h2 class="footer-title">For Mentee</h2>
                             <ul>
-                                <li><a href="privacypolicyandterms">Privacy policy & terms</a></li>
-                                <li><a href="aboutus">About us</a></li>
-                                <li><a href="contactus">Contact us</a></li>
-                                <li><a href="faq">FAQ</a></li>
+                                <li><a href="">Search Mentors</a></li>
+                                <li><a href="">Login</a></li>
+                                <li><a href="register">Register</a></li>
+                                <li><a href="">Booking</a></li>
+                                <li><a href="">Mentee Dashboard</a></li>
                             </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="footer-widget footer-menu">
+                            <h2 class="footer-title">For Mentors</h2>
+                            <ul>
+                                <li><a href="">Appointments</a></li>
+                                <li><a href="">Chat</a></li>
+                                <li><a href="">Login</a></li>
+                                <li><a href="register">Register</a></li>
+                                <li><a href="">Mentor Dashboard</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+
+                        <div class="footer-widget footer-contact">
+                            <h2 class="footer-title">Contact Us</h2>
+                            <div class="footer-contact-info">
+                                <div class="footer-address">
+                                    <span><i class="fas fa-map-marker-alt"></i></span>
+                                    <p>FPT University<br>Thach That, Hanoi, Vietnam</p>
+                                </div>
+                                <p>
+                                    <i class="fas fa-phone-alt"></i>
+                                    +84 79 6428 094
+                                </p>
+                                <ul>
+                                    <li class="list-unstyled "><p></p>Email</li>
+                                    <li class="list-unstyled"><p>codecoach.project@gmail.com</p></li>
+                                </ul>
+
+
+                            </div>
                         </div>
 
                     </div>
