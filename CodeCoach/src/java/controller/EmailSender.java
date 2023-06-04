@@ -1,65 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.util.Properties;
+import java.util.Random;
 
-/**
- *
- * @author Duy Thai
- */
 public class EmailSender {
 
-    public static void sendEmail(String recipient, String subject, String body) {
-        // Set the SMTP server properties
-        Properties properties = new Properties();
-        properties.put("mail.smtp.host", "smtp-relay.gmail.com");
-        properties.put("mail.smtp.port", "587");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
+    public EmailSender() {
+    }
+    
+    public String getRandom() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+        return String.format("%06d", number);
+    } 
 
-        // Set the sender's credentials
-        final String senderEmail = "codecoach.project@gmail.com";
-        final String senderPassword = "bbuefxcdsvagzuqe";
+    public void sendEmail(String receiverEmail, String otp) throws MessagingException {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
 
-        // Create a session with the SMTP server
-        Session session = Session.getInstance(properties, new Authenticator() {
+        Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(senderEmail, senderPassword);
+                return new PasswordAuthentication("codecoach.project@gmail.com", "phtycutgjbgukddr");
             }
         });
 
-        try {
-            // Create a MimeMessage object
-            Message message = new MimeMessage(session);
+        Message message = new MimeMessage(session);
+        message.setFrom(new InternetAddress("codecoach.project@gmail.com"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
+        message.setSubject("One-Time Password (OTP) Verification");
+        String mess = "Dear " + receiverEmail + ",\n"
+                        + "\n"
+                        + "Thank you for using our system. To proceed with your request, please use the following One-Time Password (OTP):\n"
+                        + "\n"
+                        + "OTP: "+otp+"\n"
+                        + "\n"
+                        + "Please do not share this OTP with anyone.\n"
+                        + "\n"
+                        + "If you did not initiate this request, please ignore this email.\n"
+                        + "\n"
+                        + "Thank you,\n"
+                        + "CodeCoach\n"
+                        + "\n"
+                        + "Note: This is an automated email. Please do not reply.";
+        message.setText(mess);
 
-            // Set the sender and recipient addresses
-            message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-
-            // Set the email subject and body
-            message.setSubject(subject);
-            message.setText(body);
-
-            // Send the email
-            Transport.send(message);
-            System.out.println("Email sent successfully!");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+        Transport.send(message);
+        System.out.println("Email sent successfully to " + receiverEmail);
     }
-    
-    public static void main(String[] args) {
-        String recipient = "dduythai.ddt@gmail.com";
-        String subject = "Hello";
-        String body = "This is a test email.";
 
-        sendEmail(recipient, subject, body);
+    public static void main(String[] args) {
+        EmailSender es = new EmailSender();
+        try {
+            es.sendEmail("nguyenldhe176088@fpt.edu.vn", "123456");
+        } catch (Exception e) {
+        }
+
     }
 
 }

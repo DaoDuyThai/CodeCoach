@@ -101,7 +101,7 @@ public class UserDAO {
                 + "           ,[maqh]\n"
                 + "           ,[facebook])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,1,1,?,?,?)";
+                + "           (?,?,?,?,?,?,3,1,?,?,?)";
         try {
             conn = new DBContext().getConnection();
             PreparedStatement st = conn.prepareStatement(sql);
