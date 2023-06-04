@@ -5,6 +5,7 @@
 package controller;
 
 import dal.UserDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -72,15 +76,27 @@ public class ForgotpasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
+        
         UserDAO userDao = new UserDAO();
         String email = request.getParameter("email");
-        if(!userDao.checkEmailExist(email)){
+        EmailSender es = new EmailSender();
+        String otp = es.getRandom();
+        if (!userDao.checkEmailExist(email)) {
             String error = "The email you've entered is not existed";
-                request.setAttribute("error", error);
-                request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
-        }else{
-            
+            request.setAttribute("error", error);
+            request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
+        } else {        
+            try {
+                es.sendEmail(email, otp);
+                request.setAttribute("otp", otp);
+                request.setAttribute("email", email);
+                request.getRequestDispatcher("otp").forward(request, response);
+            } catch (MessagingException ex) {
+                Logger.getLogger(ForgotpasswordController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }
 
     /**

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : forgotpassword
-    Created on : May 31, 2023, 5:14:20 PM
+    Document   : otp
+    Created on : Jun 1, 2023, 3:58:15 PM
     Author     : Duy Thai
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Forgot Password</title>
+        <title>OTP</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -38,7 +38,7 @@
                             <p>Change your password in three easy steps. This will help you to secure your password!</p>
                             <p>1. Enter your email address below</p>
                             <p>2. Our system will send you an OTP to your email</p>
-                            <p>3. Enter the OTP on the next page</p>
+                            <p>3. Enter the OTP code</p>
                         </div>
                     </div>
                 </div>
@@ -55,10 +55,10 @@
                                     <div class="row ">
                                         <div class="col-md-12 col-lg-12">
 
-                                            <form action="forgotpassword" method="post">
+                                            <form action="otp" method="post">
                                                 <div class="form-group">
-                                                    <label>Enter your email address</label>
-                                                    <input type="email" name="email" class="form-control">
+                                                    <label>Enter OTP code sent to your email</label>
+                                                    <input type="text" name="inputOtp" class="form-control">
                                                 </div>
                                                 <%
                                                     String error = (String) request.getAttribute("error");
@@ -70,7 +70,7 @@
                                                 
 
                                                 <div class="submit-section">
-                                                    <button type="submit" class="btn btn-primary submit-btn" value="change">Send OTP</button>
+                                                    <button type="submit" class="btn btn-primary submit-btn" value="change">Get new password</button>
                                                 </div>
                                             </form>
 
