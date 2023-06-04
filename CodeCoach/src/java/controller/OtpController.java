@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
 
 /**
  *
@@ -54,14 +58,10 @@ public class OtpController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    String email ="";
-    String otp ="";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        email = (String) request.getAttribute("email");
-        otp = (String) request.getAttribute("otp");
-        request.getRequestDispatcher("otp.jsp").forward(request, response);
+
     }
 
     /**
@@ -75,15 +75,16 @@ public class OtpController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String otp = (String) request.getAttribute("otp");
+        String email = (String) request.getAttribute("email");
         String inputOtp = request.getParameter("inputOtp");
-        if (inputOtp == otp) {
-            request.getRequestDispatcher("hello.html").forward(request, response);
+        if (otp.equals(inputOtp)) {
+            request.getRequestDispatcher("home").forward(request, response);
         } else {
-            String error = "Incorrect OTP";
+            String error = "Wrong OTP, please try again!";
             request.setAttribute("error", error);
-            request.getRequestDispatcher("otp").forward(request, response);
+            request.getRequestDispatcher("otp.jsp");
         }
-
     }
 
     /**
