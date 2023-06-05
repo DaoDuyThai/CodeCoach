@@ -39,7 +39,8 @@ public class UserDAO {
         return list;
     }
 
-    public Users checkLogin(String email, String password) {
+    public Users checkLogin
+        (String email, String password) {
         try {
             String querry = "Select * from Users where email =? and password =?";
             conn = new DBContext().getConnection();

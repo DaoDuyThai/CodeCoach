@@ -39,7 +39,7 @@ public class SkillDAO {
     
     public List<Skills> getTop8() {
         List<Skills> list = new ArrayList<>();
-        String querry = "Select top 8 * from skills";
+        String querry = "Select top 8 * from skills order by skillId";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(querry);
