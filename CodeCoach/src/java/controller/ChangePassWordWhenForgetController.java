@@ -1,3 +1,5 @@
+package controller;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -20,7 +22,7 @@ import java.util.logging.Logger;
  * @author Duy Thai
  */
 @WebServlet(urlPatterns = {"/changepasswordwhenforget"})
-public class ChangePassWordWhenForgetController extends HttpServlet {
+public class ChangePasswordWhenForgetController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,7 +85,7 @@ public class ChangePassWordWhenForgetController extends HttpServlet {
             session.invalidate();
             response.sendRedirect("login");
         } catch (Exception ex) {
-            Logger.getLogger(ChangePassWordWhenForgetController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangePasswordWhenForgetController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
