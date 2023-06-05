@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Register</title>
+        <title>Mentoring</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -50,10 +50,10 @@
                             <div class="login-right">
                                 <div class="login-header">
                                     <h3><span>CodeCoach</span> Register</h3>
-                                    
+                                    <p class="text-muted">Access to our dashboard</p>
                                 </div>
 
-                                <form action="register" method="post" onsubmit="return validatePassword()"> 
+                                <form action="register" method="post" onsubmit="return validatePassword()" id="form"> 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -80,22 +80,8 @@
 
                                     <div class="form-group">
                                         <label class="form-control-label">Email Address</label>
-                                        <input id="email" type="email" class="form-control" name="email" required>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Password</label>
-                                                <input id="password" type="password" class="form-control" name="password" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label">Confirm Password</label>
-                                                <input id="password-confirm" type="password" class="form-control"
-                                                       name="password_confirmation"  required>
-                                            </div>
-                                        </div>
+                                        <input id="email" type="email" class="form-control" name="email" required onchange="checkEmailExisted()">
+                                        <div id="error" style="color: red"></div>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-control-label">Phone Number</label>
@@ -133,21 +119,35 @@
                                         <label class="form-control-label">Facebook</label>
                                         <input id="facebook" type="text" class="form-control" name="facebook" required>
                                     </div>
-                                    
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Password</label>
+                                                <input id="password" type="password" class="form-control" name="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Confirm Password</label>
+                                                <input id="password-confirm" type="password" class="form-control"
+                                                       name="password_confirmation"  required>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="form-check form-check-xs custom-checkbox">
                                             <input type="checkbox" class="form-check-input" name="agreeCheckboxUser"
                                                    id="agree_checkbox_user" required>
                                             <label class="form-check-label" for="agree_checkbox_user">I agree to
-                                                CodeCoach</label> <a tabindex="-1" href="privacypolicyandterms">Privacy
+                                                CodeCoach</label> <a tabindex="-1" href="privacypolicyandterms" style="color: blue;text-decoration: underline">Privacy
                                                 Policy and Terms </a> 
                                         </div>
                                     </div>
-                                    <button  class="btn btn-primary login-btn" type="submit" name="create">Create
+                                    <button  class="btn btn-primary login-btn" type="submit" name="create" id="submit">Create
                                         Account</button>
                                     <p id="message"></p>
                                     <div class="account-footer text-center mt-3">
-                                        Already have an account? <a class="forgot-link mb-0" href="login.html">Login</a>
+                                        Already have an account? <a class="forgot-link mb-0" href="login">Login</a>
                                     </div>
                                 </form>
 
@@ -179,6 +179,27 @@
                 }
                 )
             }
+
+            function checkEmailExisted() {
+                $.ajax({
+                    type: 'POST',
+                    data: {
+                        email: $('#email').val()
+                    },
+                    url: '${pageContext.request.contextPath}/checkEmailExisted',
+                    success: function (data, textStatus, jqXHR) {
+                        if(data){
+                            $('#error').html(data);
+                            $('#submit').prop('disabled',true);
+                        }
+                        else {
+                            $('#error').html('');
+                            $('#submit').removeAttr('disabled')
+                        }
+                    }
+                }
+                )
+            }
         </script>
 
         <script>
@@ -186,16 +207,17 @@
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("password-confirm").value;
                 var message = document.getElementById("message");
-
-                if (password === confirmPassword) {
-                    message.style.color = "green";
-                    message.innerHTML = "Password match!";
-                    return true; // Cho phép g?i form
-                } else {
+                
+                if (password !== confirmPassword) {
                     message.style.color = "red";
-                    message.innerHTML = "Password incorrect! Please re-enter.";
+                    message.innerHTML = "Password Confirm is not match  ! Please re-enter.";
                     return false; // Ng?n ch?n g?i form
+                } 
+                else{
+                    message.innerHTML = '';
+                    return true;
                 }
+                
             }
         </script>
         <script src="assets/js/jquery-3.6.0.min.js"></script>

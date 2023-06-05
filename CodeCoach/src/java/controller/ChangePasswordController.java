@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.UserDAO;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -83,8 +83,7 @@ public class ChangePasswordController extends HttpServlet {
                     ud.changePassword(uc);
                     HttpSession session = request.getSession();
                     session.setAttribute("user", uc);
-                    session.invalidate();
-                    response.sendRedirect("login");
+                    response.sendRedirect("login.jsp");
                 } catch (Exception ex) {
                     Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
                 }

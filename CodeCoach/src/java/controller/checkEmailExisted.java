@@ -5,23 +5,20 @@
 
 package controller;
 
-import dal.SkillDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Skills;
+import model.Users;
 
 /**
  *
- * @author Duy Thai
+ * @author NGHIA
  */
-@WebServlet(name="HomeController", urlPatterns={"/home"})
-public class HomeController extends HttpServlet {
+public class CheckEmailExisted extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,16 +31,12 @@ public class HomeController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String email = request.getParameter("email");
+            UserDAO udo = new UserDAO();
+            boolean u = udo.checkUserByEmail(email);
+            if(u){
+              out.println("Email existed!!");
+            }
         }
     } 
 
@@ -58,10 +51,7 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        SkillDAO skillDao = new SkillDAO();
-        List<Skills> skillList = skillDao.getTop8();
-        request.setAttribute("skillList", skillList);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

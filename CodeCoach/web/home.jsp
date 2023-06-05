@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -40,7 +39,7 @@
                     </div>
 
                     <div class="search-box">
-                        <form action="searchmentor" >
+                        <form action="">
                             <div class="form-group search-info">
                                 <input type="text" class="form-control"
                                        placeholder="Search Skills, Categories, Mentor's name, etc">
@@ -120,41 +119,294 @@
 
                 <!-- carousel of popular mentors -->
                 <div class="owl-carousel mentoring-course owl-theme">
-                    <c:forEach items="${mentorList}" var="m">
-                        <div class="course-box aos" data-aos="fade-up">
-                            <div class="product">
-                                <div class="product-img">
-                                    <a href="">
-                                        <img class="img-fluid" alt src="assets/images/users/${m.userId}.png" width="600" height="300">
-                                    </a>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user1.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Donna Yancey</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Digital Marketer
+                                    </div>
                                 </div>
-                                <div class="product-content">
-                                    <h3 class="title"><a href="profile.html"></a></h3>
-                                    <div class="author-info">
-                                        <div class="author-name">
-                                            Digital Marketer
-                                        </div>
-                                    </div>
-                                    <div class="rating">
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="d-inline-block average-rating">4.4</span>
-                                    </div>
-                                    <div class="author-country">
-                                        <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
-                                    </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
                                 </div>
                             </div>
                         </div>
-                    </c:forEach>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user2.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">James Amen</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        UNIX, Calculus, Trigonometry
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user3.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title">Marvin Downey</h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        ASP.NET,Computer Gaming
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user4.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Betty Hairston</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Computer Programming
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Jose Anderson</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Digital Marketer
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star "></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user6.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Aaron Pietrzak</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        UNIX,Calculus,Trigonometry
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user7.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Brian Martinez</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        ASP.NET,Computer Gaming
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user15.jpg" width="600"
+                                         height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Misty Lundy</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Computer Programming
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user9.jpg" width="600" height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Vern Campbell</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        Digital Marketer
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-box aos" data-aos="fade-up">
+                        <div class="product">
+                            <div class="product-img">
+                                <a href="profile.html">
+                                    <img class="img-fluid" alt src="assets/img/user/user13.jpg" width="600"
+                                         height="300">
+                                </a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="profile.html">Jessica Fogarty</a></h3>
+                                <div class="author-info">
+                                    <div class="author-name">
+                                        UNIX,Calculus,Trigonometry
+                                    </div>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star filled"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span class="d-inline-block average-rating">4.4</span>
+                                </div>
+                                <div class="author-country">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt"></i> Paris, France</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
-                <!-- end of carousel of popular mentors -->
             </div>
 
-
+            <!-- end of carousel of popular mentors -->
         </section>
 
 
@@ -168,18 +420,18 @@
             </div>
             <div class="learning-path-col">
                 <div class="container">
-
+                    
                     <div id="skillslist" class="row">
 
                         <!-- categories/subcategories/skills -->
-                        <c:forEach items="${requestScope.skillList}" var="s">
+                        <c:forEach items="${skillList}" var="o">
                             <div class="countskills col-12 col-md-4 col-lg-3">
                                 <div class="large-col aos" data-aos="fade-up">
                                     <a href="" class="large-col-image">
                                         <div class="image-col-merge">
-                                            <img src="assets/images/skills/${s.skillId}.png">
+                                            <img src="assets/images/skills/${o.skillId}.png" alt>
                                             <div class="text-col">
-                                                <h5>${s.skillName}</h5>
+                                                <h5>${o.skillName}</h5>
                                             </div>
                                         </div>
                                     </a>
@@ -196,25 +448,25 @@
             </div>
         </section>
         <!--        ajax use to load more skills-->
-
+        
         <script>
-            function loadMore() {
-                var amount = document.getElementsByClassName("countskills").length;
-                $.ajax({
-                    url: "/codecoach/loadskills",
-                    type: 'get',
-                    data: {
-                        exist: amount
-                    },
-                    success: function (data) {
-                        var skillslist = document.getElementById("skillslist");
-                        skillslist.innerHTML += data;
-                    },
-                    error: function (xhr) {
-                        //Do Something to handle error
-                    }
-                });
-            }
+                            function loadMore() {
+                                var amount = document.getElementsByClassName("countskills").length;
+                                $.ajax({
+                                    url: "/codecoach/loadskills",
+                                    type: 'get',
+                                    data: {
+                                        exist: amount
+                                    },
+                                    success: function (data) {
+                                        var skillslist = document.getElementById("skillslist");
+                                        skillslist.innerHTML += data;
+                                    },
+                                    error: function (xhr) {
+                                        //Do Something to handle error
+                                    }
+                                });
+                            }
         </script>
 
         <!-- Pre footer -->

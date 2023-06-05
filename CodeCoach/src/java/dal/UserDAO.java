@@ -17,7 +17,7 @@ import model.Users;
  *
  * @author Duy Thai
  */
-public class UserDAO {
+public class UserDAO extends DBContext{
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -41,9 +41,9 @@ public class UserDAO {
 
     public Users checkLogin(String email, String password) {
         try {
-            String querry = "Select * from Users where email =? and password =?";
+            String query = "Select * from Users where email =? and password =?";
             conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(querry);
+            ps = conn.prepareStatement(query);
             ps.setString(1, email);
             ps.setString(2, password);
             rs = ps.executeQuery();
@@ -104,6 +104,22 @@ public class UserDAO {
         }
     }
 
+    public boolean checkUserByEmail(String email) {
+        try {
+            String query = "Select * from Users where email = ?";
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void insert(Users user) {
         String sql = "INSERT INTO [dbo].[Users]\n"
                 + "           ([email]\n"
@@ -120,8 +136,7 @@ public class UserDAO {
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,?,3,1,?,?,?)";
         try {
-            conn = new DBContext().getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
+            PreparedStatement st = getConnection().prepareStatement(sql);
             st.setString(3, user.getfName());
             st.setString(4, user.getlName());
             st.setString(5, user.getGender());

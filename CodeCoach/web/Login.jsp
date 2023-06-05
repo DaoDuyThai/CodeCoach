@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
+    <title>CodeCoach</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -29,14 +29,15 @@
 
         <div class="bg-pattern-style">
             <div class="content">
+
                 <div class="account-content">
                     <div class="account-box">
                         <div class="login-right">
                             <div class="login-header">
                                 <h3>Login <span>CodeCoach</span></h3>
-                                <p class="text-muted">Access to our dashboard to explore endless possibility</p>
+                                <p class="text-muted">Access to our dashboard</p>
                             </div>
-                            <form action="login" method="post">
+                            <form action="<%=request.getContextPath()%>/login" method="post">
                                 <div class="form-group">
                                     <label class="form-control-label">Email Address</label>
                                     <input type="email" name= "email" class="form-control">
@@ -60,7 +61,7 @@
                                     <%}
                                 %>
                                 <div class="text-center dont-have">Don’t have an account? <a
-                                        href="register">Register</a></div>
+                                        href="register.jsp">Register</a></div>
                             </form>
                         </div>
                     </div>
