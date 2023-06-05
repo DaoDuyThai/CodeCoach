@@ -58,7 +58,7 @@
                                             <form action="forgotpassword" method="post">
                                                 <div class="form-group">
                                                     <label>Enter your email address</label>
-                                                    <input type="email" name="email" class="form-control">
+                                                    <input type="email" name="email" class="form-control" required>
                                                 </div>
                                                 <%
                                                     String error = (String) request.getAttribute("error");
