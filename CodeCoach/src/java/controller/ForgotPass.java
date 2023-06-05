@@ -21,8 +21,8 @@ import javax.mail.MessagingException;
  *
  * @author Duy Thai
  */
-@WebServlet(name = "ForgotPasswordController", urlPatterns = {"/forgotpassword"})
-public class ForgotPasswordController extends HttpServlet {
+@WebServlet(name = "ForgotPass", urlPatterns = {"/forgot"})
+public class ForgotPass extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class ForgotPasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgotPasswordController</title>");
+            out.println("<title>Servlet ForgotPass</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ForgotPasswordController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ForgotPass at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -106,4 +106,5 @@ public class ForgotPasswordController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

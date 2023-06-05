@@ -49,7 +49,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <a class="forgot-link" href="forgotpassword">Forgot Password ?</a>
+                                    <a class="forgot-link" href="forgot">Forgot Password ?</a>
                                 </div>
                                 <button class="btn btn-primary login-btn" type="submit" value ="login">Login</button>
                                 <%
