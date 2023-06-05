@@ -18,7 +18,7 @@ import model.Users;
  *
  * @author NGHIA
  */
-public class checkEmailExisted extends HttpServlet {
+public class CheckEmailExisted extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.

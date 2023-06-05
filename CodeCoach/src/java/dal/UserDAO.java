@@ -103,7 +103,7 @@ public class UserDAO extends DBContext{
                 + "           ,[maqh]\n"
                 + "           ,[facebook])\n"
                 + "     VALUES\n"
-                + "           (?,?,?,?,?,?,1,1,?,?,?)";
+                + "           (?,?,?,?,?,?,3,1,?,?,?)";
         try {
             PreparedStatement st = getConnection().prepareStatement(sql);
             st.setString(3, user.getfName());
