@@ -39,8 +39,7 @@ public class UserDAO {
         return list;
     }
 
-    public Users checkLogin
-        (String email, String password) {
+    public Users checkLogin(String email, String password) {
         try {
             String querry = "Select * from Users where email =? and password =?";
             conn = new DBContext().getConnection();
@@ -66,7 +65,9 @@ public class UserDAO {
             ps = conn.prepareStatement(querry);
             ps.setString(1, email);
             rs = ps.executeQuery();
-            if(rs.next()) return true;
+            if (rs.next()) {
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +88,7 @@ public class UserDAO {
             System.out.println(e);
         }
     }
-    
+
     public void changePasswordWhenForget(String email, String password) throws Exception {
 
         String upd = "Update Users set password=?"
@@ -135,10 +136,11 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
         System.out.println(dao.checkEmailExist("admin@admin.com"));
-        
+
     }
 
 }
