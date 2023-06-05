@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Mentors;
 import model.Skills;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -25,6 +27,21 @@ public class MentorDAO {
     public List<Mentors> getAll() {
         List<Mentors> list = new ArrayList<>();
         String querry = "Select * from mentors";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public List<Object> getAllMentorAndUserAttribute() {
+        List<Object> list = new ArrayList<>();
+        String querry = "select * from Mentors join Users on mentors.userId = users.userId";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(querry);
