@@ -9,15 +9,16 @@ import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Users;
 
 /**
  *
- * @author NGHIA
+ * @author Duy Thai
  */
+@WebServlet(name="CheckEmailExisted", urlPatterns={"/checkemailexisted"})
 public class CheckEmailExisted extends HttpServlet {
    
     /** 
@@ -75,5 +76,4 @@ public class CheckEmailExisted extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
