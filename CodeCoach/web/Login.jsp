@@ -35,7 +35,7 @@
                         <div class="login-right">
                             <div class="login-header">
                                 <h3>Login <span>CodeCoach</span></h3>
-                                <p class="text-muted">Access to our dashboard</p>
+                                <p class="text-muted">Access to our dashboard to explore endless possibilities</p>
                             </div>
                             <form action="<%=request.getContextPath()%>/login" method="post">
                                 <div class="form-group">
