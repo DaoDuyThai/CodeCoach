@@ -152,6 +152,42 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public List<Object[]> getAllUserInfoOfMentor() {
+        List<Object[]> list = new ArrayList<>();
+
+        String querry = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook from mentors m join users u on m.userId = u.userId";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Object[] userInfo = new Object[15];
+
+                // Populate the array with data from the ResultSet
+                userInfo[0] = rs.getString("mentorId");
+                userInfo[1] = rs.getString("userId");
+                userInfo[2] = rs.getString("bio");
+                userInfo[3] = rs.getDouble("hourlyRate");
+                userInfo[4] = rs.getString("email");
+                userInfo[5] = rs.getString("password");
+                userInfo[6] = rs.getString("fName");
+                userInfo[7] = rs.getString("lName");
+                userInfo[8] = rs.getString("gender");
+                userInfo[9] = rs.getString("phoneNum");
+                userInfo[10] = rs.getInt("roleId");
+                userInfo[11] = rs.getInt("statusId");
+                userInfo[12] = rs.getString("address");
+                userInfo[13] = rs.getString("maqh");
+                userInfo[14] = rs.getString("facebook");
+
+                list.add(userInfo);
+            }
+        } catch (Exception e) {
+        }
+
+        return list;
+    }
+
     public Object[] getUserInfoByMentorId(int mentorId) {
         Object[] o = new Object[15];
         String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook from mentors m join users u on m.userId = u.userId where m.mentorId =?";
@@ -185,10 +221,9 @@ public class UserDAO extends DBContext {
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        Object[] o = dao.getUserInfoByMentorId(1);
-        for (int i = 0; i < o.length; i++) {
-            System.out.println(o[i]);
+        List<Object[]> list = dao.getAllUserInfoOfMentor();
+        for(Object[] o : list){
+            System.out.println((String)o[4]);
         }
     }
-
 }
