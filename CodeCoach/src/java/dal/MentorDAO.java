@@ -39,20 +39,7 @@ public class MentorDAO {
         return list;
     }
     
-    public List<Object> getAllMentorAndUserAttribute() {
-        List<Object> list = new ArrayList<>();
-        String querry = "select * from Mentors join Users on mentors.userId = users.userId";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(querry);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                list.add(new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
-            }
-        } catch (Exception e) {
-        }
-        return list;
-    }
+    
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
         List<Mentors> list = dao.getAll();
