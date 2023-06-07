@@ -6,7 +6,7 @@
         <div class="footer-top aos" data-aos="fade-up">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
 
                         <div class="footer-widget footer-about">
                             <div class="footer-logo">
@@ -39,35 +39,12 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-3 col-md-6">
 
-                        <div class="footer-widget footer-menu">
-                            <h2 class="footer-title">For Mentee</h2>
-                            <ul>
-                                <li><a href="">Search Mentors</a></li>
-                                <li><a href="">Login</a></li>
-                                <li><a href="register">Register</a></li>
-                                <li><a href="">Booking</a></li>
-                                <li><a href="">Mentee Dashboard</a></li>
-                            </ul>
-                        </div>
+                    <div class="col-lg-2 col-md-6"></div>
+                    <div class="col-lg-2 col-md-6"></div>
 
-                    </div>
-                    <div class="col-lg-3 col-md-6">
 
-                        <div class="footer-widget footer-menu">
-                            <h2 class="footer-title">For Mentors</h2>
-                            <ul>
-                                <li><a href="">Appointments</a></li>
-                                <li><a href="">Chat</a></li>
-                                <li><a href="">Login</a></li>
-                                <li><a href="register">Register</a></li>
-                                <li><a href="">Mentor Dashboard</a></li>
-                            </ul>
-                        </div>
-
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
 
                         <div class="footer-widget footer-contact">
                             <h2 class="footer-title">Contact Us</h2>

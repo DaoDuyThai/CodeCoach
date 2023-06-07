@@ -57,7 +57,7 @@
 
                                             <form action="changepasswordwhenforget" method="post">
                                                 <div class="form-group">
-                                                    <label>Change</label>
+                                                    <label>Enter new password</label>
                                                     <input type="text" name="password" class="form-control" required="">
                                                 </div>
                                                 <%

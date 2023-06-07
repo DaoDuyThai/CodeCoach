@@ -56,7 +56,7 @@
                                     <div class="row ">
                                         <div class="col-md-12 col-lg-12">
 
-                                            <form action="forgot" method="post">
+                                            <form action="forgotpass" method="post">
                                                 <div class="form-group">
                                                     <label>Enter your email address</label>
                                                     <input type="email" name="email" class="form-control" required>
