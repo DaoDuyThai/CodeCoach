@@ -124,7 +124,7 @@
                         <div class="course-box aos" data-aos="fade-up">
                             <div class="product">
                                 <div class="product-img">
-                                    <a href="profile.html">
+                                    <a href="viewmentorprofile?mentorId=${mInfo[0]}">
                                         <img class="img-fluid" alt src="assets/images/users/${mInfo[1]}.png" width="600"
                                              height="300">
                                     </a>
@@ -138,7 +138,7 @@
                                     </div>
                                     
                                     <div class="author-country">
-                                        <p class="mb-0"><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}</p>
+                                        <p class="mb-0"><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}, ${mInfo[15]}, ${mInfo[16]}</p>
                                     </div>
                                 </div>
                             </div>

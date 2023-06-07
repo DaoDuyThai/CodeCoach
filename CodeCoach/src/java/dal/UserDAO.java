@@ -155,19 +155,19 @@ public class UserDAO extends DBContext {
     public List<Object[]> getAllUserInfoOfMentor() {
         List<Object[]> list = new ArrayList<>();
 
-        String querry = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook from mentors m join users u on m.userId = u.userId";
+        String querry = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name from mentors m join users u on m.userId = u.userId join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(querry);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Object[] userInfo = new Object[15];
+                Object[] userInfo = new Object[17];
 
                 // Populate the array with data from the ResultSet
                 userInfo[0] = rs.getString("mentorId");
                 userInfo[1] = rs.getString("userId");
                 userInfo[2] = rs.getString("bio");
-                userInfo[3] = rs.getDouble("hourlyRate");
+                userInfo[3] = rs.getInt("hourlyRate");
                 userInfo[4] = rs.getString("email");
                 userInfo[5] = rs.getString("password");
                 userInfo[6] = rs.getString("fName");
@@ -179,7 +179,8 @@ public class UserDAO extends DBContext {
                 userInfo[12] = rs.getString("address");
                 userInfo[13] = rs.getString("maqh");
                 userInfo[14] = rs.getString("facebook");
-
+                userInfo[15] = rs.getString(16);
+                userInfo[16] = rs.getString(17);
                 list.add(userInfo);
             }
         } catch (Exception e) {
@@ -189,8 +190,8 @@ public class UserDAO extends DBContext {
     }
 
     public Object[] getUserInfoByMentorId(int mentorId) {
-        Object[] o = new Object[15];
-        String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook from mentors m join users u on m.userId = u.userId where m.mentorId =?";
+        Object[] o = new Object[17];
+        String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name from mentors m join users u on m.userId = u.userId join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp where m.mentorId =?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -212,18 +213,21 @@ public class UserDAO extends DBContext {
                 o[12] = rs.getString(13);
                 o[13] = rs.getInt(14);
                 o[14] = rs.getString(15);
+                o[15] = rs.getString(16);
+                o[16] = rs.getString(17);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         return o;
     }
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        List<Object[]> list = dao.getAllUserInfoOfMentor();
-        for(Object[] o : list){
-            System.out.println((String)o[4]);
+        Object[] o = dao.getUserInfoByMentorId(1);
+        for (int i = 0; i < o.length; i++) {
+            System.out.println(o[i]);
         }
+
     }
 }
