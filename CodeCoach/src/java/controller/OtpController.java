@@ -82,7 +82,7 @@ public class OtpController extends HttpServlet {
         String email = (String)session.getAttribute("email");
         String inputOtp = request.getParameter("inputOtp");
         if(inputOtp.equals(otp)){
-            response.sendRedirect("changepasswordwhenforget.jsp");
+            response.sendRedirect("changepasswordwhenforget");
         }else{
             String error = "Wrong OTP, please try again!";
             request.setAttribute("error", error);
