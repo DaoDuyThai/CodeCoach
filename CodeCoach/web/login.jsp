@@ -47,7 +47,7 @@
                                         </div>
                                     </div>
                                     <div class="text-end">
-                                        <a class="forgot-link" href="forgotpass">Forgot Password ?</a>
+                                        <a class="forgot-link" href="forgotpass">Forgot Password?</a>
                                     </div>
                                     <button class="btn btn-primary login-btn" type="submit" value ="login">Login</button>
                                     <%
@@ -58,7 +58,7 @@
                                     <%}
                                     %>
                                     <div class="text-center dont-have">Don’t have an account? <a
-                                            href="register.jsp">Register</a></div>
+                                            href="register">Register</a></div>
                                 </form>
                             </div>
                         </div>

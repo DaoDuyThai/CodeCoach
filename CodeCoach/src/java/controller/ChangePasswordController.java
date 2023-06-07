@@ -13,15 +13,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Users;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/changepassword"})
+public class ChangePasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,8 +35,7 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+        request.getRequestDispatcher("changepassword.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,7 +50,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     /**
@@ -64,21 +63,36 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            UserDAO ud = new UserDAO();
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            Users u = ud.checkLogin(email, password);
-            if (u != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("users", u);
-                
-                response.sendRedirect(request.getContextPath() + "/home");
+        UserDAO ud = new UserDAO();
+        String e = request.getParameter("email");
+        String op = request.getParameter("opass");
+        String p = request.getParameter("pass");
+        String rp = request.getParameter("rpass");
+        Users u = ud.checkLogin(e, op);
+        if (p.equals(rp)) {
+
+            if (u == null) {
+                //if old password is wrong
+                String error = "Old password is incorrect";
+                request.setAttribute("error", error);
+                request.getRequestDispatcher("changepassword.jsp").forward(request, response);
             } else {
-                request.setAttribute("error", "Unable to login. Check your password or email address");
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                try {
+                    //If the old password is correct
+                    Users uc = new Users(u.getUserId(), e, p, u.getfName(), u.getlName(), u.getGender(), u.getPhoneNum(), u.getRoleId(), u.getStatusId(), u.getAddress(), u.getMaqh(), u.getFacebook());
+                    ud.changePassword(uc);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", uc);
+                    response.sendRedirect("login.jsp");
+                } catch (Exception ex) {
+                    Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
-        } catch (Exception e) {
+        } else {
+            String mess = "New password and confirm password is not match";
+            request.setAttribute("err1", mess);
+            request.getRequestDispatcher("changepassword.jsp").forward(request, response);
         }
     }
 

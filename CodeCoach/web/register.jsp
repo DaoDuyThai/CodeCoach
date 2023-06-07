@@ -53,7 +53,7 @@
                                     <p class="text-muted">Access to our dashboard</p>
                                 </div>
 
-                                <form action="register" method="post" onsubmit="return validatePassword()" id="form"> 
+                                <form class="form" action="register" method="post" onsubmit="return validatePassword()" id="form"> 
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
@@ -72,10 +72,10 @@
                                     <div class="form-group" >
                                         Gender :
                                         <label for="male">Male</label>
-                                        <input type="radio" id="male" name="gender" value="male" checked >
+                                        <input class="form-check-input" type="radio" id="male" name="gender" value="male" checked >
 
                                         <label for="female">Female</label>
-                                        <input type="radio" id="female" name="gender" value="female">
+                                        <input class="form-check-input" type="radio" id="female" name="gender" value="female">
                                     </div>
 
                                     <div class="form-group">
