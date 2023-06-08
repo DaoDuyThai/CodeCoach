@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.DAO;
+import dal.TinhThanhPhoDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -63,7 +63,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        DAO dao = new DAO();
+        TinhThanhPhoDAO dao = new TinhThanhPhoDAO();
         List<TinhThanhPho> list = dao.getAllTinhThanhPho();
         request.setAttribute("listCity", list);
         request.getRequestDispatcher("register.jsp").forward(request, response);
