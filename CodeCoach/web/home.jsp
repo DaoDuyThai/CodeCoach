@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="search-box">
-                        <form action="">
+                        <form action="search" method="post">
                             <div class="form-group search-info">
                                 <input type="text" class="form-control"
                                        placeholder="Search Skills, Categories, Mentor's name, etc">

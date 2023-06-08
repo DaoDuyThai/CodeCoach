@@ -55,7 +55,9 @@ public class MentorDAO {
         }
         return null;
     }
-
+    public Mentors searchMentors(List<Mentors> result){
+        String query = "select * from mentors where ";
+    }
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
         Mentors m = dao.getMentorByMentorId(2);

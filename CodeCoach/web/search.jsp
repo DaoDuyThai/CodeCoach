@@ -1,3 +1,10 @@
+<%-- 
+    Document   : search
+    Created on : 8 Jun 2023, 15:28:37
+    Author     : ADMIN
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +33,9 @@
 
     <div class="main-wrapper">
 
-
+        <!-- Header is placed here -->
+        <%@include file="header.jsp" %>
+        <!--End of header-->
 
 
         <div class="breadcrumb-bar">
@@ -370,7 +379,7 @@
             </div>
         </div>
 
-
+    <%@include file="footer.jsp" %>
 
 
     </div>
