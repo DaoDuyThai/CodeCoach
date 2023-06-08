@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.EmailDAO;
+import dal.AboutUsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +13,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.AboutUs;
+
 
 /**
  *
- * @author win
+ * @author hoang
  */
-@WebServlet(name="VerifyAccountController", urlPatterns={"/verifyaccount"})
-public class VerifyAccountController extends HttpServlet {
+@WebServlet(name="AboutUsController", urlPatterns={"/aboutus"})
+public class AboutUsController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +39,10 @@ public class VerifyAccountController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet VerifyAccountController</title>");  
+            out.println("<title>Servlet PrivacyPolicyAndTermsController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet VerifyAccountController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet PrivacyPolicyAndTermsController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +59,10 @@ public class VerifyAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        AboutUsDAO aboutUsDao = new AboutUsDAO();
+        List<AboutUs> listAb = aboutUsDao.getAll();
+        request.setAttribute("listAb", listAb);
+        request.getRequestDispatcher("aboutus.jsp").forward(request, response);
     } 
 
     /** 
@@ -70,37 +75,8 @@ public class VerifyAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    HttpSession session = request.getSession();
-    String storedToken = (String) session.getAttribute("token");
-    String email = (String)session.getAttribute("email");
-    String token = request.getParameter("token"); // Giá trị mã xác minh người dùng nhập
-
-    EmailDAO dao = new EmailDAO();
-     // Lấy mã xác minh từ cơ sở dữ liệu dựa trên email
-    String storedCode = dao.getTokenByEmail(email);
-    response.getWriter().print(storedCode);
-    if (token.equals(storedCode)) {
-        // Mã xác minh hợp lệ
-        // Thực hiện xử lý khi mã xác minh hợp lệ
-        dao.verifyEmail(email, token);
-        request.getSession().setAttribute("verify","1");
-        request.getRequestDispatcher("home.jsp").forward(request, response);
-//    } 
-
-    }else {
-        // Mã xác minh không hợp lệ
-        // Kiểm tra xem đã có lần nhập lại OTP trước đó hay chưa
-        if (session.getAttribute("retries") == null) {
-            session.setAttribute("errorMessage", "Mã OTP không hợp lệ. Vui lòng thử lại");
-            response.sendRedirect("verifiaccounttest.jsp");
-        } else {
-                session.removeAttribute("retries"); // Xóa biến session "retries"
-                // Chuyển hướng về trang nhập đúng
-                request.getRequestDispatcher("home.jsp").forward(request, response);
-            }
-        }
+        processRequest(request, response);
     }
-
 
     /** 
      * Returns a short description of the servlet.
@@ -110,5 +86,4 @@ public class VerifyAccountController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

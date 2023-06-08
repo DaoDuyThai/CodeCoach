@@ -21,9 +21,29 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    
+    <script>
+        function showAlert(message) {
+            alert(message);
+        }
+    </script>
 </head>
 
 <body>
+    <%
+        String verify = (String) session.getAttribute("verify");
+        if (verify != null && verify.equals("1")) { 
+    %>            
+        <script>
+            showAlert("Xác minh thành công!");
+        </script>
+    <% 
+        } else { 
+    %>
+        showAlert("Đăng nhập thành công!");
+    <% 
+        } 
+    %>
 
     <div class="main-wrapper">
 

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : forgotpassword
+    Document   : sendemail
     Created on : May 31, 2023, 5:14:20 PM
-    Author     : Duy Thai
+    Author     : hoang
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -55,14 +55,14 @@
                                                     <label>Enter OTP</label>
                                                     <input type="text" name="token" class="form-control">
                                                 </div>
-                                                <% if (getServletContext().getAttribute("verificationMessage") != null) { %>
-                                                <p>${verificationMessage}</p>
-                                                <% getServletContext().removeAttribute("verificationMessage"); %>
-    <                                           <% } %>
+                                                
 
                                                 <div class="submit-section">
                                                     <button type="submit" class="btn btn-primary submit-btn" value="Submit">Verify</button>
                                                 </div>
+                                                <c:if test="${not empty sessionScope.errorMessage}">
+                                                <div class="error-message">${sessionScope.errorMessage}</div>
+                                                </c:if>
                                             </form>
 
                                         </div>
