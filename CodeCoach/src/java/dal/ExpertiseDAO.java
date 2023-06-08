@@ -49,7 +49,8 @@ public class ExpertiseDAO {
         ps.setInt(1, mentorId);
         rs = ps.executeQuery();
 
-        while (rs.next()) {
+        while 
+                (rs.next()) {
             Object[] expertiseDetails = new Object[4];
             // Populate the array with data from the ResultSet
             expertiseDetails[0] = rs.getInt(1);

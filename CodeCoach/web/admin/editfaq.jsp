@@ -9,24 +9,27 @@
 <html>
     <head>
         <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Mentoring - Add Blog Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+        <title>Mentoring - Invoice</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        <link rel="shortcut icon" href="../assets/img/favicon.png">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../assets/plugins/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="../assets/plugins/fontawesome/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/feathericon.min.css">
+        <link rel="stylesheet" href="../assets/css/feathericon.min.css">
+        <link rel="stylesheet" href="../assets/css/feather.css">
 
-    <link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+        <link rel="stylesheet" href="../assets/plugins/select2/css/select2.min.css">
 
-    <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">
+        <link rel="stylesheet" href="../assets/plugins/datatables/datatables.min.css">
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
     <body>
         <div class="main-wrapper">
@@ -35,10 +38,10 @@
 
                 <div class="header-left">
                     <a href="index.html" class="logo">
-                        <img src="assets/img/logo.png" alt="Logo">
+                        <img src="../assets/img/logo.png" alt="Logo">
                     </a>
                     <a href="index.html" class="logo logo-small">
-                        <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30">
+                        <img src="../assets/img/logo-small.png" alt="Logo" width="30" height="30">
                     </a>
                 </div>
 
@@ -66,7 +69,7 @@
                         <div class="dropdown-menu notifications">
                             <div class="topnav-dropdown-header">
                                 <span class="notification-title">Notifications</span>
-                                <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                                <a href="" class="clear-noti"> Clear All </a>
                             </div>
                             <div class="noti-content">
                                 <ul class="notification-list">
@@ -75,7 +78,7 @@
                                             <div class="media d-flex">
                                                 <span class="avatar avatar-sm flex-shrink-0">
                                                     <img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="assets/img/user/user.jpg">
+                                                         src="../assets/img/user/user.jpg">
                                                 </span>
                                                 <div class="media-body flex-grow-1">
                                                     <p class="noti-details"><span class="noti-title">Jonathan Doe</span>
@@ -91,7 +94,7 @@
                                             <div class="media d-flex">
                                                 <span class="avatar avatar-sm flex-shrink-0">
                                                     <img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="assets/img/user/user1.jpg">
+                                                         src="../assets/img/user/user1.jpg">
                                                 </span>
                                                 <div class="media-body flex-grow-1">
                                                     <p class="noti-details"><span class="noti-title">Julie Pennington</span>
@@ -108,7 +111,7 @@
                                             <div class="media d-flex">
                                                 <span class="avatar avatar-sm flex-shrink-0">
                                                     <img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="assets/img/user/user2.jpg">
+                                                         src="../assets/img/user/user2.jpg">
                                                 </span>
                                                 <div class="media-body flex-grow-1">
                                                     <p class="noti-details"><span class="noti-title">Tyrone Roberts</span>
@@ -125,7 +128,7 @@
                                             <div class="media d-flex">
                                                 <span class="avatar avatar-sm flex-shrink-0">
                                                     <img class="avatar-img rounded-circle" alt="User Image"
-                                                         src="assets/img/user/user4.jpg">
+                                                         src="../assets/img/user/user4.jpg">
                                                 </span>
                                                 <div class="media-body flex-grow-1">
                                                     <p class="noti-details"><span class="noti-title">Patricia Manzi</span>
@@ -147,13 +150,13 @@
 
                     <li class="nav-item dropdown has-arrow">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-                            <span class="user-img"><img class="rounded-circle" src="assets/img/profiles/avatar-12.jpg"
+                            <span class="user-img"><img class="rounded-circle" src="../assets/img/profiles/avatar-12.jpg"
                                                         width="31" alt="Ryan Taylor"></span>
                         </a>
                         <div class="dropdown-menu">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
-                                    <img src="assets/img/profiles/avatar-12.jpg" alt="User Image"
+                                    <img src="../assets/img/profiles/avatar-12.jpg" alt="User Image"
                                          class="avatar-img rounded-circle">
                                 </div>
                                 <div class="user-text">
@@ -401,19 +404,19 @@
         </div>
 
 
-        <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <script src="../assets/js/jquery-3.6.0.min.js"></script>
 
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/bootstrap.bundle.min.js"></script>
 
-        <script src="assets/js/feather.min.js"></script>
+        <script src="../assets/js/feather.min.js"></script>
 
-        <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-        <script src="assets/plugins/select2/js/select2.min.js"></script>
+        <script src="../assets/plugins/select2/js/select2.min.js"></script>
 
-        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-        <script src="assets/plugins/datatables/datatables.min.js"></script>
+        <script src="../assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="../assets/plugins/datatables/datatables.min.js"></script>
 
-        <script src="assets/js/script.js"></script>
+        <script src="../assets/js/script.js"></script>
     </body>
 </html>
