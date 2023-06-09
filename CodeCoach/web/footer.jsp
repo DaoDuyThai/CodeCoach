@@ -10,7 +10,7 @@
 
                         <div class="footer-widget footer-about">
                             <div class="footer-logo">
-                                <img src="assets/img/logo.png" alt="logo">
+                                <img src="assets/img/logo.png" alt="Not Found" onerror=this.src="../assets/img/logo.png">
                             </div>
                             <div class="footer-about-content">
                                 <p>Elevate your coding journey with CodeCoach - your go-to platform for mentorship.
