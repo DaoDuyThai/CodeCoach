@@ -32,16 +32,30 @@ public class FaqDAO {
                 list.add(new Faq(rs.getInt(1), rs.getString(2), rs.getString(3)));
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
         return list;
     }
-    
-    
+
+    public Faq getFaqById(int id) {
+
+        String query = "select * from faq where id =?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Faq faq = new Faq(rs.getInt(1), rs.getString(2), rs.getString(3));
+                return faq;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         FaqDAO d = new FaqDAO();
-        List<Faq> list = d.getAll();
-        for(Faq l : list){
-            System.out.println(l);
-        }
+        System.out.println(d.getFaqById(1));
     }
 }
