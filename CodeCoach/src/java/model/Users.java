@@ -34,10 +34,6 @@ public class Users {
         this.facebook = facebook;
     }
 
-    
-
-   
-
     public Users(int userId, String email, String password, String fName, String lName, String gender, String phoneNum, int roleId, int statusId, String address, String maqh, String facebook) {
         this.userId = userId;
         this.email = email;

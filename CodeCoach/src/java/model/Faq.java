@@ -9,6 +9,7 @@ package model;
  * @author Duy Thai
  */
 public class Faq {
+
     private int id;
     private String question;
     private String answer;
@@ -18,6 +19,11 @@ public class Faq {
 
     public Faq(int id, String question, String answer) {
         this.id = id;
+        this.question = question;
+        this.answer = answer;
+    }
+
+    public Faq(String question, String answer) {
         this.question = question;
         this.answer = answer;
     }
@@ -50,5 +56,5 @@ public class Faq {
     public String toString() {
         return "faq{" + "id=" + id + ", question=" + question + ", answer=" + answer + '}';
     }
-    
+
 }
