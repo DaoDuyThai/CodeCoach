@@ -70,6 +70,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4 class="mb-4">Frequent Asked Questions Lists</h4>
+                                    <button class="btn btn-success">Add more FAQ</button>
                                     <div class="card card-table">
                                         <div class="card-body">
                                             <div class="table-responsive">
@@ -89,7 +90,7 @@
                                                                 <td style="width: 100px; white-space: pre-wrap;">${fl.id}</td>
                                                                 <td style="width: 100px; white-space: pre-wrap;">${fl.question}</td>
                                                                 <td style="width: 100px; white-space: pre-wrap;">${fl.answer}</td>
-                                                                <td style="width: 100px;"><a><button class="btn btn-primary">Delete</button></a> <a><button class="btn btn-danger">Delete</button></a></td>
+                                                                <td style="width: 100px;"><a><button class="btn btn-primary">Edit</button></a> <a><button class="btn btn-danger">Delete</button></a></td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
