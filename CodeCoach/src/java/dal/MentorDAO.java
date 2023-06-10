@@ -55,15 +55,44 @@ public class MentorDAO {
         }
         return null;
     }
-    public List<Mentors> searchMentors(String searchString){
-        String query = "select * from Users left join Mentors"
-                + "on Users.userId = Mentors.userId"
-                + "inner join  ";
-        
+    public List<Mentors> searchMentors(String searchTxt){
+            List<Mentors> mtrList = new ArrayList<>();
+            String query = "select u.fName, u.lName, m.hourlyRate, e.expertiseId\n" +
+                            "from (((((Users u left join Mentors m \n" +
+                            "on u.userId = m.userId) inner join Expertise e\n" +
+                            "on m.mentorId = e.mentorId) inner join Skills sk\n" +
+                            "on e.skillId = sk.skillId) inner join SubCategories sc\n" +
+                            "on sk.subCategoryId = sc.subCategoryId) inner join Categories c\n" +
+                            "on sc.categoryId = c.categoryId)\n" +
+                            "where u.fName = ? "
+                          + "or sk.skillName = ? or "
+                          + "sc.subCategoryName = ? "
+                          + "or c.categoryName = ?";
+            try{
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setString(1, "%"+searchTxt+"%");
+                ps.setString(2, "%"+searchTxt+"%");
+                ps.setString(3, "%"+searchTxt+"%");
+                ps.setString(4, "%"+searchTxt+"%");
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    mtrList.add(new Mentors(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4)));
+                }
+                
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+            return mtrList;
     }
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
-        Mentors m = dao.getMentorByMentorId(2);
+       List<Mentors> m = dao.searchMentors("Ruby");
         System.out.println(m);
     }
 
