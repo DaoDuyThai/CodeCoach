@@ -36,12 +36,42 @@ public class MentorDAO {
         }
         return list;
     }
-    public static void main(String[] args) {
-        MentorDAO dao = new MentorDAO();
-        List<Mentors> list = dao.getAll();
-        for (Mentors mentor : list) {
-            System.out.println(mentor);
+    public List<Object[]> getAllMentor() {
+        List<Object[]> list = new ArrayList<>();
+
+        String querry = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name from mentors m join users u on m.userId = u.userId join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Object[] userInfo = new Object[17];
+
+                // Populate the array with data from the ResultSet
+                userInfo[0] = rs.getString("mentorId");
+                userInfo[1] = rs.getString("userId");
+                userInfo[2] = rs.getString("bio");
+                userInfo[3] = rs.getInt("hourlyRate");
+                userInfo[4] = rs.getString("email");
+                userInfo[5] = rs.getString("password");
+                userInfo[6] = rs.getString("fName");
+                userInfo[7] = rs.getString("lName");
+                userInfo[8] = rs.getString("gender");
+                userInfo[9] = rs.getString("phoneNum");
+                userInfo[10] = rs.getInt("roleId");
+                userInfo[11] = rs.getInt("statusId");
+                userInfo[12] = rs.getString("address");
+                userInfo[13] = rs.getString("maqh");
+                userInfo[14] = rs.getString("facebook");
+                userInfo[15] = rs.getString(16);
+                userInfo[16] = rs.getString(17);
+                list.add(userInfo);
+            }
+        } catch (Exception e) {
         }
+
+        return list;
     }
+
     
 }
