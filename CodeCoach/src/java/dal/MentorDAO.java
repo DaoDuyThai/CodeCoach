@@ -55,8 +55,11 @@ public class MentorDAO {
         }
         return null;
     }
-    public Mentors searchMentors(List<Mentors> result){
-        String query = "select * from mentors where ";
+    public List<Mentors> searchMentors(String searchString){
+        String query = "select * from Users left join Mentors"
+                + "on Users.userId = Mentors.userId"
+                + "inner join  ";
+        
     }
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
