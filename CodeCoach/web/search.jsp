@@ -145,15 +145,15 @@
                         </div>
 
                     </div>
-                    <c:forEach items="${ListM}" var="mInfo">
                     <div class="col-md-12 col-lg-8 col-xl-9">
+                        <c:forEach items="${ListM}" var="mInfo">
                         <div class="card">
                             <div class="card-body">
                                 <div class="mentor-widget">
                                     <div class="user-info-left">
                                         <div class="mentor-img">
                                             <a href="profile.html">
-                                                <img src="assets/img/user/user.jpg" class="img-fluid" alt="User Image">
+                                                <img src="assets/img/user/${mInfo[2]}.jpg" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
@@ -168,8 +168,8 @@
                                                 <span class="d-inline-block average-rating">(17)</span>
                                             </div>
                                             <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i> Florida,
-                                                    USA</p>
+                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i>${mInfo[15]},
+                                                    ${mInfo[16]}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@
                                         <div class="user-infos">
                                             <ul>
                                                 <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
+                                                <li><i class="fas fa-map-marker-alt"></i> ${mInfo[15]}, ${mInfo[16]}</li>
                                                 <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
