@@ -56,8 +56,9 @@ public class MentorDAO {
         }
         return null;
     }
-    public Object[] getMentorBySearch(String searchTxt){
-            String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, sk.skillName, c.categoryName\n" +
+    public List<Integer> getMentorBySearch(String searchTxt){
+        List<Integer> list = new ArrayList<>();
+            String query = "select m.mentorId \n" +
                             "from Users u left join Mentors m \n" +
                             "on u.userId = m.userId inner join quanhuyen qh on u.maqh = qh.maqh inner join tinhthanhpho ttp on qh.mattp = ttp.mattp join Expertise e \n" +
                             "on m.mentorId = e.mentorId  join Skills sk\n" +
@@ -75,59 +76,38 @@ public class MentorDAO {
                 ps.setString(5, "%"+searchTxt+"%");
                 rs = ps.executeQuery();
                 while(rs.next()){
-                    Object[] userInfo = new Object[18];
-
-                // Populate the array with data from the ResultSet
-                userInfo[0] = rs.getString("mentorId");
-                userInfo[1] = rs.getString("userId");
-                userInfo[2] = rs.getString("bio");
-                userInfo[3] = rs.getInt("hourlyRate");
-                userInfo[4] = rs.getString("email");
-                userInfo[5] = rs.getString("password");
-                userInfo[6] = rs.getString("fName");
-                userInfo[7] = rs.getString("lName");
-                userInfo[8] = rs.getString("gender");
-                userInfo[9] = rs.getString("phoneNum");
-                userInfo[10] = rs.getInt("roleId");
-                userInfo[11] = rs.getInt("statusId");
-                userInfo[12] = rs.getString("address");
-                userInfo[13] = rs.getString("maqh");
-                userInfo[14] = rs.getString("facebook");
-                userInfo[15] = rs.getString(16);
-                userInfo[16] = rs.getString(17);
-                userInfo[17] = rs.getString("skillName");
-                mtrList.add(userInfo);
+                    list.add(rs.getInt(1));
                 }
            }
             catch(Exception e) {
                 System.out.println(e);
             }
-            return o;
+            return list;
     }
-    public List<Integer> getAllMentorIdBySkillId(int skillId) {
-        String query = "select * from expertise where skillid =?";
-        List<Integer> list = new ArrayList<>();
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, skillId);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                list.add(rs.getInt(2));
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return list;
-    }
+//    public List<Integer> getAllMentorIdBySkillId(int skillId) {
+//        String query = "select * from expertise where skillid =?";
+//        List<Integer> list = new ArrayList<>();
+//        try {
+//            conn = new DBContext().getConnection();
+//            ps = conn.prepareStatement(query);
+//            ps.setInt(1, skillId);
+//            rs = ps.executeQuery();
+//            while(rs.next()){
+//                list.add(rs.getInt(2));
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e);
+//        }
+//        return list;
+//    }
 
     public static void main(String[] args) {
         MentorDAO mdao = new MentorDAO();
         UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
+        List<Integer> listMId = mdao.getMentorBySearch("java");
         List<Object[]> listUInfo = new ArrayList<>();
         for (Integer mentorId : listMId) {
-            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
+            Object[] uInfo = udao.getUserInfoByMentorIdForSearch(mentorId);
             listUInfo.add(uInfo);
         }
         for (Object[] objects : listUInfo) {
