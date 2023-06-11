@@ -56,6 +56,20 @@ public class MentorDAO {
         return null;
     }
 
+    public List<Integer> getMentorIdBySkillId(int skillId) {
+        String query = "select * from expertise where skillid =?";
+        List<Integer> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, skillId);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
         Mentors m = dao.getMentorByMentorId(2);
