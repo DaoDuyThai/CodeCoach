@@ -35,7 +35,7 @@
                             <li class="has-submenu">
                                 <a href>Mentor <i class="fas fa-chevron-down"></i></a>
                                 <ul class="submenu">
-                                    <li><a href="">Mentor Dashboard</a></li>
+                                    <li><a href="mentordashboard">Mentor Dashboard</a></li>
                                     <li><a href="">Notification</a></li>
                                     <li><a href="">View Booking</a></li>
                                     <li><a href="">Review</a></li>

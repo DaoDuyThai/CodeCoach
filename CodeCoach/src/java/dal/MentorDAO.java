@@ -102,7 +102,7 @@ public class MentorDAO {
             catch(Exception e) {
                 System.out.println(e);
             }
-            return mtrList;
+            return o;
     }
     public List<Integer> getAllMentorIdBySkillId(int skillId) {
         String query = "select * from expertise where skillid =?";
