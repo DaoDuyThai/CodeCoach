@@ -69,7 +69,7 @@
                                         <p><strong><%
                                             for (Users user : listUsers) {
                                                 if (user.getUserId()== chatMessage.getUserId()) {
-                                                    out.print(user.getfName());
+                                                    out.print(user.getlName());
                                                 }
                                             }  
                                         %></strong> - <%= chatMessage.getSentDateTime()%></p>
