@@ -57,6 +57,7 @@ public class MentorRegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        request.getRequestDispatcher("mentorregister.jsp").forward(request, response);
     } 
 
     /** 
@@ -75,7 +76,7 @@ public class MentorRegisterController extends HttpServlet {
             String userid = request.getParameter("userId");
             new MentorDAO().registerMentor(userid, biography, hourlyRate);
             new UserDAO().updateUser(userid);
-            request.getRequestDispatcher("login").forward(request, response);
+            response.sendRedirect("home");
         } catch (Exception e) {
         }
     }

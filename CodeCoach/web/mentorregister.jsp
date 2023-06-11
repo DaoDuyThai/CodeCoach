@@ -33,12 +33,9 @@
                                         </div>
 
                                         <form action="mentorregister" method="post">  
+                                            
                                             <div class="form-group form-focus">        
-                                                <input type="text" value="${users.userId}" readonly="readonly" name="userId" class="form-control floating">
-                                                <label class="focus-label">User Id</label>
-                                            </div>
-                                            <div class="form-group form-focus">        
-                                                <input type="text" name="biography" class="form-control floating">
+                                                <textarea type="text" row="3" name="biography" class="form-control floating"></textarea>
                                                 <label class="focus-label">Biography</label>
                                             </div>
                                             <div class="form-group form-focus">
@@ -49,6 +46,10 @@
                                                 <a class="forgot-link" href="login">Already have an account?</a>
                                             </div>
                                             <button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
+                                            <div class="form-group form-focus">    
+                                                <input type="hidden"  value="${users.userId}" readonly="readonly" name="userId" class="form-control floating">
+                                               
+                                            </div>
                                             <div class="login-or">
                                                 <span class="or-line"></span>                                              
                                         </form>
