@@ -5,7 +5,8 @@
 
 package controller;
 
-import dal.PpatDAO;
+import dal.MentorDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +14,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Ppat;
 
 /**
  *
- * @author Duy Thai
+ * @author giang
  */
-@WebServlet(name="PrivacyPolicyAndTermsController", urlPatterns={"/privacypolicyandterms"})
-public class PrivacyPolicyAndTermsController extends HttpServlet {
+@WebServlet(name="MentorRegisterController", urlPatterns={"/mentorregister"})
+public class MentorRegisterController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +37,10 @@ public class PrivacyPolicyAndTermsController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PrivacyPolicyAndTermsController</title>");  
+            out.println("<title>Servlet MentorRegisterController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PrivacyPolicyAndTermsController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet MentorRegisterController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,9 +57,7 @@ public class PrivacyPolicyAndTermsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<Ppat> listPpat = new PpatDAO().getAll();
-        request.setAttribute("listPpat", listPpat);
-        request.getRequestDispatcher("privacypolicyandterms.jsp").forward(request, response);
+        request.getRequestDispatcher("mentorregister.jsp").forward(request, response);
     } 
 
     /** 
@@ -73,7 +70,15 @@ public class PrivacyPolicyAndTermsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String biography = request.getParameter("biography");
+            String hourlyRate = request.getParameter("hourlyRate");
+            String userid = request.getParameter("userId");
+            new MentorDAO().registerMentor(userid, biography, hourlyRate);
+            new UserDAO().updateUser(userid);
+            response.sendRedirect("home");
+        } catch (Exception e) {
+        }
     }
 
     /** 
