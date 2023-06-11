@@ -239,7 +239,7 @@ public class UserDAO extends DBContext {
         return o;
     }
     
-    public void updateUser(String userId) {
+    public void updateRoleIdUser(String userId) {
         String query = "UPDATE [dbo].[Users] SET [roleId] = 2 WHERE userId = "+userId+"";
         try {
             conn = new DBContext().getConnection();
