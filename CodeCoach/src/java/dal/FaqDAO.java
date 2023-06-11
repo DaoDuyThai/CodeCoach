@@ -101,8 +101,19 @@ public class FaqDAO {
         return count;
     }
 
+    public void deleteFaq(int id) {
+        String query = "delete from faq where id=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         FaqDAO d = new FaqDAO();
-        System.out.println(d.countFaq());
     }
 }
