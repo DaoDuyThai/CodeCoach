@@ -58,7 +58,7 @@ public class MentorDAO {
     }
     public List<Integer> getMentorBySearch(String searchTxt){
         List<Integer> list = new ArrayList<>();
-            String query = "select m.mentorId \n" +
+            String query = "select distinct m.mentorId \n" +
                             "from Users u left join Mentors m \n" +
                             "on u.userId = m.userId inner join quanhuyen qh on u.maqh = qh.maqh inner join tinhthanhpho ttp on qh.mattp = ttp.mattp join Expertise e \n" +
                             "on m.mentorId = e.mentorId  join Skills sk\n" +

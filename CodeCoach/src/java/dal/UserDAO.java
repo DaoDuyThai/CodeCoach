@@ -254,7 +254,7 @@ public class UserDAO extends DBContext {
     }
      public Object[] getUserInfoByMentorIdForSearch(int mentorId) {
         Object[] o = new Object[20];
-        String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, subCategoryName, categoryName\n" +
+        String query = "select distinct m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, subCategoryName, categoryName\n" +
                         "from Users u join Mentors m\n" +
                         "on u.userId = m.userId inner join quanhuyen qh on u.maqh = qh.maqh inner join tinhthanhpho ttp on qh.mattp = ttp.mattp join Expertise e\n" +
                         "on m.mentorId = e.mentorId  join Skills sk\n" +
