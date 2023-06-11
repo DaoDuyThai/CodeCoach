@@ -5,7 +5,8 @@
 
 package controller;
 
-import dal.PpatDAO;
+import dal.ChatRoomDAO;
+import dal.ChatRoomUsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +15,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Ppat;
+import model.ChatMessages;
+import model.ChatRoom;
+import dal.ChatMessagesDAO;
+import dal.UserDAO;
+import model.Users;
 
 /**
  *
- * @author Duy Thai
+ * @author giang
  */
-@WebServlet(name="PrivacyPolicyAndTermsController", urlPatterns={"/privacypolicyandterms"})
-public class PrivacyPolicyAndTermsController extends HttpServlet {
+@WebServlet(name="ListChatController", urlPatterns={"/listchat"})
+public class ListChatController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +43,10 @@ public class PrivacyPolicyAndTermsController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PrivacyPolicyAndTermsController</title>");  
+            out.println("<title>Servlet ListChatController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet PrivacyPolicyAndTermsController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ListChatController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,9 +63,22 @@ public class PrivacyPolicyAndTermsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        List<Ppat> listPpat = new PpatDAO().getAll();
-        request.setAttribute("listPpat", listPpat);
-        request.getRequestDispatcher("privacypolicyandterms.jsp").forward(request, response);
+        //String userId = request.getParameter("userId");
+        String userId = "1";
+        List<ChatRoom> chatRooms = new ChatRoomDAO().getChatRoombyUserId(userId);
+        request.setAttribute("chatRooms", chatRooms);
+        String selectedChatRoomId = request.getParameter("chatRoomId");
+        if (selectedChatRoomId != null) {
+            List<ChatMessages> listChatMessages = new ChatMessagesDAO().getChatMessagesbySelectedChatRoomId(selectedChatRoomId);
+            List<ChatRoom> listChatRooms = new ChatRoomDAO().getAllChatRoom();
+            List<Users> listUsers = new UserDAO().getAllUser();
+            request.setAttribute("listChatRooms", listChatRooms);
+            request.setAttribute("listChatMessages", listChatMessages);
+            request.setAttribute("selectedChatRoomId", selectedChatRoomId);
+            request.setAttribute("listUsers", listUsers);
+            request.setAttribute(userId, this);
+        }
+        request.getRequestDispatcher("listchat.jsp").forward(request, response);  
     } 
 
     /** 
@@ -73,7 +91,12 @@ public class PrivacyPolicyAndTermsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        //String userId = request.getParameter("userId");
+        String userId = "1";
+        String chatRoomId = request.getParameter("chatRoomId");
+        String message = request.getParameter("message");
+        new ChatMessagesDAO().insertChatMessage(userId, chatRoomId, message);
+        response.sendRedirect("listchat?chatRoomId=" + chatRoomId);
     }
 
     /** 

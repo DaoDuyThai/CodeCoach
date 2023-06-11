@@ -55,6 +55,16 @@ public class MentorDAO {
         }
         return null;
     }
+    
+    public void registerMentor(String userId, String biography, String hourlyRate) {
+        String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES("+userId+",'"+biography+"',"+hourlyRate+")";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();         
+        } catch (Exception e) {
+        }
+    }
 
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
