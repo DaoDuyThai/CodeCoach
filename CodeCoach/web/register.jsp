@@ -72,10 +72,10 @@
                                     <div class="form-group" >
                                         Gender :
                                         <label for="male">Male</label>
-                                        <input class="form-check-input" type="radio" id="male" name="gender" value="male" checked >
+                                        <input class="form-check-input" type="radio" id="male" name="gender" value="Male" checked >
 
                                         <label for="female">Female</label>
-                                        <input class="form-check-input" type="radio" id="female" name="gender" value="female">
+                                        <input class="form-check-input" type="radio" id="female" name="gender" value="Female">
                                     </div>
 
                                     <div class="form-group">
