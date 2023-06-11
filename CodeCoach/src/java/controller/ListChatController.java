@@ -18,6 +18,7 @@ import model.ChatMessages;
 import model.ChatRoom;
 import dal.ChatMessagesDAO;
 import dal.UserDAO;
+import jakarta.servlet.http.HttpSession;
 import model.Users;
 
 /**
@@ -44,7 +45,7 @@ public class ListChatController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListChatController</title>");            
+            out.println("<title>Servlet ListChatController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ListChatController at " + request.getContextPath() + "</h1>");
@@ -65,8 +66,13 @@ public class ListChatController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         //String userId = request.getParameter("userId");
-        String userId = request.getParameter("userId");
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("users");
+//        String userId = request.getParameter("userId");
+//        out.print(u);
+        String userId = Integer.toString(u.getUserId());
         if (userId != null) {
             List<ChatRoom> chatRooms = new ChatRoomDAO().getChatRoombyUserId(userId);
             request.setAttribute("chatRooms", chatRooms);
@@ -85,7 +91,7 @@ public class ListChatController extends HttpServlet {
         } else {
             response.sendRedirect("login");
         }
-        
+
     }
 
     /**
@@ -99,7 +105,11 @@ public class ListChatController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String userId = request.getParameter("userId");
+        HttpSession session = request.getSession();
+        Users u = (Users) session.getAttribute("users");
+//        String userId = request.getParameter("userId");
+//        out.print(u);
+        String userId = Integer.toString(u.getUserId());
         if (userId != null) {
             String chatRoomId = request.getParameter("chatRoomId");
             String message = request.getParameter("message");
