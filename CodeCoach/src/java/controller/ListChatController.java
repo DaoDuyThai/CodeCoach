@@ -64,7 +64,8 @@ public class ListChatController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //String userId = request.getParameter("userId");
-        String userId = "1";
+        String userId = request.getParameter("userId");
+        
         List<ChatRoom> chatRooms = new ChatRoomDAO().getChatRoombyUserId(userId);
         request.setAttribute("chatRooms", chatRooms);
         String selectedChatRoomId = request.getParameter("chatRoomId");
