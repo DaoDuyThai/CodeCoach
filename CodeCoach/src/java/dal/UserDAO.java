@@ -221,10 +221,42 @@ public class UserDAO extends DBContext {
         }
         return o;
     }
+    public Object[] getUserInfoByMenteeId(int menteeId) {
+        Object[] o = new Object[17];
+        String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name from mentees m join users u on m.userId = u.userId join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp where m.menteeId =?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, menteeId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                o[0] = rs.getInt(1);
+                o[1] = rs.getInt(2);
+                o[2] = rs.getString(3);
+                o[3] = rs.getInt(4);
+                o[4] = rs.getString(5);
+                o[5] = rs.getString(6);
+                o[6] = rs.getString(7);
+                o[7] = rs.getString(8);
+                o[8] = rs.getString(9);
+                o[9] = rs.getString(10);
+                o[10] = rs.getInt(11);
+                o[11] = rs.getInt(12);
+                o[12] = rs.getString(13);
+                o[13] = rs.getInt(14);
+                o[14] = rs.getString(15);
+                o[15] = rs.getString(16);
+                o[16] = rs.getString(17);
+            }
+        } catch (Exception e) {
+
+        }
+        return o;
+    }
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        Object[] o = dao.getUserInfoByMentorId(1);
+        Object[] o = dao.getUserInfoByMenteeId(4);
         for (int i = 0; i < o.length; i++) {
             System.out.println(o[i]);
         }

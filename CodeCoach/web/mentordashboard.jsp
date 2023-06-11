@@ -144,7 +144,6 @@
                                                 <thead>
                                                     <tr>
                                                         <th>BASIC INFO</th>
-                                                        <th>CREATED DATE</th>
                                                         <th class="text-center">TAGS</th>
                                                         <th class="text-center">ACTION</th>
                                                     </tr>
@@ -163,133 +162,13 @@
                                                                             data-cfemail="ec98959e8382899e838e899e989fac8d88838e89c28f8381">[email&#160;protected]</span></span></a>
                                                             </h2>
                                                         </td>
-                                                        <td>08 April 2020</td>
+                                                        
                                                         <td class="text-center"><span class="pending">PENDING</span>
                                                         </td>
                                                         <td class="text-center"><a href="profile.html"
                                                                 class="btn btn-sm bg-info-light"><i
                                                                     class="far fa-eye"></i> View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user1.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Julie Pennington <span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="761c031a1f133617121914135815191b">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        <td>08 April 2020</td>
-                                                        <td class="text-center"><span class="pending">PENDING</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user3.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Allen Davis <span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="cfaea3a3aaa1abaeb9a6bc8faeaba0adaae1aca0a2">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        <td>08 April 2020</td>
-                                                        <td class="text-center"><span class="pending">PENDING</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user4.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Patricia Manzi <span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="1161706563787278707c707f6b785170757e73743f727e7c">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        <td>08 April 2020</td>
-                                                        <td class="text-center"><span class="accept">ACCEPTED</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user5.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Olive Lawrence <span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="c9a6a5a0bfaca5a8bebbaca7aaac89a8ada6abace7aaa6a4">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        <td>08 April 2020</td>
-                                                        <td class="text-center"><span class="accept">ACCEPTED</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user6.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Frances Foster <span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="610713000f0204122100050e03044f020e0c">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        <td>08 April 2020</td>
-                                                        <td class="text-center"><span class="accept">ACCEPTED</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user7.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Deloris Briscoe <span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="254140494a574c5647574c56464a406544414a47400b464a48">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        <td>08 April 2020</td>
-                                                        <td class="text-center"><span class="reject">REJECTED</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>
+                                                    </tr>  
                                                 </tbody>
                                             </table>
                                         </div>
