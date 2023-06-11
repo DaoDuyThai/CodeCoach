@@ -63,7 +63,7 @@ public class SearchController extends HttpServlet {
     throws ServletException, IOException {
         String searchTxt = request.getParameter("searchTxt");
         MentorDAO DAO = new MentorDAO();
-        List<Object[]> list = DAO.searchMentors(searchTxt);
+        List<Object[]> list = DAO.getMentorsBySearch(searchTxt);
        
        request.setAttribute("ListM", list);
        request.getRequestDispatcher("search.jsp").forward(request, response);

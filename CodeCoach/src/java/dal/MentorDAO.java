@@ -56,10 +56,10 @@ public class MentorDAO {
         }
         return null;
     }
-    public List<Object[]> searchMentors(String searchTxt){
+    public List<Object[]> getMentorsBySearch(String searchTxt){
             List<Object[]> mtrList = new ArrayList<>();
             String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, "
-                          + "u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, m.hourlyRate\n" +
+                          + "u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, c.categoryName\n" +
                             "from ((((((Users u join Mentors m \n" +
                             "on u.userId = m.userId) join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp) join Expertise e \n" +
                             "on m.mentorId = e.mentorId)  join Skills sk\n" +
@@ -67,7 +67,7 @@ public class MentorDAO {
                             "on sk.subCategoryId = sc.subCategoryId) inner join Categories c \n" +
                             "on sc.categoryId = c.categoryId)\n" +
                             "where u.fName like ? "
-                          + "or where u.lName like ?"
+                          + "or u.lName like ?"
                           + "or sk.skillName like ? or "
                           + "sc.subCategoryName like ? "
                           + "or c.categoryName like ?";
@@ -78,9 +78,10 @@ public class MentorDAO {
                 ps.setString(2, "%"+searchTxt+"%");
                 ps.setString(3, "%"+searchTxt+"%");
                 ps.setString(4, "%"+searchTxt+"%");
+                ps.setString(5, "%"+searchTxt+"%");
                 rs = ps.executeQuery();
                 while(rs.next()){
-                    Object[] userInfo = new Object[19];
+                    Object[] userInfo = new Object[18];
 
                 // Populate the array with data from the ResultSet
                 userInfo[0] = rs.getString("mentorId");
@@ -101,7 +102,6 @@ public class MentorDAO {
                 userInfo[15] = rs.getString(16);
                 userInfo[16] = rs.getString(17);
                 userInfo[17] = rs.getString("skillName");
-                userInfo[18] = rs.getString("hourlyRate");
                 mtrList.add(userInfo);
                 }
                 
@@ -113,7 +113,7 @@ public class MentorDAO {
     }
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
-       List<Object[]> m = dao.searchMentors("Ruby");
+       List<Object[]> m = dao.getMentorsBySearch("java");
        for (Object[] mInfo: m)
         System.out.println(mInfo);
     }
