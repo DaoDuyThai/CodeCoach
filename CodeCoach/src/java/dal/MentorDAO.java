@@ -58,15 +58,16 @@ public class MentorDAO {
     }
     public List<Object[]> searchMentors(String searchTxt){
             List<Object[]> mtrList = new ArrayList<>();
-            String query = "select select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, "
+            String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, "
                           + "u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, m.hourlyRate\n" +
                             "from ((((((Users u join Mentors m \n" +
-                            "on u.userId = m.userId) join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp) join Expertise e\n" +
+                            "on u.userId = m.userId) join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp) join Expertise e \n" +
                             "on m.mentorId = e.mentorId)  join Skills sk\n" +
                             "on e.skillId = sk.skillId)  join SubCategories sc\n" +
-                            "on sk.subCategoryId = sc.subCategoryId) inner join Categories c\n" +
+                            "on sk.subCategoryId = sc.subCategoryId) inner join Categories c \n" +
                             "on sc.categoryId = c.categoryId)\n" +
                             "where u.fName like ? "
+                          + "or where u.lName like ?"
                           + "or sk.skillName like ? or "
                           + "sc.subCategoryName like ? "
                           + "or c.categoryName like ?";

@@ -157,8 +157,8 @@
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">${mInfo.fName}</a></h4>
-                                            <p class="mentor-type">Digital Marketer</p>
+                                            <h4 class="usr-name"><a href="profile.html">${mInfo[6]} ${mInfo[7]}</a></h4>
+                                            <p class="mentor-type">${mInfo[17]}</p>
                                             <div class="rating">
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -178,7 +178,7 @@
                                             <ul>
                                                 <li><i class="far fa-comment"></i> 17 Feedback</li>
                                                 <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo.hourlyRate} <i
+                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
                                             </ul>

@@ -48,6 +48,7 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        processRequest(request, response);
     } 
 
     /** 
@@ -60,9 +61,9 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       String searchTxt = request.getParameter("searchTxt");
-       MentorDAO DAO = new MentorDAO();
-       List<Object[]> list = DAO.searchMentors(searchTxt);
+        String searchTxt = request.getParameter("searchTxt");
+        MentorDAO DAO = new MentorDAO();
+        List<Object[]> list = DAO.searchMentors(searchTxt);
        
        request.setAttribute("ListM", list);
        request.getRequestDispatcher("search.jsp").forward(request, response);
