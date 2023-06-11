@@ -108,7 +108,6 @@ public class ListChatController extends HttpServlet {
         } else {
             response.sendRedirect("login");
         }
-        
     }
 
     /**

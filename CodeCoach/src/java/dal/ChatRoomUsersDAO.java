@@ -19,7 +19,7 @@ public class ChatRoomUsersDAO extends DBContext{
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
+   
     public List<Integer> listChatRoomIdbyUserId(String userId) {
         List<Integer> listChatRoom = new ArrayList<>();
         String query = "SELECT [chatRoomId] FROM [CodeCoach].[dbo].[ChatRoomUsers] WHERE userId="+userId+"";
@@ -32,8 +32,7 @@ public class ChatRoomUsersDAO extends DBContext{
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        
+        }   
         return listChatRoom;
     }
 }
