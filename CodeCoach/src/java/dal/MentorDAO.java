@@ -56,7 +56,7 @@ public class MentorDAO {
         return null;
     }
 
-    public List<Integer> getMentorIdBySkillId(int skillId) {
+    public List<Integer> getAllMentorIdBySkillId(int skillId) {
         String query = "select * from expertise where skillid =?";
         List<Integer> list = new ArrayList<>();
         try {
@@ -64,6 +64,9 @@ public class MentorDAO {
             ps = conn.prepareStatement(query);
             ps.setInt(1, skillId);
             rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(rs.getInt(2));
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -71,9 +74,19 @@ public class MentorDAO {
     }
 
     public static void main(String[] args) {
-        MentorDAO dao = new MentorDAO();
-        Mentors m = dao.getMentorByMentorId(2);
-        System.out.println(m);
+        MentorDAO mdao = new MentorDAO();
+        UserDAO udao = new UserDAO();
+        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
+        List<Object[]> listUInfo = new ArrayList<>();
+        for (Integer mentorId : listMId) {
+            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
+            listUInfo.add(uInfo);
+        }
+        for (Object[] objects : listUInfo) {
+            for(int i = 0; i < objects.length; i++){
+                System.out.print(objects[i] + " ");
+            }
+            System.out.println("");
+        }
     }
-
 }
