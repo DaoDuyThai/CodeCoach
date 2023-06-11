@@ -93,7 +93,8 @@ public class MentorDAO {
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
        List<Mentors> m = dao.searchMentors("Ruby");
-        System.out.println(m);
+       for (Mentors mInfo: m)
+        System.out.println(mInfo);
     }
 
 }

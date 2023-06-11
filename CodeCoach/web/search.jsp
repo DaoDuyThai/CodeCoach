@@ -145,8 +145,8 @@
                         </div>
 
                     </div>
+                    <c:forEach items="${ListM}" var="mInfo">
                     <div class="col-md-12 col-lg-8 col-xl-9">
-                        <c:forEach items="${ListM}" var="mInfo">
                         <div class="card">
                             <div class="card-body">
                                 <div class="mentor-widget">
@@ -157,8 +157,8 @@
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">Ruby Perrin</a></h4>
-                                            <p class="mentor-type">Digital Marketer</p>
+                                            <h4 class="usr-name"><a href="profile.html">${mInfo.fName}</a></h4>
+<!--                                            <p class="mentor-type">Digital Marketer</p>-->
                                             <div class="rating">
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -178,7 +178,7 @@
                                             <ul>
                                                 <li><i class="far fa-comment"></i> 17 Feedback</li>
                                                 <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i
+                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo.hourlyRate} <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
                                             </ul>
@@ -190,186 +190,9 @@
                                 </div>
                             </div>
                         </div>
+                        <c:forEach>
 
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mentor-widget">
-                                    <div class="user-info-left">
-                                        <div class="mentor-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/user/user1.jpg" class="img-fluid" alt="User Image">
-                                            </a>
-                                        </div>
-                                        <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">Darren Elder</a></h4>
-                                            <p class="mentor-type">Digital Marketer</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(35)</span>
-                                            </div>
-                                            <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i> Newyork,
-                                                    USA</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="user-info-right">
-                                        <div class="user-infos">
-                                            <ul>
-                                                <li><i class="far fa-comment"></i> 35 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> $50 - $300 <i
-                                                        class="fas fa-info-circle" data-bs-toggle="tooltip"
-                                                        title="Lorem Ipsum"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="mentor-booking">
-                                            <a class="apt-btn" href="booking.html">Book Appointment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mentor-widget">
-                                    <div class="user-info-left">
-                                        <div class="mentor-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/user/user2.jpg" class="img-fluid" alt="User Image">
-                                            </a>
-                                        </div>
-                                        <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">Deborah Angel</a></h4>
-                                            <p class="mentor-type">UNIX, Calculus, Trigonometry</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(27)</span>
-                                            </div>
-                                            <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i> Georgia,
-                                                    USA</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="user-info-right">
-                                        <div class="user-infos">
-                                            <ul>
-                                                <li><i class="far fa-comment"></i> 35 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> $100 - $400 <i
-                                                        class="fas fa-info-circle" data-bs-toggle="tooltip"
-                                                        title="Lorem Ipsum"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="mentor-booking">
-                                            <a class="apt-btn" href="booking.html">Book Appointment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mentor-widget">
-                                    <div class="user-info-left">
-                                        <div class="mentor-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/user/user4.jpg" class="img-fluid" alt="User Image">
-                                            </a>
-                                        </div>
-                                        <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">Sofia Brient</a></h4>
-                                            <p class="mentor-type">Computer Programmin</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(4)</span>
-                                            </div>
-                                            <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i>
-                                                    Louisiana, USA</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="user-info-right">
-                                        <div class="user-infos">
-                                            <ul>
-                                                <li><i class="far fa-comment"></i> 4 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> $150 - $250 <i
-                                                        class="fas fa-info-circle" data-bs-toggle="tooltip"
-                                                        title="Lorem Ipsum"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="mentor-booking">
-                                            <a class="apt-btn" href="booking.html">Book Appointment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mentor-widget">
-                                    <div class="user-info-left">
-                                        <div class="mentor-img">
-                                            <a href="profile.html">
-                                                <img src="assets/img/user/user5.jpg" class="img-fluid" alt="User Image">
-                                            </a>
-                                        </div>
-                                        <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">Katharine Berthold</a></h4>
-                                            <p class="mentor-type">ASP.NET, Computer Gaming</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(52)</span>
-                                            </div>
-                                            <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i> Texas,
-                                                    USA</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="user-info-right">
-                                        <div class="user-infos">
-                                            <ul>
-                                                <li><i class="far fa-comment"></i> 52 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> Texas, USA</li>
-                                                <li><i class="far fa-money-bill-alt"></i> $100 - $500 <i
-                                                        class="fas fa-info-circle" data-bs-toggle="tooltip"
-                                                        title="Lorem Ipsum"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="mentor-booking">
-                                            <a class="apt-btn" href="booking.html">Book Appointment</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                   
 
                         <div class="load-more text-center">
                             <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
