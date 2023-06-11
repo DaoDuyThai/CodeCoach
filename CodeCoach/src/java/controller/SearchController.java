@@ -34,8 +34,12 @@ public class SearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+       String searchTxt = request.getParameter("searchTxt");
+       MentorDAO DAO = new MentorDAO();
+       List<Mentors> list = DAO.searchMentors(searchTxt);
        
-        
+       request.setAttribute("ListM", list);
+       request.getRequestDispatcher("search.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

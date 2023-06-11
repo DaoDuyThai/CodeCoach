@@ -146,7 +146,7 @@
 
                     </div>
                     <div class="col-md-12 col-lg-8 col-xl-9">
-                        <c:forEach items="${mentorInfoList}" var="mInfo">
+                        <c:forEach items="${ListM}" var="mInfo">
                         <div class="card">
                             <div class="card-body">
                                 <div class="mentor-widget">

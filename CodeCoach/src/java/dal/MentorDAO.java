@@ -64,10 +64,10 @@ public class MentorDAO {
                             "on e.skillId = sk.skillId) inner join SubCategories sc\n" +
                             "on sk.subCategoryId = sc.subCategoryId) inner join Categories c\n" +
                             "on sc.categoryId = c.categoryId)\n" +
-                            "where u.fName = ? "
-                          + "or sk.skillName = ? or "
-                          + "sc.subCategoryName = ? "
-                          + "or c.categoryName = ?";
+                            "where u.fName like ? "
+                          + "or sk.skillName like ? or "
+                          + "sc.subCategoryName like ? "
+                          + "or c.categoryName like ?";
             try{
                 conn = new DBContext().getConnection();
                 ps = conn.prepareStatement(query);
