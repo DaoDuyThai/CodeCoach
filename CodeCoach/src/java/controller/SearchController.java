@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Mentors;
 
@@ -62,10 +63,16 @@ public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String searchTxt = request.getParameter("searchTxt");
-        MentorDAO DAO = new MentorDAO();
-        Object[] list = DAO.getMentorBySearch(searchTxt);
+        MentorDAO mdao = new MentorDAO();
+        UserDAO udao = new UserDAO();
+        List<Integer> listMId = mdao.getMentorBySearch("java");
+        List<Object[]> listUInfo = new ArrayList<>();
+        for (Integer mentorId : listMId) {
+            Object[] uInfo = udao.getUserInfoByMentorIdForSearch(mentorId);
+            listUInfo.add(uInfo);
+        }
        
-       request.setAttribute("ListM", list);
+       request.setAttribute("ListM", listUInfo);
        request.getRequestDispatcher("search.jsp").forward(request, response);
     }
 
