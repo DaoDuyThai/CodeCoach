@@ -44,10 +44,10 @@
                     <div class="col-md-8 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="home">Home</a></li>
                             </ol>
                         </nav>
-                        <h2 class="breadcrumb-title">2245 matches found for : Mentors In Florida</h2>
+         
                     </div>
                     <div class="col-md-4 col-12 d-md-block d-none">
                         <div class="sort-by">
@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="user-info-cont">
                                             <h4 class="usr-name"><a href="profile.html">${mInfo.fName}</a></h4>
-<!--                                            <p class="mentor-type">Digital Marketer</p>-->
+                                            <p class="mentor-type">Digital Marketer</p>
                                             <div class="rating">
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>

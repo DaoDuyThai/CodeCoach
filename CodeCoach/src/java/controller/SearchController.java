@@ -34,12 +34,7 @@ public class SearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String searchTxt = request.getParameter("searchTxt");
-       MentorDAO DAO = new MentorDAO();
-       List<Mentors> list = DAO.searchMentors(searchTxt);
-       
-       request.setAttribute("ListM", list);
-       request.getRequestDispatcher("search.jsp").forward(request, response);
+   
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,15 +48,6 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       //getmentors
-        MentorDAO mentorDao = new MentorDAO();
-        List<Mentors> mentorList = mentorDao.getAll();
-        request.setAttribute("mentorList", mentorList);
-        //get Mentor user's info
-        UserDAO userDao = new UserDAO();
-        List<Object[]> mentorInfoList = userDao.getAllUserInfoOfMentor();
-        request.setAttribute("mentorInfoList", mentorInfoList);
-        request.getRequestDispatcher("search.jsp").forward(request, response);
     } 
 
     /** 
@@ -74,7 +60,12 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       processRequest(request, response);
+       String searchTxt = request.getParameter("searchTxt");
+       MentorDAO DAO = new MentorDAO();
+       List<Object[]> list = DAO.searchMentors(searchTxt);
+       
+       request.setAttribute("ListM", list);
+       request.getRequestDispatcher("search.jsp").forward(request, response);
     }
 
     /** 

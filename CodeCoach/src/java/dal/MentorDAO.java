@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
 import model.Mentors;
 import model.Skills;
@@ -55,13 +56,14 @@ public class MentorDAO {
         }
         return null;
     }
-    public List<Mentors> searchMentors(String searchTxt){
-            List<Mentors> mtrList = new ArrayList<>();
-            String query = "select u.fName, u.lName, m.hourlyRate, e.expertiseId\n" +
-                            "from (((((Users u left join Mentors m \n" +
-                            "on u.userId = m.userId) inner join Expertise e\n" +
-                            "on m.mentorId = e.mentorId) inner join Skills sk\n" +
-                            "on e.skillId = sk.skillId) inner join SubCategories sc\n" +
+    public List<Object[]> searchMentors(String searchTxt){
+            List<Object[]> mtrList = new ArrayList<>();
+            String query = "select select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, "
+                          + "u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, m.hourlyRate\n" +
+                            "from ((((((Users u join Mentors m \n" +
+                            "on u.userId = m.userId) join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp) join Expertise e\n" +
+                            "on m.mentorId = e.mentorId)  join Skills sk\n" +
+                            "on e.skillId = sk.skillId)  join SubCategories sc\n" +
                             "on sk.subCategoryId = sc.subCategoryId) inner join Categories c\n" +
                             "on sc.categoryId = c.categoryId)\n" +
                             "where u.fName like ? "
@@ -77,11 +79,29 @@ public class MentorDAO {
                 ps.setString(4, "%"+searchTxt+"%");
                 rs = ps.executeQuery();
                 while(rs.next()){
-                    mtrList.add(new Mentors(
-                    rs.getInt(1),
-                    rs.getInt(2),
-                    rs.getString(3),
-                    rs.getString(4)));
+                    Object[] userInfo = new Object[19];
+
+                // Populate the array with data from the ResultSet
+                userInfo[0] = rs.getString("mentorId");
+                userInfo[1] = rs.getString("userId");
+                userInfo[2] = rs.getString("bio");
+                userInfo[3] = rs.getInt("hourlyRate");
+                userInfo[4] = rs.getString("email");
+                userInfo[5] = rs.getString("password");
+                userInfo[6] = rs.getString("fName");
+                userInfo[7] = rs.getString("lName");
+                userInfo[8] = rs.getString("gender");
+                userInfo[9] = rs.getString("phoneNum");
+                userInfo[10] = rs.getInt("roleId");
+                userInfo[11] = rs.getInt("statusId");
+                userInfo[12] = rs.getString("address");
+                userInfo[13] = rs.getString("maqh");
+                userInfo[14] = rs.getString("facebook");
+                userInfo[15] = rs.getString(16);
+                userInfo[16] = rs.getString(17);
+                userInfo[17] = rs.getString("skillName");
+                userInfo[18] = rs.getString("hourlyRate");
+                mtrList.add(userInfo);
                 }
                 
             }
@@ -92,8 +112,8 @@ public class MentorDAO {
     }
     public static void main(String[] args) {
         MentorDAO dao = new MentorDAO();
-       List<Mentors> m = dao.searchMentors("Ruby");
-       for (Mentors mInfo: m)
+       List<Object[]> m = dao.searchMentors("Ruby");
+       for (Object[] mInfo: m)
         System.out.println(mInfo);
     }
 
