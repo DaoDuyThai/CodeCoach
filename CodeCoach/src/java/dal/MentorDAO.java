@@ -56,21 +56,15 @@ public class MentorDAO {
         }
         return null;
     }
-    public List<Object[]> getMentorsBySearch(String searchTxt){
-            List<Object[]> mtrList = new ArrayList<>();
-            String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, "
-                          + "u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, c.categoryName\n" +
-                            "from ((((((Users u join Mentors m \n" +
-                            "on u.userId = m.userId) join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp) join Expertise e \n" +
-                            "on m.mentorId = e.mentorId)  join Skills sk\n" +
-                            "on e.skillId = sk.skillId)  join SubCategories sc\n" +
-                            "on sk.subCategoryId = sc.subCategoryId) inner join Categories c \n" +
-                            "on sc.categoryId = c.categoryId)\n" +
-                            "where u.fName like ? "
-                          + "or u.lName like ?"
-                          + "or sk.skillName like ? or "
-                          + "sc.subCategoryName like ? "
-                          + "or c.categoryName like ?";
+    public Object[] getMentorBySearch(String searchTxt){
+            String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, sk.skillName, c.categoryName\n" +
+                            "from Users u left join Mentors m \n" +
+                            "on u.userId = m.userId inner join quanhuyen qh on u.maqh = qh.maqh inner join tinhthanhpho ttp on qh.mattp = ttp.mattp join Expertise e \n" +
+                            "on m.mentorId = e.mentorId  join Skills sk\n" +
+                            "on e.skillId = sk.skillId  join SubCategories sc\n" +
+                            "on sk.subCategoryId = sc.subCategoryId join Categories c \n" +
+                            "on sc.categoryId = c.categoryId\n" +
+                            "where u.fName like ? or u.lName like ? or sk.skillName like ? or sc.subCategoryName like ? or c.categoryName like ?";
             try{
                 conn = new DBContext().getConnection();
                 ps = conn.prepareStatement(query);
@@ -104,18 +98,44 @@ public class MentorDAO {
                 userInfo[17] = rs.getString("skillName");
                 mtrList.add(userInfo);
                 }
-                
-            }
+           }
             catch(Exception e) {
-                e.printStackTrace();
+                System.out.println(e);
             }
             return mtrList;
     }
+    public List<Integer> getAllMentorIdBySkillId(int skillId) {
+        String query = "select * from expertise where skillid =?";
+        List<Integer> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, skillId);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                list.add(rs.getInt(2));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
-        MentorDAO dao = new MentorDAO();
-       List<Object[]> m = dao.getMentorsBySearch("java");
-       for (Object[] mInfo: m)
-        System.out.println(mInfo);
+        MentorDAO mdao = new MentorDAO();
+        UserDAO udao = new UserDAO();
+        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
+        List<Object[]> listUInfo = new ArrayList<>();
+        for (Integer mentorId : listMId) {
+            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
+            listUInfo.add(uInfo);
+        }
+        for (Object[] objects : listUInfo) {
+            for(int i = 0; i < objects.length; i++){
+                System.out.print(objects[i] + " ");
+            }
+            System.out.println("");
+        }
     }
 
 }
