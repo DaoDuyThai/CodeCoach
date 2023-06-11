@@ -75,7 +75,7 @@ public class MentorRegisterController extends HttpServlet {
             String hourlyRate = request.getParameter("hourlyRate");
             String userid = request.getParameter("userId");
             new MentorDAO().registerMentor(userid, biography, hourlyRate);
-            new UserDAO().updateUser(userid);
+            new UserDAO().updateRoleIdUser(userid);
             response.sendRedirect("home");
         } catch (Exception e) {
         }
