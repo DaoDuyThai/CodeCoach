@@ -34,8 +34,7 @@
             <%@include file="header.jsp" %>
             <!--End of header-->
 
-
-
+            <!--Admin user start-->
             <c:if test="${users.roleId == 1}">
                 <div class="breadcrumb-bar">
                     <div class="container-fluid">
@@ -50,10 +49,14 @@
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
+
                             <!--Admin sidebar start-->
                             <%@include file="adminsidebar.jsp" %>
                             <!--Admin sidebar end-->
+
                             <div class="col-md-7 col-lg-8 col-xl-9">
+
+                                <!--count faq number start-->
                                 <div class="row">
                                     <div class="col-md-12 col-lg-2 dash-board-list pink"></div>
                                     <div class="col-md-12 col-lg-8 dash-board-list blue">
@@ -75,11 +78,15 @@
 
                                     <div class="col-md-12 col-lg-2 dash-board-list pink"></div>
                                 </div>
+                                <!--count faq number end-->
+
+
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4 class="mb-4">Frequent Asked Questions Lists</h4>
-                                        <button  onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more FAQ</button>
 
+                                        <!--add faq start-->
+                                        <button  onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more FAQ</button>
                                         <!-- addForm start here -->
                                         <div id="addFormContainer" style="display: none;">
                                             <div class="card card-form">
@@ -102,6 +109,9 @@
                                             </div>
                                         </div>
                                         <!-- addForm end here -->
+                                        <!--add faq end-->
+
+                                        <!--table start-->
                                         <div class="card card-table">
                                             <div class="card-body">
                                                 <div class="table-responsive">
@@ -127,7 +137,7 @@
                                                                         <a><button onclick="doDelete(${fl.id})" class="btn btn-danger">Delete</button></a>
                                                                     </td>
                                                                 </tr>
-                                                                <%-- Hidden row for the edit form --%>
+                                                                <%-- Hidden row for the edit form start--%>
                                                                 <tr class="edit-row" style="display: none;">
                                                                     <td colspan="4">
                                                                         <form action="updatefaq" method="POST">
@@ -144,6 +154,7 @@
                                                                         </form>
                                                                     </td>
                                                                 </tr>
+                                                                <%-- Hidden row for the edit form end--%>
 
                                                                 <% counter++;%>
                                                             </c:forEach>
@@ -152,6 +163,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--table end-->
+
                                     </div>
                                 </div>
                             </div>
@@ -159,9 +172,13 @@
                     </div>
                 </div>
             </c:if>
+            <!--Admin user end-->
+
+            <!--not admin start-->
             <c:if test="${users.roleId != 1 || empty users}">
                 <%@include file="accessdenied.jsp" %>
             </c:if>
+            <!--not admin end-->
 
             <!-- end of Pre footer -->
             <%@include file="footer.jsp" %>
@@ -181,31 +198,34 @@
 
         <script src="assets/js/script.js"></script>
         <script type="text/javascript">
-
-                                                                        function doDelete(id) {
-                                                                            if (confirm("Are you sure to delete this question")) {
-                                                                                window.location = "deletefaq?id=" + id
+                                                                            // prompt if you want to delete
+                                                                            function doDelete(id) {
+                                                                                if (confirm("Are you sure to delete this question")) {
+                                                                                    window.location = "deletefaq?id=" + id
+                                                                                }
                                                                             }
-                                                                        }
-                                                                        function showAddForm() {
-                                                                            document.getElementById('addFormContainer').style.display = 'block';
-                                                                        }
-                                                                        function hideAddForm() {
-                                                                            document.getElementById('addFormContainer').style.display = 'none';
-                                                                        }
-                                                                        function toggleEditForm(button) {
-                                                                            var editRow = button.parentNode.parentNode.nextElementSibling;
-                                                                            var display = editRow.style.display;
-                                                                            if (display === 'none' || display === '') {
-                                                                                // Show the edit form
-                                                                                editRow.style.display = 'table-row';
-                                                                                button.innerText = 'Cancel';
-                                                                            } else {
-                                                                                // Hide the edit form
-                                                                                editRow.style.display = 'none';
-                                                                                button.innerText = 'Edit';
+                                                                            //show add faq form
+                                                                            function showAddForm() {
+                                                                                document.getElementById('addFormContainer').style.display = 'block';
                                                                             }
-                                                                        }
+                                                                            //hide add faq form
+                                                                            function hideAddForm() {
+                                                                                document.getElementById('addFormContainer').style.display = 'none';
+                                                                            }
+                                                                            //show and hide edit faq form
+                                                                            function toggleEditForm(button) {
+                                                                                var editRow = button.parentNode.parentNode.nextElementSibling;
+                                                                                var display = editRow.style.display;
+                                                                                if (display === 'none' || display === '') {
+                                                                                    // Show the edit form
+                                                                                    editRow.style.display = 'table-row';
+                                                                                    button.innerText = 'Cancel';
+                                                                                } else {
+                                                                                    // Hide the edit form
+                                                                                    editRow.style.display = 'none';
+                                                                                    button.innerText = 'Edit';
+                                                                                }
+                                                                            }
         </script>
 
     </body>
