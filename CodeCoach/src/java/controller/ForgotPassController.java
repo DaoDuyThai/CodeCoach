@@ -21,6 +21,9 @@ import javax.mail.MessagingException;
  *
  * @author Duy Thai
  */
+/**
+ * This servlet handles the "Forgot Password" functionality.
+ */
 @WebServlet(name = "ForgotPassController", urlPatterns = {"/forgotpass"})
 public class ForgotPassController extends HttpServlet {
 
@@ -77,12 +80,16 @@ public class ForgotPassController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDAO userDao = new UserDAO();
+        //get email 
         String email = request.getParameter("email");
+        //check if email exist, if do generate otp and send otp to the given email
         if (userDao.checkEmailExist(email)) {
             EmailSender es = new EmailSender();
             String otp = es.getRandom();
             try {
+                //send email
                 es.sendEmail(email, otp);
+                //put in session and send to otp.jsp
                 HttpSession session = request.getSession();
                 session.setAttribute("otp", otp);
                 session.setAttribute("email", email);
@@ -90,6 +97,7 @@ public class ForgotPassController extends HttpServlet {
             } catch (MessagingException ex) {
                 Logger.getLogger(OtpController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            //if the email is not existed in database send error to forgotpassword.jsp
         } else {
             String error = "We couldn't find your account, please enter your email again";
             request.setAttribute("error", error);
