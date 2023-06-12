@@ -42,7 +42,7 @@
                                         <li><a href="">View Booking</a></li>
                                         <li><a href="">Review</a></li>
                                         <li><a href="">Invoices</a></li>
-                                        <li><a href="">Profile Settings</a></li>
+                                        <li><a href="">Profile Settings</a></li>                                      
                                     </ul>
                                 </li>
                             </c:if>
@@ -57,6 +57,10 @@
                                     <li><a href="">Favourites</a></li>
                                     <li><a href="">Invoices</a></li>
                                     <li><a href="">Profile Settings</a></li>
+                                    <c:if test="${users.userId==3}">
+                                        <li><a href="mentorregister">Mentor Register</a></li>
+                                    </c:if>
+                                    
                                 </ul>
                             </li>
                             <li class="has-submenu">
@@ -64,7 +68,7 @@
 
                             </li>
                             <li class="has-submenu">
-                                <a href>Chat <i class="fas "></i></a>
+                                <a href="listchat">Chat <i class="fas "></i></a>
                             </li>
                             <li class="has-submenu">
                                 <a href="contactus">Contact Us <i class="fas "></i></a>

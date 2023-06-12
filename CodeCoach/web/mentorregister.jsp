@@ -36,12 +36,28 @@
                                             
                                             <div class="form-group form-focus">        
                                                 <textarea type="text" row="3" name="biography" class="form-control floating"></textarea>
-                                                <label class="focus-label">Biography</label>
+                                                <label class="focus-label">Enter your biography</label>
                                             </div>
                                             <div class="form-group form-focus">
                                                 <input type="number" name="hourlyRate" class="form-control floating">
-                                                <label class="focus-label">Hourly Rate</label>
-                                            </div>                                          
+                                                <label class="focus-label">Enter number of hourly rate that you want</label>
+                                            </div>   
+                                            <div class="form-group form-focus">
+                                                <input type="text" name="hourlyRate" class="form-control floating">
+                                                <label class="focus-label">Enter your description</label>
+                                            </div> 
+                                            <div class="form-group form-focus">
+                                                <input type="text" name="hourlyRate" class="form-control floating">
+                                                <label class="focus-label">Enter your skill</label>
+                                            </div> 
+                                            <div class="form-group form-focus">
+                                                <input type="text" name="hourlyRate" class="form-control floating">
+                                                <label class="focus-label">Enter your SubCategories</label>
+                                            </div> 
+                                            <div class="form-group form-focus">
+                                                <input type="text" name="hourlyRate" class="form-control floating">
+                                                <label class="focus-label">Enter your Categories</label>
+                                            </div> 
                                             <div class="text-end">
                                                 <a class="forgot-link" href="login">Already have an account?</a>
                                             </div>
