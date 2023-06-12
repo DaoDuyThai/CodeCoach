@@ -110,7 +110,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-body custom-border-card pb-0">
-
+                                    <!--personal details start-->
                                     <div class="widget education-widget mb-0">
                                         <h4 class="widget-title">Personal Details</h4>
                                         <hr />
@@ -143,10 +143,11 @@
                                             </ul>
                                         </div>
                                     </div>
-
+                                    <!--personal details end-->
                                 </div>
                             </div>
 
+                            <!--expertise start-->
                             <div class="card">
                                 <div class="card-body pb-1 custom-border-card">
 
@@ -164,17 +165,13 @@
                                                         </div>
                                                     </li>
                                                 </c:forEach>
-
-
-
-
-
                                             </ul>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
+                            <!--expertise end-->
 
                             <div class="card">
                                 <div class="card-body custom-border-card pb-0">
