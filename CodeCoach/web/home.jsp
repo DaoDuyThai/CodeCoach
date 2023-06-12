@@ -188,6 +188,7 @@
                         <!-- end of categories/subcategories/skills -->
 
                     </div>
+                    <!--this button will load more skills-->
                     <div class="view-all text-center aos" data-aos="fade-up">
                         <button onclick="loadMore()" class="btn btn-primary">Load more</button>
                     </div>
