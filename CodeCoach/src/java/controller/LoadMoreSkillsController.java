@@ -33,6 +33,7 @@ public class LoadMoreSkillsController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //get the amount of skills already have in dom
         String amount = request.getParameter("exist");
         int iamount = Integer.parseInt(amount);
         SkillDAO skillDao = new SkillDAO();

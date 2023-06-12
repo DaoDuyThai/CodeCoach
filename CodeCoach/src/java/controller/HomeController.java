@@ -63,17 +63,18 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //getskills
+        //get skills list
         SkillDAO skillDao = new SkillDAO();
         List<Skills> skillList = skillDao.getTop8();
         request.setAttribute("skillList", skillList);
-        //getmentors
+        //get mentor list
         MentorDAO mentorDao = new MentorDAO();
         List<Mentors> mentorList = mentorDao.getAll();
         request.setAttribute("mentorList", mentorList);
-        //get Mentor user's info
+        //get Mentor user's info list
         UserDAO userDao = new UserDAO();
         List<Object[]> mentorInfoList = userDao.getAllUserInfoOfMentor();
+        //set attribute and push to the page
         request.setAttribute("mentorInfoList", mentorInfoList);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
