@@ -64,7 +64,7 @@
 
                             </li>
                             <li class="has-submenu">
-                                <a href>Chat <i class="fas "></i></a>
+                                <a href="listchat">Chat <i class="fas "></i></a>
                             </li>
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">
