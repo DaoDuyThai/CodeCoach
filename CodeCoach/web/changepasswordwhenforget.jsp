@@ -28,6 +28,7 @@
             <%@include file="header.jsp" %>
             <!--End of header-->
 
+            <!--content start-->
 
             <div class="breadcrumb-bar">
                 <div class="container-fluid">
@@ -60,6 +61,7 @@
                                                     <label>Enter new password</label>
                                                     <input type="text" name="password" class="form-control" required="">
                                                 </div>
+                                                <!--error if encountered-->
                                                 <%
                                                     String error = (String) request.getAttribute("error");
                                                     if (error != null) {
@@ -82,6 +84,7 @@
                     </div>
                 </div>
             </div>
+            <!--content end-->
 
             <!-- footer is place here -->
 
