@@ -198,3 +198,9 @@ INSERT INTO PrivacyPolicyAndTerms VALUES(2, 2, 'Tutoring Services','Our tutoring
 INSERT INTO PrivacyPolicyAndTerms VALUES(3, 2, 'Intellectual Property','All intellectual property rights, including copyrights and trademarks, related to our tutoring system and website content, belong to us or our licensors. You may not reproduce, modify, distribute, or use any of our intellectual property without prior written permission.'); 
 INSERT INTO PrivacyPolicyAndTerms VALUES(4, 2, 'Limitation of Liability','We strive to provide accurate and reliable information; however, we do not warrant the completeness, accuracy, or reliability of any information on our website or provided through our tutoring system. We are not liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use our tutoring services or any information obtained from our website.'); 
 INSERT INTO PrivacyPolicyAndTerms VALUES(5, 2, 'Amendments','We reserve the right to modify or update this Privacy Policy and Terms and Conditions at any time without prior notice. Any changes to these policies will be effective immediately upon posting on our website. It is your responsibility to review these policies periodically to stay informed of any updates.'); 
+
+INSERT INTO ContactUs (infor, href)
+VALUES ('FPT University Thach That, Hanoi, Vietnam', 'https://goo.gl/maps/46NsiFijUrQ5kV1J6'),
+       ('+84 79 6428 094', 'tel://1234567920'),
+       ('codecoach.project@gmail.com', 'mailto:codecoach.project@gmail.com'),
+       ('CodeCoach.com', 'https://codecoach.com');

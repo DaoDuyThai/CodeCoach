@@ -192,3 +192,9 @@ Create table PrivacyPolicyAndTerms(
    summary varchar(255),
    content varchar(500)
 );
+
+CREATE TABLE ContactUs (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  infor VARCHAR(255),
+  href VARCHAR(255)
+);
