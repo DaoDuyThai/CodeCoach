@@ -43,6 +43,7 @@
                                         <li><a href="">Review</a></li>
                                         <li><a href="">Invoices</a></li>
                                         <li><a href="">Profile Settings</a></li>
+                                        <li><a href="mentorregister">Mentor Register</a></li>
                                     </ul>
                                 </li>
                             </c:if>
