@@ -77,13 +77,20 @@ public class OtpController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
+        //get session to continue with the otp authorize
         HttpSession session = request.getSession();
+        //get otp
         String otp = (String)session.getAttribute("otp");
+        //get email
         String email = (String)session.getAttribute("email");
+        //get input otp
         String inputOtp = request.getParameter("inputOtp");
+        //compare input otp and otp
         if(inputOtp.equals(otp)){
+            //go to changepassword page
             response.sendRedirect("changepasswordwhenforget");
         }else{
+            //send error
             String error = "Wrong OTP, please try again!";
             request.setAttribute("error", error);
             request.getRequestDispatcher("otp.jsp").forward(request, response);
