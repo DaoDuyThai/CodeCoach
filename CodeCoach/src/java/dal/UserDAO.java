@@ -215,23 +215,23 @@ public class UserDAO extends DBContext {
             ps.setInt(1, mentorId);
             rs = ps.executeQuery();
             while (rs.next()) {
-                o[0] = rs.getInt(1);
-                o[1] = rs.getInt(2);
-                o[2] = rs.getString(3);
-                o[3] = rs.getInt(4);
-                o[4] = rs.getString(5);
-                o[5] = rs.getString(6);
-                o[6] = rs.getString(7);
-                o[7] = rs.getString(8);
-                o[8] = rs.getString(9);
-                o[9] = rs.getString(10);
-                o[10] = rs.getInt(11);
-                o[11] = rs.getInt(12);
-                o[12] = rs.getString(13);
-                o[13] = rs.getInt(14);
-                o[14] = rs.getString(15);
-                o[15] = rs.getString(16);
-                o[16] = rs.getString(17);
+                o[0] = rs.getInt(1); //mentorId
+                o[1] = rs.getInt(2); //userId
+                o[2] = rs.getString(3); //bio
+                o[3] = rs.getInt(4); //hourlyRate
+                o[4] = rs.getString(5); //email
+                o[5] = rs.getString(6); // password
+                o[6] = rs.getString(7); //fname
+                o[7] = rs.getString(8); //lname
+                o[8] = rs.getString(9); //gender
+                o[9] = rs.getString(10); //phoneNum
+                o[10] = rs.getInt(11); // roleId
+                o[11] = rs.getInt(12); //statusId
+                o[12] = rs.getString(13); // address
+                o[13] = rs.getInt(14); // maqh
+                o[14] = rs.getString(15); //facebook
+                o[15] = rs.getString(16); //qh name
+                o[16] = rs.getString(17); //ttp name
             }
         } catch (Exception e) {
 

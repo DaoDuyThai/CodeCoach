@@ -73,10 +73,10 @@
                                                     <a href="javascript:void(0)" class="btn-blue">
                                                         <i class="fas fa-comments"></i>
                                                     </a>
-                                                    <a href="chat.html" class="btn-blue">
+                                                    <a href="mailto:${mentorInfo[4]}" class="btn-blue">
                                                         <i class="fas fa-envelope"></i>
                                                     </a>
-                                                    <a href="javascript:void(0)" class="btn-blue" data-toggle="modal"
+                                                    <a href="https://${mentorInfo[14]}" class="btn-blue" data-toggle="modal"
                                                        data-target="#voice_call">
                                                         <i class="fas fa-phone-alt"></i>
                                                     </a>
