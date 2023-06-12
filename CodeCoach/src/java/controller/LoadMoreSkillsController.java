@@ -37,9 +37,12 @@ public class LoadMoreSkillsController extends HttpServlet {
         //get the amount of skills already have in dom
         String amount = request.getParameter("exist");
         try {
+            //parse amount to int
             int iamount = Integer.parseInt(amount);
+            //get list of skills which are not in dom yet
             SkillDAO skillDao = new SkillDAO();
             List<Skills> skillList = skillDao.getNext8(iamount);
+            //print the structure of the html and return them
             PrintWriter out = response.getWriter();
             for (Skills s : skillList) {
                 out.println("<div class=\"countskills col-12 col-md-4 col-lg-3\">\n"

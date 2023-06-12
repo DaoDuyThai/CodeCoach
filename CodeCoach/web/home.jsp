@@ -247,11 +247,13 @@
                 </div>
             </div>
         </section>
+        <!-- end of Pre footer -->
+
         <!--Content end-->
 
-        <!-- end of Pre footer -->
+        <!--Footer start-->
         <%@include file="footer.jsp" %>
-        <!-- footer is place here -->
+        <!-- Footer end -->
 
     </div>
 
