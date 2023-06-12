@@ -194,9 +194,10 @@
                 </div>
             </div>
         </section>
-        <!--        ajax use to load more skills-->
+        
 
         <script>
+            <!--        ajax use to load more skills-->
             function loadMore() {
                 var amount = document.getElementsByClassName("countskills").length;
                 $.ajax({
