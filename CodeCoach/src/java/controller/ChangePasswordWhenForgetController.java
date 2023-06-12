@@ -76,15 +76,21 @@ public class ChangePasswordWhenForgetController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //get session
         HttpSession session = request.getSession();
+        //get email
         String email = (String) session.getAttribute("email");
+        //get input password
         String password = request.getParameter("password");
         UserDAO userDao = new UserDAO();
         try {
+            //change password in db 
             userDao.changePasswordWhenForget(email, password);
             session.invalidate();
+            //redirect to login
             response.sendRedirect("login");
         } catch (Exception ex) {
+            //exception
             Logger.getLogger(ChangePasswordWhenForgetController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
