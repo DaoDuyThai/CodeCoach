@@ -76,12 +76,13 @@ public class ViewMentorProfileController extends HttpServlet {
         request.setAttribute("mentorInfo", mentorInfo);
         //get mentor's experience
         ExperienceDAO experienceDao = new ExperienceDAO();
-        List<Experience> experienceList= experienceDao.getExperienceByMentorId(mentorId);
+        List<Experience> experienceList = experienceDao.getExperienceByMentorId(mentorId);
         request.setAttribute("experienceList", experienceList);
         //get mentor's expertise
         ExpertiseDAO expertiseDao = new ExpertiseDAO();
         List<Object[]> expertiseList = expertiseDao.getExpertiseDetailsByMentorId(mentorId);
         request.setAttribute("expertiseList", expertiseList);
+        //send to view mentor profile .jsp
         request.getRequestDispatcher("viewmentorprofile.jsp").forward(request, response);
     }
 
