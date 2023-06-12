@@ -7,7 +7,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Mentoring</title>
+        <title>Chat</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body class="chat-page">
-        <%@include file="header.jsp" %>
+
         <div class="main-wrapper">
             <div class="content">
                 <div class="container-fluid">
@@ -65,23 +65,23 @@
                                                 }
                                                 %></h2>
                                         </div>    
-                                        
+
                                         <div class="col-sm" style="text-align: right">
                                             <div class="chat-options">
-                                            <a href="" data-bs-toggle="modal"
-                                               data-bs-target="#voice_call">
-                                                <i class="material-icons">local_phone</i>
-                                            </a>
-                                            <a href="" data-bs-toggle="modal"
-                                               data-bs-target="#video_call">
-                                                <i class="material-icons">videocam</i>
-                                            </a>
-                                            <a href="">
-                                                <i class="material-icons">more_vert</i>
-                                            </a>
-                                        </div>  
+                                                <a href="" data-bs-toggle="modal"
+                                                   data-bs-target="#voice_call">
+                                                    <i class="material-icons">local_phone</i>
+                                                </a>
+                                                <a href="" data-bs-toggle="modal"
+                                                   data-bs-target="#video_call">
+                                                    <i class="material-icons">videocam</i>
+                                                </a>
+                                                <a href="">
+                                                    <i class="material-icons">more_vert</i>
+                                                </a>
+                                            </div>  
                                         </div>
-                                         
+
                                     </div>    
                                     <hr>    
                                     <div class="chat-messages">
@@ -114,7 +114,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
+
+
+
+
         <script src="assets/js/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/script.js"></script>

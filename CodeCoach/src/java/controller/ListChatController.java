@@ -66,29 +66,30 @@ public class ListChatController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        //String userId = request.getParameter("userId");
-        HttpSession session = request.getSession();
-        Users u = (Users) session.getAttribute("users");
-//        String userId = request.getParameter("userId");
-//        out.print(u);
-        String userId = Integer.toString(u.getUserId());
-        if (userId != null) {
-            List<ChatRoom> chatRooms = new ChatRoomDAO().getChatRoombyUserId(userId);
-            request.setAttribute("chatRooms", chatRooms);
-            String selectedChatRoomId = request.getParameter("chatRoomId");
-            if (selectedChatRoomId != null) {
-                List<ChatMessages> listChatMessages = new ChatMessagesDAO().getChatMessagesbySelectedChatRoomId(selectedChatRoomId);
-                List<ChatRoom> listChatRooms = new ChatRoomDAO().getAllChatRoom();
-                List<Users> listUsers = new UserDAO().getAllUser();
-                request.setAttribute("listChatRooms", listChatRooms);
-                request.setAttribute("listChatMessages", listChatMessages);
-                request.setAttribute("selectedChatRoomId", selectedChatRoomId);
-                request.setAttribute("listUsers", listUsers);
-                request.setAttribute(userId, this);
+        try {
+            HttpSession session = request.getSession();
+            Users u = (Users) session.getAttribute("users");
+            String userId = Integer.toString(u.getUserId());
+            if (userId != null) {
+                List<ChatRoom> chatRooms = new ChatRoomDAO().getChatRoombyUserId(userId);
+                request.setAttribute("chatRooms", chatRooms);
+                String selectedChatRoomId = request.getParameter("chatRoomId");
+                if (selectedChatRoomId != null) {
+                    List<ChatMessages> listChatMessages = new ChatMessagesDAO().getChatMessagesbySelectedChatRoomId(selectedChatRoomId);
+                    List<ChatRoom> listChatRooms = new ChatRoomDAO().getAllChatRoom();
+                    List<Users> listUsers = new UserDAO().getAllUser();
+                    request.setAttribute("listChatRooms", listChatRooms);
+                    request.setAttribute("listChatMessages", listChatMessages);
+                    request.setAttribute("selectedChatRoomId", selectedChatRoomId);
+                    request.setAttribute("listUsers", listUsers);
+                    request.setAttribute(userId, this);
+                }
+                request.getRequestDispatcher("listchat.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login");
             }
-            request.getRequestDispatcher("listchat.jsp").forward(request, response);
-        } else {
+
+        } catch (Exception e) {
             response.sendRedirect("login");
         }
 
