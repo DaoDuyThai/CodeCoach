@@ -28,6 +28,7 @@
             <%@include file="header.jsp" %>
             <!--End of header-->
 
+            <!--content start-->
 
             <div class="breadcrumb-bar">
                 <div class="container-fluid">
@@ -54,12 +55,13 @@
                                 <div class="card-body">
                                     <div class="row ">
                                         <div class="col-md-12 col-lg-12">
-
+                                            <!--enter otp-->
                                             <form action="otp" method="post">
                                                 <div class="form-group">
                                                     <label>Enter OTP code sent to your email</label>
                                                     <input type="text" name="inputOtp" class="form-control" required>
                                                 </div>
+                                                <!--error if encounter-->
                                                 <%
                                                     String error = (String) request.getAttribute("error");
                                                     if (error != null) {
@@ -82,6 +84,8 @@
                     </div>
                 </div>
             </div>
+
+            <!--content end-->
 
             <!-- footer is place here -->
 

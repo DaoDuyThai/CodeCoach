@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        
+
         <title>Forgot Password</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
@@ -29,6 +29,7 @@
             <%@include file="header.jsp" %>
             <!--End of header-->
 
+            <!--<content start-->
 
             <div class="breadcrumb-bar">
                 <div class="container-fluid">
@@ -61,6 +62,7 @@
                                                     <label>Enter your email address</label>
                                                     <input type="email" name="email" class="form-control" required>
                                                 </div>
+                                                <!--error if encountered-->
                                                 <%
                                                     String error = (String) request.getAttribute("error");
                                                     if (error != null) {
@@ -68,7 +70,7 @@
                                                 <div style="color: red"><%=error%></div>
                                                 <%}
                                                 %>
-                                                
+
 
                                                 <div class="submit-section">
                                                     <button type="submit" class="btn btn-primary submit-btn" value="change">Send OTP</button>
@@ -83,6 +85,7 @@
                     </div>
                 </div>
             </div>
+            <!--content end-->
 
             <!-- footer is place here -->
 
