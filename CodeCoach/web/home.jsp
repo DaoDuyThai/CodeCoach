@@ -33,6 +33,7 @@
         <%@include file="header.jsp" %>
         <!--End of header-->
 
+        <!--Content start-->
         <section class="section section-search">
             <div class="container">
                 <div class="banner-wrapper m-auto text-center aos" data-aos="fade-up">
@@ -240,6 +241,8 @@
                 </div>
             </div>
         </section>
+        <!--Content end-->
+        
         <!-- end of Pre footer -->
         <%@include file="footer.jsp" %>
         <!-- footer is place here -->
