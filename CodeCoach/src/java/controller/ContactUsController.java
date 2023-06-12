@@ -58,12 +58,8 @@ public class ContactUsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ContactUsDAO contactUsDAO = new ContactUsDAO();
-
-        List<ContactUs> contactUsList = contactUsDAO.getAll();
-        
-        // Đặt danh sách người dùng vào sessionScope
-        request.setAttribute("contactUsList", contactUsList);
+        List<ContactUs> listContactUs = new ContactUsDAO().getAll();
+        request.setAttribute("ctact", listContactUs);
         request.getRequestDispatcher("contactus.jsp").forward(request, response);
 
     }

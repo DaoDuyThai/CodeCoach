@@ -62,7 +62,7 @@
                                 <a href>Chat <i class="fas "></i></a>
                             </li>
                             <li class="has-submenu">
-                                <a href="contactus.jsp">Contact Us <i class="fas "></i></a>
+                                <a href="contactus">Contact Us <i class="fas "></i></a>
                             </li>
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">
