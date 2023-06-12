@@ -179,7 +179,6 @@ public class UserDAO extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Object[] userInfo = new Object[17];
-
                 // Populate the array with data from the ResultSet
                 userInfo[0] = rs.getString("mentorId");
                 userInfo[1] = rs.getString("userId");
