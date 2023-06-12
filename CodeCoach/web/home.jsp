@@ -20,12 +20,12 @@
 
     <link rel="stylesheet" href="assets/css/style.css">
     <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    
-    
+
+
 </head>
 
 <body>
-    
+
 
     <div class="main-wrapper">
 
@@ -140,7 +140,7 @@
                                             ${mInfo[3]} VND/Slot
                                         </div>
                                     </div>
-                                    
+
                                     <div class="author-country">
                                         <p class="mb-0"><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}, ${mInfo[15]}, ${mInfo[16]}</p>
                                     </div>
@@ -195,18 +195,22 @@
                 </div>
             </div>
         </section>
-        
+
 
         <script>
-            <!--        ajax use to load more skills-->
+<!--        ajax use to load more skills-->
             function loadMore() {
+//            get the already-have skills in the current dom
                 var amount = document.getElementsByClassName("countskills").length;
                 $.ajax({
+                    //call to loadskills controller
                     url: "/codecoach/loadskills",
                     type: 'get',
+                    //push the data to the load skill controller
                     data: {
                         exist: amount
                     },
+                    //if success binding to dom
                     success: function (data) {
                         var skillslist = document.getElementById("skillslist");
                         skillslist.innerHTML += data;
@@ -244,7 +248,7 @@
             </div>
         </section>
         <!--Content end-->
-        
+
         <!-- end of Pre footer -->
         <%@include file="footer.jsp" %>
         <!-- footer is place here -->
