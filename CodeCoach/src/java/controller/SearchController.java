@@ -50,6 +50,7 @@ public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         request.getRequestDispatcher("search.jsp").forward(request, response);
+        
     } 
 
     /** 
@@ -65,15 +66,17 @@ public class SearchController extends HttpServlet {
         String searchTxt = request.getParameter("searchTxt");
         MentorDAO mdao = new MentorDAO();
         UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getMentorBySearch("java");
+        List<Integer> listMId = mdao.getMentorBySearch(searchTxt);
         List<Object[]> listUInfo = new ArrayList<>();
+        if (searchTxt!= null){
         for (Integer mentorId : listMId) {
             Object[] uInfo = udao.getUserInfoByMentorIdForSearch(mentorId);
             listUInfo.add(uInfo);
         }
-       
-       request.setAttribute("ListM", listUInfo);
-       request.getRequestDispatcher("search.jsp").forward(request, response);
+        request.setAttribute("ListM", listUInfo);
+        request.getRequestDispatcher("search.jsp").forward(request, response);
+        }
+        else {response.sendRedirect(request.getContextPath());}
     }
 
     /** 

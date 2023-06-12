@@ -41,7 +41,7 @@
                     <div class="search-box">
                         <form action="search" method="post">
                             <div class="form-group search-info">
-                                <input type="searchText" class="form-control"
+                                <input name="searchTxt" type="text" class="form-control"
                                        placeholder="Search Skills, Categories, Mentor's name, etc">
                             </div>
                             <button type="submit" class="btn btn-primary search-btn"><i><img
