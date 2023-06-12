@@ -173,6 +173,7 @@
                             </div>
                             <!--expertise end-->
 
+                            <!--experience start-->
                             <div class="card">
                                 <div class="card-body custom-border-card pb-0">
 
@@ -196,6 +197,7 @@
 
                                 </div>
                             </div>
+                            <!--experience end-->
 
                         </div>
                     </div>
@@ -209,14 +211,6 @@
             <!-- footer is place here -->
 
         </div>
-
-
-
-
-
-
-
-
         <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
         <script src="assets/js/jquery-3.6.0.min.js"></script>
 
