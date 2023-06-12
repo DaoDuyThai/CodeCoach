@@ -53,7 +53,7 @@
                                 <ul class="submenu">
                                     <li><a href="">Mentee Dashboard</a></li>
                                     <li><a href="">Notification</a></li>
-                                    <li><a href="">Booking</a></li>
+                                    <li><a href="booking.jsp">Booking</a></li>
                                     <li><a href="">Favourites</a></li>
                                     <li><a href="">Invoices</a></li>
                                     <li><a href="">Profile Settings</a></li>
@@ -65,6 +65,9 @@
                             </li>
                             <li class="has-submenu">
                                 <a href>Chat <i class="fas "></i></a>
+                            </li>
+                            <li class="has-submenu">
+                                <a href="contactus">Contact Us <i class="fas "></i></a>
                             </li>
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">

@@ -4,9 +4,17 @@
         <servlet-name>checkEmailExisted</servlet-name>
         <servlet-class>controller.CheckEmailExisted</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ContactUsController</servlet-name>
+        <servlet-class>controller.ContactUsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>checkEmailExisted</servlet-name>
         <url-pattern>/checkEmailExisted</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactUsController</servlet-name>
+        <url-pattern>/contactus</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
