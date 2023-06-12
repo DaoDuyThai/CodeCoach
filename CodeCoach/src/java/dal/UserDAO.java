@@ -202,7 +202,6 @@ public class UserDAO extends DBContext {
             }
         } catch (Exception e) {
         }
-
         return list;
     }
 

@@ -61,11 +61,15 @@ public class EditFaqController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //count number of faq
         FaqDAO faqDao = new FaqDAO();
         String countFaq = faqDao.countFaq();
+        //send attribute
         request.setAttribute("countFaq", countFaq);
+        //get faq list
         List<Faq> faqList = faqDao.getAll();
         request.setAttribute("faqList", faqList);
+        //send to edit faq page
         request.getRequestDispatcher("editfaq.jsp").forward(request, response);
     }
 
@@ -80,11 +84,15 @@ public class EditFaqController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //get question
         String question = request.getParameter("question");
+        //get answer
         String answer = request.getParameter("answer");
-        Faq faq = new Faq(question,answer);
+        Faq faq = new Faq(question, answer);
         FaqDAO faqDao = new FaqDAO();
+        //add faq to db
         faqDao.insertFaq(faq);
+        //go to editfaq
         response.sendRedirect("editfaq");
     }
 
