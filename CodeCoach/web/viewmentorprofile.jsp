@@ -30,6 +30,8 @@
             <!--End of header-->
 
 
+
+            <!--content start-->
             <div class="breadcrumb-bar">
                 <div class="container-fluid">
                     <div class="row align-items-center">
@@ -67,8 +69,8 @@
                                             </div>
                                             <div class="user-info-cont">
                                                 <h4 class="usr-name">${mentorInfo[6]} ${mentorInfo[7]}</h4>
-                                                <p class="mentor-type">English Literature (M.A)</p>
                                                 <div class="mentor-action">
+                                                    <!--contact start-->
                                                     <p class="mentor-type social-title">Contact Me</p>
                                                     <a href="javascript:void(0)" class="btn-blue">
                                                         <i class="fas fa-comments"></i>
@@ -80,6 +82,7 @@
                                                        data-target="#voice_call">
                                                         <i class="fas fa-phone-alt"></i>
                                                     </a>
+                                                    <!--contact end-->
                                                 </div>
                                             </div>
                                         </div>
@@ -154,18 +157,18 @@
                                             <ul class="experience-list profile-custom-list">
                                                 <c:forEach items="${expertiseList}" var="ex">
                                                     <li>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <div class="row-result">${ex[3]}</div>
+                                                        <div class="experience-content">
+                                                            <div class="timeline-content">
+                                                                <div class="row-result">${ex[3]}</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
                                                 </c:forEach>
-                                                
-                                                
-                                                
 
-                                                
+
+
+
+
                                             </ul>
                                         </div>
                                     </div>
@@ -201,6 +204,7 @@
                     </div>
                 </div>
             </div>
+            <!--content end-->
 
 
             <!-- end of Pre footer -->
