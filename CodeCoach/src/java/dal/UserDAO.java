@@ -252,48 +252,7 @@ public class UserDAO extends DBContext {
         }
         return o;
     }
-     public Object[] getUserInfoByMentorIdForSearch(int mentorId) {
-        Object[] o = new Object[20];
-        String query = "select distinct m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name, sk.skillName, subCategoryName, categoryName\n" +
-                        "from Users u join Mentors m\n" +
-                        "on u.userId = m.userId inner join quanhuyen qh on u.maqh = qh.maqh inner join tinhthanhpho ttp on qh.mattp = ttp.mattp join Expertise e\n" +
-                        "on m.mentorId = e.mentorId  join Skills sk\n" +
-                        "on e.skillId = sk.skillId  join SubCategories sc\n" +
-                        "on sk.subCategoryId = sc.subCategoryId join Categories c \n" +
-                        "on sc.categoryId = c.categoryId\n" +
-                        "where m.mentorId = ? ";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, mentorId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                o[0] = rs.getInt(1);
-                o[1] = rs.getInt(2);
-                o[2] = rs.getString(3);
-                o[3] = rs.getInt(4);
-                o[4] = rs.getString(5);
-                o[5] = rs.getString(6);
-                o[6] = rs.getString(7);
-                o[7] = rs.getString(8);
-                o[8] = rs.getString(9);
-                o[9] = rs.getString(10);
-                o[10] = rs.getInt(11);
-                o[11] = rs.getInt(12);
-                o[12] = rs.getString(13);
-                o[13] = rs.getInt(14);
-                o[14] = rs.getString(15);
-                o[15] = rs.getString(16);
-                o[16] = rs.getString(17);
-                o[17] = rs.getString(18);
-                o[18] = rs.getString(19);
-                o[19] = rs.getString(20);
-            }
-        } catch (Exception e) {
-
-        }
-        return o;
-    }
+     
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
         Object[] o = dao.getUserInfoByMenteeId(1);

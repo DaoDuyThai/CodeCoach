@@ -64,16 +64,17 @@ public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String searchTxt = request.getParameter("searchTxt");
-        MentorDAO mdao = new MentorDAO();
-        UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getMentorBySearch(searchTxt);
-        List<Object[]> listUInfo = new ArrayList<>();
+        MentorDAO mentorDAO = new MentorDAO();
+        List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
+
+        List<MentorDAO.MentorDTO> mentorList = new ArrayList<>();
+        
         if (searchTxt!= null){
-        for (Integer mentorId : listMId) {
-            Object[] uInfo = udao.getUserInfoByMentorIdForSearch(mentorId);
-            listUInfo.add(uInfo);
+        for (Integer mentorId : mentorIds) {
+            MentorDAO.MentorDTO mentorDTO = mentorDAO.getMentorInfoForSearchById(mentorId);
+            mentorList.add(mentorDTO);
         }
-        request.setAttribute("ListM", listUInfo);
+        request.setAttribute("mentors", mentorList);
         request.getRequestDispatcher("search.jsp").forward(request, response);
         }
         else {response.sendRedirect(request.getContextPath());}

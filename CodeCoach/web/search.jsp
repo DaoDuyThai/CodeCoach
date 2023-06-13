@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,7 +147,7 @@
 
                     </div>
                     <div class="col-md-12 col-lg-8 col-xl-9">
-                        <c:forEach items="${ListM}" var="mInfo">
+                        <c:forEach items="${mentors}" var="mInfo">
                         <div class="card">
                             <div class="card-body">
                                 <div class="mentor-widget">
@@ -157,8 +158,8 @@
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">${mInfo[6]} ${mInfo[7]}</a></h4>
-                                            <p class="mentor-type">${mInfo[17]}</p>
+                                            <h4 class="usr-name"><a href="profile.html">${mInfo.firstName} ${mInfo.lastName}</a></h4>
+                                            <p class="mentor-type">${mInfo.skillName}</p>
                                             <div class="rating">
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -168,8 +169,8 @@
                                                 <span class="d-inline-block average-rating">(17)</span>
                                             </div>
                                             <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i>${mInfo[15]},
-                                                    ${mInfo[16]}</p>
+                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i>${mInfo.tenqh},
+                                                    ${mInfo.tenttp}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -177,8 +178,8 @@
                                         <div class="user-infos">
                                             <ul>
                                                 <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> ${mInfo[15]}, ${mInfo[16]}</li>
-                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
+                                                <li><i class="fas fa-map-marker-alt"></i> ${mInfo.address}, ${mInfo.tenttp}</li>
+                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo.hourlyRate} <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
                                             </ul>
