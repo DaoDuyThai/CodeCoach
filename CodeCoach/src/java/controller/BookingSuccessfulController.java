@@ -6,6 +6,7 @@
 package controller;
 
 import dal.BookingDAO;
+import dal.BookingDetailDAO;
 import dal.MenteeDAO;
 import dal.MentorDAO;
 import java.io.IOException;
@@ -19,6 +20,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Users;
 import dal.UserDAO;
 import model.Booking;
+import model.BookingDetails;
 import model.Mentors;
 
 /**
@@ -71,6 +73,8 @@ public class BookingSuccessfulController extends HttpServlet {
             Booking b = new BookingDAO().getBookingLatestbyMenteeId(menteeId);
             Mentors m = new MentorDAO().getMentorByMentorId(b.getMentorId());
             String mentorName = new UserDAO().selectUserNameByUserId(String.valueOf(m.getUserId()));
+            BookingDetails bd = new BookingDetailDAO().getBookingDetailsbyBookingId(String.valueOf(b.getBookingId()));
+            request.setAttribute("bd", bd);
             request.setAttribute("mentorName", mentorName);
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
