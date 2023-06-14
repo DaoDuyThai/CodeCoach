@@ -7,33 +7,29 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import model.Booking;
-
 
 /**
  *
  * @author giang
  */
-public class BookingDAO {
+public class MenteeDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
     
-     public Booking getBookingLatestbyMenteeId(String menteeId) {
-        Booking b = new Booking();
-        String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = "+menteeId+" AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = "+menteeId+");";
+     public String getMenteeIdbyUserId(String userId) {
+        String menteeId ="";
+        String query = "Select menteeId from Mentees where userId="+userId+"";
         try {
             conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(querry);
+            ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                b = new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                menteeId = rs.getString(1);
             }
         } catch (Exception e) {
         }
-        return b;
+        return menteeId;
     }
 }

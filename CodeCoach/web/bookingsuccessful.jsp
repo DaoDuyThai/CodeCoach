@@ -22,8 +22,6 @@
     <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-        <%Object fullName = request.getAttribute("fullName");%>   
-        <%out.print(fullName.toString());%>
     <div class="main-wrapper">
         <div class="breadcrumb-bar">
             <div class="container-fluid">
@@ -52,7 +50,7 @@
                                 <div class="success-cont">
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
-                                    <p>Appointment booked with <strong></strong><br> on <strong>12 Nov 2019
+                                    <p>Appointment booked with <strong><%out.print(request.getAttribute("mentorName"));%></strong><br> on <strong>12 Nov 2019
                                             5:00PM to 6:00PM</strong></p>
                                     <a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
                                 </div>

@@ -5,6 +5,9 @@
 
 package controller;
 
+import dal.BookingDAO;
+import dal.MenteeDAO;
+import dal.MentorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Users;
 import dal.UserDAO;
+import model.Booking;
+import model.Mentors;
 
 /**
  *
@@ -62,8 +67,11 @@ public class BookingSuccessfulController extends HttpServlet {
             HttpSession session = request.getSession();
             Users u = (Users) session.getAttribute("users");
             String userId = Integer.toString(u.getUserId());
-            String fullName = new UserDAO().selectUserNameByUserId(userId);
-            request.setAttribute("fullName", fullName);
+            String menteeId = new MenteeDAO().getMenteeIdbyUserId(userId);
+            Booking b = new BookingDAO().getBookingLatestbyMenteeId(menteeId);
+            Mentors m = new MentorDAO().getMentorByMentorId(b.getMentorId());
+            String mentorName = new UserDAO().selectUserNameByUserId(String.valueOf(m.getUserId()));
+            request.setAttribute("mentorName", mentorName);
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
         }
