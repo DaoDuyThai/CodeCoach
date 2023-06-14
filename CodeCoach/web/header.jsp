@@ -55,7 +55,7 @@
                                 </ul>
                             </li>
                             <li class="has-submenu">
-                                <a href>Search mentor <i class="fas"></i></a>
+                                <a href='search'>Search mentor <i class="fas"></i></a>
 
                             </li>
                             <li class="has-submenu">

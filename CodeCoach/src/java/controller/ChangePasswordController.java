@@ -81,9 +81,11 @@ public class ChangePasswordController extends HttpServlet {
                     //If the old password is correct
                     Users uc = new Users(u.getUserId(), e, p, u.getfName(), u.getlName(), u.getGender(), u.getPhoneNum(), u.getRoleId(), u.getStatusId(), u.getAddress(), u.getMaqh(), u.getFacebook());
                     ud.changePassword(uc);
+                    
                     HttpSession session = request.getSession();
                     session.setAttribute("user", uc);
-                    response.sendRedirect("login.jsp");
+                    session.invalidate();
+                    response.sendRedirect("home.jsp");
                 } catch (Exception ex) {
                     Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,15 +32,15 @@
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-
+        
         <div class="breadcrumb-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
                         <nav aria-label="breadcrumb" class="page-breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item"><a href="home">Home</a></li>
+                                
                             </ol>
                         </nav>
                         <h2 class="breadcrumb-title">Dashboard</h2>
@@ -64,10 +65,12 @@
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
+                                <c:if test="${users.roleId == 2}">
                                 <div class="user-info-cont">
-                                    <h4 class="usr-name">Jonathan Doe</h4>
-                                    <p class="mentor-type">English Literature (M.A)</p>
+                                    <h4 class="usr-name">${users.lName} ${users.fName}</h4>
+                                    <p class="mentor-type"></p>
                                 </div>
+                                </c:if>
                             </div>
                             <div class="custom-sidebar-nav">
                                 <ul>
@@ -85,7 +88,7 @@
                                                     class="fas fa-chevron-right"></i></span></a></li>                                  
                                     <li><a href="profile.html"><i class="fas fa-user-cog"></i>Profile <span><i
                                                     class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="login.html"><i class="fas fa-sign-out-alt"></i>Logout <span><i
+                                    <li><a href="login"><i class="fas fa-sign-out-alt"></i>Logout <span><i
                                                     class="fas fa-chevron-right"></i></span></a></li>
                                 </ul>
                             </div>
