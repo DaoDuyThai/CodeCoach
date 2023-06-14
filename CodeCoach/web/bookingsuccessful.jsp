@@ -56,13 +56,12 @@
                                     <h3>Appointment booked Successfully!</h3>
                                     <p>Appointment booked with <strong><%out.print(request.getAttribute("mentorName"));%>
                                         </strong><br> on <strong><%out.print(bookingdetail.getDate());%> 
-                                            from <%out.print(slot.getStartTime().substring(0, 8));%> 
+                                            </strong>from <strong><%out.print(slot.getStartTime().substring(0, 8));%> 
                                             to <%out.print(slot.getEndTime().substring(0, 8));%></strong></p>
                                     <a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
