@@ -246,12 +246,28 @@ public class UserDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    
+    public String selectUserNameByUserId(String userId) {
+        String fullName ="";
+        String querry = "select fName,lName from Users where userId="+userId+"";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                fullName = rs.getString(1) + " " +rs.getString(2);
+            }
+            
+        } catch (Exception e) {
+        }
+        return fullName;
+    }
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        Object[] o = dao.getUserInfoByMentorId(1);
-        for (int i = 0; i < o.length; i++) {
-            System.out.println(o[i]);
-        }
+        String fullName = dao.selectUserNameByUserId("1");
+        
+            System.out.println(fullName);
+        
     }
 }
