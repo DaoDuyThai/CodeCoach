@@ -247,7 +247,7 @@ public class UserDAO extends DBContext {
         }
     }
     
-    public String selectUserNameByUserId(String userId) {
+    public String selectUserNameByUserId(int userId) {
         String fullName ="";
         String querry = "select fName,lName from Users where userId="+userId+"";
         try {
@@ -264,10 +264,7 @@ public class UserDAO extends DBContext {
     }
 
     public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        String fullName = dao.selectUserNameByUserId("1");
         
-            System.out.println(fullName);
         
     }
 }

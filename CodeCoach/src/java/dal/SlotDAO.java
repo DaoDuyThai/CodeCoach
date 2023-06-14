@@ -7,29 +7,29 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import model.BookingDetails;
+import model.Slot;
 
 /**
  *
  * @author giang
  */
-public class BookingDetailDAO {
+public class SlotDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public BookingDetails getBookingDetailbyBookingId(int bookingId) {
-        BookingDetails bookingdetail = new BookingDetails();
-        String query = "SELECT * FROM BookingDetails Where bookingId="+bookingId+"";
+    public Slot getSlotbySlotId(int slotId) {
+        Slot slot = new Slot();
+        String query = "SELECT * FROM Slot Where slotId = "+slotId+"";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                bookingdetail = new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
-            }
+                slot = new Slot(rs.getInt(1), rs.getString(2), rs.getString(3));
+        }
         } catch (Exception e) {
         }
-        return bookingdetail;
+        return slot;
     }
 }
