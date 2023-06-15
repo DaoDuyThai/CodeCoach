@@ -93,15 +93,14 @@
                             <li class="nav-item dropdown nav has-arrow logged-item header-navbar-rht">
                                 <a href="" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img class="rounded-circle" src="assets/images/users/${users.userId}.png" width="31"
-                                             alt="Darren Elder">
+                                        <img class="rounded-circle" src="assets/images/users/${users.userId}.png" width="31" onerror=this.src="assets/images/users/default.png">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div class="user-header">
                                         <div class="avatar avatar-sm">
                                             <img src="assets/images/users/${users.userId}.png" alt="User Image"
-                                                 class="avatar-img rounded-circle">
+                                                 class="avatar-img rounded-circle" onerror=this.src="assets/images/users/default.png">
                                         </div>
                                         <div class="user-text">
                                             <h6>${users.lName} ${users.fName}</h6>

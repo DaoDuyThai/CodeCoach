@@ -54,7 +54,7 @@
                                         <div class="user-info-left align-items-center">
                                             <div class="mentor-img d-flex flex-wrap justify-content-center">
                                                 <div class="pro-avatar avatar avatar-xxl">
-                                                    <img class="avatar-img rounded-circle" src="assets/images/users/${mentorInfo[1]}.png" alt="alt"/>
+                                                    <img class="avatar-img rounded-circle" src="assets/images/users/${mentorInfo[1]}.png" alt="alt" onerror=this.src="assets/images/users/default.png"/>
                                                 </div>
                                                 <div class="rating text-center">
                                                     <i class="fas fa-star filled"></i>
