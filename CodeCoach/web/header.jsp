@@ -93,7 +93,7 @@
                             <li class="nav-item dropdown nav has-arrow logged-item header-navbar-rht">
                                 <a href="" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img class="rounded-circle" src="${users.getAvatar()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default.jpg" : users.getAvatar()}" width="31"
+                                        <img class="rounded-circle" src="assets/images/users/${users.userId}.png" width="31" onerror=this.src="assets/images/users/default.png" width="31"
                                              alt="">
                                     </span>
                                 </a>
