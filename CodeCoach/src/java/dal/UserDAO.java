@@ -280,9 +280,23 @@ public class UserDAO extends DBContext {
      
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        Object[] o = dao.getUserInfoByMenteeId(1);
-        for (int i = 0; i < o.length; i++) {
-            System.out.println(o[i]);
-        }
+        System.out.println(dao.getUserNameByUserId(1));
     }
+
+    public String getUserNameByUserId(int userId) {
+        String fullName="";
+        String query = "Select fName, lName from Users where userId= "+userId+"";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery(); 
+            while (rs.next()) {
+                fullName = rs.getString(1) + " " + rs.getString(2);
+            }
+        } catch (Exception e) {
+        }
+        return fullName;
+    }
+    
+    
 }

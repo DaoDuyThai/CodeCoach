@@ -91,7 +91,7 @@ public class BookingSuccessfulController extends HttpServlet {
                 new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, m.getUserId());
             }else {
                 new ChatMessagesDAO().insertChatMessage(String.valueOf(m.getUserId()), String.valueOf(sharedChatRoomId), "You have successfully submitted your application, please wait for the mentor to review your request. During that time you can communicate with your mentor here");
-            new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
             } 
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
