@@ -95,6 +95,7 @@ public class BookingSuccessfulController extends HttpServlet {
             } 
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
+            
         }
     } 
 
