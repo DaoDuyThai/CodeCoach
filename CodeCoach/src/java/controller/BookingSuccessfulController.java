@@ -82,6 +82,8 @@ public class BookingSuccessfulController extends HttpServlet {
             request.setAttribute("bookingdetail", bookingdetail);
             request.setAttribute("slot", slot);
             new ChatRoomDAO().insertChatRoom(mentorName, u.getfName()+" "+u.getlName());
+            int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
+            
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
         }

@@ -61,6 +61,22 @@ public class ChatRoomDAO extends DBContext{
             
         } catch (Exception e) {
             e.printStackTrace();
-        }     
+        }         
+    }
+    
+    public int getLatestChatRoomId() {
+        int chatRoomId=0;
+        String query = "Select MAX(chatRoomId) from ChatRoom";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                chatRoomId = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return chatRoomId;
     }
 }
