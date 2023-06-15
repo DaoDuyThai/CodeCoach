@@ -64,7 +64,7 @@ public class EditFaqController extends HttpServlet {
         //count number of faq
         FaqDAO faqDao = new FaqDAO();
         String countFaq = faqDao.countFaq();
-        //send attribute
+        //set attribute
         request.setAttribute("countFaq", countFaq);
         //get faq list
         List<Faq> faqList = faqDao.getAll();
