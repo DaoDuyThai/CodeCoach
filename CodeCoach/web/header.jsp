@@ -37,7 +37,7 @@
                                 <li class="has-submenu">
                                     <a href>Mentor <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
-                                        <li><a href="">Mentor Dashboard</a></li>
+                                        <li><a href="mentordashboard">Mentor Dashboard</a></li>
                                         <li><a href="">Notification</a></li>
                                         <li><a href="">View Booking</a></li>
                                         <li><a href="">Review</a></li>
@@ -64,7 +64,7 @@
                                 </ul>
                             </li>
                             <li class="has-submenu">
-                                <a href>Search mentor <i class="fas"></i></a>
+                                <a href='search'>Search mentor <i class="fas"></i></a>
 
                             </li>
                             <li class="has-submenu">
@@ -105,13 +105,14 @@
                                         <div class="user-text">
                                             <h6>${users.lName} ${users.fName}</h6>
                                             <p class="text-muted mb-0"><c:if test="${users.roleId == 1}">Admin</c:if><c:if test="${users.roleId == 2}">Mentor</c:if><c:if test="${users.roleId == 3}">Mentee</c:if></p>
-                                            </div>
                                         </div>
-                                        <a class="dropdown-item" href="">Profile Settings</a>
-                                        <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                                        <a class="dropdown-item" href="logout">Logout</a>
                                     </div>
-                                </li>
+                                    <a class="dropdown-item" href="">Dashboard</a>
+                                    <a class="dropdown-item" href="">Profile Settings</a>
+                                    <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
+                                </div>
+                            </li>
 
                             </ul>
                     </c:if>

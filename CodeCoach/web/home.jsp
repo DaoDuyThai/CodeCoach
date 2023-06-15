@@ -43,9 +43,9 @@
                     </div>
 
                     <div class="search-box">
-                        <form action="">
+                        <form action="search" method="post">
                             <div class="form-group search-info">
-                                <input type="text" class="form-control"
+                                <input name="searchTxt" type="text" class="form-control"
                                        placeholder="Search Skills, Categories, Mentor's name, etc">
                             </div>
                             <button type="submit" class="btn btn-primary search-btn"><i><img
