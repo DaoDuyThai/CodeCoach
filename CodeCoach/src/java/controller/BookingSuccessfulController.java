@@ -83,16 +83,19 @@ public class BookingSuccessfulController extends HttpServlet {
             request.setAttribute("mentorName", mentorName);
             request.setAttribute("bookingdetail", bookingdetail);
             request.setAttribute("slot", slot);
-            new ChatRoomDAO().insertChatRoom(mentorName, u.getfName()+" "+u.getlName());
-            int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
-            new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, u.getUserId());
-            new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, m.getUserId());
-            new ChatMessagesDAO().insertChatMessage(String.valueOf(m.getUserId()), String.valueOf(chatRoomId), "You have successfully submitted your application, please wait for the mentor to review your request. During that time you can communicate with your mentor here");
-            new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(chatRoomId), "Enter the message below to chat with the mentor");
+            int sharedChatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(u.getUserId(), m.getUserId());
+            if (sharedChatRoomId==0) {
+                new ChatRoomDAO().insertChatRoom(mentorName, u.getfName()+" "+u.getlName());
+                int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
+                new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, u.getUserId());
+                new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, m.getUserId());
+            }else {
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(m.getUserId()), String.valueOf(sharedChatRoomId), "You have successfully submitted your application, please wait for the mentor to review your request. During that time you can communicate with your mentor here");
+            new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
+            } 
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
         }
-        
     } 
 
     /** 
