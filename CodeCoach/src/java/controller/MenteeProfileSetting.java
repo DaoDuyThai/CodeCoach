@@ -79,7 +79,7 @@ public class MenteeProfileSetting extends HttpServlet {
             for (Users users : listUser) {
                 System.out.println(users.getAvatar());
             }
-            request.getRequestDispatcher("/mentee/profilesetting.jsp").forward(request, response);
+            request.getRequestDispatcher("profilesetting.jsp").forward(request, response);
         }
     }
 

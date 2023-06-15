@@ -76,7 +76,7 @@ public class HireMentorController extends HttpServlet {
             List<Slot> listSlot = slotDAO.getAll();
             request.setAttribute("infoMentor", mentor);
             request.setAttribute("listSlot", listSlot);
-            request.getRequestDispatcher("/mentor/hireMentor.jsp").forward(request, response);
+            request.getRequestDispatcher("hireMentor.jsp").forward(request, response);
         }
     }
 

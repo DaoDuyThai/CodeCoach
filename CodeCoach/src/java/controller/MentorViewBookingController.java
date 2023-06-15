@@ -68,7 +68,7 @@ public class MentorViewBookingController extends HttpServlet {
             List<Booking> listBooking = bookingDAO.getAllForMentorId(user.getUserId());
             request.setAttribute("userInf", user);
             request.setAttribute("listBooking", listBooking);
-            request.getRequestDispatcher("/mentor/viewbooking.jsp").forward(request, response);
+            request.getRequestDispatcher("viewbooking.jsp").forward(request, response);
         }
     }
 

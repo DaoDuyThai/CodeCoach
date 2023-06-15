@@ -69,7 +69,7 @@ public class BookingsController extends HttpServlet {
             List<Mentors> listMentor=mentorDAO.getAllMentor();
             request.setAttribute("userInf", listUser);
             request.setAttribute("listMentor", listMentor);
-            request.getRequestDispatcher("/mentee/bookings.jsp").forward(request, response);
+            request.getRequestDispatcher("bookings.jsp").forward(request, response);
         }
     }
 
