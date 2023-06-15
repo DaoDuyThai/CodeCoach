@@ -285,4 +285,8 @@ public class UserDAO extends DBContext {
             System.out.println(o[i]);
         }
     }
+
+    public String getUserNameByUserId(int userId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
