@@ -7,6 +7,7 @@ package controller;
 
 import dal.BookingDAO;
 import dal.BookingDetailDAO;
+import dal.ChatRoomDAO;
 import dal.MenteeDAO;
 import dal.MentorDAO;
 import dal.SlotDAO;
@@ -74,12 +75,13 @@ public class BookingSuccessfulController extends HttpServlet {
             String menteeId = new MenteeDAO().getMenteeIdbyUserId(userId);
             Booking b = new BookingDAO().getBookingLatestbyMenteeId(menteeId);
             Mentors m = new MentorDAO().getMentorByMentorId(b.getMentorId());
-            String mentorName = new UserDAO().selectUserNameByUserId(m.getUserId());
+            String mentorName = new UserDAO().getUserNameByUserId(m.getUserId());
             BookingDetails bookingdetail = new BookingDetailDAO().getBookingDetailbyBookingId(b.getBookingId());
             Slot slot = new SlotDAO().getSlotbySlotId(bookingdetail.getSlotId());
             request.setAttribute("mentorName", mentorName);
             request.setAttribute("bookingdetail", bookingdetail);
             request.setAttribute("slot", slot);
+            new ChatRoomDAO().insertChatRoom(mentorName, u.getfName()+" "+u.getlName());
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
         }

@@ -51,4 +51,16 @@ public class ChatRoomDAO extends DBContext{
         }     
         return chatRooms;
     }
+    
+    public void insertChatRoom(String mentorName, String menteeName) {
+        String query = "INSERT INTO ChatRoom ([chatRoomName]) VALUES ('"+mentorName+" "+menteeName+"')";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }     
+    }
 }
