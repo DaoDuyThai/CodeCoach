@@ -35,4 +35,16 @@ public class ChatRoomUsersDAO extends DBContext{
         }   
         return listChatRoom;
     }
+    
+    public void insertChatRoomUser(int chatRoomId, int userId) {
+        String query = "INSERT INTO [ChatRoomUsers]([chatRoomId],[userId]) VALUES ("+chatRoomId+","+userId+")";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }   
+    }
 }

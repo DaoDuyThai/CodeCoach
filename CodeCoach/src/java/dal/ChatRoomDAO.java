@@ -53,7 +53,7 @@ public class ChatRoomDAO extends DBContext{
     }
     
     public void insertChatRoom(String mentorName, String menteeName) {
-        String query = "INSERT INTO ChatRoom ([chatRoomName]) VALUES ('"+mentorName+" "+menteeName+"')";
+        String query = "INSERT INTO ChatRoom ([chatRoomName]) VALUES ('"+mentorName+" - "+menteeName+"')";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);         

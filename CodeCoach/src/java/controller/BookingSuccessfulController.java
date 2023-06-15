@@ -8,6 +8,7 @@ package controller;
 import dal.BookingDAO;
 import dal.BookingDetailDAO;
 import dal.ChatRoomDAO;
+import dal.ChatRoomUsersDAO;
 import dal.MenteeDAO;
 import dal.MentorDAO;
 import dal.SlotDAO;
@@ -83,7 +84,8 @@ public class BookingSuccessfulController extends HttpServlet {
             request.setAttribute("slot", slot);
             new ChatRoomDAO().insertChatRoom(mentorName, u.getfName()+" "+u.getlName());
             int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
-            
+            new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, u.getUserId());
+            new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, m.getUserId());
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {
         }
