@@ -8,6 +8,26 @@
         <servlet-name>ContactUsController</servlet-name>
         <servlet-class>controller.ContactUsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MentorViewBookingController</servlet-name>
+        <servlet-class>controller.MentorViewBookingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MenteeProfileSetting</servlet-name>
+        <servlet-class>controller.MenteeProfileSetting</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookingsController</servlet-name>
+        <servlet-class>controller.BookingsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserProfileController</servlet-name>
+        <servlet-class>controller.UserProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HireMentorController</servlet-name>
+        <servlet-class>controller.HireMentorController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>checkEmailExisted</servlet-name>
         <url-pattern>/checkEmailExisted</url-pattern>
@@ -15,6 +35,26 @@
     <servlet-mapping>
         <servlet-name>ContactUsController</servlet-name>
         <url-pattern>/contactus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MentorViewBookingController</servlet-name>
+        <url-pattern>/viewbooking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MenteeProfileSetting</servlet-name>
+        <url-pattern>/profilesetting-mentee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookingsController</servlet-name>
+        <url-pattern>/bookings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserProfileController</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HireMentorController</servlet-name>
+        <url-pattern>/hire</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

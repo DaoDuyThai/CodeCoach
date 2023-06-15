@@ -16,7 +16,7 @@ public class QuanHuyen {
 
     public QuanHuyen() {
     }
-
+ 
     public QuanHuyen(String maqh, String name, String type, String mattp) {
         this.maqh = maqh;
         this.name = name;
@@ -55,7 +55,7 @@ public class QuanHuyen {
     public void setMattp(String mattp) {
         this.mattp = mattp;
     }
-
+    
     @Override
     public String toString() {
         return "QuanHuyen{" + "maqh=" + maqh + ", name=" + name + ", type=" + type + ", mattp=" + mattp + '}';

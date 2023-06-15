@@ -13,6 +13,7 @@ import model.Mentors;
 import model.Skills;
 import java.util.HashMap;
 import java.util.Map;
+import model.Users;
 
 /**
  *
@@ -55,13 +56,13 @@ public class MentorDAO {
         }
         return null;
     }
-    
+
     public void registerMentor(String userId, String biography, String hourlyRate) {
-        String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES("+userId+",'"+biography+"',"+hourlyRate+")";
+        String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES(" + userId + ",'" + biography + "'," + hourlyRate + ")";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();         
+            rs = ps.executeQuery();
         } catch (Exception e) {
         }
     }
@@ -74,7 +75,7 @@ public class MentorDAO {
             ps = conn.prepareStatement(query);
             ps.setInt(1, skillId);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(rs.getInt(2));
             }
         } catch (Exception e) {
@@ -83,20 +84,93 @@ public class MentorDAO {
         return list;
     }
 
+    public List<Mentors> getAllMentor() {
+        List<Mentors> list = new ArrayList<>();
+        String query = "select * from Mentors m\n"
+                + "inner join Users u\n"
+                + "on m.userId=u.userId";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Mentors mentors = new Mentors();
+                mentors.setUserId(rs.getInt("userId"));
+                mentors.setBio(rs.getString("bio"));
+                mentors.setHourlyRate(rs.getString("hourlyRate"));
+
+                Users users = new Users();
+                users.setfName(rs.getString("fName"));
+                users.setlName(rs.getString("lName"));
+                users.setEmail(rs.getString("email"));
+                users.setAddress(rs.getString("address"));
+                users.setPhoneNum(rs.getString("phoneNum"));
+                users.setGender(rs.getString("gender"));
+                users.setAvatar(rs.getString("avatar"));
+
+                mentors.setUsers(users);
+
+                list.add(mentors);
+
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public Mentors getMentorByUserId(int userId) {
+        String query = "select * from Mentors m\n"
+                + "inner join Users u\n"
+                + "on m.userId=u.userId\n"
+                + "wHere m.userId=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Mentors mentors = new Mentors();
+                mentors.setUserId(rs.getInt("userId"));
+                mentors.setBio(rs.getString("bio"));
+                mentors.setHourlyRate(rs.getString("hourlyRate"));
+
+                Users users = new Users();
+                users.setfName(rs.getString("fName"));
+                users.setlName(rs.getString("lName"));
+                users.setEmail(rs.getString("email"));
+                users.setAddress(rs.getString("address"));
+                users.setPhoneNum(rs.getString("phoneNum"));
+                users.setGender(rs.getString("gender"));
+                users.setAvatar(rs.getString("avatar"));
+
+                mentors.setUsers(users);
+
+                return mentors;
+
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         MentorDAO mdao = new MentorDAO();
         UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
-        List<Object[]> listUInfo = new ArrayList<>();
-        for (Integer mentorId : listMId) {
-            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
-            listUInfo.add(uInfo);
-        }
-        for (Object[] objects : listUInfo) {
-            for(int i = 0; i < objects.length; i++){
-                System.out.print(objects[i] + " ");
-            }
-            System.out.println("");
+//        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
+//        List<Object[]> listUInfo = new ArrayList<>();
+//        for (Integer mentorId : listMId) {
+//            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
+//            listUInfo.add(uInfo);
+//        }
+//        for (Object[] objects : listUInfo) {
+//            for (int i = 0; i < objects.length; i++) {
+//                System.out.print(objects[i] + " ");
+//            }
+//            System.out.println("");
+//        }
+        List<Mentors> cl = mdao.getAllMentor();
+        for (Mentors mentors : cl) {
+            System.out.println(mentors.getHourlyRate());
         }
     }
 }

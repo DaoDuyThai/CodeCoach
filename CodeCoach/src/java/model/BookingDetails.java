@@ -23,6 +23,10 @@ public class BookingDetails {
         return "BookingDetails{" + "bookingDetailId=" + bookingDetailId + ", bookingId=" + bookingId + ", slotId=" + slotId + ", date=" + date + '}';
     }
 
+    public BookingDetails( int slotId, String date) {
+        this.slotId = slotId;
+        this.date = date;
+    }
     public BookingDetails(int bookingDetailId, int bookingId, int slotId, String date) {
         this.bookingDetailId = bookingDetailId;
         this.bookingId = bookingId;

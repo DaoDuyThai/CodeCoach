@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 
 import java.sql.Connection;
@@ -10,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.QuanHuyen;
 import model.Roles;
+import model.TinhThanhPho;
 import model.Users;
 
 /**
@@ -23,8 +21,7 @@ public class UserDAO extends DBContext {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    
-     public List<Users> getAllUser() {
+    public List<Users> getAllUser() {
         List<Users> listUsers = new ArrayList<>();
         String querry = "select * from Users";
         try {
@@ -39,7 +36,7 @@ public class UserDAO extends DBContext {
 
         return listUsers;
     }
-     
+
     public List<Roles> getAll() {
         List<Roles> list = new ArrayList<>();
         String querry = "select * from roles";
@@ -236,22 +233,76 @@ public class UserDAO extends DBContext {
         }
         return o;
     }
-    
-    public void updateRoleIdUser(String userId) {
-        String query = "UPDATE [dbo].[Users] SET [roleId] = 2 WHERE userId = "+userId+"";
+
+    public List<Users> getInforUserById(int userId) {
+        List<Users> listUser = new ArrayList<>();
+        String query = "select * from Users u inner join quanhuyen q\n"
+                + "on u.maqh=q.maqh\n"
+                + "inner join tinhthanhpho tp\n"
+                + "on q.mattp=tp.mattp\n"
+                + "where u.userId=?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();         
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Users users = new Users();
+                users.setfName(rs.getString("fName"));
+                users.setlName(rs.getString("lName"));
+
+                users.setEmail(rs.getString("email"));
+                users.setAddress(rs.getString("address"));
+                users.setPhoneNum(rs.getString("phoneNum"));
+                users.setAvatar(rs.getString("avatar"));
+
+                QuanHuyen quanhuyen = new QuanHuyen();
+                quanhuyen.setName(rs.getString("name"));
+
+                TinhThanhPho tinhthanhpho = new TinhThanhPho();
+                tinhthanhpho.setName(rs.getString(19));
+
+                users.setQuanhuyen(quanhuyen);
+                users.setTinhthanhpho(tinhthanhpho);
+
+                listUser.add(users);
+            }
+        } catch (Exception e) {
+        }
+        return listUser;
+    }
+
+    public boolean updateInforUserById(int userId, String fname, String lname, String address, String phone, String maqh,String avatar) {
+        String query = "UPDATE [dbo].[Users]\n"
+                + "SET fName = '" + fname + "', lName = '" + lname + "',avatar='"+avatar+"', [address] = '" + address + "', phoneNum = '" + phone + "', maqh = '" + maqh + "'\n"
+                + "WHERE userId = " + userId;
+
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+        } 
+        return false;
+    }
+
+    public void updateRoleIdUser(String userId) {
+        String query = "UPDATE [dbo].[Users] SET [roleId] = 2 WHERE userId = " + userId + "";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
-        Object[] o = dao.getUserInfoByMentorId(1);
-        for (int i = 0; i < o.length; i++) {
-            System.out.println(o[i]);
-        }
+//        Object[] o = dao.getUserInfoByMentorId(1);
+//        for (int i = 0; i < o.length; i++) {
+//            System.out.println(o[i]);
+//        }
     }
 }

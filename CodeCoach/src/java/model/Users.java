@@ -22,6 +22,32 @@ public class Users {
     private String address;
     private String maqh;
     private String facebook;
+    private String avatar;
+    
+    private QuanHuyen quanhuyen;
+    private TinhThanhPho tinhthanhpho;
+
+    public Users(int userId, String email, String password, String fName, String lName, String gender, String phoneNum, int roleId, int statusId, String address, String maqh, String facebook, String avatar, QuanHuyen quanhuyen, TinhThanhPho tinhthanhpho) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.fName = fName;
+        this.lName = lName;
+        this.gender = gender;
+        this.phoneNum = phoneNum;
+        this.roleId = roleId;
+        this.statusId = statusId;
+        this.address = address;
+        this.maqh = maqh;
+        this.facebook = facebook;
+        this.avatar = avatar;
+        this.quanhuyen = quanhuyen;
+        this.tinhthanhpho = tinhthanhpho;
+    }
+
+
+
+    
 
     public Users(String fName, String lName, String gender, String email, String phoneNum, String address, String facebook,String password) {
         this.email = email;
@@ -152,4 +178,29 @@ public class Users {
     public void setFacebook(String facebook) {
         this.facebook = facebook;
     }
+
+    public QuanHuyen getQuanhuyen() {
+        return quanhuyen;
+    }
+
+    public void setQuanhuyen(QuanHuyen quanhuyen) {
+        this.quanhuyen = quanhuyen;
+    }
+
+    public TinhThanhPho getTinhthanhpho() {
+        return tinhthanhpho;
+    }
+
+    public void setTinhthanhpho(TinhThanhPho tinhthanhpho) {
+        this.tinhthanhpho = tinhthanhpho;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    
 }

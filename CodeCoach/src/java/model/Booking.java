@@ -15,17 +15,33 @@ public class Booking {
     private int menteeId;
     private int skillId;
     private String status;
+    private Mentees mentees;
+    private Users users;
+    private BookingDetails bookingDetails;
+    private Slot slot;
 
     public Booking() {
     }
 
-    public Booking(int bookingId, int mentorId, int menteeId, int skillId, String status) {
-        this.bookingId = bookingId;
+    public Booking( int mentorId, int menteeId, int skillId, String status) {
         this.mentorId = mentorId;
         this.menteeId = menteeId;
         this.skillId = skillId;
         this.status = status;
     }
+    public Booking(int bookingId, int mentorId, int menteeId, int skillId, String status, Mentees mentees, Users users, BookingDetails bookingDetails, Slot slot) {
+        this.bookingId = bookingId;
+        this.mentorId = mentorId;
+        this.menteeId = menteeId;
+        this.skillId = skillId;
+        this.status = status;
+        this.mentees = mentees;
+        this.users = users;
+        this.bookingDetails = bookingDetails;
+        this.slot = slot;
+    }
+
+    
 
     @Override
     public String toString() {
@@ -70,6 +86,37 @@ public class Booking {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public BookingDetails getBookingDetails() {
+        return bookingDetails;
+    }
+
+    public void setBookingDetails(BookingDetails bookingDetails) {
+        this.bookingDetails = bookingDetails;
+    }
+
+    public Slot getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Slot slot) {
+        this.slot = slot;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+    public Mentees getMentees() {
+        return mentees;
+    }
+
+    public void setMentees(Mentees mentees) {
+        this.mentees = mentees;
     }
 
 }

@@ -15,7 +15,7 @@
                                 <span></span>
                             </span>
                         </a>
-                        <a href="home" class="navbar-brand logo">
+                        <a href="/home" class="navbar-brand logo">
                             <img src="assets/img/logo.png" class="img-fluid" alt="Not Found" onerror=this.src="../assets/img/logo.png">
                         </a>
                     </div>
@@ -39,7 +39,7 @@
                                     <ul class="submenu">
                                         <li><a href="">Mentor Dashboard</a></li>
                                         <li><a href="">Notification</a></li>
-                                        <li><a href="">View Booking</a></li>
+                                        <li><a onclick="ViewBooking()">View Booking</a></li>
                                         <li><a href="">Review</a></li>
                                         <li><a href="">Invoices</a></li>
                                         <li><a href="">Profile Settings</a></li>                                      
@@ -53,14 +53,14 @@
                                 <ul class="submenu">
                                     <li><a href="">Mentee Dashboard</a></li>
                                     <li><a href="">Notification</a></li>
-                                    <li><a href="booking.jsp">Booking</a></li>
+                                    <li><a onclick="Bookings()">Booking</a></li>
                                     <li><a href="">Favourites</a></li>
                                     <li><a href="">Invoices</a></li>
                                     <li><a href="">Profile Settings</a></li>
-                                    <c:if test="${users.userId==3}">
+                                        <c:if test="${users.userId==3}">
                                         <li><a href="mentorregister">Mentor Register</a></li>
-                                    </c:if>
-                                    
+                                        </c:if>
+
                                 </ul>
                             </li>
                             <li class="has-submenu">
@@ -93,8 +93,8 @@
                             <li class="nav-item dropdown nav has-arrow logged-item header-navbar-rht">
                                 <a href="" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                                     <span class="user-img">
-                                        <img class="rounded-circle" src="assets/images/users/${users.userId}.png" width="31"
-                                             alt="Darren Elder">
+                                        <img class="rounded-circle" src="${users.getAvatar()== null ? "https://res.cloudinary.com/ddrjnfihc/image/upload/v1667138651/Home/images/UserProfile/default.jpg" : users.getAvatar()}" width="31"
+                                             alt="">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
@@ -108,13 +108,20 @@
                                             <p class="text-muted mb-0"><c:if test="${users.roleId == 1}">Admin</c:if><c:if test="${users.roleId == 2}">Mentor</c:if><c:if test="${users.roleId == 3}">Mentee</c:if></p>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item" href="">Profile Settings</a>
-                                        <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                                        <a class="dropdown-item" href="logout">Logout</a>
-                                    </div>
-                                </li>
+                                    <c:choose>
+                                        <c:when test="${users.roleId == 2}">
+                                            <a class="dropdown-item" onclick="ProfileSettingMentor()">Profile Settings</a>
+                                        </c:when>
+                                        <c:when test="${users.roleId == 3}">
+                                            <a class="dropdown-item" onclick="ProfileSettingMentee()">Profile Settings</a>
+                                        </c:when>
+                                    </c:choose>
+                                    <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
+                                    <a class="dropdown-item" href="logout">Logout</a>
+                                </div>
+                            </li>
 
-                            </ul>
+                        </ul>
                     </c:if>
                     <!-- end of login header -->
 
@@ -137,4 +144,18 @@
             </div>
         </header>
     </div>
+    <script>
+        function ViewBooking() {
+            window.location.href = "viewbooking";
+        }
+        function ProfileSettingMentor() {
+            window.location.href = "profilesetting-mentor";
+        }
+        function ProfileSettingMentee() {
+            window.location.href = "profilesetting-mentee";
+        }
+        function Bookings() {
+            window.location.href = "bookings";
+        }
+    </script>
 </html>

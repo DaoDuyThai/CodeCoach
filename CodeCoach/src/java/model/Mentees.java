@@ -9,8 +9,11 @@ package model;
  * @author Duy Thai
  */
 public class Mentees {
+
     private int menteeId;
     private int userId;
+
+    private Users users;
 
     public Mentees() {
     }
@@ -18,6 +21,12 @@ public class Mentees {
     @Override
     public String toString() {
         return "Mentees{" + "menteeId=" + menteeId + ", userId=" + userId + '}';
+    }
+
+    public Mentees(int menteeId, int userId, Users users) {
+        this.menteeId = menteeId;
+        this.userId = userId;
+        this.users = users;
     }
 
     public Mentees(int menteeId, int userId) {
@@ -40,5 +49,13 @@ public class Mentees {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
 }

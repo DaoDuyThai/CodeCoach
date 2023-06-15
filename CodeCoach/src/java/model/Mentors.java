@@ -14,6 +14,8 @@ public class Mentors {
     private int userId;
     private String bio;
     private String hourlyRate;
+    
+    private Users users;
 
     @Override
     public String toString() {
@@ -22,6 +24,17 @@ public class Mentors {
 
     public Mentors() {
     }
+
+    public Mentors(int mentorId, int userId, String bio, String hourlyRate, Users users) {
+        this.mentorId = mentorId;
+        this.userId = userId;
+        this.bio = bio;
+        this.hourlyRate = hourlyRate;
+        this.users = users;
+    }
+
+
+    
 
     public Mentors(int mentorId, int userId, String bio, String hourlyRate) {
         this.mentorId = mentorId;
@@ -62,4 +75,11 @@ public class Mentors {
         this.hourlyRate = hourlyRate;
     }
 
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 }
