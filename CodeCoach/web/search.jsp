@@ -160,7 +160,7 @@
                                     <div class="user-info-left">
                                         <div class="mentor-img">
                                             <a href="profile.html">
-                                                <img src="assets/img/user/user.jpg" class="img-fluid" alt="User Image">
+                                                <img src="assets/img/user/${mInfo[1]}.jpg" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
