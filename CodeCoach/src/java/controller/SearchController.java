@@ -67,14 +67,13 @@ public class SearchController extends HttpServlet {
         MentorDAO mentorDAO = new MentorDAO();
         List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
 
-        List<MentorDAO.MentorDTO> mentorList = new ArrayList<>();
-        
+        List<Object> mentorInformationList = new ArrayList<>();
         if (searchTxt!= null){
         for (Integer mentorId : mentorIds) {
-            MentorDAO.MentorDTO mentorDTO = mentorDAO.getMentorInfoForSearchById(mentorId);
-            mentorList.add(mentorDTO);
+             List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
+            mentorInformationList.add(mentorInformation);
         }
-        request.setAttribute("mentors", mentorList);
+        request.setAttribute("mentors", mentorInformationList);
         request.getRequestDispatcher("search.jsp").forward(request, response);
         }
         else {response.sendRedirect(request.getContextPath());}

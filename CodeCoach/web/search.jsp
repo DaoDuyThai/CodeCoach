@@ -164,8 +164,10 @@
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">${mInfo.firstName} ${mInfo.lastName}</a></h4>
-                                            <p class="mentor-type">${mInfo.skillName}</p>
+                                            <h4 class="usr-name"><a href="profile.html">${mInfo[6]} ${mInfo[7]}</a></h4>
+                                            <c:forEach var="skill" items="${mInfo}" begin="17" end="26">
+                                            <span class="badge badge-primary">${skill}</span>
+                                            </c:forEach>
                                             <div class="rating">
                                                 <i class="fas fa-star filled"></i>
                                                 <i class="fas fa-star filled"></i>
@@ -175,8 +177,8 @@
                                                 <span class="d-inline-block average-rating">(17)</span>
                                             </div>
                                             <div class="mentor-details">
-                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i>${mInfo.tenqh},
-                                                    ${mInfo.tenttp}</p>
+                                                <p class="user-location"><i class="fas fa-map-marker-alt"></i>${mInfo[15]},
+                                                    ${mInfo[16]}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -184,8 +186,8 @@
                                         <div class="user-infos">
                                             <ul>
                                                 <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> ${mInfo.address}, ${mInfo.tenttp}</li>
-                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo.hourlyRate} <i
+                                                <li><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}, ${mInfo[16]}</li>
+                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
                                             </ul>
@@ -202,7 +204,7 @@
                    
 
                         <div class="load-more text-center">
-                            <a class="btn btn-primary btn-sm" href="javascript:void(0);">Load More</a>
+                        <button class="btn btn-primary btn-sm load-more-button">Load More</button>
                         </div>
                     </div>
                 </div>
@@ -213,6 +215,35 @@
 
 
     </div>
+    <script>
+    $(document).ready(function () {
+        var visibleItems = 3; // Number of initially visible items
+        var totalItems = ${mentors.length}; // Total number of mentors
+        var itemsPerPage = 3; // Number of items to load per page
+        var loadMoreButton = $(".load-more-button");
+
+        // Hide mentors beyond the initial visible items
+        $(".mentor-widget:gt(" + (visibleItems - 1) + ")").hide();
+
+        // Show/hide Load More button based on the number of mentors
+        if (totalItems <= visibleItems) {
+            loadMoreButton.hide();
+        }
+
+        // Load more mentors when the Load More button is clicked
+        loadMoreButton.click(function () {
+            var hiddenItems = $(".mentor-widget:hidden");
+            var numItemsToShow = Math.min(hiddenItems.length, itemsPerPage);
+
+            hiddenItems.slice(0, numItemsToShow).slideDown();
+
+            // Hide Load More button if no more mentors to show
+            if ($(".mentor-widget:hidden").length === 0) {
+                loadMoreButton.hide();
+            }
+        });
+    });
+    </script>
 
 
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
