@@ -67,6 +67,7 @@ public class SearchController extends HttpServlet {
         List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
 
         List<Object> mentorInformationList = new ArrayList<>();
+        try{
         if (searchTxt!= null){
         for (Integer mentorId : mentorIds) {
              List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
@@ -76,6 +77,11 @@ public class SearchController extends HttpServlet {
         request.getRequestDispatcher("search.jsp").forward(request, response);
         }
         else {response.sendRedirect(request.getContextPath());}
+        
+        }
+        catch (Exception e){
+            System.err.println(e);
+        }
     }
 
     /** 
