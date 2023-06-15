@@ -58,7 +58,7 @@
                                         </strong><br> on <strong><%out.print(bookingdetail.getDate());%> 
                                             </strong>from <strong><%out.print(slot.getStartTime().substring(0, 8));%> 
                                             to <%out.print(slot.getEndTime().substring(0, 8));%></strong></p>
-                                    <a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
+                                    <a href="home" class="btn btn-primary view-inv-btn">Ok</a>
                                 </div>
                             </div>
                         </div>
