@@ -20,7 +20,9 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body class="chat-page">
-
+        <!-- Header is placed here -->
+        <%@include file="header.jsp" %>
+        <!--End of header-->
         <div class="main-wrapper">
             <div class="content">
                 <div class="container-fluid">

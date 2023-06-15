@@ -35,4 +35,37 @@ public class ChatRoomUsersDAO extends DBContext{
         }   
         return listChatRoom;
     }
+    
+    public void insertChatRoomUser(int chatRoomId, int userId) {
+        String query = "INSERT INTO [ChatRoomUsers]([chatRoomId],[userId]) VALUES ("+chatRoomId+","+userId+")";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }   
+    }
+    
+    public int getSharedChatRoomIdbyId(int userId1, int userId2) {
+        int chatRoomId = 0;
+        String query = "SELECT chatRoomId FROM [ChatRoomUsers] WHERE userId IN ("+userId1+", "+userId2+") GROUP BY chatRoomId HAVING COUNT(DISTINCT userId) = 2";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                chatRoomId = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }   
+        return  chatRoomId;
+    }
+    
+    public static void main(String[] args) {
+        int chatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(1, 5);
+        System.out.println(chatRoomId);
+    }
 }

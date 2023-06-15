@@ -1,3 +1,5 @@
+<%@page import="model.Slot"%>
+<%@page import="model.BookingDetails"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +21,11 @@
 </head>
 
 <body>
-
+    <!-- Header is placed here -->
+        <%@include file="header.jsp" %>
+        <!--End of header-->
+         <%BookingDetails bookingdetail = (BookingDetails) request.getAttribute("bookingdetail");%>
+         <%Slot slot = (Slot) request.getAttribute("slot"); %>
     <div class="main-wrapper">
         <div class="breadcrumb-bar">
             <div class="container-fluid">
@@ -48,13 +54,14 @@
                                 <div class="success-cont">
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
-                                    <p>Appointment booked with <strong>Darren Elder</strong><br> on <strong>12 Nov 2019
-                                            5:00PM to 6:00PM</strong></p>
-                                    <a href="invoice-view.html" class="btn btn-primary view-inv-btn">View Invoice</a>
+                                    <p>Appointment booked with <strong><%out.print(request.getAttribute("mentorName"));%>
+                                        </strong><br> on <strong><%out.print(bookingdetail.getDate());%> 
+                                            </strong>from <strong><%out.print(slot.getStartTime().substring(0, 8));%> 
+                                            to <%out.print(slot.getEndTime().substring(0, 8));%></strong></p>
+                                    <a href="home" class="btn btn-primary view-inv-btn">Ok</a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -69,7 +76,8 @@
 
     <script src="assets/js/script.js"></script>
 </body>
-
-<!-- Mirrored from mentoring.dreamguystech.com/html/template/booking-success.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:23 GMT -->
+<!-- end of Pre footer -->
+    <%@include file="footer.jsp" %>
+    <!-- footer is place here -->
 
 </html>

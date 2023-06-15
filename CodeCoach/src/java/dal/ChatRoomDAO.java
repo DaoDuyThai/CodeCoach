@@ -51,4 +51,32 @@ public class ChatRoomDAO extends DBContext{
         }     
         return chatRooms;
     }
+    
+    public void insertChatRoom(String mentorName, String menteeName) {
+        String query = "INSERT INTO ChatRoom ([chatRoomName]) VALUES ('"+mentorName+" - "+menteeName+"')";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }         
+    }
+    
+    public int getLatestChatRoomId() {
+        int chatRoomId=0;
+        String query = "Select MAX(chatRoomId) from ChatRoom";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);         
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                chatRoomId = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return chatRoomId;
+    }
 }
