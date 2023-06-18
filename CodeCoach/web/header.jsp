@@ -110,7 +110,7 @@
                                     <a class="dropdown-item" href="">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
                                     <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/login">Logout</a>
+                                    <a class="dropdown-item" href="logout">Logout</a>
                                 </div>
                             </li>
 
