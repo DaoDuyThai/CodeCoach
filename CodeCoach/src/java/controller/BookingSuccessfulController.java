@@ -13,6 +13,7 @@ import dal.ChatRoomUsersDAO;
 import dal.MenteeDAO;
 import dal.MentorDAO;
 import dal.SlotDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -21,16 +22,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Users;
-import dal.UserDAO;
 import model.Booking;
 import model.BookingDetails;
 import model.Mentors;
 import model.Slot;
+import model.Users;
 
 /**
  *
- * @author giang
+ * @author Duy Thai
  */
 @WebServlet(name="BookingSuccessfulController", urlPatterns={"/bookingsuccessful"})
 public class BookingSuccessfulController extends HttpServlet {
@@ -71,7 +71,7 @@ public class BookingSuccessfulController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession();
+             HttpSession session = request.getSession();
             Users u = (Users) session.getAttribute("users");
             String userId = Integer.toString(u.getUserId());
             String menteeId = new MenteeDAO().getMenteeIdbyUserId(userId);
@@ -91,7 +91,7 @@ public class BookingSuccessfulController extends HttpServlet {
                 new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, m.getUserId());
             }else {
                 new ChatMessagesDAO().insertChatMessage(String.valueOf(m.getUserId()), String.valueOf(sharedChatRoomId), "You have successfully submitted your application, please wait for the mentor to review your request. During that time you can communicate with your mentor here");
-            new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
             } 
             request.getRequestDispatcher("bookingsuccessful.jsp").forward(request, response);
         } catch (Exception e) {

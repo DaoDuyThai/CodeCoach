@@ -32,4 +32,10 @@ public class BookingDetailDAO {
         }
         return bookingdetail;
     }
+    
+    public static void main(String[] args) {
+        BookingDetails bookingdetail = new BookingDetails();
+        bookingdetail = new BookingDetailDAO().getBookingDetailbyBookingId(1);
+        System.out.println(bookingdetail.getDate());
+    }
 }
