@@ -88,16 +88,26 @@
                                     <hr>    
                                     <div class="chat-messages">
                                         <% for (ChatMessages chatMessage : listChatMessages) {%>
-                                        <div class="message">
-                                            <p><strong><%
-                                                for (Users user : listUsers) {
-                                                    if (user.getUserId() == chatMessage.getUserId()) {
-                                                        out.print(user.getfName());
+                                        <div class="media received d-flex">
+                                            <div class="avatar flex-shrink-0">
+                                                <img src="assets/images/users/<%=chatMessage.getUserId()%>.png" alt="User Image"
+                                                     class="avatar-img rounded-circle">
+                                            </div>
+                                            <div class="media-body flex-grow-1">
+                                                <p><strong><%
+                                                    for (Users user : listUsers) {
+                                                        if (user.getUserId() == chatMessage.getUserId()) {
+                                                            out.print(user.getfName() + " " + user.getlName());
+                                                        }
                                                     }
-                                                }
-                                                    %></strong> - <%= chatMessage.getSentDateTime()%></p>
-                                            <p><%= chatMessage.getMessage()%></p>
+                                                        %></strong> - <%= chatMessage.getSentDateTime().substring(0, 16)%></p>
+                                                <p><%= chatMessage.getMessage()%></p>
+                                            </div>
+                                            
+
+
                                         </div>
+                                            <br><br>
                                         <% }%>
                                     </div>
                                     <form action="listchat" method="post" class="chat-form">
