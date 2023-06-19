@@ -51,7 +51,7 @@
                             <li class="has-submenu">
                                 <a href>Mentee <i class="fas fa-chevron-down"></i></a>
                                 <ul class="submenu">
-                                    <li><a href="">Mentee Dashboard</a></li>
+                                    <li><a href="menteedashboard">Mentee Dashboard</a></li>
                                     <li><a href="">Notification</a></li>
                                     <li><a href="booking.jsp">Booking</a></li>
                                     <li><a href="">Favourites</a></li>

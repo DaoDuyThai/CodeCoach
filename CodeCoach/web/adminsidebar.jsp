@@ -12,7 +12,7 @@
         <div class="profile-sidebar">
             <div class="custom-sidebar-nav">
                 <ul>
-                    <li><a href="dashboard.html"><i class="fas fa-chart-pie"></i>Admin Dashboard
+                    <li><a href="admindashboard"><i class="fas fa-chart-pie"></i>Admin Dashboard
                             <span><i class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="bookings.html"><i class="fas fa-list-alt"></i>List Mentors <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
@@ -23,9 +23,9 @@
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="reviews.html"><i class="fas fa-file-invoice"></i>View Transactions <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="editfaq"><i class="fas fa-question-circle"></i>Edit FAQ <span><i
+                    <li><a href="editfaq"><i class="fas fa-question-circle"></i>FAQ <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="blog.html"><i class="fas fa-book-reader"></i>Edit Privacy policy & Terms <span><i
+                    <li><a href="blog.html"><i class="fas fa-book-reader"></i>Privacy policy & Terms <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="profile.html"><i class="fas fa-user-cog"></i>Admin Profile <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
