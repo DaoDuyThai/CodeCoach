@@ -55,7 +55,7 @@ public class ListBookingController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("listbooking.jsp").forward(request, response);
     } 
 
     /** 
