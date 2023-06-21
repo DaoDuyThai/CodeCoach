@@ -10,20 +10,22 @@ package model;
  */
 public class Feedback {
 
+
     private int feedbackId;
-    private int menteeId;
+    private int userId;
     private int mentorId;
     private int bookingId;
     private int rating;
     private String reviewText;
     private String reviewDateTime;
+    private String reviewerName; // Added reviewerName field
 
     public Feedback() {
     }
 
-    public Feedback(int feedbackId, int menteeId, int mentorId, int bookingId, int rating, String reviewText, String reviewDateTime) {
+    public Feedback(int feedbackId, int userId, int mentorId, int bookingId, int rating, String reviewText, String reviewDateTime) {
         this.feedbackId = feedbackId;
-        this.menteeId = menteeId;
+        this.userId = userId;
         this.mentorId = mentorId;
         this.bookingId = bookingId;
         this.rating = rating;
@@ -33,7 +35,16 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" + "feedbackId=" + feedbackId + ", menteeId=" + menteeId + ", mentorId=" + mentorId + ", bookingId=" + bookingId + ", rating=" + rating + ", reviewText=" + reviewText + ", reviewDateTime=" + reviewDateTime + '}';
+        return "Feedback{" +
+                "feedbackId=" + feedbackId +
+                ", userId=" + userId +
+                ", mentorId=" + mentorId +
+                ", bookingId=" + bookingId +
+                ", rating=" + rating +
+                ", reviewText='" + reviewText + '\'' +
+                ", reviewDateTime='" + reviewDateTime + '\'' +
+                ", reviewerName='" + reviewerName + '\'' +
+                '}';
     }
 
     public int getFeedbackId() {
@@ -44,12 +55,12 @@ public class Feedback {
         this.feedbackId = feedbackId;
     }
 
-    public int getMenteeId() {
-        return menteeId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setMenteeId(int menteeId) {
-        this.menteeId = menteeId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getMentorId() {
@@ -92,4 +103,11 @@ public class Feedback {
         this.reviewDateTime = reviewDateTime;
     }
 
+    public String getReviewerName() {
+        return reviewerName;
+    }
+
+    public void setReviewerName(String reviewerName) {
+        this.reviewerName = reviewerName;
+    }
 }

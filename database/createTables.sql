@@ -135,13 +135,13 @@ CREATE TABLE BookingDetails(
 
 CREATE TABLE Feedback (
   feedbackId INT IDENTITY(1,1) PRIMARY KEY,
-  menteeId INT NOT NULL,
+  userId INT NOT NULL,
   mentorId INT NOT NULL,
   bookingId INT NOT NULL,
   rating INT NOT NULL,
   reviewText VARCHAR(MAX) NOT NULL,
   reviewDateTime DATETIME NOT NULL,
-  FOREIGN KEY (menteeId) REFERENCES Mentees(menteeId),
+  FOREIGN KEY (userId) REFERENCES Users(userId),
   FOREIGN KEY (mentorId) REFERENCES Mentors(mentorId),
   FOREIGN KEY (bookingId) REFERENCES Booking(bookingId)
 );

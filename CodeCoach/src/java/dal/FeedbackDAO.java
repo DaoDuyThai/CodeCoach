@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dal;
 
 import java.sql.Connection;
@@ -11,38 +7,57 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
 
-/**
- *
- * @author ADMIN
- */
-public class FeedbackDAO {
-    Connection conn = null;
-    PreparedStatement ps = null;
-    ResultSet rs = null;
+public class FeedbackDAO extends DBContext {
+
+    private Connection conn = null;
+    private PreparedStatement ps = null;
+    private ResultSet rs = null;
 
     public List<Feedback> getAllFeedback() {
-    List<Feedback> listFeedback = new ArrayList<>();
-    String query = "select * from Feedback";
-     try {
+        List<Feedback> feedbackList = new ArrayList<>();
+        String query = "SELECT f.feedbackId, f.userId, f.mentorId, u.fName, u.lName, f.reviewText, f.reviewDateTime "
+                + "FROM Feedback f "
+                + "JOIN Users u ON f.userId = u.userId";
+
+        try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
+
             while (rs.next()) {
-                listFeedback.add(
-                    new Feedback(
-                    rs.getInt(1),
-                    rs.getInt(2),
-                    rs.getInt(3),
-                    rs.getInt(4),
-                    rs.getInt(5),
-                    rs.getString(6),
-                    rs.getString(7)
-                    )
-                );
+                int feedbackId = rs.getInt("feedbackId");
+                int userId = rs.getInt("userId");
+                int mentorId = rs.getInt("mentorId");
+                String reviewerName = rs.getString("fName");
+                String reviewText = rs.getString("reviewText");
+                String reviewDateTime = rs.getString("reviewDateTime");
+
+                Feedback feedback = new Feedback(feedbackId, userId, mentorId, 0, 0, reviewText, reviewDateTime);
+                feedback.setReviewerName(reviewerName); // Assuming you add a setter method for reviewerName in the Feedback class
+                feedbackList.add(feedback);
             }
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
+        } finally {
+            closeResources();
         }
-    return listFeedback;
-}
+
+        return feedbackList;
+    }
+
+    private void closeResources() {
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
