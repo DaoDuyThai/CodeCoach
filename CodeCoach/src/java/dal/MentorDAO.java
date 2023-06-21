@@ -149,7 +149,25 @@ public class MentorDAO {
 
     return mentorInformation;
 }
-
+    public int getMentorIdByUserId(Users u){
+        int mentorId = 0;
+        String query = "select mentorId from Mentors m join Users u on m.userId=u.userId\n" +
+                   "where u.userId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, u.getUserId());
+            rs = ps.executeQuery();
+            if (rs.next()){
+                mentorId = rs.getInt("mentorId");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return mentorId;
+    
+    }
 
     
     public static void main(String[] args) {

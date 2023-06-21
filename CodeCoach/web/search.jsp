@@ -43,30 +43,13 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-7 col-12">
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            </ol>
-                        </nav>
-         
                     </div>
                     <div class="col-md-5 col-12 d-md-block d-none">
                         <div class="search-box">
-                        <form action="search" method="post">
-                          <input name="searchTxt" type="text" id="search-input" class="form-control" placeholder="Search">
-                           <button type="submit" id="search-button" class="btn btn-primary">Search</button>
-                        </form>
-                    </div>
-                        <div class="sort-by">
-                            <span class="sort-title">Sort by</span>
-                            <span class="sortby-fliter">
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option class="sorting">Popular</option>
-                                    <option class="sorting">Latest</option>
-                                    <option class="sorting">Free</option>
-                                </select>
-                            </span>
+                            <form action="search" method="post">
+                                <input name="searchTxt" type="text" id="search-input" class="form-control" placeholder="Search">
+                                <button type="submit" id="search-button" class="btn btn-primary">Search</button>
+                            </form>
                         </div>
                     </div>
                 </div>
