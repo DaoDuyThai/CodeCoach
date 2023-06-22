@@ -168,7 +168,7 @@ public class MentorDAO {
                 mentorOccurrence[1] = rs.getInt(2);
                 mentorOccurrence[2] = rs.getString(3);
                 mentorOccurrence[3] = rs.getString(4);
-                mentorOccurrence[4] = rs.getString(5);
+                mentorOccurrence[4] = rs.getInt(5);
                 list.add(mentorOccurrence);
             }
         } catch (Exception e) {

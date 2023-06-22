@@ -23,67 +23,104 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <script>
             window.onload = function () {
-                //bar chart start
-                var barChart = new CanvasJS.Chart("barChartContainer", {
-                    animationEnabled: true,
+            //bar chart start
+            var barChart = new CanvasJS.Chart("barChartContainer", {
+            animationEnabled: true,
                     theme: "light2", // "light1", "light2", "dark1", "dark2"
                     title: {
-                        text: "Monthly Booking Statistics"
+                    text: "Monthly Booking Statistics"
                     },
                     axisY: {
-                        title: "Number of bookings"
+                    title: "Number of bookings"
                     },
                     data: [{
-                            type: "column",
+                    type: "column",
                             showInLegend: true,
                             legendMarkerColor: "grey",
                             legendText: " ",
                             dataPoints: [
-                                {y: ${jan}, label: "Jan"},
-                                {y: ${feb}, label: "Feb"},
-                                {y: ${mar}, label: "Mar"},
-                                {y: ${apr}, label: "Apr"},
-                                {y: ${may}, label: "May"},
-                                {y: ${jun}, label: "Jun"},
-                                {y: ${jul}, label: "Jul"},
-                                {y: ${aug}, label: "Aug"},
-                                {y: ${sep}, label: "Sep"},
-                                {y: ${oct}, label: "Oct"},
-                                {y: ${nov}, label: "Nov"},
-                                {y: ${dec}, label: "Dec"}
+                            {y: ${jan}, label: "Jan"},
+                            {y: ${feb}, label: "Feb"},
+                            {y: ${mar}, label: "Mar"},
+                            {y: ${apr}, label: "Apr"},
+                            {y: ${may}, label: "May"},
+                            {y: ${jun}, label: "Jun"},
+                            {y: ${jul}, label: "Jul"},
+                            {y: ${aug}, label: "Aug"},
+                            {y: ${sep}, label: "Sep"},
+                            {y: ${oct}, label: "Oct"},
+                            {y: ${nov}, label: "Nov"},
+                            {y: ${dec}, label: "Dec"}
                             ]
-                        }]
-                });
-                //bar chart end
-                //pie chart start
-                var pieChart = new CanvasJS.Chart("pieChartContainer", {
-                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    }]
+            });
+            //bar chart end
+            
+            //pie chart start
+            var pieChart = new CanvasJS.Chart("pieChartContainer", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
                     exportEnabled: true,
                     animationEnabled: true,
                     title: {
-                        text: "Top 5 most loved technology"
+                    text: "Most Loved Technology"
                     },
                     data: [{
-                            type: "pie",
+                    type: "pie",
                             startAngle: 25,
-                            toolTipContent: "<b>{label}</b>: {y}%",
+                            toolTipContent: "<b>{label}</b>: {y}",
                             showInLegend: "true",
                             legendText: "{label}",
                             indexLabelFontSize: 16,
                             indexLabel: "{label} - {y}",
                             dataPoints: [
-                                <c:forEach var="lso" items="${listSkillOccurrence}">
-                                                {y: ${lso[1]}, label: "${lso[0]}"},                                                     
-                                </c:forEach>
+            <c:forEach var="lso" items="${listSkillOccurrence}">
+                            {y: ${lso[1]}, label: "${lso[0]}"},
+            </c:forEach>
                             ]
-                        }]
-                });
-                //pie char end
+                    }]
+            });
+            //pie char end
 
 
-                barChart.render();
-                pieChart.render();
-            }
+            //axis chart start
+            var axisChart = new CanvasJS.Chart("axisChartContainer", {
+            theme: "light1", // "light1", "light2", "dark1"
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    title: {
+                    text: "Most Booked Mentors"
+                    },
+                    axisX: {
+                    margin: 10,
+                            labelPlacement: "inside",
+                            tickPlacement: "inside"
+                    },
+                    axisY2: {
+                    title: "Booking",
+                            titleFontSize: 14,
+                            includeZero: true,
+                            suffix: "booking"
+                    },
+                    data: [{
+                    type: "bar",
+                            axisYType: "secondary",
+                            yValueFormatString: "#,###.##booked",
+                            indexLabel: "{y}",
+                            dataPoints: [
+            <c:forEach items="${listMentorOccurence}" var="lmo">
+                            {label: "${lmo[2]} ${lmo[3]}", y: ${lmo[4]}},
+            </c:forEach>
+
+
+                                                ]
+                                        }]
+                                });
+                                //axis chart end
+
+                                barChart.render();
+                                pieChart.render();
+                                axisChart.render();
+                                }
         </script>
     </head>
     <body>
@@ -167,15 +204,15 @@
                             </div>
                             <br/><br/>
                             <!--count end-->   
-                            
+
                             <div class="row">
                                 <!--bar chart start-->
                                 <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
                                 <!--bar chart end-->
                             </div>
-                            
+
                             <br/><br/>
-                            
+
                             <div class="row">
                                 <!--pie chart start-->
                                 <div class="col-md-6">
@@ -183,16 +220,17 @@
                                 </div>
                                 <!--pie chart end-->
 
-                                
+                                <!--axis chart start-->
                                 <div class="col-md-6">
-
+                                    <div id="axisChartContainer" style="height: 300px; width: 100%;"></div>
                                 </div>
+                                <!--axis chart end-->
 
                             </div>
-                            
+
                             <br/><br/>
-                            
-                            
+
+
                             <!--table start-->
                             <div class="row">
                                 <div class="col-md-12">

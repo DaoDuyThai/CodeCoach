@@ -76,7 +76,7 @@
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">
                                 <li>
-                                    <a href="admindashboard" target="_blank">Admin</a>
+                                    <a href="admindashboard" >Admin</a>
                                 </li>
                             </c:if>
                             <!--end of Admin button-->
