@@ -48,10 +48,6 @@
                         </c:forEach>
 
 
-
-
-
-
                         <h1>Terms:</h1>
                         <br>
 
