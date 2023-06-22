@@ -36,7 +36,8 @@
                                                         <div class="user-info-left">
 
                                                             <div class="user-info-cont">
-                                                                <h4 class="usr-name"><a>${c.categoryName} </a></h4>
+                                                                <h4 class="usr-name">${s.categoryId}
+                                                                <a>${c.categoryName}</a></h4>
                                                                 
          
                                                             </div>
@@ -44,7 +45,8 @@
                                                         <div class="user-info-right">
      
                                                             <div class="mentor-booking">
-                                                                <a class="apt-btn" href="subcategory.jsp">View Category</a>
+                                                                <a class="apt-btn" href="subcategory?categoryId=${c.categoryId}">View Category</a>
+                                                                
                                                             </div>
                                                         </div>
                                                                 

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Categories;
+import model.SubCategories;
 
 /**
  *
@@ -33,10 +34,27 @@ public class CategoryDAO {
         }
         return list;
     }
+     public List<SubCategories> getSubCategorybyCategoryId(String categoryId){
+            List<SubCategories> listS = new ArrayList<>();
+            String query = "select * from SubCategories where categoryId = ?";
+            try{
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setString(1, categoryId);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    listS.add(new SubCategories(rs.getInt(1), rs.getInt(2), rs.getString(3)));
+                }              
+            }
+            catch(Exception e){              
+            }
+            return listS;
+        }
+    
     public static void main(String[] args) {
         CategoryDAO d = new CategoryDAO();
-        List<Categories> list = d.getAll();
-        for(Categories l : list){
+        List<SubCategories> listS = d.getSubCategorybyCategoryId("1");
+        for(SubCategories l : listS){
             System.out.println(l);
         }
     }
