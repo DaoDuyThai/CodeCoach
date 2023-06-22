@@ -33,9 +33,27 @@ public class BookingDetailDAO {
         return bookingdetail;
     }
     
+    public int countBookingsByYearAndMonth(int year, int month){
+        String query = "select count(bookingDetailId) as Total from bookingdetails where YEAR(date) = ? and month(date) = ?";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, year);
+            ps.setInt(2, month);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
     public static void main(String[] args) {
-        BookingDetails bookingdetail = new BookingDetails();
-        bookingdetail = new BookingDetailDAO().getBookingDetailbyBookingId(1);
-        System.out.println(bookingdetail.getDate());
+        BookingDetailDAO dao = new BookingDetailDAO();
+        System.out.println(dao.countBookingsByYearAndMonth(2023, 3));
     }
 }

@@ -23,8 +23,7 @@ public class UserDAO extends DBContext {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    
-     public List<Users> getAllUser() {
+    public List<Users> getAllUser() {
         List<Users> listUsers = new ArrayList<>();
         String querry = "select * from Users";
         try {
@@ -39,7 +38,7 @@ public class UserDAO extends DBContext {
 
         return listUsers;
     }
-     
+
     public List<Roles> getAll() {
         List<Roles> list = new ArrayList<>();
         String querry = "select * from roles";
@@ -236,16 +235,17 @@ public class UserDAO extends DBContext {
         }
         return o;
     }
-    
+
     public void updateRoleIdUser(String userId) {
-        String query = "UPDATE [dbo].[Users] SET [roleId] = 2 WHERE userId = "+userId+"";
+        String query = "UPDATE [dbo].[Users] SET [roleId] = 2 WHERE userId = " + userId + "";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();         
+            rs = ps.executeQuery();
         } catch (Exception e) {
         }
     }
+
     public Object[] getUserInfoByMenteeId(int menteeId) {
         Object[] o = new Object[15];
         String query = "select m.menteeId, m.userId, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name from mentees m join users u on m.userId = u.userId join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp where m.menteeId =?";
@@ -277,19 +277,14 @@ public class UserDAO extends DBContext {
         }
         return o;
     }
-     
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        System.out.println(dao.getUserNameByUserId(1));
-    }
 
     public String getUserNameByUserId(int userId) {
-        String fullName="";
-        String query = "Select fName, lName from Users where userId= "+userId+"";
+        String fullName = "";
+        String query = "Select fName, lName from Users where userId= " + userId + "";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            rs = ps.executeQuery(); 
+            rs = ps.executeQuery();
             while (rs.next()) {
                 fullName = rs.getString(1) + " " + rs.getString(2);
             }
@@ -297,4 +292,27 @@ public class UserDAO extends DBContext {
         }
         return fullName;
     }
+
+    public int getTotalUserByRoleId(int roleId) {
+        String query = "select count(userid) as Total from users where roleId =" + roleId + "";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        UserDAO dao = new UserDAO();
+        System.out.println(dao.getTotalUserByRoleId(3));
+    }
+
 }

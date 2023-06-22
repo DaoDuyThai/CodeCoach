@@ -20,6 +20,49 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+        <script>
+            window.onload = function () {
+                //bar chart start
+                var barChart = new CanvasJS.Chart("barChartContainer", {
+                    animationEnabled: true,
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                        text: "Monthly Booking Statistics"
+                    },
+                    axisY: {
+                        title: "Number of bookings"
+                    },
+                    data: [{
+                            type: "column",
+                            showInLegend: true,
+                            legendMarkerColor: "grey",
+                            legendText: " ",
+                            dataPoints: [
+                                {y: ${jan}, label: "Jan"},
+                                {y: ${feb}, label: "Feb"},
+                                {y: ${mar}, label: "Mar"},
+                                {y: ${apr}, label: "Apr"},
+                                {y: ${may}, label: "May"},
+                                {y: ${jun}, label: "Jun"},
+                                {y: ${jul}, label: "Jul"},
+                                {y: ${aug}, label: "Aug"},
+                                {y: ${sep}, label: "Sep"},
+                                {y: ${oct}, label: "Oct"},
+                                {y: ${nov}, label: "Nov"},
+                                {y: ${dec}, label: "Dec"}
+                            ]
+                        }]
+                });
+                //bar chart end
+                //pie chart start
+                
+                //pie char end
+
+                pieChart.render();
+                barChart.render();
+
+            }
+        </script>
     </head>
     <body>
         <div class="main-wrapper">
@@ -46,49 +89,70 @@
                         <!-- mentee side bar start -->
                         <%@include file="adminsidebar.jsp" %>
                         <!-- mentee side bar end -->
-                        
+
                         <div class="col-md-7 col-lg-8 col-xl-9">
+                            <!--count start-->                   
+
                             <div class="row">
                                 <div class="col-md-12 col-lg-4 dash-board-list blue">
-                                    <div class="dash-widget">
-                                        <div class="circle-bar">
-                                            <div class="icon-col">
-                                                <i class="fas fa-users"></i>
+                                    <a href="">
+                                        <div class="dash-widget">
+                                            <div class="circle-bar">
+                                                <div class="icon-col">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                            </div>
+                                            <div class="dash-widget-info">
+                                                <h3>${totalMentee}</h3>
+                                                <h6>Number of Mentees</h6>
                                             </div>
                                         </div>
-                                        <div class="dash-widget-info">
-                                            <h3>23</h3>
-                                            <h6>Members</h6>
-                                        </div>
-                                    </div>
+                                    </a>
+
                                 </div>
                                 <div class="col-md-12 col-lg-4 dash-board-list yellow">
-                                    <div class="dash-widget">
-                                        <div class="circle-bar">
-                                            <div class="icon-col">
-                                                <i class="fas fa-calendar-check"></i>
+                                    <a href="">
+                                        <div class="dash-widget">
+                                            <div class="circle-bar">
+                                                <div class="icon-col">
+                                                    <i class="fas fa-user-graduate"></i>
+                                                </div>
+                                            </div>
+                                            <div class="dash-widget-info">
+                                                <h3>${totalMentor}</h3>
+                                                <h6>Number of Mentors</h6>
                                             </div>
                                         </div>
-                                        <div class="dash-widget-info">
-                                            <h3>33</h3>
-                                            <h6>Appointments</h6>
-                                        </div>
-                                    </div>
+                                    </a>
+
                                 </div>
                                 <div class="col-md-12 col-lg-4 dash-board-list pink">
-                                    <div class="dash-widget">
-                                        <div class="circle-bar">
-                                            <div class="icon-col">
-                                                <i class="fas fa-wallet"></i>
+                                    <a href="">
+                                        <div class="dash-widget">
+                                            <div class="circle-bar">
+                                                <div class="icon-col">
+                                                    <i class="fas fa-wallet"></i>
+                                                </div>
+                                            </div>
+                                            <div class="dash-widget-info">
+                                                <h3>${totalSkill}</h3>
+                                                <h6>Number of Skills</h6>
                                             </div>
                                         </div>
-                                        <div class="dash-widget-info">
-                                            <h3>$14</h3>
-                                            <h6>Total Earned</h6>
-                                        </div>
-                                    </div>
+                                    </a>
+
                                 </div>
                             </div>
+                            <!--count end-->                   
+
+                            
+                            <!--bar chart start-->
+                            <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
+                            <!--bar chart end-->
+
+
+
+                            <!--table start-->
                             <div class="row">
                                 <div class="col-md-12">
                                     <h4 class="mb-4">Mentee Lists</h4>
@@ -252,6 +316,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--table end-->
                         </div>
                     </div>
                 </div>
@@ -274,5 +339,8 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
         <script src="assets/js/script.js"></script>
+
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
     </body>
 </html>

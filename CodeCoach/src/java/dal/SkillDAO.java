@@ -21,7 +21,7 @@ public class SkillDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
-    
+
     public List<Skills> getAll() {
         List<Skills> list = new ArrayList<>();
         String querry = "Select * from skills";
@@ -36,7 +36,7 @@ public class SkillDAO {
         }
         return list;
     }
-    
+
     public List<Skills> getTop8() {
         List<Skills> list = new ArrayList<>();
         String querry = "Select top 8 * from skills order by skillId";
@@ -51,7 +51,7 @@ public class SkillDAO {
         }
         return list;
     }
-    
+
     public List<Skills> getNext8(int amount) {
         List<Skills> list = new ArrayList<>();
         String querry = "Select * from skills order by skillId offset ? rows fetch next 8 rows only";
@@ -67,12 +67,26 @@ public class SkillDAO {
         }
         return list;
     }
-    
+
+    public int getTotalSkill() {
+        String query = "select count(skillId) as Total from skills";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        List<Skills> list = dao.getNext8(5);
-        for (Skills s : list) {
-            System.out.println(s);
-        }
+        System.out.println(dao.getTotalSkill());
     }
 }

@@ -1,4 +1,6 @@
-﻿-- Insert data into UserStatus table
+﻿
+
+-- Insert data into UserStatus table
 INSERT INTO UserStatus (statusName)
 VALUES
   ('Active'),
@@ -15,10 +17,10 @@ VALUES
 -- Insert data into Users table
 INSERT INTO Users (email, password, fName, lName, gender, phoneNum, roleId, statusId, address, maqh, facebook)
 VALUES
-  ('admin@admin.com','123456' , 'Admin', 'User', 'Male', '123456', 1, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
-  ('mentor@mentor.com','123456', 'Mentor', 'User', 'Male', '234567', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
-  ('mentee@mentee.com','123456', 'Mentee', 'User', 'Male', '345678', 3, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
-  ('thaiddhe176315@fpt.edu.vn','123456', N'Đào', N'Duy Thái', 'Male', '0796428094', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/');
+  ('admin@admin.com','1' , 'Admin', 'User', 'Male', '123456', 1, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
+  ('mentor@mentor.com','1', 'Mentor', 'User', 'Male', '234567', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
+  ('mentee@mentee.com','1', 'Mentee', 'User', 'Male', '345678', 3, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
+  ('thaiddhe176315@fpt.edu.vn','1', N'Đào', N'Duy Thái', 'Male', '0796428094', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/');
 
 -- Insert data into Categories table
 INSERT INTO Categories (categoryName) VALUES
@@ -129,16 +131,74 @@ VALUES
   (1, 1, 14, 'Pending'),
   (2, 1, 1, 'Accepted'),
   (2, 1, 2, 'Rejected'),
-  (2, 1, 3, 'Pending');
+  (2, 1, 3, 'Pending'),
+  (1, 1, 1, 'Accepted'),
+  (2, 1, 5, 'Pending'),
+  (1, 1, 13, 'Rejected'),
+  (2, 1, 22, 'Rejected'),
+  (1, 1, 14, 'Pending'),
+  (2, 1, 12, 'Rejected'),
+  (1, 1, 13, 'Pending');
+  
 
   -- Insert data into BookingDetails table
 INSERT INTO BookingDetails (bookingId, slotId, date)
 VALUES
-  (1, 1, '2023-05-01'),
-  (2, 2, '2023-05-03'),
-  (3, 3, '2023-05-05'),
-  (4, 3, '2023-05-06'),
-  (5, 3, '2023-05-06');
+  -- Booking 1 details
+  (1, 1, '2023-01-15'),
+  (1, 3, '2023-01-17'),
+  (1, 5, '2023-01-20'),
+
+  -- Booking 2 details
+  (2, 2, '2023-02-10'),
+  (2, 4, '2023-02-12'),
+  (2, 6, '2023-02-15'),
+
+  -- Booking 3 details
+
+  -- Booking 4 details
+  (4, 1, '2023-04-20'),
+  (4, 3, '2023-04-22'),
+  (4, 5, '2023-04-25'),
+
+  -- Booking 5 details
+  (5, 2, '2023-05-07'),
+  (5, 4, '2023-05-09'),
+  (5, 6, '2023-05-12'),
+  (5, 6, '2023-05-17'),
+  (5, 6, '2023-05-22'),
+  (5, 6, '2023-05-30'),
+
+  -- Booking 6 details
+  (6, 3, '2023-06-25'),
+  (6, 5, '2023-06-27'),
+  (6, 7, '2023-06-30'),
+
+  -- Booking 7 details
+  (7, 1, '2023-07-10'),
+  (7, 3, '2023-07-12'),
+
+  -- Booking 8 details
+  (8, 2, '2023-08-05'),
+
+  -- Booking 9 details
+  (9, 3, '2023-09-20'),
+  (9, 5, '2023-09-22'),
+  (9, 7, '2023-09-25'),
+
+  -- Booking 10 details
+  (10, 1, '2023-10-07'),
+  (10, 3, '2023-10-09'),
+  (10, 5, '2023-10-12'),
+
+  -- Booking 11 details
+  (11, 2, '2023-11-25'),
+  (11, 6, '2023-11-30'),
+
+  -- Booking 12 details
+  (12, 3, '2023-12-10'),
+  (12, 5, '2023-12-12'),
+  (12, 7, '2023-12-15');
 
   -- Insert data into Feedback table
 INSERT INTO Feedback (menteeId, mentorId, bookingId, rating, reviewText, reviewDateTime)
