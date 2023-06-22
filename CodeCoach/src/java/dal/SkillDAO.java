@@ -85,8 +85,31 @@ public class SkillDAO {
         return 0;
     }
 
+    public List<Object[]> getTop5MostBookedSkills(){
+        String query = "SELECT top 5 s.skillName, COUNT(*) AS occurrence FROM booking b JOIN Skills s ON b.skillId = s.skillId GROUP BY s.skillName order by occurrence desc;";
+        List<Object[]> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               Object[] skillOccurrence = new Object[5]; 
+               skillOccurrence[0] = rs.getString("skillName");
+               skillOccurrence[1] = rs.getInt("occurrence");
+               list.add(skillOccurrence);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        System.out.println(dao.getTotalSkill());
+        List<Object[]> list = dao.getTop5MostBookedSkills();
+        for (Object[] objects : list) {
+            System.out.println(objects[0] +" "+objects[1]);
+        }
+        
     }
 }

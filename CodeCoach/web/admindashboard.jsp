@@ -55,12 +55,37 @@
                 });
                 //bar chart end
                 //pie chart start
-                
+                var pieChart = new CanvasJS.Chart("pieChartContainer", {
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    exportEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Top 5 most loved technology"
+                    },
+                    data: [{
+                            type: "pie",
+                            startAngle: 25,
+                            toolTipContent: "<b>{label}</b>: {y}%",
+                            showInLegend: "true",
+                            legendText: "{label}",
+                            indexLabelFontSize: 16,
+                            indexLabel: "{label} - {y}%",
+                            dataPoints: [
+                                {y: 51.08, label: "Chrome"},
+                                {y: 27.34, label: "Internet Explorer"},
+                                {y: 10.62, label: "Firefox"},
+                                {y: 5.02, label: "Microsoft Edge"},
+                                {y: 4.07, label: "Safari"},
+                                {y: 1.22, label: "Opera"},
+                                {y: 0.44, label: "Others"}
+                            ]
+                        }]
+                });
                 //pie char end
 
-                pieChart.render();
-                barChart.render();
 
+                barChart.render();
+                pieChart.render();
             }
         </script>
     </head>
@@ -143,15 +168,30 @@
 
                                 </div>
                             </div>
-                            <!--count end-->                   
-
+                            <br/><br/>
+                            <!--count end-->   
                             
-                            <!--bar chart start-->
-                            <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
-                            <!--bar chart end-->
+                            <div class="row">
+                                <!--bar chart start-->
+                                <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
+                                <!--bar chart end-->
+                            </div>
+                            
+                            <br/><br/>
+                            
+                            <div class="row">
+                                <!--pie chart start-->
+                                <div class="col-md-6">
+                                    <div id="pieChartContainer" style="height: 300px; width: 100%;"></div>
+                                </div>
+                                <!--pie chart end-->
 
+                                
+                                <div class="col-md-6">
 
+                                </div>
 
+                            </div>
                             <!--table start-->
                             <div class="row">
                                 <div class="col-md-12">

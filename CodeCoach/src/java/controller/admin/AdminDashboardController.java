@@ -95,6 +95,8 @@ public class AdminDashboardController extends HttpServlet {
         request.setAttribute("nov", nov);
         int dec = bookingDetailDao.countBookingsByYearAndMonth(2023, 12);
         request.setAttribute("dec", dec);
+        //get top 5 most loved technology
+        
         //send attributes
         request.setAttribute("totalMentor", totalMentor);
         request.setAttribute("totalMentee", totalMentee);
