@@ -68,7 +68,7 @@ public class FeedbackController extends HttpServlet {
             UserDAO userDao = new UserDAO();
             Object[] mentorInfo = userDao.getUserInfoByMentorId(mentorId);
             request.setAttribute("mentorInfo", mentorInfo);
-            request.getRequestDispatcher("reviews.jsp").forward(request, response);
+            request.getRequestDispatcher("review.jsp").forward(request, response);
         } catch (Exception e) {
             System.out.println(e);
         }
