@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import model.Mentors;
 import model.Skills;
@@ -22,19 +23,26 @@ import model.Skills;
  *
  * @author hoang
  */
-@WebServlet(name="ListMentorController", urlPatterns={"/listmentor"})
-public class ListMentorController extends HttpServlet {
+@WebServlet(name="SearchMentorController", urlPatterns={"/searchmentor"})
+public class SearchMentorController extends HttpServlet {
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        MentorDAO dao = new MentorDAO();
+        String skillId = request.getParameter("skillId");
+        MentorDAO mdao = new MentorDAO();
+        List<Integer> listMId = mdao.getMentorIdBySkillId(skillId);
+        List<Object[]> listUInfo = new ArrayList<>();
         SkillDAO sdao = new SkillDAO();
         List<Skills> listS = sdao.getAll();
-        List<Object[]> list = dao.getAllMentor(); 
+        for (Integer mentorId : listMId) {
+            Object[] uInfo = mdao.getUserInfoByMentorId(mentorId);
+            listUInfo.add(uInfo);
+        }
+        request.setAttribute("listM", listUInfo); // Truyền danh sách mentor cho JSP
         request.setAttribute("listS", listS);
-        request.setAttribute("listM", list);
         request.getRequestDispatcher("listmentor.jsp").forward(request, response);
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +56,7 @@ public class ListMentorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     } 
 
     /** 

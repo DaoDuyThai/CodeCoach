@@ -5,8 +5,7 @@
 
 package controller;
 
-import dal.MentorDAO;
-import dal.SkillDAO;
+import dal.CategoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,26 +14,37 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Mentors;
-import model.Skills;
+import model.Categories;
 
 /**
  *
  * @author hoang
  */
-@WebServlet(name="ListMentorController", urlPatterns={"/listmentor"})
-public class ListMentorController extends HttpServlet {
+@WebServlet(name="CategoryController", urlPatterns={"/listcategory"})
+public class CategoryController extends HttpServlet {
    
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        MentorDAO dao = new MentorDAO();
-        SkillDAO sdao = new SkillDAO();
-        List<Skills> listS = sdao.getAll();
-        List<Object[]> list = dao.getAllMentor(); 
-        request.setAttribute("listS", listS);
-        request.setAttribute("listM", list);
-        request.getRequestDispatcher("listmentor.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet CategoryController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet CategoryController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,7 +58,11 @@ public class ListMentorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        CategoryDAO d = new CategoryDAO();
+        List<Categories> listCate = d.getAll();
+        request.setAttribute("listC", listCate);
+        request.getRequestDispatcher("category.jsp").forward(request, response);
+        
     } 
 
     /** 
