@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.CategoryDAO;
 import dal.SkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,14 +15,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Skills;
-import model.SubCategories;
 
 /**
  *
  * @author hoang
  */
-@WebServlet(name="SubCategoryController", urlPatterns={"/subcategory"})
-public class SubCategoryController extends HttpServlet {
+@WebServlet(name="SubCategoryDetail", urlPatterns={"/subcategorydetail"})
+public class SubCategoryDetailController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +33,13 @@ public class SubCategoryController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String categoryId = request.getParameter("categoryId");   
-        List<SubCategories> listS = new CategoryDAO().getSubCategorybyCategoryId(categoryId);          
-        request.setAttribute("listS", listS);      
-        request.getRequestDispatcher("subcategory.jsp").forward(request, response);
+        
+            /* TODO output your page here. You may use following sample code. */
+            String subCategoryId = request.getParameter("subCategoryId");
+            List<Skills> listsk = new SkillDAO().getSkillBySubCategoryId(subCategoryId);
+            request.setAttribute("listsk", listsk);
+            request.getRequestDispatcher("subcategory.jsp").forward(request, response);
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -99,7 +99,7 @@ public class MentorDAO {
 //    }
     public Object[] getUserInfoByMentorId(int mentorId) {
         Object[] o = new Object[17];
-        String query = "select m.mentorId, m.userId, m.bio, m.hourlyRate, u.email, u.password, u.fName, u.lName, u.gender, u.phoneNum, u.roleId, u.statusId, u.address, u.maqh, u.facebook, qh.name, ttp.name from mentors m join users u on m.userId = u.userId join quanhuyen qh on u.maqh = qh.maqh join tinhthanhpho ttp on qh.mattp = ttp.mattp where m.mentorId =?";
+        String query = "Su";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);

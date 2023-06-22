@@ -67,10 +67,26 @@ public class SkillDAO {
         }
         return list;
     }
+    public List<Skills> getSkillBySubCategoryId(String subCategoryId){
+            List<Skills> listS = new ArrayList<>();
+            String query = "select * from Skills where subCategoryId = ?";
+            try{
+                conn = new DBContext().getConnection();
+                ps = conn.prepareStatement(query);
+                ps.setString(1, subCategoryId);
+                rs = ps.executeQuery();
+                while(rs.next()){
+                    listS.add(new Skills(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+                }              
+            }
+            catch(Exception e){              
+            }
+            return listS;
+        }
     
     public static void main(String[] args) {
         SkillDAO dao = new SkillDAO();
-        List<Skills> list = dao.getTop8();
+        List<Skills> list = dao.getSkillBySubCategoryId("1");
         for (Skills s : list) {
             System.out.println(s);
         }

@@ -50,12 +50,6 @@ public class CategoryDAO {
             }
             return listS;
         }
+     
     
-    public static void main(String[] args) {
-        CategoryDAO d = new CategoryDAO();
-        List<SubCategories> listS = d.getSubCategorybyCategoryId("1");
-        for(SubCategories l : listS){
-            System.out.println(l);
-        }
-    }
 }
