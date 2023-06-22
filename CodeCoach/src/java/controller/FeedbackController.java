@@ -59,14 +59,13 @@ public class FeedbackController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         try {
-            int mentorId = Integer.parseInt(request.getParameter("mentorId"));
+            int userId = Integer.parseInt(request.getParameter("userId"));
             //get mentor properties
             MentorDAO mentorDao = new MentorDAO();
-            Mentors mentor = mentorDao.getMentorByMentorId(mentorId);
-            request.setAttribute("mentor", mentor);
+            int mentor = mentorDao.getMentorIdByUserId(userId);
             //get user properties
             UserDAO userDao = new UserDAO();
-            Object[] mentorInfo = userDao.getUserInfoByMentorId(mentorId);
+            Object[] mentorInfo = userDao.getUserInfoByMentorId(mentor);
             request.setAttribute("mentorInfo", mentorInfo);
             request.getRequestDispatcher("review.jsp").forward(request, response);
         } catch (Exception e) {

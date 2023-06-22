@@ -53,48 +53,13 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    
 
-                        <div class="profile-sidebar">
-                            <div class="user-widget">
-                                <div class="pro-avatar">JD</div>
-                                <div class="rating">
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <c:if test="${users.roleId == 2}">
-                                <div class="user-info-cont">
-                                    <h4 class="usr-name">${users.lName} ${users.fName}</h4>
-                                    <p class="mentor-type"></p>
-                                </div>
-                                </c:if>
-                            </div>
-                            <div class="custom-sidebar-nav">
-                                <ul>
-                                    <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i>Dashboard
-                                            <span><i class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="bookings.html"><i class="fas fa-clock"></i>Bookings <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="schedule-timings.html"><i class="fas fa-hourglass-start"></i>Schedule
-                                            Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="chat.html"><i class="fas fa-comments"></i>Messages <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="reviews.html"><i class="fas fa-eye"></i>Reviews <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>                                  
-                                    <li><a href="profile.html"><i class="fas fa-user-cog"></i>Profile <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="login"><i class="fas fa-sign-out-alt"></i>Logout <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <!-- mentor sidebar start -->
+                    <%@include file="mentorsidebar.jsp" %>
+                    <!-- mentor sidebar end -->
 
-                    </div>
+                    
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <div class="row">
                             <div class="col-md-12 col-lg-4 dash-board-list blue">
