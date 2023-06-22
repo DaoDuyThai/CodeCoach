@@ -5,6 +5,7 @@
 
 package controller;
 
+import dal.FeedbackDAO;
 import dal.MentorDAO;
 import dal.UserDAO;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Feedback;
 import model.Mentors;
 
 /**
@@ -58,19 +61,7 @@ public class FeedbackController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            //get mentor properties
-            MentorDAO mentorDao = new MentorDAO();
-            int mentor = mentorDao.getMentorIdByUserId(userId);
-            //get user properties
-            UserDAO userDao = new UserDAO();
-            Object[] mentorInfo = userDao.getUserInfoByMentorId(mentor);
-            request.setAttribute("mentorInfo", mentorInfo);
-            request.getRequestDispatcher("review.jsp").forward(request, response);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        request.getRequestDispatcher("review.jsp").forward(request, response);
     } 
 
     /** 
@@ -83,7 +74,23 @@ public class FeedbackController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            MentorDAO mentorDAO = new MentorDAO();
+            // Get the userId from the session or request parameters
+            int userId = Integer.parseInt(request.getParameter("userId"));
+            
+            // Get the mentorId associated with the userId
+            int mentorId = mentorDAO.getMentorIdByUserId(userId);
+             // Get the feedback for the mentor
+            List<Feedback> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
+             // Set the feedback list as an attribute for the JSP to access
+            request.setAttribute("feedbackList", feedbackList);
+            
+            request.getRequestDispatcher("review.jsp").forward(request, response);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     /** 

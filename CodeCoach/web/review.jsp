@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -63,52 +64,66 @@
                         <div class="doc-review review-listing">
 
                             <ul class="comments-list">
-
-                                <li>
-                                    <div class="comment">
-                                        <img class="avatar rounded-circle" alt="User Image"
-                                            src="assets/img/user/user.jpg">
-                                        <div class="comment-body">
-                                            <div class="meta-data">
-                                                <span class="comment-author">Richard Wilson</span>
-                                                <span class="comment-date">Reviewed 2 Days ago</span>
-                                                <div class="review-count rating">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star"></i>
+                                <c:forEach var="feedback" items="${feedbackList}">
+                                    <li>
+                                        <div class="comment">
+                                            <img class="avatar rounded-circle" alt="User Image"
+                                                src="assets/img/user/user.jpg">
+                                            <div class="comment-body">
+                                                <div class="meta-data">
+                                                    <span class="comment-author">${feedback.reviewerName}</span>
+                                                    <span class="comment-date">Reviewed ${feedback.reviewDateTime}</span>
+                                                    <div class="review-count rating">
+                                                        <c:choose>
+                                                            <c:when test="${feedback.rating >= 1}">
+                                                                <i class="fas fa-star filled"></i>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <i class="fas fa-star"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${feedback.rating >= 2}">
+                                                                <i class="fas fa-star filled"></i>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <i class="fas fa-star"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${feedback.rating >= 3}">
+                                                                <i class="fas fa-star filled"></i>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <i class="fas fa-star"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${feedback.rating >= 4}">
+                                                                <i class="fas fa-star filled"></i>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <i class="fas fa-star"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <c:choose>
+                                                            <c:when test="${feedback.rating >= 5}">
+                                                                <i class="fas fa-star filled"></i>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <i class="fas fa-star"></i>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the
-                                                consectetur</p>
-                                            <p class="comment-content">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                Ut enim ad minim veniam, quis nostrud exercitation.
-                                                Curabitur non nulla sit amet nisl tempus
-                                            </p>
-                                            <div class="comment-reply">
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                                <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a href="#" class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a href="#" class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
+                                                
+                                                <p class="comment-content">${feedback.reviewText}</p>
+                                                
                                             </div>
                                         </div>
-                                    </div>
-
-                                    
-
+                                    </li>
+                                </c:forEach>
                             </ul>
-
                         </div>
                     </div>
                 </div>
