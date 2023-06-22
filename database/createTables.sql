@@ -1,6 +1,3 @@
-
-
-
 CREATE TABLE tinhthanhpho (
   mattp varchar(5)  NOT NULL PRIMARY KEY,
   [name] nvarchar(100)  NOT NULL,
@@ -191,10 +188,4 @@ Create table PrivacyPolicyAndTerms(
    type int,
    summary varchar(255),
    content varchar(500)
-);
-
-CREATE TABLE ContactUs (
-  id INT IDENTITY(1,1) PRIMARY KEY,
-  infor VARCHAR(255),
-  href VARCHAR(255)
 );
