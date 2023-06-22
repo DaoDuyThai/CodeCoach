@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -96,11 +97,12 @@ public class AdminDashboardController extends HttpServlet {
         int dec = bookingDetailDao.countBookingsByYearAndMonth(2023, 12);
         request.setAttribute("dec", dec);
         //get top 5 most loved technology
-        
+        List<Object[]> listSkillOccurrence = skillDao.getTop5MostBookedSkills();
         //send attributes
         request.setAttribute("totalMentor", totalMentor);
         request.setAttribute("totalMentee", totalMentee);
         request.setAttribute("totalSkill", totalSkill);
+        request.setAttribute("listSkillOccurrence", listSkillOccurrence);
         request.getRequestDispatcher("admindashboard.jsp").forward(request, response);
     }
 

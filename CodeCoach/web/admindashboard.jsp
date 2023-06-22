@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,15 +70,11 @@
                             showInLegend: "true",
                             legendText: "{label}",
                             indexLabelFontSize: 16,
-                            indexLabel: "{label} - {y}%",
+                            indexLabel: "{label} - {y}",
                             dataPoints: [
-                                {y: 51.08, label: "Chrome"},
-                                {y: 27.34, label: "Internet Explorer"},
-                                {y: 10.62, label: "Firefox"},
-                                {y: 5.02, label: "Microsoft Edge"},
-                                {y: 4.07, label: "Safari"},
-                                {y: 1.22, label: "Opera"},
-                                {y: 0.44, label: "Others"}
+                                <c:forEach var="lso" items="${listSkillOccurrence}">
+                                                {y: ${lso[1]}, label: "${lso[0]}"},                                                     
+                                </c:forEach>
                             ]
                         }]
                 });
@@ -192,6 +189,10 @@
                                 </div>
 
                             </div>
+                            
+                            <br/><br/>
+                            
+                            
                             <!--table start-->
                             <div class="row">
                                 <div class="col-md-12">

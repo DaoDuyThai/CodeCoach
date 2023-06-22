@@ -93,7 +93,7 @@ public class SkillDAO {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-               Object[] skillOccurrence = new Object[5]; 
+               Object[] skillOccurrence = new Object[4]; 
                skillOccurrence[0] = rs.getString("skillName");
                skillOccurrence[1] = rs.getInt("occurrence");
                list.add(skillOccurrence);
