@@ -5,6 +5,7 @@
 package controller.admin;
 
 import dal.BookingDetailDAO;
+import dal.MentorDAO;
 import dal.SkillDAO;
 import dal.UserDAO;
 import java.io.IOException;
@@ -65,6 +66,7 @@ public class AdminDashboardController extends HttpServlet {
         UserDAO userDao = new UserDAO();
         SkillDAO skillDao = new SkillDAO();
         BookingDetailDAO bookingDetailDao = new BookingDetailDAO();
+        MentorDAO mentorDao = new MentorDAO();
         //get total mentor
         int totalMentor = userDao.getTotalUserByRoleId(2);
         //get total mentee
@@ -98,11 +100,14 @@ public class AdminDashboardController extends HttpServlet {
         request.setAttribute("dec", dec);
         //get top 5 most loved technology
         List<Object[]> listSkillOccurrence = skillDao.getTop5MostBookedSkills();
+        //get top booked mentor
+        List<Object[]> listMentorOccurence = mentorDao.getTop5MostBookedMentors();
         //send attributes
         request.setAttribute("totalMentor", totalMentor);
         request.setAttribute("totalMentee", totalMentee);
         request.setAttribute("totalSkill", totalSkill);
         request.setAttribute("listSkillOccurrence", listSkillOccurrence);
+        request.setAttribute("listMentorOccurence", listMentorOccurence);
         request.getRequestDispatcher("admindashboard.jsp").forward(request, response);
     }
 
