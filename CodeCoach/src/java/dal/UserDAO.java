@@ -24,7 +24,7 @@ public class UserDAO extends DBContext {
     ResultSet rs = null;
 
     
-     public List<Users> getAllUser() {
+    public List<Users> getAllUser() {
         List<Users> listUsers = new ArrayList<>();
         String querry = "select * from Users";
         try {
