@@ -78,9 +78,9 @@ public class ListInvoiceController extends HttpServlet {
             Users u = (Users) session.getAttribute("users");
             String userId = Integer.toString(u.getUserId());
             if (userId != null) {
-                Mentors mentor = new MentorDAO().getMentorByUserId(userId);
-                request.setAttribute("mentor", mentor);
-                List<Booking> bookings = new BookingDAO().getBookingsByMentorId(mentor.getMentorId());
+                Mentors m = new MentorDAO().getMentorByUserId(userId);
+                request.setAttribute("m", m);
+                List<Booking> bookings = new BookingDAO().getBookingsByMentorId(m.getMentorId());
                 request.setAttribute("bookings", bookings);
                 List<Users> listusers = new UserDAO().getAllUser();
                 request.setAttribute("listusers", listusers);

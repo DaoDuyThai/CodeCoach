@@ -82,6 +82,6 @@ public class BookingDetailDAO {
     
     public static void main(String[] args) {
          List<Integer> listCountDetail = new BookingDetailDAO().countBookingDetailsbyId();
-         System.out.println(listCountDetail.get(2));
+         System.out.println(listCountDetail);
     }
 }

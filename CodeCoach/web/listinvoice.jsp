@@ -38,7 +38,9 @@
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-
+        <%Mentors m = (Mentors) request.getAttribute("m");
+        List<Integer> listCountDetail = (List<Integer>) request.getAttribute("List<Integer>");
+        %>
         <div class="account-box">              
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
@@ -82,10 +84,9 @@
                                                 </c:forEach>
                                             </td>
                                             <td>                                                
-                                                <c:forEach items="${listCountDetail}" var="listCountDetail">
-                                                    <c:set var="money" value="${listCountDetail.get(1)}"></c:set>
-                                                    
-                                                </c:forEach> 
+                                                <%
+                                                    for int
+                                                %>
                                                 
                                                 
                                             </td>
