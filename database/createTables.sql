@@ -1,3 +1,46 @@
+-- SELECT * FROM USERS
+-- CREATE DATABASE CodeCoach
+
+/*
+select qh_name.name as qh_name, ttp.name as tp_name from (SELECT qh.name, qh.mattp
+FROM Users u
+JOIN quanhuyen qh ON u.maqh = qh.maqh
+WHERE u.userId = 1) as qh_name join tinhthanhpho ttp on qh_name.mattp = ttp.mattp
+
+ */
+
+
+USE CodeCoach
+
+
+DROP TABLE IF EXISTS ChatMessages;
+DROP TABLE IF EXISTS ChatRoomUsers;
+DROP TABLE IF EXISTS ChatRoom;
+DROP TABLE IF EXISTS Notifications;
+DROP TABLE IF EXISTS Feedback;
+DROP TABLE IF EXISTS BookingDetails;
+DROP TABLE IF EXISTS Booking;
+DROP TABLE IF EXISTS Slot;
+DROP TABLE IF EXISTS MenteeInterests;
+DROP TABLE IF EXISTS Mentees;
+DROP TABLE IF EXISTS Expertise;
+DROP TABLE IF EXISTS Experience;
+DROP TABLE IF EXISTS Mentors;
+DROP TABLE IF EXISTS Skills;
+DROP TABLE IF EXISTS SubCategories;
+DROP TABLE IF EXISTS Categories;
+DROP TABLE IF EXISTS Users;
+DROP TABLE IF EXISTS Roles;
+DROP TABLE IF EXISTS UserStatus;
+DROP TABLE IF EXISTS ContactUs;
+DROP TABLE IF EXISTS FAQ;
+DROP TABLE IF EXISTS PrivacyPolicyAndTerms;
+DROP TABLE IF EXISTS quanhuyen;
+DROP TABLE IF EXISTS tinhthanhpho;
+
+
+
+
 CREATE TABLE tinhthanhpho (
   mattp varchar(5)  NOT NULL PRIMARY KEY,
   [name] nvarchar(100)  NOT NULL,
@@ -190,3 +233,8 @@ Create table PrivacyPolicyAndTerms(
    content varchar(500)
 );
 
+CREATE TABLE ContactUs (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  infor VARCHAR(255),
+  href VARCHAR(255)
+);

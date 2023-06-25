@@ -4,6 +4,11 @@
  */
 package model;
 
+import dal.BookingDetailDAO;
+import dal.MenteeDAO;
+import dal.SkillDAO;
+import dal.SlotDAO;
+
 /**
  *
  * @author Duy Thai
@@ -15,6 +20,71 @@ public class Booking {
     private int menteeId;
     private int skillId;
     private String status;
+
+    private String startTime;
+    private String endTime;
+    private String menteeName;
+    private String skillName;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public Booking(int bookingId, int mentorId, int menteeId, int skillId, String status, boolean getAllInfo) {
+        this.bookingId = bookingId;
+        this.mentorId = mentorId;
+        this.menteeId = menteeId;
+        this.skillId = skillId;
+        this.status = status;
+        if(getAllInfo){
+            BookingDetails bookingDetails = new BookingDetailDAO().getBookingDetailbyBookingId(bookingId);
+            Slot slot = new SlotDAO().getSlotByBookingDetailsId(bookingDetails.getSlotId());
+            Skills skill = new SkillDAO().getSkillBySkillId(skillId);
+            Users mentee = new MenteeDAO().getUserByMenteeId(menteeId);
+            this.menteeName  = mentee.getfName() + " " + mentee.getlName();
+            this.startTime = slot.getStartTime();
+            this.endTime = slot.getEndTime();
+            this.skillName = skill.getSkillName();
+            this.date = bookingDetails.getDate();
+        }
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getMenteeName() {
+        return menteeName;
+    }
+
+    public void setMenteeName(String menteeName) {
+        this.menteeName = menteeName;
+    }
+
+    public String getSkillName() {
+        return skillName;
+    }
+
+    public void setSkillName(String skillName) {
+        this.skillName = skillName;
+    }
 
     public Booking() {
     }
@@ -29,7 +99,18 @@ public class Booking {
 
     @Override
     public String toString() {
-        return "Booking{" + "bookingId=" + bookingId + ", mentorId=" + mentorId + ", menteeId=" + menteeId + ", skillId=" + skillId + ", status=" + status + '}';
+        return "Booking{" +
+                "bookingId=" + bookingId +
+                ", mentorId=" + mentorId +
+                ", menteeId=" + menteeId +
+                ", skillId=" + skillId +
+                ", status='" + status + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", menteeName='" + menteeName + '\'' +
+                ", skillName='" + skillName + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 
     public int getBookingId() {
