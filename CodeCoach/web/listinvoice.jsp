@@ -39,73 +39,31 @@
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-       
+        
         <div class="account-box">              
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
                     
-                    <c:forEach items="${bookings}" var="b">
-                     
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading${b.getBookingId()}">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${b.getBookingId()}" aria-expanded="false" aria-controls="collapse${b.getBookingId()}">                                 
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <c:forEach items="${mentors}" var="mentor">
-                                                    <c:if test="${mentor.getMentorId()==b.getMentorId()}">
-                                                        <c:set var="userIdMentor" value="${mentor.getUserId()}"/>                                                 
-                                                    </c:if>                                                   
-                                                </c:forEach>
-                                                <c:forEach items="${listusers}" var="listusers">
-                                                    <c:if test="${listusers.getUserId()==userIdMentor}">
-                                                        <p>${listusers.getfName()} ${listusers.getlName()}</p>                                                     
-                                                    </c:if>                                                   
-                                                </c:forEach>
-                                            </td>
-                                            <td>
-                                                <c:forEach items="${mentees}" var="mentee">
-                                                    <c:if test="${mentee.getMenteeId()==b.getMenteeId()}">
-                                                        <c:set var="userIdMentee" value="${mentee.getUserId()}"></c:set>                                                     
-                                                    </c:if>                                                   
-                                                </c:forEach>
-                                                <c:forEach items="${listusers}" var="listusers">
-                                                    <c:if test="${listusers.getUserId()==userIdMentee}">
-                                                        <p>${listusers.getfName()} ${listusers.getlName()}</p>                                                     
-                                                    </c:if>                                                   
-                                                </c:forEach>
-                                            </td>
-                                            <td>
-                                                <c:forEach items="${skills}" var="skill">
-                                                    <c:if test="${skill.getSkillId()==b.getSkillId()}">
-                                                        <p>${skill.getSkillName()}</p>                                                
-                                                    </c:if>                                                   
-                                                </c:forEach>
-                                            </td>
-                                            <td>                                                
-                                                 <%List<BookingDetails> li = (List<BookingDetails>) request.getAttribute("bookingDetails");
-                                                 for (int i=0;i<li.size();i++) {
-                                                 %><p><%out.print(li.get(i).getBookingDetailId());%></p><%
-                                                     }
-                                                 %>
-                                                 
-                                                 
-                                                 
-                                                
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </button>
-                            </h2>
-                            <div id="collapse${b.getBookingId()}" class="accordion-collapse collapse" aria-labelledby="heading${b.getBookingId()}" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <c:forEach items="bookingDetails" var="bookingDetails">
-                                        
-                                    </c:forEach>
+                    <%List<Booking> listBooking = (List<Booking>) request.getAttribute("bookings");
+                    for (int i=0;i<listBooking.size();i++) {
+                    %>
+                    <div class="accordion-item">
+                                <h2 class="accordion-header" id="<%="heading"+i%>">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${o.getId()}" aria-expanded="false" aria-controls="collapse${o.getId()}">
+                                        <strong>${o.getQuestion()}</strong>
+                                    </button>
+                                </h2>
+                                <div id="collapse${o.getId()}" class="accordion-collapse collapse" aria-labelledby="heading${o.getId()}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        ${o.getAnswer()}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>  
-                    </c:forEach>                                                 
+                            </div>  
+                    <%
+                        }
+                   %>
+                                
+                                                      
                 </div>
             </div>
         </div>
