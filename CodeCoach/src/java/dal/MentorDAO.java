@@ -26,7 +26,7 @@ public class MentorDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Mentors> getAll() {
+    public List<Mentors> getAllMentor() {
         List<Mentors> list = new ArrayList<>();
         String query = "Select * from mentors";
         try {

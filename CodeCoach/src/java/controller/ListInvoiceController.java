@@ -22,8 +22,10 @@ import dal.UserDAO;
 import jakarta.servlet.http.HttpSession;
 import model.ChatMessages;
 import model.ChatRoom;
+import model.Mentees;
 import model.Mentors;
 import model.Users;
+import dal.MenteeDAO;
 
 /**
  *
@@ -73,11 +75,14 @@ public class ListInvoiceController extends HttpServlet {
             String userId = Integer.toString(u.getUserId());
             if (userId != null) {
                 Mentors m = new MentorDAO().getMentorByUserId(userId);
-                request.setAttribute("m", m);
                 List<Booking> bookings = new BookingDAO().getBookingsByMentorId(m.getMentorId());
                 request.setAttribute("bookings", bookings);
                 List<Users> users = new UserDAO().getAllUser();
                 request.setAttribute("users", users);
+                List<Mentors> mentors = new MentorDAO().getAllMentor();
+                request.setAttribute("mentors", mentors);
+                List<Mentees> mentees = new MenteeDAO().getAllMentee();
+                request.setAttribute("mentees", mentees);
                 request.getRequestDispatcher("listinvoice.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login");

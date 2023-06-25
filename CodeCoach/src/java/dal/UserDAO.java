@@ -279,8 +279,10 @@ public class UserDAO extends DBContext {
     }
      
     public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        System.out.println(dao.getUserNameByUserId(1));
+        List<Users> users = new UserDAO().getAllUser();
+        for (int i=0;i<users.size();i++) {
+            System.out.println(users.get(i).toString());
+        }
     }
 
     public String getUserNameByUserId(int userId) {

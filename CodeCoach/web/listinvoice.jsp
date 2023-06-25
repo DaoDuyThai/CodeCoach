@@ -1,3 +1,4 @@
+<%@page import="model.Mentees"%>
 <%@page import="model.Mentors"%>
 <%@page import="model.Booking"%>
 <%@page import="model.Users"%>
@@ -20,24 +21,24 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-       <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
 
-        table th, table td {
-            border: 1px solid black;
-            padding: 8px;
-            width: calc(100% / 4); 
-        }
-    </style>
+            table th, table td {
+                border: 1px solid black;
+                padding: 8px;
+                width: calc(100% / 4);
+            }
+        </style>
     </head>
     <body class="chat-page">
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-        <%Mentors m = (Mentors) request.getAttribute("m");%> 
+
         <div class="account-box">              
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
@@ -48,7 +49,14 @@
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${b.getBookingId()}" aria-expanded="false" aria-controls="collapse${b.getBookingId()}">                                 
                                     <table>
                                         <tr>
-                                            <td>${m.getMentorId()}</td>
+                                            <td>
+                                                <c:forEach items="${mentors}" var="mentor">
+                                                    <c:if test="${mentor.getMentorId()==b.getMentorId()}">
+                                                        <c:set var="userId" value="${mentor.getUserId()}"></c:set>                                                     
+                                                    </c:if>                                                   
+                                                </c:forEach>
+                                                
+                                            </td>
                                             <td>${b.getMentorId()}</td>
                                             <td>${b.getMenteeId()}</td>
                                             <td>${b.getSkillId()}</td>
