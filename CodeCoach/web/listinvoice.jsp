@@ -1,3 +1,4 @@
+<%@page import="model.Skills"%>
 <%@page import="model.BookingDetails"%>
 <%@page import="model.Mentees"%>
 <%@page import="model.Mentors"%>
@@ -39,31 +40,53 @@
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-        
+
         <div class="account-box">              
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
-                    
-                    <%List<Booking> listBooking = (List<Booking>) request.getAttribute("bookings");
-                    for (int i=0;i<listBooking.size();i++) {
+
+                    <%List<Booking> listBookings = (List<Booking>) request.getAttribute("bookings");
+                        List<Users> listUsers = (List<Users>) request.getAttribute("listusers");
+                        List<Mentors> listMentors = (List<Mentors>) request.getAttribute("mentors");
+                        List<Mentees> listMentees = (List<Mentees>) request.getAttribute("mentees");
+                        List<Skills> listSkills = (List<Skills>) request.getAttribute("skills");
+                        List<BookingDetails> listBookingDetails = (List<BookingDetails>) request.getAttribute("bookingDetails");
+                        for (int i = 0; i < listBookings.size(); i++) {
                     %>
                     <div class="accordion-item">
-                                <h2 class="accordion-header" id="<%="heading"+i%>">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse"+i%>" aria-expanded="false" aria-controls="<%="collapse"+i%>">
-                                        <strong>${o.getQuestion()}</strong>
-                                    </button>
-                                </h2>
-                                <div id="<%="collapse"+i%>" class="accordion-collapse collapse" aria-labelledby="heading${o.getId()}" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        ${o.getAnswer()}
-                                    </div>
-                                </div>
-                            </div>  
+                        <table>
+                            <tr>
+                                <th>Mentor Name</th>
+                                <th>Mentee Name</th>
+                                <th>Skill</th>
+                                <th>Invoice</th>
+                            </tr>                                   
+                        </table>
+                        <h2 class="accordion-header" id="<%="heading" + i%>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse" + i%>" aria-expanded="false" aria-controls="<%="collapse" + i%>">                             
+                                <table>
+                                    <tr>
+                                        <th>
+                                            <%for %>
+                                        </th>
+                                        <th>Header 2</th>
+                                        <th>Header 3</th>
+                                        <th>Header 3</th>
+                                    </tr>                                   
+                                </table>
+                            </button>
+                        </h2>
+                        <div id="<%="collapse" + i%>" class="accordion-collapse collapse" aria-labelledby="<%="heading" + i%>" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                ${o.getAnswer()}
+                            </div>
+                        </div>
+                    </div>  
                     <%
                         }
-                   %>
-                                
-                                                      
+                    %>
+
+
                 </div>
             </div>
         </div>
