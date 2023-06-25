@@ -45,13 +45,17 @@
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
 
-                    <%List<Booking> listBookings = (List<Booking>) request.getAttribute("bookings");
+                    <%  Mentors m = (Mentors) request.getAttribute("m");
+                        List<Booking> listBookings = (List<Booking>) request.getAttribute("bookings");
                         List<Users> listUsers = (List<Users>) request.getAttribute("listusers");
                         List<Mentors> listMentors = (List<Mentors>) request.getAttribute("mentors");
                         List<Mentees> listMentees = (List<Mentees>) request.getAttribute("mentees");
                         List<Skills> listSkills = (List<Skills>) request.getAttribute("skills");
                         List<BookingDetails> listBookingDetails = (List<BookingDetails>) request.getAttribute("bookingDetails");
                         for (int i = 0; i < listBookings.size(); i++) {
+                        int userId=0;
+                        String fullName="";
+                        String skillName="";
                     %>
                     <div class="accordion-item">
                         <table>
@@ -67,11 +71,54 @@
                                 <table>
                                     <tr>
                                         <th>
-                                            <%for %>
+                                            <%for (int j = 0; j < listMentors.size(); j++) {
+                                                    if (listBookings.get(i).getMentorId() == listMentors.get(j).getMentorId()) {
+                                                        userId = listMentors.get(j).getUserId();
+                                                    }
+                                                }
+                                              for (int k=0;k<listUsers.size();k++) {
+                                                    if (listUsers.get(k).getUserId()==userId) {
+                                                    fullName = listUsers.get(k).getfName() + " " + listUsers.get(k).getlName();
+                                                }
+                                                }  
+                                            %>
+                                            <%out.print(fullName);%>
                                         </th>
-                                        <th>Header 2</th>
-                                        <th>Header 3</th>
-                                        <th>Header 3</th>
+                                        <th>
+                                            <%for (int j = 0; j < listMentees.size(); j++) {
+                                                    if (listBookings.get(i).getMenteeId() == listMentees.get(j).getMenteeId()) {
+                                                        userId = listMentees.get(j).getUserId();
+                                                    }
+                                                }
+                                              for (int k=0;k<listUsers.size();k++) {
+                                                    if (listUsers.get(k).getUserId()==userId) {
+                                                    fullName = listUsers.get(k).getfName() + " " + listUsers.get(k).getlName();
+                                                }
+                                                }  
+                                            %>
+                                            <%out.print(fullName);%>
+                                        </th>
+                                        <th>
+                                            <%for (int l = 0; l < listSkills.size(); l++) {
+                                                    if (listBookings.get(i).getSkillId() == listSkills.get(l).getSkillId()) {
+                                                        skillName = listSkills.get(l).getSkillName();
+                                                    }
+                                                }                                            
+                                            %>
+                                            <%out.print(skillName);%>
+                                        </th>
+                                        <th>
+                                            <%int count=0;
+                                                int invoice=0;
+                                                for (int n=0;n<listBookingDetails.size();n++) {
+                                                    if (listBookingDetails.get(n).getBookingId()==listBookings.get(i).getBookingId()) {
+                                                    count=count+1;
+                                                }
+                                                }
+                                               invoice = count * Integer.parseInt(m.getHourlyRate());
+                                            %>
+                                            <%out.print(invoice);%>
+                                        </th>
                                     </tr>                                   
                                 </table>
                             </button>
