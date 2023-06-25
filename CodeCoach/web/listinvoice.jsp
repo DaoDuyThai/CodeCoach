@@ -1,3 +1,4 @@
+<%@page import="model.BookingDetails"%>
 <%@page import="model.Mentees"%>
 <%@page import="model.Mentors"%>
 <%@page import="model.Booking"%>
@@ -38,15 +39,13 @@
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-        <%Mentors m = (Mentors) request.getAttribute("m");
-        List<Integer> listCountDetail = (List<Integer>) request.getAttribute("List<Integer>");
-        %>
+       
         <div class="account-box">              
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
                     
                     <c:forEach items="${bookings}" var="b">
-            
+                     
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading${b.getBookingId()}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${b.getBookingId()}" aria-expanded="false" aria-controls="collapse${b.getBookingId()}">                                 
@@ -84,10 +83,14 @@
                                                 </c:forEach>
                                             </td>
                                             <td>                                                
-                                                <%
-                                                    for int
-                                                %>
-                                                
+                                                 <%List<BookingDetails> li = (List<BookingDetails>) request.getAttribute("bookingDetails");
+                                                 for (int i=0;i<li.size();i++) {
+                                                 %><p><%out.print(li.get(i).getBookingDetailId());%></p><%
+                                                     }
+                                                 %>
+                                                 
+                                                 
+                                                 
                                                 
                                             </td>
                                         </tr>
