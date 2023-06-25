@@ -60,16 +60,16 @@
                                 <c:forEach var="feedback" items="${feedbackList}">
                                     <li>
                                         <div class="comment">
-                                            <img class="avatar rounded-circle" alt="User Image" src="assets/images/users/${feedback[1]}.png">
+                                            <img class="avatar rounded-circle" alt="User Image" src="assets/images/users/${feedback.getUserId()}.png">
                                             <div class="comment-body">
                                                 <div class="meta-data">
-                                                    <span class="comment-author">${feedback[3]}</span>
-                                                    <span class="comment-date">Reviewed ${feedback[7]}</span>
+                                                    <span class="comment-author">${feedback.getReviewerName()}</span>
+                                                    <span class="comment-date">Reviewed ${feedback.getReviewDateTime()}</span>
                                                     <div class="review-count rating">
                                                         <!-- Display star ratings here -->
                                                         <c:forEach var="star" begin="1" end="5">
                                                             <c:choose>
-                                                                <c:when test="${feedback[5] >= star}">
+                                                                <c:when test="${feedback.getRating() >= star}">
                                                                     <i class="fas fa-star filled"></i>
                                                                 </c:when>
                                                                 <c:otherwise>
@@ -79,7 +79,7 @@
                                                         </c:forEach>
                                                     </div>
                                                 </div>
-                                                <p class="comment-content">${feedback[6]}</p>
+                                                <p class="comment-content">${feedback.getReviewText()}</p>
                                             </div>
                                         </div>
                                     </li>

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
+import org.eclipse.jdt.internal.compiler.batch.Main;
 
 public class FeedbackDAO extends DBContext {
 
@@ -14,9 +15,9 @@ public class FeedbackDAO extends DBContext {
     private ResultSet rs = null;
     
     //Use mentorId to get their feedback
-    public List<Object[]> getAllFeedbackOfMentor(int revMentorId) {
-        List<Object[]> feedbackList = new ArrayList<>();
-        String query = "SELECT f.feedbackId, u.userId, f.mentorId, u.fName, u.lName, f.rating, f.reviewText, CONVERT(date, reviewDateTime, 112) AS reviewDate "
+    public List<Feedback> getAllFeedbackOfMentor(int revMentorId) {
+        List<Feedback> feedbackList = new ArrayList<>();
+        String query = "SELECT f.feedbackId, f.userId, f.mentorId, u.fName, u.lName, f.bookingId, f.rating, f.reviewText, CONVERT(date, reviewDateTime, 112) AS reviewDate "
                 + "FROM Feedback f "
                 + "JOIN Users u ON f.userId = u.userId where mentorId = ?";
 
@@ -27,17 +28,18 @@ public class FeedbackDAO extends DBContext {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                Object[] feedbackInfo = new Object[8];
-                feedbackInfo[0] = rs.getInt("feedbackId");
-                feedbackInfo[1] = rs.getInt("userId");
-                feedbackInfo[2] = rs.getInt("mentorId");
-                feedbackInfo[3] = rs.getString("fName");
-                feedbackInfo[4] = rs.getString("lName");
-                feedbackInfo[5] = rs.getInt("rating");
-                feedbackInfo[6] = rs.getString("reviewText");
-                feedbackInfo[7] = rs.getString("reviewDate");
-                feedbackList.add(feedbackInfo);
-                
+                int feedbackId = rs.getInt("feedbackId");
+                int userId = rs.getInt("userId");
+                int mentorId = rs.getInt("mentorId");
+                String reviewerName = rs.getString("fName");
+                int bookingId = rs.getInt("bookingId");
+                int rating = rs.getInt("rating");
+                String reviewText = rs.getString("reviewText");
+                String reviewDateTime = rs.getString("reviewDate");
+
+                Feedback feedback = new Feedback(feedbackId, userId, mentorId, bookingId, rating, reviewText, reviewDateTime);
+                feedback.setReviewerName(reviewerName);
+                feedbackList.add(feedback);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,27 +57,15 @@ public class FeedbackDAO extends DBContext {
             // Get the mentorId associated with the userId
             int mentorId = mentorDao.getMentorIdByUserId(userId, 0);
              // Get the feedback for the mentor
-        List<Object[]> feedbackList = dao.getAllFeedbackOfMentor(mentorId);
+        List<Feedback> feedbackList = dao.getAllFeedbackOfMentor(1);
         
-         for (Object[] feedback : feedbackList) {
-        int feedbackId = (int) feedback[0];
-        int ruserId = (int) feedback[1];
-        int rmentorId = (int) feedback[2];
-        String fName = (String) feedback[3];
-        String lName = (String) feedback[4];
-        int rating = (int) feedback[5];
-        String reviewText = (String) feedback[6];
-        String reviewDate = (String) feedback[7];
-        
-        System.out.println("Feedback ID: " + feedbackId);
-        System.out.println("User ID: " + ruserId);
-        System.out.println("Mentor ID: " + rmentorId);
-        System.out.println("Reviewer Name: " + fName + " " + lName);
-        System.out.println("Rating: " + rating);
-        System.out.println("Review Text: " + reviewText);
-        System.out.println("Review Date: " + reviewDate);
-        System.out.println();
+        for (Feedback feedback : feedbackList) {
+            System.out.println("Reviewer Name: " + feedback.getReviewerName());
+            System.out.println("Review Date/Time: " + feedback.getReviewDateTime());
+            System.out.println("Rating: " + feedback.getRating());
+            System.out.println("Review Text: " + feedback.getReviewText());
+            System.out.println();
+        }
     }
     
-}
 }
