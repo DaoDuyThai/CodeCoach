@@ -189,3 +189,4 @@ Create table PrivacyPolicyAndTerms(
    summary varchar(255),
    content varchar(500)
 );
+

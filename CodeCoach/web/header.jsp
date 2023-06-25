@@ -107,7 +107,6 @@
                                             <p class="text-muted mb-0"><c:if test="${users.roleId == 1}">Admin</c:if><c:if test="${users.roleId == 2}">Mentor</c:if><c:if test="${users.roleId == 3}">Mentee</c:if></p>
                                         </div>
                                     </div>
-                                    <a class="dropdown-item" href="admindashboard">Dashboard</a>
                                     <a class="dropdown-item" href="">Profile Settings</a>
                                     <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
                                     <a class="dropdown-item" href="logout">Logout</a>
