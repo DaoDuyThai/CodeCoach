@@ -53,20 +53,21 @@
                         List<Skills> listSkills = (List<Skills>) request.getAttribute("skills");
                         List<BookingDetails> listBookingDetails = (List<BookingDetails>) request.getAttribute("bookingDetails");
                         for (int i = 0; i < listBookings.size(); i++) {
-                        int userId=0;
-                        String fullName="";
-                        String skillName="";
+                            int userId = 0;
+                            String fullName = "";
+                            String skillName = "";
                     %>
                     <div class="accordion-item">
-                        <table>
-                            <tr>
-                                <th>Mentor Name</th>
-                                <th>Mentee Name</th>
-                                <th>Skill</th>
-                                <th>Invoice</th>
-                            </tr>                                   
-                        </table>
+
                         <h2 class="accordion-header" id="<%="heading" + i%>">
+                            <table>
+                                <tr>
+                                    <th>Mentor Name</th>
+                                    <th>Mentee Name</th>
+                                    <th>Skill</th>
+                                    <th>Invoice</th>
+                                </tr>                                   
+                            </table>
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse" + i%>" aria-expanded="false" aria-controls="<%="collapse" + i%>">                             
                                 <table>
                                     <tr>
@@ -76,11 +77,11 @@
                                                         userId = listMentors.get(j).getUserId();
                                                     }
                                                 }
-                                              for (int k=0;k<listUsers.size();k++) {
-                                                    if (listUsers.get(k).getUserId()==userId) {
-                                                    fullName = listUsers.get(k).getfName() + " " + listUsers.get(k).getlName();
+                                                for (int k = 0; k < listUsers.size(); k++) {
+                                                    if (listUsers.get(k).getUserId() == userId) {
+                                                        fullName = listUsers.get(k).getfName() + " " + listUsers.get(k).getlName();
+                                                    }
                                                 }
-                                                }  
                                             %>
                                             <%out.print(fullName);%>
                                         </th>
@@ -90,11 +91,11 @@
                                                         userId = listMentees.get(j).getUserId();
                                                     }
                                                 }
-                                              for (int k=0;k<listUsers.size();k++) {
-                                                    if (listUsers.get(k).getUserId()==userId) {
-                                                    fullName = listUsers.get(k).getfName() + " " + listUsers.get(k).getlName();
+                                                for (int k = 0; k < listUsers.size(); k++) {
+                                                    if (listUsers.get(k).getUserId() == userId) {
+                                                        fullName = listUsers.get(k).getfName() + " " + listUsers.get(k).getlName();
+                                                    }
                                                 }
-                                                }  
                                             %>
                                             <%out.print(fullName);%>
                                         </th>
@@ -103,19 +104,19 @@
                                                     if (listBookings.get(i).getSkillId() == listSkills.get(l).getSkillId()) {
                                                         skillName = listSkills.get(l).getSkillName();
                                                     }
-                                                }                                            
+                                                }
                                             %>
                                             <%out.print(skillName);%>
                                         </th>
                                         <th>
-                                            <%int count=0;
-                                                int invoice=0;
-                                                for (int n=0;n<listBookingDetails.size();n++) {
-                                                    if (listBookingDetails.get(n).getBookingId()==listBookings.get(i).getBookingId()) {
-                                                    count=count+1;
+                                            <%int count = 0;
+                                                int invoice = 0;
+                                                for (int n = 0; n < listBookingDetails.size(); n++) {
+                                                    if (listBookingDetails.get(n).getBookingId() == listBookings.get(i).getBookingId()) {
+                                                        count = count + 1;
+                                                    }
                                                 }
-                                                }
-                                               invoice = count * Integer.parseInt(m.getHourlyRate());
+                                                invoice = count * Integer.parseInt(m.getHourlyRate());
                                             %>
                                             <%out.print(invoice);%>
                                         </th>
@@ -125,15 +126,29 @@
                         </h2>
                         <div id="<%="collapse" + i%>" class="accordion-collapse collapse" aria-labelledby="<%="heading" + i%>" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                ${o.getAnswer()}
+                                <%for (int o = 0; o <listBookingDetails.size(); o++) {
+                                        if (listBookingDetails.get(o).getBookingId() == listBookings.get(i).getBookingId()) {
+                                %>
+                                <table>
+                                    <tr>
+
+                                        <th>
+                                            <%out.print("Slot " + listBookingDetails.get(o).getSlotId());%>
+                                        </th>
+                                        <th>
+                                            <%out.print(listBookingDetails.get(o).getDate());%>
+                                        </th>
+                                    </tr>
+                                </table>
+                                <%
+                                        }
+                                    }%>
                             </div>
                         </div>
                     </div>  
                     <%
                         }
                     %>
-
-
                 </div>
             </div>
         </div>
