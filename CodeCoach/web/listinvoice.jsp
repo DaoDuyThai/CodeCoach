@@ -10,7 +10,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Chat</title>
+        <title>List Invoice</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -42,8 +42,9 @@
         <div class="account-box">              
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
-
+                    
                     <c:forEach items="${bookings}" var="b">
+            
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading${b.getBookingId()}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${b.getBookingId()}" aria-expanded="false" aria-controls="collapse${b.getBookingId()}">                                 
@@ -52,21 +53,51 @@
                                             <td>
                                                 <c:forEach items="${mentors}" var="mentor">
                                                     <c:if test="${mentor.getMentorId()==b.getMentorId()}">
-                                                        <c:set var="userId" value="${mentor.getUserId()}"></c:set>                                                     
+                                                        <c:set var="userIdMentor" value="${mentor.getUserId()}"/>                                                 
                                                     </c:if>                                                   
                                                 </c:forEach>
+                                                <c:forEach items="${listusers}" var="listusers">
+                                                    <c:if test="${listusers.getUserId()==userIdMentor}">
+                                                        <p>${listusers.getfName()} ${listusers.getlName()}</p>                                                     
+                                                    </c:if>                                                   
+                                                </c:forEach>
+                                            </td>
+                                            <td>
+                                                <c:forEach items="${mentees}" var="mentee">
+                                                    <c:if test="${mentee.getMenteeId()==b.getMenteeId()}">
+                                                        <c:set var="userIdMentee" value="${mentee.getUserId()}"></c:set>                                                     
+                                                    </c:if>                                                   
+                                                </c:forEach>
+                                                <c:forEach items="${listusers}" var="listusers">
+                                                    <c:if test="${listusers.getUserId()==userIdMentee}">
+                                                        <p>${listusers.getfName()} ${listusers.getlName()}</p>                                                     
+                                                    </c:if>                                                   
+                                                </c:forEach>
+                                            </td>
+                                            <td>
+                                                <c:forEach items="${skills}" var="skill">
+                                                    <c:if test="${skill.getSkillId()==b.getSkillId()}">
+                                                        <p>${skill.getSkillName()}</p>                                                
+                                                    </c:if>                                                   
+                                                </c:forEach>
+                                            </td>
+                                            <td>                                                
+                                                <c:forEach items="${listCountDetail}" var="listCountDetail">
+                                                    <c:set var="money" value="${listCountDetail.get(1)}"></c:set>
+                                                    
+                                                </c:forEach> 
+                                                
                                                 
                                             </td>
-                                            <td>${b.getMentorId()}</td>
-                                            <td>${b.getMenteeId()}</td>
-                                            <td>${b.getSkillId()}</td>
                                         </tr>
                                     </table>
                                 </button>
                             </h2>
                             <div id="collapse${b.getBookingId()}" class="accordion-collapse collapse" aria-labelledby="heading${b.getBookingId()}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-
+                                    <c:forEach items="bookingDetails" var="bookingDetails">
+                                        
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>  

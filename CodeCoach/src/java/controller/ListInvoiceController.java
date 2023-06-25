@@ -26,6 +26,10 @@ import model.Mentees;
 import model.Mentors;
 import model.Users;
 import dal.MenteeDAO;
+import dal.SkillDAO;
+import model.BookingDetails;
+import model.Skills;
+import dal.BookingDetailDAO;
 
 /**
  *
@@ -74,15 +78,23 @@ public class ListInvoiceController extends HttpServlet {
             Users u = (Users) session.getAttribute("users");
             String userId = Integer.toString(u.getUserId());
             if (userId != null) {
-                Mentors m = new MentorDAO().getMentorByUserId(userId);
-                List<Booking> bookings = new BookingDAO().getBookingsByMentorId(m.getMentorId());
+                Mentors mentor = new MentorDAO().getMentorByUserId(userId);
+                request.setAttribute("mentor", mentor);
+                List<Booking> bookings = new BookingDAO().getBookingsByMentorId(mentor.getMentorId());
                 request.setAttribute("bookings", bookings);
-                List<Users> users = new UserDAO().getAllUser();
-                request.setAttribute("users", users);
+                List<Users> listusers = new UserDAO().getAllUser();
+                request.setAttribute("listusers", listusers);
                 List<Mentors> mentors = new MentorDAO().getAllMentor();
                 request.setAttribute("mentors", mentors);
                 List<Mentees> mentees = new MenteeDAO().getAllMentee();
                 request.setAttribute("mentees", mentees);
+                List<Skills> skills = new SkillDAO().getAll();
+                request.setAttribute("skills", skills);
+                List<BookingDetails> bookingDetails = new BookingDetailDAO().getAllBookingDetails();
+                request.setAttribute("bookingDetails", bookingDetails);
+                List<Integer> listCountDetail = new BookingDetailDAO().countBookingDetailsbyId();
+                request.setAttribute("listCountDetail", listCountDetail);
+               
                 request.getRequestDispatcher("listinvoice.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login");
