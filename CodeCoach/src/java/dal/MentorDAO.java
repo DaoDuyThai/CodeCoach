@@ -113,7 +113,7 @@ public class MentorDAO {
         }
         return list;
     }
-  public List<Object> getMentorInformationByIdFromSearch(int mentorId) {
+  public List<Object> getMentorInformationById(int mentorId) {
     MentorDAO mentorDAO = new MentorDAO();
     ExpertiseDAO expertiseDAO = new ExpertiseDAO();
     UserDAO userDAO = new UserDAO();
@@ -149,8 +149,7 @@ public class MentorDAO {
 
     return mentorInformation;
 }
-    public int getMentorIdByUserId(int userId){
-        int mentorId = 0;
+    public int getMentorIdByUserId(int userId, int mentorId){
         String query = "select mentorId from Mentors m join Users u on m.userId=u.userId\n" +
                    "where u.userId = ?";
         try {

@@ -40,8 +40,7 @@
                         <div class="col-sm-12">
                             <h3 class="page-title">List of Mentor</h3>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="javascript:(0);">Users</a></li>
+                              
                                 <li class="breadcrumb-item active">Mentor</li>
                             </ul>
                         </div>
@@ -64,6 +63,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <c:forEach>
                                             <tr>
                                                 <td>
                                                     <h2 class="table-avatar">
@@ -75,8 +75,7 @@
                                                     </h2>
                                                 </td>
                                                 <td>Maths</td>
-                                                <td>14 Jan 2019 <br><small>02.59 AM</small></td>
-                                                <td>$3100.00</td>
+                                                
                                                 <td>
                                                     <div class="status-toggle d-flex justify-content-center">
                                                         <input type="checkbox" id="status_1" class="check" checked>

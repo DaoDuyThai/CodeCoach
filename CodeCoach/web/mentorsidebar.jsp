@@ -20,7 +20,7 @@
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="review" class="active"><i class="fas fa-eye"></i>Reviews <span><i
+                    <li><a href="feedback" class="active"><i class="fas fa-eye"></i>Reviews <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="profile.html"><i class="fas fa-user-cog"></i>Profile <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>

@@ -7,7 +7,6 @@ package controller;
 
 import dal.FeedbackDAO;
 import dal.MentorDAO;
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,15 +14,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import model.Feedback;
-import model.Mentors;
+import model.Users;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="FeedbackController", urlPatterns={"/review"})
+@WebServlet(name="FeedbackController", urlPatterns={"/feedback"})
 public class FeedbackController extends HttpServlet {
    
     /** 
@@ -61,7 +62,7 @@ public class FeedbackController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("review.jsp").forward(request, response);
+        doPost(request, response);
     } 
 
     /** 
@@ -74,23 +75,19 @@ public class FeedbackController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        try {
             FeedbackDAO feedbackDAO = new FeedbackDAO();
             MentorDAO mentorDAO = new MentorDAO();
-            // Get the userId from the session or request parameters
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            
-            // Get the mentorId associated with the userId
-            int mentorId = mentorDAO.getMentorIdByUserId(userId);
-             // Get the feedback for the mentor
-            List<Feedback> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
-             // Set the feedback list as an attribute for the JSP to access
-            request.setAttribute("feedbackList", feedbackList);
-            
-            request.getRequestDispatcher("review.jsp").forward(request, response);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("users");
+            int userId = user.getUserId();
+            try {
+                int mentorId = mentorDAO.getMentorIdByUserId(userId, 0);
+                List<Object[]> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
+                request.setAttribute("feedbackList", feedbackList);
+                request.getRequestDispatcher("feedback.jsp").forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
     }
 
     /** 
@@ -101,5 +98,6 @@ public class FeedbackController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
 
 }
