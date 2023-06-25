@@ -49,11 +49,11 @@
                     %>
                     <div class="accordion-item">
                                 <h2 class="accordion-header" id="<%="heading"+i%>">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${o.getId()}" aria-expanded="false" aria-controls="collapse${o.getId()}">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse"+i%>" aria-expanded="false" aria-controls="<%="collapse"+i%>">
                                         <strong>${o.getQuestion()}</strong>
                                     </button>
                                 </h2>
-                                <div id="collapse${o.getId()}" class="accordion-collapse collapse" aria-labelledby="heading${o.getId()}" data-bs-parent="#accordionExample">
+                                <div id="<%="collapse"+i%>" class="accordion-collapse collapse" aria-labelledby="heading${o.getId()}" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         ${o.getAnswer()}
                                     </div>
