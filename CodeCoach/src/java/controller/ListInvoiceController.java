@@ -12,6 +12,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
+import model.Booking;
+import dal.BookingDAO;
+import dal.ChatMessagesDAO;
+import dal.ChatRoomDAO;
+import dal.MentorDAO;
+import dal.UserDAO;
+import jakarta.servlet.http.HttpSession;
+import model.ChatMessages;
+import model.ChatRoom;
+import model.Mentors;
+import model.Users;
 
 /**
  *
@@ -55,7 +67,27 @@ public class ListInvoiceController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("listinvoice.jsp").forward(request, response);
+         try {
+            HttpSession session = request.getSession();
+            Users u = (Users) session.getAttribute("users");
+            String userId = Integer.toString(u.getUserId());
+            if (userId != null) {
+                Mentors m = new MentorDAO().getMentorByUserId(userId);
+                request.setAttribute("m", m);
+                List<Booking> bookings = new BookingDAO().getBookingsByMentorId(m.getMentorId());
+                request.setAttribute("bookings", bookings);
+                List<Users> users = new UserDAO().getAllUser();
+                request.setAttribute("users", users);
+                request.getRequestDispatcher("listinvoice.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login");
+            }
+
+        } catch (Exception e) {
+            response.sendRedirect("login");
+        }
+
+        
     } 
 
     /** 

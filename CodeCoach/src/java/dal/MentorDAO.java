@@ -58,6 +58,22 @@ public class MentorDAO {
         return null;
     }
     
+    public Mentors getMentorByUserId(String userId) {
+        String query = "select * from mentors where userId ="+userId+"";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);          
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Mentors mentor = new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+                return mentor;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public void registerMentor(String userId, String biography, String hourlyRate) {
         String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES("+userId+",'"+biography+"',"+hourlyRate+")";
         try {
@@ -153,19 +169,7 @@ public class MentorDAO {
 
     
     public static void main(String[] args) {
-        MentorDAO mdao = new MentorDAO();
-        UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
-        List<Object[]> listUInfo = new ArrayList<>();
-        for (Integer mentorId : listMId) {
-            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
-            listUInfo.add(uInfo);
-        }
-        for (Object[] objects : listUInfo) {
-            for(int i = 0; i < objects.length; i++){
-                System.out.print(objects[i] + " ");
-            }
-            System.out.println("");
-        }
+        Mentors m = new MentorDAO().getMentorByUserId("2");
+        System.out.println(m.getMentorId());
     }
 }
