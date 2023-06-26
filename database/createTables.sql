@@ -100,8 +100,6 @@ CREATE TABLE MenteeInterests (
   skillId INT,
   FOREIGN KEY (menteeId) REFERENCES Mentees(menteeId),
   FOREIGN KEY (skillId) REFERENCES Skills(skillId),
-  FOREIGN KEY (categoryId) REFERENCES Categories(categoryId),
-  FOREIGN KEY (subCategoryId) REFERENCES SubCategories(subCategoryId)
 );
 
 CREATE TABLE Slot (

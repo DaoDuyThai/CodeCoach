@@ -109,7 +109,7 @@ VALUES
   -- Insert data into MenteeInterests table
 INSERT INTO MenteeInterests (menteeId, skillId, categoryId, subCategoryId)
 VALUES
-  (1, 3, 2, 3);
+  (1, 3);
 
   -- Insert data into Slot table
 INSERT INTO Slot (startTime, endTime)
