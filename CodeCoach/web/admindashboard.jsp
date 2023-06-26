@@ -55,7 +55,7 @@
                     }]
             });
             //bar chart end
-            
+
             //pie chart start
             var pieChart = new CanvasJS.Chart("pieChartContainer", {
             theme: "light2", // "light1", "light2", "dark1", "dark2"
@@ -153,7 +153,7 @@
                             <!--count start-->                   
 
                             <div class="row">
-                                <div class="col-md-12 col-lg-4 dash-board-list blue">
+                                <div class="col-md-12 col-lg-3 dash-board-list blue">
                                     <a href="">
                                         <div class="dash-widget">
                                             <div class="circle-bar">
@@ -167,9 +167,9 @@
                                             </div>
                                         </div>
                                     </a>
-
                                 </div>
-                                <div class="col-md-12 col-lg-4 dash-board-list yellow">
+
+                                <div class="col-md-12 col-lg-3 dash-board-list yellow">
                                     <a href="">
                                         <div class="dash-widget">
                                             <div class="circle-bar">
@@ -183,9 +183,8 @@
                                             </div>
                                         </div>
                                     </a>
-
                                 </div>
-                                <div class="col-md-12 col-lg-4 dash-board-list pink">
+                                <div class="col-md-12 col-lg-3 dash-board-list pink">
                                     <a href="">
                                         <div class="dash-widget">
                                             <div class="circle-bar">
@@ -199,7 +198,21 @@
                                             </div>
                                         </div>
                                     </a>
-
+                                </div>
+                                <div class="col-md-12 col-lg-3 dash-board-list blue">
+                                    <a href="">
+                                        <div class="dash-widget">
+                                            <div class="circle-bar">
+                                                <div class="icon-col">
+                                                    <i class="fas fa-users"></i>
+                                                </div>
+                                            </div>
+                                            <div class="dash-widget-info">
+                                                <h3>${totalUsers}</h3>
+                                                <h6>Number of Users</h6>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <br/><br/>
@@ -231,7 +244,7 @@
                             <br/><br/>
 
 
-                            
+
                         </div>
                     </div>
                 </div>

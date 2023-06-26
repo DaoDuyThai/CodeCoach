@@ -309,6 +309,23 @@ public class UserDAO extends DBContext {
         }
         return 0;
     }
+    
+    public int getTotalUsers(){
+        String query = "select count(userid) as Total from users";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();

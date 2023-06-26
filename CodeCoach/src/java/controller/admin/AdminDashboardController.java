@@ -73,6 +73,8 @@ public class AdminDashboardController extends HttpServlet {
         int totalMentee = userDao.getTotalUserByRoleId(3);
         //get total skill
         int totalSkill = skillDao.getTotalSkill();
+        //get total users
+        int totalUsers = userDao.getTotalUsers();
         //get total booking by each month and set attributes
         int jan = bookingDetailDao.countBookingsByYearAndMonth(2023, 1);
         request.setAttribute("jan", jan);
@@ -106,6 +108,7 @@ public class AdminDashboardController extends HttpServlet {
         request.setAttribute("totalMentor", totalMentor);
         request.setAttribute("totalMentee", totalMentee);
         request.setAttribute("totalSkill", totalSkill);
+        request.setAttribute("totalUsers", totalUsers);
         request.setAttribute("listSkillOccurrence", listSkillOccurrence);
         request.setAttribute("listMentorOccurence", listMentorOccurence);
         request.getRequestDispatcher("admindashboard.jsp").forward(request, response);
