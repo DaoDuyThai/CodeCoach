@@ -107,7 +107,7 @@ VALUES
   (3);
 
   -- Insert data into MenteeInterests table
-INSERT INTO MenteeInterests (menteeId, skillId, categoryId, subCategoryId)
+INSERT INTO MenteeInterests (menteeId, skillId)
 VALUES
   (1, 3);
 
