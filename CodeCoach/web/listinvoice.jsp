@@ -54,6 +54,16 @@
                         List<Skills> listSkills = (List<Skills>) request.getAttribute("skills");
                         List<BookingDetails> listBookingDetails = (List<BookingDetails>) request.getAttribute("bookingDetails");
                         List<Slot> listSlots = (List<Slot>) request.getAttribute("slots");
+                        %>
+                        <table>
+                            <tr style="font-size: 40px;">
+                                    <th>Mentor Name</th>
+                                    <th>Mentee Name</th>
+                                    <th>Skill</th>
+                                    <th>Invoice</th>
+                                </tr>                                   
+                            </table>
+                    <%
                         for (int i = 0; i < listBookings.size(); i++) {
                             int userId = 0;
                             String fullName = "";
@@ -62,14 +72,7 @@
                     <div class="accordion-item">
 
                         <h2 class="accordion-header" id="<%="heading" + i%>">
-                            <table>
-                                <tr>
-                                    <th>Mentor Name</th>
-                                    <th>Mentee Name</th>
-                                    <th>Skill</th>
-                                    <th>Invoice</th>
-                                </tr>                                   
-                            </table>
+                            
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse" + i%>" aria-expanded="false" aria-controls="<%="collapse" + i%>">                             
                                 <table>
                                     <tr>
