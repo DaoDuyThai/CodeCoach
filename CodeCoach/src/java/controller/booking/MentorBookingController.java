@@ -45,7 +45,7 @@ public class MentorBookingController extends HttpServlet {
             return;
         }
 
-        Mentors mentor = new MentorDAO().getMentorByUserId(user.getUserId());
+        Mentors mentor = new MentorDAO().getMentorByUserId(Integer.toString(user.getUserId()));
 
         ArrayList<Booking> mentorBookings = new BookingDAO().getBookingMentorId(mentor.getMentorId());
 

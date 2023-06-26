@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import model.Mentees;
+import model.Users;
 
 /**
  *
@@ -19,7 +20,28 @@ public class MenteeDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    
+    private final String GET_USER_BY_MENTEE_ID = " SELECT *\n" +
+            "FROM Users\n" +
+            "JOIN Mentees ON Users.userId = Mentees.userId\n" +
+            "WHERE Mentees.menteeId = ?";
 
+    
+    public Users getUserByMenteeId (int menteeId) {
+        Users user = new Users();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(GET_USER_BY_MENTEE_ID);
+            ps.setInt(1, menteeId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Users(String fName, String lName, String gender, String email, String phoneNum, String address, String facebook,String password)
+                user = new Users(rs.getString("fName"), rs.getString("lName"), rs.getString("gender"), rs.getString("email"), rs.getString("PhoneNum"), rs.getString("address"),rs.getString("facebook"),rs.getString("password"));
+            }
+        } catch (Exception e) {
+        }
+        return user;
+    }
     
     public String getMenteeIdbyUserId(String userId) {
         String menteeId ="";

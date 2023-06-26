@@ -20,7 +20,26 @@ public class BookingDAO {
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
+    
+    private final String GET_BOOKING_BY_MENTOR_ID = "SELECT * FROM [dbo].[Booking] WHERE mentorId = ?";
 
+
+    public ArrayList<Booking> getBookingMentorId(int mentorId) {
+        ArrayList<Booking> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(GET_BOOKING_BY_MENTOR_ID);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //Booking(int bookingId, int mentorId, int menteeId, int skillId, String status, boolean getAllInfo)
+                list.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), true));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     public Booking getBookingLatestbyMenteeId(String menteeId) {
         Booking b = new Booking();
         String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = " + menteeId + " AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = " + menteeId + ");";
