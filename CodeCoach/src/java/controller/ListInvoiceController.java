@@ -30,6 +30,8 @@ import dal.SkillDAO;
 import model.BookingDetails;
 import model.Skills;
 import dal.BookingDetailDAO;
+import dal.SlotDAO;
+import model.Slot;
 
 /**
  *
@@ -94,6 +96,8 @@ public class ListInvoiceController extends HttpServlet {
                 request.setAttribute("bookingDetails", bookingDetails);
                 List<Integer> listCountDetail = new BookingDetailDAO().countBookingDetailsbyId();
                 request.setAttribute("listCountDetail", listCountDetail);
+                List<Slot> slots = new SlotDAO().getAll();
+                request.setAttribute("slots", slots);
                
                 request.getRequestDispatcher("listinvoice.jsp").forward(request, response);
             } else {

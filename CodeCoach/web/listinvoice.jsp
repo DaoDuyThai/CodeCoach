@@ -1,3 +1,4 @@
+<%@page import="model.Slot"%>
 <%@page import="model.Skills"%>
 <%@page import="model.BookingDetails"%>
 <%@page import="model.Mentees"%>
@@ -52,6 +53,7 @@
                         List<Mentees> listMentees = (List<Mentees>) request.getAttribute("mentees");
                         List<Skills> listSkills = (List<Skills>) request.getAttribute("skills");
                         List<BookingDetails> listBookingDetails = (List<BookingDetails>) request.getAttribute("bookingDetails");
+                        List<Slot> listSlots = (List<Slot>) request.getAttribute("slots");
                         for (int i = 0; i < listBookings.size(); i++) {
                             int userId = 0;
                             String fullName = "";
@@ -116,7 +118,7 @@
                                                         count = count + 1;
                                                     }
                                                 }
-                                                invoice = count * Integer.parseInt(m.getHourlyRate());
+                                                invoice = count * Integer.parseInt(m.getHourlyRate()) *2;
                                             %>
                                             <%out.print(invoice);%>
                                         </th>
@@ -134,6 +136,7 @@
 
                                         <th>
                                             <%out.print("Slot " + listBookingDetails.get(o).getSlotId());%>
+                                            <%out.print("aaa");%>
                                         </th>
                                         <th>
                                             <%out.print(listBookingDetails.get(o).getDate());%>
