@@ -95,8 +95,6 @@ CREATE TABLE Mentees (
 CREATE TABLE MenteeInterests (
   menteeInterestId INT IDENTITY(1,1) PRIMARY KEY,
   menteeId INT NOT NULL,
-  categoryId INT,
-  subCategoryId INT,
   skillId INT,
   FOREIGN KEY (menteeId) REFERENCES Mentees(menteeId),
   FOREIGN KEY (skillId) REFERENCES Skills(skillId),
