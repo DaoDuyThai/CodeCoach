@@ -130,125 +130,135 @@
             <%@include file="header.jsp" %>
             <!--End of header-->
 
-
-            <div class="breadcrumb-bar">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col-md-12 col-12">
-                            <h2 class="breadcrumb-title">Admin Dashboard</h2>
+            <c:if test="${users.roleId == 1}">
+                <div class="breadcrumb-bar">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-12">
+                                <h2 class="breadcrumb-title">Admin Dashboard</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- mentee side bar start -->
-                        <%@include file="adminsidebar.jsp" %>
-                        <!-- mentee side bar end -->
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- mentee side bar start -->
+                            <%@include file="adminsidebar.jsp" %>
+                            <!-- mentee side bar end -->
 
-                        <div class="col-md-7 col-lg-8 col-xl-9">
-                            <!--count start-->                   
 
-                            <div class="row">
-                                <div class="col-md-12 col-lg-3 dash-board-list blue">
-                                    <a href="">
-                                        <div class="dash-widget">
-                                            <div class="circle-bar">
-                                                <div class="icon-col">
-                                                    <i class="fas fa-users"></i>
+
+                            <div class="col-md-7 col-lg-8 col-xl-9">
+                                <!--count start-->                   
+
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3 dash-board-list blue">
+                                        <a href="">
+                                            <div class="dash-widget">
+                                                <div class="circle-bar">
+                                                    <div class="icon-col">
+                                                        <i class="fas fa-users"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="dash-widget-info">
+                                                    <h3>${totalMentee}</h3>
+                                                    <h6>Number of Mentees</h6>
                                                 </div>
                                             </div>
-                                            <div class="dash-widget-info">
-                                                <h3>${totalMentee}</h3>
-                                                <h6>Number of Mentees</h6>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-12 col-lg-3 dash-board-list yellow">
+                                        <a href="">
+                                            <div class="dash-widget">
+                                                <div class="circle-bar">
+                                                    <div class="icon-col">
+                                                        <i class="fas fa-user-graduate"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="dash-widget-info">
+                                                    <h3>${totalMentor}</h3>
+                                                    <h6>Number of Mentors</h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3 dash-board-list pink">
+                                        <a href="">
+                                            <div class="dash-widget">
+                                                <div class="circle-bar">
+                                                    <div class="icon-col">
+                                                        <i class="fas fa-wallet"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="dash-widget-info">
+                                                    <h3>${totalSkill}</h3>
+                                                    <h6>Number of Skills</h6>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3 dash-board-list blue">
+                                        <a href="">
+                                            <div class="dash-widget">
+                                                <div class="circle-bar">
+                                                    <div class="icon-col">
+                                                        <i class="fas fa-users"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="dash-widget-info">
+                                                    <h3>${totalUsers}</h3>
+                                                    <h6>Number of Users</h6>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <!--count end-->   
+
+                                <div class="row">
+                                    <!--bar chart start-->
+                                    <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
+                                    <!--bar chart end-->
                                 </div>
 
-                                <div class="col-md-12 col-lg-3 dash-board-list yellow">
-                                    <a href="">
-                                        <div class="dash-widget">
-                                            <div class="circle-bar">
-                                                <div class="icon-col">
-                                                    <i class="fas fa-user-graduate"></i>
-                                                </div>
-                                            </div>
-                                            <div class="dash-widget-info">
-                                                <h3>${totalMentor}</h3>
-                                                <h6>Number of Mentors</h6>
-                                            </div>
-                                        </div>
-                                    </a>
+                                <br/><br/>
+
+                                <div class="row">
+                                    <!--pie chart start-->
+                                    <div class="col-md-6">
+                                        <div id="pieChartContainer" style="height: 300px; width: 100%;"></div>
+                                    </div>
+                                    <!--pie chart end-->
+
+                                    <!--axis chart start-->
+                                    <div class="col-md-6">
+                                        <div id="axisChartContainer" style="height: 300px; width: 100%;"></div>
+                                    </div>
+                                    <!--axis chart end-->
+
                                 </div>
-                                <div class="col-md-12 col-lg-3 dash-board-list pink">
-                                    <a href="">
-                                        <div class="dash-widget">
-                                            <div class="circle-bar">
-                                                <div class="icon-col">
-                                                    <i class="fas fa-wallet"></i>
-                                                </div>
-                                            </div>
-                                            <div class="dash-widget-info">
-                                                <h3>${totalSkill}</h3>
-                                                <h6>Number of Skills</h6>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-md-12 col-lg-3 dash-board-list blue">
-                                    <a href="">
-                                        <div class="dash-widget">
-                                            <div class="circle-bar">
-                                                <div class="icon-col">
-                                                    <i class="fas fa-users"></i>
-                                                </div>
-                                            </div>
-                                            <div class="dash-widget-info">
-                                                <h3>${totalUsers}</h3>
-                                                <h6>Number of Users</h6>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
+
+                                <br/><br/>
+
+
+
                             </div>
-                            <br/><br/>
-                            <!--count end-->   
-
-                            <div class="row">
-                                <!--bar chart start-->
-                                <div id="barChartContainer" style="height: 300px; width: 100%;"></div>
-                                <!--bar chart end-->
-                            </div>
-
-                            <br/><br/>
-
-                            <div class="row">
-                                <!--pie chart start-->
-                                <div class="col-md-6">
-                                    <div id="pieChartContainer" style="height: 300px; width: 100%;"></div>
-                                </div>
-                                <!--pie chart end-->
-
-                                <!--axis chart start-->
-                                <div class="col-md-6">
-                                    <div id="axisChartContainer" style="height: 300px; width: 100%;"></div>
-                                </div>
-                                <!--axis chart end-->
-
-                            </div>
-
-                            <br/><br/>
-
-
-
                         </div>
                     </div>
                 </div>
-            </div>
+            </c:if>
+
+
+            <!--not admin start-->
+            <c:if test="${users.roleId != 1 || empty users}">
+                <%@include file="accessdenied.jsp" %>
+            </c:if>
+            <!--not admin end-->
 
 
             <!--Footer start-->
