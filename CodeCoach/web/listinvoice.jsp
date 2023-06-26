@@ -138,7 +138,7 @@
                                             <%out.print("Slot " + listBookingDetails.get(o).getSlotId());%>
                                             <%for (int v = 0; v < listSlots.size(); v++) {
                                                     if (listBookingDetails.get(o).getSlotId() == listSlots.get(v).getSlotId()) {
-                                                        out.print("("+listSlots.get(v).getStartTime().substring(0, 8) +" - "+listSlots.get(v).getEndTime().substring(0, 8));
+                                                        out.print("("+listSlots.get(v).getStartTime().substring(0, 5) +" - "+listSlots.get(v).getEndTime().substring(0, 5)+")");
                                                     }
                                                 }%>
                                         </th>
