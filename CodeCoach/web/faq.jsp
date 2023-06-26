@@ -35,7 +35,6 @@
                 <br>
                 <div class="account-box">              
                     <div class="login-right">
-
                         <div class="accordion" id="accordionExample">
                             <c:forEach items="${listFaq}" var="o">
                                 <div class="accordion-item">

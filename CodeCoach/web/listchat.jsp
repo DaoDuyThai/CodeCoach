@@ -103,11 +103,8 @@
                                                         %></strong> - <%= chatMessage.getSentDateTime().substring(0, 16)%></p>
                                                 <p><%= chatMessage.getMessage()%></p>
                                             </div>
-                                            
-
-
                                         </div>
-                                            <br><br>
+                                        <br><br>
                                         <% }%>
                                     </div>
                                     <form action="listchat" method="post" class="chat-form">

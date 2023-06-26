@@ -23,7 +23,8 @@ public class UserDAO extends DBContext {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Users> getAllUser() {
+    
+     public List<Users> getAllUser() {
         List<Users> listUsers = new ArrayList<>();
         String querry = "select * from Users";
         try {
@@ -276,6 +277,11 @@ public class UserDAO extends DBContext {
 
         }
         return o;
+    }
+     
+    public static void main(String[] args) {
+        UserDAO dao = new UserDAO();
+        System.out.println(dao.getUserNameByUserId(1));
     }
 
     public String getUserNameByUserId(int userId) {
