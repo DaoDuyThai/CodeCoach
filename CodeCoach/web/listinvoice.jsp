@@ -118,7 +118,7 @@
                                                         count = count + 1;
                                                     }
                                                 }
-                                                invoice = count * Integer.parseInt(m.getHourlyRate()) *2;
+                                                invoice = count * Integer.parseInt(m.getHourlyRate()) * 2;
                                             %>
                                             <%out.print(invoice);%>
                                         </th>
@@ -128,7 +128,7 @@
                         </h2>
                         <div id="<%="collapse" + i%>" class="accordion-collapse collapse" aria-labelledby="<%="heading" + i%>" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <%for (int o = 0; o <listBookingDetails.size(); o++) {
+                                <%for (int o = 0; o < listBookingDetails.size(); o++) {
                                         if (listBookingDetails.get(o).getBookingId() == listBookings.get(i).getBookingId()) {
                                 %>
                                 <table>
@@ -136,7 +136,11 @@
 
                                         <th>
                                             <%out.print("Slot " + listBookingDetails.get(o).getSlotId());%>
-                                            <%out.print("aaa");%>
+                                            <%for (int v = 0; v < listSlots.size(); v++) {
+                                                    if (listBookingDetails.get(o).getSlotId() == listSlots.get(v).getSlotId()) {
+                                                        out.print("("+listSlots.get(v).getStartTime().substring(0, 8) +" - "+listSlots.get(v).getEndTime().substring(0, 8));
+                                                    }
+                                                }%>
                                         </th>
                                         <th>
                                             <%out.print(listBookingDetails.get(o).getDate());%>
@@ -154,13 +158,13 @@
                     %>
                 </div>
             </div>
-                <%@include file="footer.jsp" %>
+            <%@include file="footer.jsp" %>
         </div>
 
 
         <script src="assets/js/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/script.js"></script>
-        
+
     </body>
 </html>
