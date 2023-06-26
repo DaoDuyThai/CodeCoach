@@ -19,7 +19,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/build/web" relative="/" />
         </webroots>
-        <sourceRoots />
       </configuration>
     </facet>
   </component>
@@ -30,5 +29,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sqljdbc42" level="project" />
+    <orderEntry type="library" name="jakarta.servlet.jsp.jstl-api-2.0.0" level="project" />
+    <orderEntry type="library" name="jakarta.servlet.jsp.jstl-2.0.0" level="project" />
+    <orderEntry type="library" name="jakarta.mail-1.6.7" level="project" />
   </component>
 </module>

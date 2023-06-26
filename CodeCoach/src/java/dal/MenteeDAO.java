@@ -4,11 +4,12 @@
  */
 package dal;
 
-import model.Users;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import model.Mentees;
 
 /**
  *
@@ -19,34 +20,8 @@ public class MenteeDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    private final String GET_USER_BY_MENTEE_ID = " SELECT *\n" +
-            "FROM Users\n" +
-            "JOIN Mentees ON Users.userId = Mentees.userId\n" +
-            "WHERE Mentees.menteeId = ?";
-
-    public static void main(String[] args) {
-        //Test getUserByMenteeId (int menteeId)
-        Users user = new MenteeDAO().getUserByMenteeId(1);
-        System.out.println(user);
-    }
-
-    public Users getUserByMenteeId (int menteeId) {
-        Users user = new Users();
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(GET_USER_BY_MENTEE_ID);
-            ps.setInt(1, menteeId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                //Users(String fName, String lName, String gender, String email, String phoneNum, String address, String facebook,String password)
-                user = new Users(rs.getString("fName"), rs.getString("lName"), rs.getString("gender"), rs.getString("email"), rs.getString("PhoneNum"), rs.getString("address"),rs.getString("facebook"),rs.getString("password"));
-            }
-        } catch (Exception e) {
-        }
-        return user;
-    }
-
-     public String getMenteeIdbyUserId(String userId) {
+    
+    public String getMenteeIdbyUserId(String userId) {
         String menteeId ="";
         String query = "Select menteeId from Mentees where userId="+userId+"";
         try {
@@ -59,5 +34,21 @@ public class MenteeDAO {
         } catch (Exception e) {
         }
         return menteeId;
+    }
+     
+    public List<Mentees> getAllMentee() {
+        List<Mentees> listMentees = new ArrayList<>();
+        String querry = "select * from Mentees";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listMentees.add(new Mentees(rs.getInt(1), rs.getInt(2)));
+            }
+        } catch (Exception e) {
+        }
+
+        return listMentees;
     }
 }

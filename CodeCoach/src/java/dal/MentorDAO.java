@@ -4,13 +4,17 @@
  */
 package dal;
 
-import model.Mentors;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.List;
+import model.Mentors;
+import model.Skills;
+import java.util.HashMap;
+import java.util.Map;
+import model.Users;
 
 /**
  *
@@ -22,24 +26,7 @@ public class MentorDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    private String GET_MENTOR_BY_USER_ID = "SELECT * FROM [dbo].[Mentors] WHERE userId = ?";
-
-    public Mentors getMentorByUserId(int userId) {
-        Mentors mentor = new Mentors();
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(GET_MENTOR_BY_USER_ID);
-            ps.setInt(1, userId);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                mentor = new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
-            }
-        } catch (Exception e) {
-        }
-        return mentor;
-    }
-
-    public List<Mentors> getAll() {
+    public List<Mentors> getAllMentor() {
         List<Mentors> list = new ArrayList<>();
         String query = "Select * from mentors";
         try {
@@ -71,12 +58,28 @@ public class MentorDAO {
         return null;
     }
     
+    public Mentors getMentorByUserId(String userId) {
+        String query = "select * from mentors where userId ="+userId+"";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);          
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Mentors mentor = new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+                return mentor;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public void registerMentor(String userId, String biography, String hourlyRate) {
-        String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES("+userId+",'"+biography+"',"+hourlyRate+")";
+        String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES(" + userId + ",'" + biography + "'," + hourlyRate + ")";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();         
+            rs = ps.executeQuery();
         } catch (Exception e) {
         }
     }
@@ -89,7 +92,7 @@ public class MentorDAO {
             ps = conn.prepareStatement(query);
             ps.setInt(1, skillId);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 list.add(rs.getInt(2));
             }
         } catch (Exception e) {
@@ -97,7 +100,6 @@ public class MentorDAO {
         }
         return list;
     }
-
 
     public List<Integer> getMentorIdBySearch(String searchTxt) {
         List<Integer> list = new ArrayList<>();
@@ -126,59 +128,76 @@ public class MentorDAO {
         }
         return list;
     }
-  public List<Object> getMentorInformationByIdFromSearch(int mentorId) {
-    MentorDAO mentorDAO = new MentorDAO();
-    ExpertiseDAO expertiseDAO = new ExpertiseDAO();
-    UserDAO userDAO = new UserDAO();
 
-    List<Object> mentorInformation = new ArrayList<>();
+    public List<Object> getMentorInformationByIdFromSearch(int mentorId) {
+        MentorDAO mentorDAO = new MentorDAO();
+        ExpertiseDAO expertiseDAO = new ExpertiseDAO();
+        UserDAO userDAO = new UserDAO();
 
-    // Get mentor's user information
-    Object[] userInfo = userDAO.getUserInfoByMentorId(mentorId);
-    mentorInformation.add(userInfo[0]);
-    mentorInformation.add(userInfo[1]);
-    mentorInformation.add(userInfo[2]);
-    mentorInformation.add(userInfo[3]);
-    mentorInformation.add(userInfo[4]);
-    mentorInformation.add(userInfo[5]);
-    mentorInformation.add(userInfo[6]);
-    mentorInformation.add(userInfo[7]);
-    mentorInformation.add(userInfo[8]);
-    mentorInformation.add(userInfo[9]);
-    mentorInformation.add(userInfo[10]);
-    mentorInformation.add(userInfo[11]);
-    mentorInformation.add(userInfo[12]);
-    mentorInformation.add(userInfo[13]);
-    mentorInformation.add(userInfo[14]);
-    mentorInformation.add(userInfo[15]);
-    mentorInformation.add(userInfo[16]);
+        List<Object> mentorInformation = new ArrayList<>();
 
-    // Get mentor's skill names
-    List<Object[]> expertiseDetails = expertiseDAO.getExpertiseDetailsByMentorId(mentorId);
-    for (Object[] expertise : expertiseDetails) {
-        String skillName = (String) expertise[3];
-        mentorInformation.add(skillName);
+        // Get mentor's user information
+        Object[] userInfo = userDAO.getUserInfoByMentorId(mentorId);
+        mentorInformation.add(userInfo[0]);
+        mentorInformation.add(userInfo[1]);
+        mentorInformation.add(userInfo[2]);
+        mentorInformation.add(userInfo[3]);
+        mentorInformation.add(userInfo[4]);
+        mentorInformation.add(userInfo[5]);
+        mentorInformation.add(userInfo[6]);
+        mentorInformation.add(userInfo[7]);
+        mentorInformation.add(userInfo[8]);
+        mentorInformation.add(userInfo[9]);
+        mentorInformation.add(userInfo[10]);
+        mentorInformation.add(userInfo[11]);
+        mentorInformation.add(userInfo[12]);
+        mentorInformation.add(userInfo[13]);
+        mentorInformation.add(userInfo[14]);
+        mentorInformation.add(userInfo[15]);
+        mentorInformation.add(userInfo[16]);
+
+        // Get mentor's skill names
+        List<Object[]> expertiseDetails = expertiseDAO.getExpertiseDetailsByMentorId(mentorId);
+        for (Object[] expertise : expertiseDetails) {
+            String skillName = (String) expertise[3];
+            mentorInformation.add(skillName);
+        }
+
+        return mentorInformation;
     }
 
-    return mentorInformation;
-}
-
-
-    
-    public static void main(String[] args) {
-        MentorDAO mdao = new MentorDAO();
-        UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
-        List<Object[]> listUInfo = new ArrayList<>();
-        for (Integer mentorId : listMId) {
-            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
-            listUInfo.add(uInfo);
-        }
-        for (Object[] objects : listUInfo) {
-            for(int i = 0; i < objects.length; i++){
-                System.out.print(objects[i] + " ");
+    public List<Object[]> getTop5MostBookedMentors() {
+        String query = "SELECT TOP 5 m.mentorId, m.userId, u.fName, u.lName, COUNT(m.mentorId) AS mentorOccurrence\n"
+                + "FROM booking b\n"
+                + "JOIN mentors m ON b.mentorId = m.mentorId\n"
+                + "JOIN users u ON m.userId = u.userId\n"
+                + "GROUP BY m.mentorId, u.fName, u.lName, m.userId\n"
+                + "ORDER BY mentorOccurrence DESC;";
+        List<Object[]> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Object[] mentorOccurrence = new Object[5];
+                mentorOccurrence[0] = rs.getInt(1);
+                mentorOccurrence[1] = rs.getInt(2);
+                mentorOccurrence[2] = rs.getString(3);
+                mentorOccurrence[3] = rs.getString(4);
+                mentorOccurrence[4] = rs.getInt(5);
+                list.add(mentorOccurrence);
             }
-            System.out.println("");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        MentorDAO dao = new MentorDAO();
+        List<Object[]> list = dao.getTop5MostBookedMentors();
+        for (Object[] objects : list) {
+            System.out.println(objects[0] + " " + objects[1]+ " " + objects[2]+ " " + objects[3]+ " " + objects[4]);
         }
     }
 }
