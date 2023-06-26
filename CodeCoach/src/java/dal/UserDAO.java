@@ -279,10 +279,7 @@ public class UserDAO extends DBContext {
         return o;
     }
      
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        System.out.println(dao.getUserNameByUserId(1));
-    }
+    
 
     public String getUserNameByUserId(int userId) {
         String fullName = "";
