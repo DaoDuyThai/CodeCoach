@@ -41,7 +41,7 @@
         <%@include file="header.jsp" %>
         <!--End of header-->
 
-        <div class="account-box">              
+        <div class="account-box">
             <div class="login-right">
                 <div class="accordion" id="accordionExample">
 
@@ -66,9 +66,9 @@
                                     <th>Mentee Name</th>
                                     <th>Skill</th>
                                     <th>Invoice</th>
-                                </tr>                                   
+                                </tr>
                             </table>
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse" + i%>" aria-expanded="false" aria-controls="<%="collapse" + i%>">                             
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="<%="#collapse" + i%>" aria-expanded="false" aria-controls="<%="collapse" + i%>">
                                 <table>
                                     <tr>
                                         <th>
@@ -120,7 +120,7 @@
                                             %>
                                             <%out.print(invoice);%>
                                         </th>
-                                    </tr>                                   
+                                    </tr>
                                 </table>
                             </button>
                         </h2>
@@ -145,7 +145,7 @@
                                     }%>
                             </div>
                         </div>
-                    </div>  
+                    </div>
                     <%
                         }
                     %>

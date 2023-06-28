@@ -4,6 +4,7 @@
  */
 package dal;
 
+import controller.booking.Utilities;
 import model.QuanHuyen;
 import model.TinhThanhPho;
 
@@ -12,6 +13,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import model.QuanHuyen;
+import model.Roles;
+import model.TinhThanhPho;
 
 /**
  *
@@ -46,7 +56,7 @@ public class TinhThanhPhoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result;
+        return Utilities.convertToNonDiacritics(result);
     }
 
     public List<TinhThanhPho> getAllTinhThanhPho() {

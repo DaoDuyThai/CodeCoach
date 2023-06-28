@@ -10,13 +10,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import java.util.List;
+import model.Booking;
 
 /**
  *
  * @author giang
  */
 public class BookingDAO {
+
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
@@ -39,10 +41,10 @@ public class BookingDAO {
         }
         return list;
     }
-    
-     public Booking getBookingLatestbyMenteeId(String menteeId) {
+
+    public Booking getBookingLatestbyMenteeId(String menteeId) {
         Booking b = new Booking();
-        String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = "+menteeId+" AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = "+menteeId+");";
+        String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = " + menteeId + " AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = " + menteeId + ");";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(querry);
@@ -68,8 +70,19 @@ public class BookingDAO {
         }
     }
 
-    public static void main(String[] args) {
-        //test updateBookingStatus
-        new BookingDAO().updateBookingStatus(1, "Pending");
+    public List<Booking> getBookingsByMentorId(int mentorId) {
+        List<Booking> list = new ArrayList<>();
+        String querry = "SELECT * FROM [dbo].[Booking] WHERE mentorId = " + mentorId + ";";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

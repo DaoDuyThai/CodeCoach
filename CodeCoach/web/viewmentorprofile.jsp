@@ -89,7 +89,7 @@
                                         <div class="user-info-right d-flex align-items-end flex-wrap">
                                             <div class="hireme-btn text-center">
                                                 <span class="hire-rate">${mentor.hourlyRate}VND/Hour</span>
-                                                <a class="blue-btn-radius" href="">Hire Me</a>
+                                                <a class="blue-btn-radius" href="book?mentor-id=${mentor.mentorId}&user-id=${mentor.userId}">Hire Me</a>
                                             </div>
                                         </div>
                                     </div>

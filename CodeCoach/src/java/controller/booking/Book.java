@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-
 package controller.booking;
 
 import dal.BookingDAO;
@@ -18,13 +13,11 @@ import model.Users;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
-/**
- *
- * @author dai nghia
- */
-@WebServlet(name="MentorBookingController", urlPatterns={"/mentor-booking"})
-public class MentorBookingController extends HttpServlet {
+@WebServlet(name="Book", urlPatterns={"/book"})
+public class Book extends HttpServlet {
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -39,29 +32,13 @@ public class MentorBookingController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String go = request.getParameter("go");
-        if (go == null){
-            Users user = (Users) request.getSession().getAttribute("users");
-            if(user == null || user.getRoleId() != 2){
-                response.sendRedirect("login");
-                return;
-            }
-
-            Mentors mentor = new MentorDAO().getMentorByUserId(user.getUserId());
-
-            ArrayList<Booking> mentorBookings = new BookingDAO().getBookingMentorId(mentor.getMentorId());
-
-            request.setAttribute("mentorBookings", mentorBookings);
-
-            request.getRequestDispatcher("booking/mentor-booking.jsp").forward(request, response);
-        }
-        else if("change-status".equals(go)){
-            int bookingId = Integer.parseInt(request.getParameter("booking-id"));
-            String status = request.getParameter("status");
-            BookingDAO bookingDAO = new BookingDAO();
-            bookingDAO.updateBookingStatus(bookingId, status);
-            response.sendRedirect("mentor-booking");
-        }
+        String mentorId = request.getParameter("mentor-id");
+        String userId = request.getParameter("user-id");
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        request.setAttribute("now", now);
+        request.setAttribute("start-day", Utilities.getStartDayOfWeek(calendar));
+        request.getRequestDispatcher("booking/book.jsp").forward(request, response);
 
     }
 

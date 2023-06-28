@@ -11,17 +11,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import model.Slot;
 
 public class SlotDAO extends DBContext{
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public static void main(String[] args) {
-        SlotDAO slotDAO = new SlotDAO();
-        Slot slot = slotDAO.getSlotByBookingDetailsId(1);
-        System.out.println(slot);
-    }
 
     private final String GET_SLOT_BY_BOOKING_DETAILS_ID = " SELECT Slot.*\n" +
             "FROM Slot\n" +
@@ -77,5 +73,8 @@ public class SlotDAO extends DBContext{
         return slot;
     }
     
-
+    public static void main(String[] args) {
+        Slot slot = new SlotDAO().getSlotbySlotId(1);
+        System.out.println(slot.getStartTime().substring(0, 8));
+    }
 }

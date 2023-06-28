@@ -3,7 +3,7 @@
     Created on : Jun 12, 2023, 9:54:34 PM
     Author     : MrTuan
 --%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,28 @@
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
         <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <style>
+            .action-button{
+                display: flex;
+                width: 80px;
+                height: 28px;
+                margin: 0 5px 0 0;
+                text-align: center;
+                background: #fba20a;
+                border-radius: 5px;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                pointer-events: none;
+            }
+
+            .action-table-data{
+                display: flex;
+                width: auto;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
     </head>
     <body>
 
@@ -109,6 +131,7 @@
                                                         <th>MENTEE LISTS</th>
                                                         <th>SCHEDULED DATE</th>
                                                         <th class="text-center">SCHEDULED TIMINGS</th>
+                                                        <th class="text-center">Status</th>
                                                         <th class="text-center">ACTION</th>
                                                     </tr>
                                                 </thead>
@@ -119,8 +142,26 @@
                                                                 ${booking.menteeName}
                                                             </td>
                                                             <td>${booking.date}</td>
-                                                            <td class="text-center"><span class="pending">${booking.startTime} - ${booking.endTime}</span></td>
+                                                            <fmt:parseDate var="start_time" value="${booking.startTime}" pattern="HH:mm:ss.SSSSSSS" />
+                                                            <fmt:parseDate var="end_time" value="${booking.endTime}" pattern="HH:mm:ss.SSSSSSS" />
+
+                                                            <td class="text-center"><span class="pending"><fmt:formatDate value="${start_time}" pattern="hh:mm a" /> - <fmt:formatDate value="${end_time}" pattern="hh:mm a" /></span></td>
                                                             <td class="text-center"><a href="profile-mentee.html" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i>${booking.status}</a></td>
+                                                            <td class="text-center action-table-data">
+                                                                <c:if test="">
+
+                                                                </c:if>
+                                                                <c:choose>
+                                                                    <c:when test="${booking.status == 'Pending' && booking.status != 'Rejected'}">
+                                                                        <a class="action-button" href="mentor-booking?go=change-status&booking-id=${booking.bookingId}&status=Rejected">Reject</a>
+                                                                        <a class="action-button" href="mentor-booking?go=change-status&booking-id=${booking.bookingId}&status=Accepted">Accept</a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a class="action-button" href="mentor-booking?go=change-status&booking-id=${booking.bookingId}&status=Accepted">No action</a>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+
+                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>

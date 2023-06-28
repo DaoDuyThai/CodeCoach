@@ -49,7 +49,26 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String searchTxt = request.getParameter("searchTxt");
+        MentorDAO mentorDAO = new MentorDAO();
+        List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
+
+        List<Object> mentorInformationList = new ArrayList<>();
+        try{
+        if (searchTxt!= null){
+        for (Integer mentorId : mentorIds) {
+             List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
+            mentorInformationList.add(mentorInformation);
+        }
+        request.setAttribute("mentors", mentorInformationList);
         request.getRequestDispatcher("search.jsp").forward(request, response);
+        }
+        else {response.sendRedirect(request.getContextPath());}
+
+        }
+        catch (Exception e){
+            System.err.println(e);
+        }
     } 
 
     /** 

@@ -97,7 +97,7 @@ public class BookingDetailDAO {
         }
         return 0;
     }
-    
+
     public static void main(String[] args) {
         BookingDetailDAO dao = new BookingDetailDAO();
         System.out.println(dao.countBookingsByYearAndMonth(2023, 3));

@@ -94,7 +94,7 @@ public class ListInvoiceController extends HttpServlet {
                 request.setAttribute("bookingDetails", bookingDetails);
                 List<Integer> listCountDetail = new BookingDetailDAO().countBookingDetailsbyId();
                 request.setAttribute("listCountDetail", listCountDetail);
-               
+
                 request.getRequestDispatcher("listinvoice.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login");
@@ -104,7 +104,7 @@ public class ListInvoiceController extends HttpServlet {
             response.sendRedirect("login");
         }
 
-        
+
     } 
 
     /** 
