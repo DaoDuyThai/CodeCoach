@@ -74,6 +74,9 @@
                             <li class="has-submenu">
                                 <a href="contactus">Contact Us <i class="fas "></i></a>
                             </li>
+                            <li class="has-submenu">
+                                <a href="faq">FAQ <i class="fas "></i></a>
+                            </li>
 
                             <!--Admin button-->
                             <c:if test="${users.roleId == 1}">
