@@ -5,6 +5,7 @@
 package controller.admin;
 
 import dal.BookingDetailDAO;
+import dal.MenteeDAO;
 import dal.MentorDAO;
 import dal.SkillDAO;
 import dal.UserDAO;
@@ -64,13 +65,14 @@ public class AdminDashboardController extends HttpServlet {
             throws ServletException, IOException {
         //create daos
         UserDAO userDao = new UserDAO();
+        MenteeDAO menteeDao = new MenteeDAO();
         SkillDAO skillDao = new SkillDAO();
         BookingDetailDAO bookingDetailDao = new BookingDetailDAO();
         MentorDAO mentorDao = new MentorDAO();
         //get total mentor
-        int totalMentor = userDao.getTotalUserByRoleId(2);
+        int totalMentor = mentorDao.getTotalMentorNumber();
         //get total mentee
-        int totalMentee = userDao.getTotalUserByRoleId(3);
+        int totalMentee = menteeDao.getTotalMenteeNumber();
         //get total skill
         int totalSkill = skillDao.getTotalSkill();
         //get total users

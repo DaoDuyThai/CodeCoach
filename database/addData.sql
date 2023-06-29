@@ -103,10 +103,6 @@ VALUES
   (2, 12),
   (2, 22);
 
-  -- Insert data into Mentees table
-INSERT INTO Mentees (userId)
-VALUES
-  (3);
 
   -- Insert data into MenteeInterests table
 INSERT INTO MenteeInterests (menteeId, skillId)

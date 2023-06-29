@@ -73,4 +73,21 @@ public class MenteeDAO {
 
         return listMentees;
     }
+    
+    public int getTotalMenteeNumber() {
+        String query = "select count(menteeid) as Total from mentees";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 }
