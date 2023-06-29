@@ -60,16 +60,18 @@
                                 <c:forEach var="feedback" items="${feedbackList}">
                                     <li>
                                         <div class="comment">
-                                            <img class="avatar rounded-circle" alt="User Image" src="assets/images/users/${feedback.getUserId()}.png">
+                                            <img class="avatar rounded-circle" alt="User Image" src="assets/images/users/${feedback[3]}.png">
                                             <div class="comment-body">
                                                 <div class="meta-data">
-                                                    <span class="comment-author">${feedback.getReviewerName()}</span>
-                                                    <span class="comment-date">Reviewed ${feedback.getReviewDateTime()}</span>
+                                                    <span class="comment-author">${feedback[4]} ${feedback[5]}</span>
+                                                    <span class="comment-date">Reviewed ${feedback[8]}</span>
+                                                    
+                                                </div>
                                                     <div class="review-count rating">
                                                         <!-- Display star ratings here -->
                                                         <c:forEach var="star" begin="1" end="5">
                                                             <c:choose>
-                                                                <c:when test="${feedback.getRating() >= star}">
+                                                                <c:when test="${feedback[6] >= star}">
                                                                     <i class="fas fa-star filled"></i>
                                                                 </c:when>
                                                                 <c:otherwise>
@@ -78,8 +80,7 @@
                                                             </c:choose>
                                                         </c:forEach>
                                                     </div>
-                                                </div>
-                                                <p class="comment-content">${feedback.getReviewText()}</p>
+                                                <p class="comment-content">${feedback[7]}</p>
                                             </div>
                                         </div>
                                     </li>

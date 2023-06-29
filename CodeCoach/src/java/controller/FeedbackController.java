@@ -82,7 +82,7 @@ public class FeedbackController extends HttpServlet {
             int userId = user.getUserId();
             try {
                 int mentorId = mentorDAO.getMentorIdByUserId(userId, 0);
-                List<Feedback> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
+                List<Object> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
                 request.setAttribute("feedbackList", feedbackList);
                 request.getRequestDispatcher("feedback.jsp").forward(request, response);
             } catch (Exception e) {

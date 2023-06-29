@@ -113,7 +113,7 @@ public class MentorDAO {
         }
         return list;
     }
-  public List<Object> getMentorInformationById(int mentorId) {
+  public List<Object> getMentorInformationByIdFromSearch(int mentorId) {
     MentorDAO mentorDAO = new MentorDAO();
     ExpertiseDAO expertiseDAO = new ExpertiseDAO();
     UserDAO userDAO = new UserDAO();

@@ -135,7 +135,7 @@ CREATE TABLE BookingDetails(
 
 CREATE TABLE Feedback (
   feedbackId INT IDENTITY(1,1) PRIMARY KEY,
-  userId INT NOT NULL,
+  menteeId INT NOT NULL,
   mentorId INT NOT NULL,
   bookingId INT NOT NULL,
   rating INT NOT NULL,
