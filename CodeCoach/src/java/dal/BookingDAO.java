@@ -84,8 +84,4 @@ public class BookingDAO {
         }
     }
 
-    public static void main(String[] args) {
-        //test updateBookingStatus
-        new BookingDAO().updateBookingStatus(1, "Pending");
-    }
 }
