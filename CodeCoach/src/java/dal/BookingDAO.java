@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -38,6 +39,21 @@ public class BookingDAO {
         } catch (Exception e) {
         }
         return list;
+    }
+    
+    public List<Booking> getBookingsByMentorId(int mentorId) {
+        List<Booking> listBookings = new ArrayList<>();
+        String querry = "Select * From Booking Where mentorId=" + mentorId + " AND status='Accepted'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookings.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
+            }
+        } catch (Exception e) {
+        }
+        return listBookings;
     }
     
      public Booking getBookingLatestbyMenteeId(String menteeId) {
