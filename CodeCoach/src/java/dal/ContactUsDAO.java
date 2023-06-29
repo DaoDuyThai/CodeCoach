@@ -36,12 +36,4 @@ public class ContactUsDAO {
         return list;
     }
     
-    
-    public static void main(String[] args) {
-        ContactUsDAO d = new ContactUsDAO();
-        List<ContactUs> list = d.getAll();
-        for(ContactUs l : list){
-            System.out.println(l);
-        }
-    }
 }
