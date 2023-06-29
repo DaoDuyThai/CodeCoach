@@ -94,10 +94,5 @@ public class EmailDAO extends DBContext {
         } 
         return token;
     }
-//    public static void main(String[] args) {
-//        EmailDAO dao = new EmailDAO();
-//          //dao.addVerificationCode("mentee@mentee.com", "2564");
-//        dao.verifyEmail("hoangkiet2107@gmail.com", "2564");
-////        dao.getTokenByEmail("hoangkiet2107@gmail.com");
-//  
+
 }
