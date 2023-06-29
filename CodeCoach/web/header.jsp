@@ -46,7 +46,7 @@
                                     </ul>
                                 </li>
                             </c:if>
-                            <c:if test="${users.userId==3}">
+                            <c:if test="${users.roleId==3 || users.roleId == 2 || users.roleId == 1}">
 
                                 <li class="has-submenu">
                                     <a href>Mentee <i class="fas fa-chevron-down"></i></a>
