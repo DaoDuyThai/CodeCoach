@@ -124,17 +124,17 @@ VALUES
 INSERT INTO Booking (mentorId, menteeId, skillId, status)
 VALUES
   (1, 1, 13, 'Accepted'),
-  (1, 1, 14, 'Pending'),
-  (2, 1, 1, 'Accepted'),
-  (2, 1, 2, 'Rejected'),
+  (1, 2, 14, 'Pending'),
+  (2, 3, 1, 'Accepted'),
+  (2, 4, 2, 'Rejected'),
   (2, 1, 3, 'Pending'),
-  (1, 1, 1, 'Accepted'),
-  (2, 1, 5, 'Pending'),
-  (1, 1, 13, 'Rejected'),
+  (1, 2, 1, 'Accepted'),
+  (2, 3, 5, 'Pending'),
+  (1, 4, 13, 'Rejected'),
   (2, 1, 22, 'Rejected'),
-  (1, 1, 14, 'Pending'),
-  (2, 1, 12, 'Rejected'),
-  (1, 1, 13, 'Pending');
+  (1, 2, 14, 'Pending'),
+  (2, 3, 12, 'Rejected'),
+  (1, 3, 13, 'Pending');
   
 
   -- Insert data into BookingDetails table

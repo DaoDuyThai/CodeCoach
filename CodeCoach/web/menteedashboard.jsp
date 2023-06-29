@@ -49,20 +49,7 @@
                         
                         <div class="col-md-7 col-lg-8 col-xl-9">
                             <div class="row">
-                                <div class="col-md-12 col-lg-4 dash-board-list blue">
-                                    <div class="dash-widget">
-                                        <div class="circle-bar">
-                                            <div class="icon-col">
-                                                <i class="fas fa-users"></i>
-                                            </div>
-                                        </div>
-                                        <div class="dash-widget-info">
-                                            <h3>23</h3>
-                                            <h6>Members</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-lg-4 dash-board-list yellow">
+                                <div class="col-md-12 col-lg-3 dash-board-list blue">
                                     <div class="dash-widget">
                                         <div class="circle-bar">
                                             <div class="icon-col">
@@ -70,21 +57,34 @@
                                             </div>
                                         </div>
                                         <div class="dash-widget-info">
-                                            <h3>33</h3>
-                                            <h6>Appointments</h6>
+                                            <h3>${totalAcceptedBooking}</h3>
+                                            <h6>Total Booking</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 col-lg-4 dash-board-list pink">
+                                <div class="col-md-12 col-lg-3 dash-board-list blue">
                                     <div class="dash-widget">
                                         <div class="circle-bar">
                                             <div class="icon-col">
-                                                <i class="fas fa-wallet"></i>
+                                                <i class="fas fa-calendar-week"></i>
                                             </div>
                                         </div>
                                         <div class="dash-widget-info">
-                                            <h3>$14</h3>
-                                            <h6>Total Earned</h6>
+                                            <h3>33</h3>
+                                            <h6>Total<br/>Slots</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-3 dash-board-list pink">
+                                    <div class="dash-widget">
+                                        <div class="circle-bar">
+                                            <div class="icon-col">
+                                                <i class="fas fa-calendar-minus"></i>
+                                            </div>
+                                        </div>
+                                        <div class="dash-widget-info">
+                                            <h3>${totalPendingBooking}</h3>
+                                            <h6>Pending Bookings</h6>
                                         </div>
                                     </div>
                                 </div>
