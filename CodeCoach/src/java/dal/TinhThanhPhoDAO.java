@@ -23,9 +23,7 @@ public class TinhThanhPhoDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public static void main(String[] args) {
-        System.out.println(new TinhThanhPhoDAO().getTTPNameAndQHName(1));
-    }
+
 
     private final String GET_TTPNAME_QHNAME_BY_USER_ID = "select qh_name.name as qh_name, ttp.name as tp_name from (SELECT qh.name, qh.mattp\n" +
             "FROM Users u\n" +

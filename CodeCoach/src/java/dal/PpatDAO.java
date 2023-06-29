@@ -36,11 +36,5 @@ public class PpatDAO {
         }
         return list;
     }
-    public static void main(String[] args) {
-        PpatDAO d = new PpatDAO();
-        List<Ppat> L = d.getAll();
-        for (Ppat ppat : L) {
-            System.out.println(ppat);
-        }
-    }
+
 }

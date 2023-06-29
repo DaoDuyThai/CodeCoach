@@ -17,11 +17,6 @@ public class SlotDAO extends DBContext{
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public static void main(String[] args) {
-        SlotDAO slotDAO = new SlotDAO();
-        Slot slot = slotDAO.getSlotByBookingDetailsId(1);
-        System.out.println(slot);
-    }
 
     private final String GET_SLOT_BY_BOOKING_DETAILS_ID = " SELECT Slot.*\n" +
             "FROM Slot\n" +
