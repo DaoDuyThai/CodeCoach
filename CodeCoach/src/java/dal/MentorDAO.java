@@ -169,20 +169,4 @@ public class MentorDAO {
     }
 
     
-    public static void main(String[] args) {
-        MentorDAO mdao = new MentorDAO();
-        UserDAO udao = new UserDAO();
-        List<Integer> listMId = mdao.getAllMentorIdBySkillId(13);
-        List<Object[]> listUInfo = new ArrayList<>();
-        for (Integer mentorId : listMId) {
-            Object[] uInfo = udao.getUserInfoByMentorId(mentorId);
-            listUInfo.add(uInfo);
-        }
-        for (Object[] objects : listUInfo) {
-            for(int i = 0; i < objects.length; i++){
-                System.out.print(objects[i] + " ");
-            }
-            System.out.println("");
-        }
-    }
 }
