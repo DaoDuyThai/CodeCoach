@@ -48,7 +48,7 @@
                             </c:if>
                             <c:if test="${users.roleId==3 || users.roleId == 2 || users.roleId == 1}">
 
-                                <li class="has-submenu">
+                                <li  class="has-submenu">
                                     <a href>Mentee <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                         <li><a href="menteedashboard">Mentee Dashboard</a></li>
