@@ -134,12 +134,6 @@ public class BookingDAO {
         return 0;
     }
     
-    public static void main(String[] args) {
-        BookingDAO dao = new BookingDAO();
-        System.out.println(dao.getTotalPendingBookingByMenteeId(1));
-    }
-    
-    
-    
+
 
 }
