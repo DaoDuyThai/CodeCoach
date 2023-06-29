@@ -135,7 +135,7 @@ public class BookingDAO {
     }
 
     public int getTotalMoneySpentByMenteeId(int menteeId) {
-        String query = "   select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
+        String query = "select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
                 + "   join Booking b on bd.bookingId = b.bookingId \n"
                 + "   join Mentors m on m.mentorId = b.mentorId\n"
                 + "   where b.menteeId = "+menteeId+" and status = 'Accepted' ";
@@ -154,5 +154,5 @@ public class BookingDAO {
         return 0;
     }
     
-    
+   
 }

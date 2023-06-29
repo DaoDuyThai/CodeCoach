@@ -20,25 +20,26 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-        
+
         <script>
-            
             window.onload = function () {
-            //bar chart start
-            var barChart = new CanvasJS.Chart("barChartContainer", {
-            animationEnabled: true,
-                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    exportEnabled: true,
+                    theme: "light1", // "light1", "light2", "dark1", "dark2"
                     title: {
-                    text: "Monthly Booking Statistics"
+                        text: "Monthly Spending"
                     },
                     axisY: {
-                    title: "Number of bookings"
+                        includeZero: true
                     },
                     data: [{
-                    type: "column",
-                            showInLegend: true,
-                            legendMarkerColor: "grey",
-                            legendText: " ",
+                            type: "column", //change type to bar, line, area, pie, etc
+                            //indexLabel: "{y}", //Shows y value on all Data Points
+                            indexLabelFontColor: "#5A5757",
+                            indexLabelFontSize: 16,
+                            indexLabelPlacement: "outside",
                             dataPoints: [
                             {y: ${jan}, label: "Jan"},
                             {y: ${feb}, label: "Feb"},
@@ -53,21 +54,23 @@
                             {y: ${nov}, label: "Nov"},
                             {y: ${dec}, label: "Dec"}
                             ]
-                    }]
-            });
-            //bar chart end
+                        }]
+                });
+                chart.render();
+
+            }
         </script>
     </head>
     <body>
         <div class="main-wrapper">
             <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
-        var totalSpendingAfter = ${totalSpending};
-        totalSpendingAfter = totalSpendingAfter.toLocaleString('vi', {style: 'currency', currency: 'VND'});
-        console.log(totalSpendingAfter);
-        document.getElementById("totalSpending").innerHTML = totalSpendingAfter;
-    });
-</script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var totalSpendingAfter = ${totalSpending};
+                    totalSpendingAfter = totalSpendingAfter.toLocaleString('vi', {style: 'currency', currency: 'VND'});
+                    console.log(totalSpendingAfter);
+                    document.getElementById("totalSpending").innerHTML = totalSpendingAfter;
+                });
+            </script>
 
 
             <!-- Header is placed here -->
@@ -148,168 +151,13 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <h4 class="mb-4">Monthly Spendings</h4>
+
                             <div class="row">
-                                <div class="col-md-12">
-                                    <h4 class="mb-4">Mentee Lists</h4>
-                                    <div class="card card-table">
-                                        <div class="card-body">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-center mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>BASIC INFO</th>
-                                                            <th>CREATED DATE</th>
-                                                            <th class="text-center">TAGS</th>
-                                                            <th class="text-center">ACTION</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user2.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Tyrone Roberts<span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="ec98959e8382899e838e899e989fac8d88838e89c28f8381">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="pending">PENDING</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user1.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Julie Pennington <span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="761c031a1f133617121914135815191b">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="pending">PENDING</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user3.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Allen Davis <span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="cfaea3a3aaa1abaeb9a6bc8faeaba0adaae1aca0a2">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="pending">PENDING</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user4.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Patricia Manzi <span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="1161706563787278707c707f6b785170757e73743f727e7c">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="accept">ACCEPTED</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user5.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Olive Lawrence <span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="c9a6a5a0bfaca5a8bebbaca7aaac89a8ada6abace7aaa6a4">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="accept">ACCEPTED</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user6.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Frances Foster <span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="610713000f0204122100050e03044f020e0c">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="accept">ACCEPTED</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <h2 class="table-avatar">
-                                                                    <a href="profile.html"
-                                                                       class="avatar avatar-sm me-2"><img
-                                                                            class="avatar-img rounded-circle"
-                                                                            src="assets/img/user/user7.jpg"
-                                                                            alt="User Image"></a>
-                                                                    <a href="profile.html">Deloris Briscoe <span><span
-                                                                                class="__cf_email__"
-                                                                                data-cfemail="254140494a574c5647574c56464a406544414a47400b464a48">[email&#160;protected]</span></span></a>
-                                                                </h2>
-                                                            </td>
-                                                            <td>08 April 2020</td>
-                                                            <td class="text-center"><span class="reject">REJECTED</span>
-                                                            </td>
-                                                            <td class="text-center"><a href="profile.html"
-                                                                                       class="btn btn-sm bg-info-light"><i
-                                                                        class="far fa-eye"></i> View</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <!--bar chart start-->
+                                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                                <!--bar chart end-->
                             </div>
                         </div>
                     </div>
@@ -333,5 +181,7 @@
         <script src="assets/plugins/theia-sticky-sidebar/theia-sticky-sidebar.js"></script>
 
         <script src="assets/js/script.js"></script>
+
+        <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     </body>
 </html>

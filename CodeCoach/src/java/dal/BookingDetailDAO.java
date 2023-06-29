@@ -115,5 +115,30 @@ public class BookingDetailDAO {
         return 0;
     }
     
+    public int getMonthlyMoneySpentByMenteeId(int menteeId, int year, int month) {
+        String query = "select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
+                + "   join Booking b on bd.bookingId = b.bookingId \n"
+                + "   join Mentors m on m.mentorId = b.mentorId\n"
+                + "   where b.menteeId = "+menteeId+" and status = 'Accepted' and YEAR(bd.date) = "+year+" and month(bd.date) = "+ month+"";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+    public static void main(String[] args) {
+        BookingDetailDAO dao = new BookingDetailDAO();
+        System.out.println(dao.getMonthlyMoneySpentByMenteeId(1, 2023, 5));
+    }
+    
    
 }
