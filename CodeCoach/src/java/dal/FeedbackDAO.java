@@ -47,25 +47,5 @@ public class FeedbackDAO extends DBContext {
 
         return feedbackList;
     }
-
-    public static void main(String[] args) {
-        MentorDAO mentorDao = new MentorDAO();
-        FeedbackDAO dao= new FeedbackDAO();
-        // Get the userId from the session or request parameters
-            int userId = 2;
-            
-            // Get the mentorId associated with the userId
-            int mentorId = mentorDao.getMentorIdByUserId(userId, 0);
-             // Get the feedback for the mentor
-        List<Feedback> feedbackList = dao.getAllFeedbackOfMentor(1);
-        
-        for (Feedback feedback : feedbackList) {
-            System.out.println("Reviewer Name: " + feedback.getReviewerName());
-            System.out.println("Review Date/Time: " + feedback.getReviewDateTime());
-            System.out.println("Rating: " + feedback.getRating());
-            System.out.println("Review Text: " + feedback.getReviewText());
-            System.out.println();
-        }
-    }
     
 }
