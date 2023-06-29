@@ -135,10 +135,7 @@ public class BookingDetailDAO {
         return 0;
     }
     
-    public static void main(String[] args) {
-        BookingDetailDAO dao = new BookingDetailDAO();
-        System.out.println(dao.getMonthlyMoneySpentByMenteeId(1, 2023, 5));
-    }
+
     
    
 }
