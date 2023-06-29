@@ -75,7 +75,7 @@
                                 <a href="contactus">Contact Us <i class="fas "></i></a>
                             </li>
                             <li class="has-submenu">
-                                <a href="faq ">FAQ <i class="fas "></i></a>
+                                <a href="faq">FAQ <i class="fas "></i></a>
                             </li>
 
                             <!--Admin button-->
