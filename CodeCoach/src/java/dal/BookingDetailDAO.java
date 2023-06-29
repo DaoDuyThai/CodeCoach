@@ -98,5 +98,22 @@ public class BookingDetailDAO {
         return 0;
     }
     
-
+    public int getTotalBookingSlotByMenteeId(int menteeId) {
+        String query = "  select count(bd.bookingDetailId) as Total from BookingDetails bd join Booking b on bd.bookingId = b.bookingId where b.menteeId = "+menteeId+" and status = 'Accepted'";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+   
 }

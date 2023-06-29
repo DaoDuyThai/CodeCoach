@@ -5,6 +5,7 @@
 package controller.mentee;
 
 import dal.BookingDAO;
+import dal.BookingDetailDAO;
 import dal.MenteeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,7 +67,9 @@ public class MenteeDashboardController extends HttpServlet {
         //create daos
         MenteeDAO menteeDao = new MenteeDAO();
         BookingDAO bookingDao = new BookingDAO();
-
+        BookingDetailDAO bookingDetailDao = new BookingDetailDAO();
+        
+        
         //get user from login session
         Users user = (Users) session.getAttribute("users");
         try {
@@ -74,15 +77,18 @@ public class MenteeDashboardController extends HttpServlet {
             int menteeId = Integer.parseInt(menteeDao.getMenteeIdbyUserId(Integer.toString(user.getUserId())));
             //get total accepted booking
             int totalAcceptedBooking = bookingDao.getTotalAcceptedBookingByMenteeId(menteeId);
-            
-            
-            //get total pending
+            //get total accepted slots
+            int totalSlot = bookingDetailDao.getTotalBookingSlotByMenteeId(menteeId);
+            //get total pending booking
             int totalPendingBooking = bookingDao.getTotalPendingBookingByMenteeId(menteeId);
-
+            //get total spendings
+            int totalSpending = bookingDao.getTotalMoneySpentByMenteeId(menteeId);
+            
             //set data to jsp
             request.setAttribute("totalAcceptedBooking", totalAcceptedBooking);
-            
+            request.setAttribute("totalSlot", totalSlot);
             request.setAttribute("totalPendingBooking", totalPendingBooking);
+            request.setAttribute("totalSpending", totalSpending);
 
             //send data to jsp
             request.getRequestDispatcher("menteedashboard.jsp").forward(request, response);

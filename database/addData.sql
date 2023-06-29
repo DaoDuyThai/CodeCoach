@@ -131,7 +131,7 @@ VALUES
   (1, 2, 1, 'Accepted'),
   (2, 3, 5, 'Pending'),
   (1, 4, 13, 'Rejected'),
-  (2, 1, 22, 'Rejected'),
+  (2, 3, 22, 'Rejected'),
   (1, 2, 14, 'Pending'),
   (2, 3, 12, 'Rejected'),
   (1, 3, 13, 'Pending');

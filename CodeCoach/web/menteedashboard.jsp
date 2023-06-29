@@ -20,9 +20,55 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
+        
+        <script>
+            
+            window.onload = function () {
+            //bar chart start
+            var barChart = new CanvasJS.Chart("barChartContainer", {
+            animationEnabled: true,
+                    theme: "light2", // "light1", "light2", "dark1", "dark2"
+                    title: {
+                    text: "Monthly Booking Statistics"
+                    },
+                    axisY: {
+                    title: "Number of bookings"
+                    },
+                    data: [{
+                    type: "column",
+                            showInLegend: true,
+                            legendMarkerColor: "grey",
+                            legendText: " ",
+                            dataPoints: [
+                            {y: ${jan}, label: "Jan"},
+                            {y: ${feb}, label: "Feb"},
+                            {y: ${mar}, label: "Mar"},
+                            {y: ${apr}, label: "Apr"},
+                            {y: ${may}, label: "May"},
+                            {y: ${jun}, label: "Jun"},
+                            {y: ${jul}, label: "Jul"},
+                            {y: ${aug}, label: "Aug"},
+                            {y: ${sep}, label: "Sep"},
+                            {y: ${oct}, label: "Oct"},
+                            {y: ${nov}, label: "Nov"},
+                            {y: ${dec}, label: "Dec"}
+                            ]
+                    }]
+            });
+            //bar chart end
+        </script>
     </head>
     <body>
         <div class="main-wrapper">
+            <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        var totalSpendingAfter = ${totalSpending};
+        totalSpendingAfter = totalSpendingAfter.toLocaleString('vi', {style: 'currency', currency: 'VND'});
+        console.log(totalSpendingAfter);
+        document.getElementById("totalSpending").innerHTML = totalSpendingAfter;
+    });
+</script>
+
 
             <!-- Header is placed here -->
             <%@include file="header.jsp" %>
@@ -46,11 +92,11 @@
                         <!-- mentee side bar start -->
                         <%@include file="menteesidebar.jsp" %>
                         <!-- mentee side bar end -->
-                        
+
                         <div class="col-md-7 col-lg-8 col-xl-9">
                             <div class="row">
                                 <div class="col-md-12 col-lg-3 dash-board-list blue">
-                                    <div class="dash-widget">
+                                    <div class="dash-widget" style="padding: 5px">
                                         <div class="circle-bar">
                                             <div class="icon-col">
                                                 <i class="fas fa-calendar-check"></i>
@@ -58,25 +104,25 @@
                                         </div>
                                         <div class="dash-widget-info">
                                             <h3>${totalAcceptedBooking}</h3>
-                                            <h6>Total Booking</h6>
+                                            <h6>Total Bookings</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 col-lg-3 dash-board-list blue">
-                                    <div class="dash-widget">
+                                <div class="col-md-12 col-lg-2 dash-board-list blue">
+                                    <div class="dash-widget" style="padding: 5px">
                                         <div class="circle-bar">
                                             <div class="icon-col">
                                                 <i class="fas fa-calendar-week"></i>
                                             </div>
                                         </div>
                                         <div class="dash-widget-info">
-                                            <h3>33</h3>
+                                            <h3>${totalSlot}</h3>
                                             <h6>Total<br/>Slots</h6>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 col-lg-3 dash-board-list pink">
-                                    <div class="dash-widget">
+                                <div class="col-md-12 col-lg-3 dash-board-list yellow">
+                                    <div class="dash-widget" style="padding: 5px">
                                         <div class="circle-bar">
                                             <div class="icon-col">
                                                 <i class="fas fa-calendar-minus"></i>
@@ -85,6 +131,19 @@
                                         <div class="dash-widget-info">
                                             <h3>${totalPendingBooking}</h3>
                                             <h6>Pending Bookings</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-lg-4 dash-board-list pink">
+                                    <div class="dash-widget" style="padding: 5px">
+                                        <div class="circle-bar">
+                                            <div class="icon-col">
+                                                <i class="fas fa-wallet"></i>
+                                            </div>
+                                        </div>
+                                        <div class="dash-widget-info">
+                                            <h3 id="totalSpending"></h3>
+                                            <h6>Total<br/> Spending</h6>
                                         </div>
                                     </div>
                                 </div>
