@@ -46,23 +46,24 @@
                                     </ul>
                                 </li>
                             </c:if>
+                            <c:if test="${users.userId==3}">
 
+                                <li class="has-submenu">
+                                    <a href>Mentee <i class="fas fa-chevron-down"></i></a>
+                                    <ul class="submenu">
+                                        <li><a href="menteedashboard">Mentee Dashboard</a></li>
+                                        <li><a href="">Notification</a></li>
+                                        <li><a href="booking.jsp">Booking</a></li>
+                                        <li><a href="">Favourites</a></li>
+                                        <li><a href="">Invoices</a></li>
+                                        <li><a href="mentee-profile?go=edit-profile">Profile Settings</a></li>
 
-                            <li class="has-submenu">
-                                <a href>Mentee <i class="fas fa-chevron-down"></i></a>
-                                <ul class="submenu">
-                                    <li><a href="menteedashboard">Mentee Dashboard</a></li>
-                                    <li><a href="">Notification</a></li>
-                                    <li><a href="booking.jsp">Booking</a></li>
-                                    <li><a href="">Favourites</a></li>
-                                    <li><a href="">Invoices</a></li>
-                                    <li><a href="mentee-profile?go=edit-profile">Profile Settings</a></li>
-                                    <c:if test="${users.userId==3}">
                                         <li><a href="mentorregister">Mentor Register</a></li>
-                                    </c:if>
-                                    
-                                </ul>
-                            </li>
+
+
+                                    </ul>
+                                </li>
+                            </c:if>
                             <li class="has-submenu">
                                 <a href='search'>Search mentor <i class="fas"></i></a>
 
@@ -106,14 +107,14 @@
                                         <div class="user-text">
                                             <h6>${users.lName} ${users.fName}</h6>
                                             <p class="text-muted mb-0"><c:if test="${users.roleId == 1}">Admin</c:if><c:if test="${users.roleId == 2}">Mentor</c:if><c:if test="${users.roleId == 3}">Mentee</c:if></p>
+                                            </div>
                                         </div>
+                                        <a class="dropdown-item" href="">Dashboard</a>
+                                        <a class="dropdown-item" href="general-profile?go=edit-profile&user-id">Profile Settings</a>
+                                        <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
+                                        <a class="dropdown-item" href="logout">Logout</a>
                                     </div>
-                                    <a class="dropdown-item" href="">Dashboard</a>
-                                    <a class="dropdown-item" href="general-profile?go=edit-profile&user-id">Profile Settings</a>
-                                    <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
-                                    <a class="dropdown-item" href="logout">Logout</a>
-                                </div>
-                            </li>
+                                </li>
 
                             </ul>
                     </c:if>
