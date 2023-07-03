@@ -16,7 +16,7 @@ Welcome to CodeCoach! This project aims to provide a comprehensive platform for 
 1. Clone the CodeCoach repository from GitHub.
 2. Install dependencies using the package manager of your choice (e.g., Maven).
 3. Configure the database connection and other necessary settings in the application configuration file.
-4. Run finalDatabase.sql in database folder
+4. Run sql files respectively in the database folder
 5. Build and run the project using your preferred development environment or build tool (e.g., IntelliJ IDEA, Eclipse, or Apache Ant).
 ## Technologies Used
 - Java: The core programming language for developing the CodeCoach application.
