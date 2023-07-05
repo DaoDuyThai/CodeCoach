@@ -49,9 +49,4 @@ public class SlotDAO extends DBContext{
         }
         return slot;
     }
-    
-    public static void main(String[] args) {
-        Slot slot = new SlotDAO().getSlotbySlotId(1);
-        System.out.println(slot.getStartTime().substring(0, 8));
-    }
 }
