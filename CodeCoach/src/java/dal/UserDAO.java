@@ -330,9 +330,5 @@ public class UserDAO extends DBContext {
         return 0;
     }
 
-    public static void main(String[] args) {
-        UserDAO dao = new UserDAO();
-        System.out.println(dao.getTotalUserByRoleId(3));
-    }
-
+  
 }
