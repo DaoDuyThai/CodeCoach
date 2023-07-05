@@ -55,7 +55,8 @@ public class MentorNotificationsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        request.getRequestDispatcher("mentornotifications.jsp").forward(request, response);
     } 
 
     /** 

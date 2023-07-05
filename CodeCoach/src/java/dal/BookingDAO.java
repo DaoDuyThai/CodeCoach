@@ -52,10 +52,5 @@ public class BookingDAO {
     }
 
     
-    public static void main(String[] args) {
-         List<Booking> listBookings = new BookingDAO().getBookingsByMentorId(1);
-         for (Booking b : listBookings) {
-             System.out.println(b.toString());
-         }
-    }
+  
 }
