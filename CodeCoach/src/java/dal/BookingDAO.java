@@ -21,6 +21,22 @@ public class BookingDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
+    public List<Booking> getAllBooking() {
+        List<Booking> listBookings = new ArrayList<>();
+        String querry = "select * from Booking";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookings.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
+            }
+        } catch (Exception e) {
+        }
+
+        return listBookings;
+    }
+    
     public Booking getBookingLatestbyMenteeId(String menteeId) {
         Booking b = new Booking();
         String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = " + menteeId + " AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = " + menteeId + ");";

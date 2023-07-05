@@ -20,9 +20,9 @@ public class NotificationDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    public List<Notifications> getAllNotification() {
+    public List<Notifications> getNotificationbyUserId(String userId) {
         List<Notifications> listNotifications = new ArrayList<>();
-        String querry = "select * from Notifications";
+        String querry = "select * from Notifications Where userId="+userId+"";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(querry);
