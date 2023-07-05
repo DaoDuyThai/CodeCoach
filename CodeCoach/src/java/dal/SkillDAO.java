@@ -22,7 +22,7 @@ public class SkillDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Skills> getAll() {
+    public List<Skills> getAllSkill() {
         List<Skills> list = new ArrayList<>();
         String querry = "Select * from skills";
         try {

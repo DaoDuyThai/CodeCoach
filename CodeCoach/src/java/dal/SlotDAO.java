@@ -16,7 +16,7 @@ public class SlotDAO extends DBContext{
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Slot> getAll() {
+    public List<Slot> getAllSlot() {
         List<Slot> list = new ArrayList<>();
         String query = "select * from Slot";
         try {
