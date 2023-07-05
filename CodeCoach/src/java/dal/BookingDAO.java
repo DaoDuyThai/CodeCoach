@@ -33,7 +33,6 @@ public class BookingDAO {
             }
         } catch (Exception e) {
         }
-
         return listBookings;
     }
     

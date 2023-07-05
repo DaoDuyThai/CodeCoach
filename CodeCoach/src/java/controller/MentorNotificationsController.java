@@ -5,7 +5,9 @@
 package controller;
 
 import dal.BookingDAO;
+import dal.MenteeDAO;
 import dal.NotificationDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,6 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Booking;
+import model.Mentees;
 import model.Notifications;
 import model.Users;
 
@@ -71,6 +74,12 @@ public class MentorNotificationsController extends HttpServlet {
             if (userId != null) {
                 List<Notifications> listNotifications = new NotificationDAO().getNotificationbyUserId(userId);
                 List<Booking> listBookings = new BookingDAO().getAllBooking();
+                List<Mentees> listMentees = new MenteeDAO().getAllMentee();
+                List<Users> listUsers = new UserDAO().getAllUser();
+                request.setAttribute("listNotifications", listNotifications);
+                request.setAttribute("listBookings", listBookings);
+                request.setAttribute("listMentees", listMentees);
+                request.setAttribute("listUsers", listUsers);
                 request.getRequestDispatcher("mentornotifications.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login");
