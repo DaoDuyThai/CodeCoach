@@ -66,15 +66,4 @@ public class ExpertiseDAO {
 
     return list;
 }
-
-    public static void main(String[] args) {
-        ExpertiseDAO dao = new ExpertiseDAO();
-        List<Object[]> list = dao.getExpertiseDetailsByMentorId(1);
-        for (Object[] objects : list) {
-            for(int i =0; i < objects.length; i++){
-                System.out.println(objects[i]);
-            }
-        }
-    }
-
 }
