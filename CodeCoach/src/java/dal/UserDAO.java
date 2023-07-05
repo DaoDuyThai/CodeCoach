@@ -329,6 +329,4 @@ public class UserDAO extends DBContext {
         }
         return 0;
     }
-
-  
 }

@@ -63,9 +63,5 @@ public class ChatRoomUsersDAO extends DBContext{
         }   
         return  chatRoomId;
     }
-    
-    public static void main(String[] args) {
-        int chatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(1, 5);
-        System.out.println(chatRoomId);
-    }
+
 }
