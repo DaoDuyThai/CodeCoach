@@ -192,12 +192,4 @@ public class MentorDAO {
         }
         return list;
     }
-
-    public static void main(String[] args) {
-        MentorDAO dao = new MentorDAO();
-        List<Object[]> list = dao.getTop5MostBookedMentors();
-        for (Object[] objects : list) {
-            System.out.println(objects[0] + " " + objects[1]+ " " + objects[2]+ " " + objects[3]+ " " + objects[4]);
-        }
-    }
 }
