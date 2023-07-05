@@ -103,13 +103,4 @@ public class SkillDAO {
         }
         return list;
     }
-    
-    public static void main(String[] args) {
-        SkillDAO dao = new SkillDAO();
-        List<Object[]> list = dao.getTop5MostBookedSkills();
-        for (Object[] objects : list) {
-            System.out.println(objects[0] +" "+objects[1]);
-        }
-        
-    }
 }
