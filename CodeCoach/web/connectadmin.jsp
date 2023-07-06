@@ -36,17 +36,19 @@
                             <div class="chat-window">
                                 <div class="chat-cont-left">
                                     <div class="chat-header">
-                                        <span>Chat</span>
+                                        <span>Chat with admin</span>
                                     </div>
                                     <div class="chat-users-list">
                                         <div class="chat-scroll">
                                             <% List<ChatRoom> chatRooms = (List<ChatRoom>) request.getAttribute("chatRooms"); %> 
                                             <ul class="list-group">
-                                                <% for (ChatRoom chatRoom : chatRooms) {%>
+                                                <% for (ChatRoom chatRoom : chatRooms) {
+                                                if (chatRoom.getChatRoomName().contains("Admin")) {
+                                                %>
                                                 <li class="list-group-item">
                                                     <a href="listchat?chatRoomId=<%= chatRoom.getChatRoomId()%>"><%= chatRoom.getChatRoomName()%></a>
                                                 </li>
-                                                <% } %>
+                                                <% }} %>
                                             </ul>
                                         </div>
                                     </div>
@@ -61,7 +63,7 @@
                                         <div class="col-sm">
                                             <h2><%
                                                 for (ChatRoom chatroom : listChatRooms) {
-                                                    if (chatroom.getChatRoomId() == Integer.parseInt(selectedChatRoomId) && chatroom.getChatRoomName().contains("Admin")) {
+                                                    if (chatroom.getChatRoomId() == Integer.parseInt(selectedChatRoomId)) {
                                                         out.print(chatroom.getChatRoomName());
                                                     }
                                                 }
@@ -124,6 +126,10 @@
                 </div>
             </div>
         </div> 
+
+
+
+
         <script src="assets/js/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <script src="assets/js/script.js"></script>
