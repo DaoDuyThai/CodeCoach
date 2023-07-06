@@ -5,6 +5,9 @@
 
 package controller;
 
+import dal.ChatMessagesDAO;
+import dal.ChatRoomDAO;
+import dal.ChatRoomUsersDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,13 +15,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Users;
 
 /**
  *
  * @author giang
  */
-@WebServlet(name="ViewAndEditAdminProfileController", urlPatterns={"/viewandeditadminprofile"})
-public class ViewAndEditAdminProfileController extends HttpServlet {
+@WebServlet(name="ConnectAdminController", urlPatterns={"/connectadmin"})
+public class ConnectAdminController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +40,10 @@ public class ViewAndEditAdminProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewAndEditAdminProfileController</title>");  
+            out.println("<title>Servlet ConnectAdminController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewAndEditAdminProfileController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ConnectAdminController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +60,23 @@ public class ViewAndEditAdminProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("viewandeditadminprofile.jsp").forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            Users u = (Users) session.getAttribute("users");
+            String userId = Integer.toString(u.getUserId());
+            int sharedChatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(u.getUserId(), 1);
+            if (sharedChatRoomId==0) {
+                new ChatRoomDAO().insertChatRoom("Admin", u.getfName()+" "+u.getlName());
+                int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
+                new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, u.getUserId());
+                new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, 1);
+            }else {
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(1), String.valueOf(sharedChatRoomId), "You are connected to admin");
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the admin");
+            } 
+            request.getRequestDispatcher("conectadmin.jsp").forward(request, response);
+            } catch (Exception e) {
+        }
     } 
 
     /** 
