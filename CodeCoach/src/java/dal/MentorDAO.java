@@ -192,4 +192,9 @@ public class MentorDAO {
         }
         return list;
     }
+    
+    public static void main(String[] args) {
+        Mentors m =new MentorDAO().getMentorByMentorId(1);
+        System.out.println(m.getUserId());
+    }
 }

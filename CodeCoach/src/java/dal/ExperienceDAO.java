@@ -38,6 +38,16 @@ public class ExperienceDAO {
 
         return list;
     }
+    
+    public void insertExperience(int mentorId, String description) {
+        String query = "INSERT INTO [dbo].[Experience]([mentorId],[description]) VALUES("+mentorId+",'"+description+"')";   
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();         
+        } catch (Exception e) {
+        }
+    }
 }
 
 
