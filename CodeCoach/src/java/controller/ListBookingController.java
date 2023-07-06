@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Booking;
 import dal.BookingDAO;
+import dal.BookingDetailDAO;
+import model.BookingDetails;
 
 /**
  *
@@ -59,6 +61,9 @@ public class ListBookingController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         List<Booking> listBookings = new BookingDAO().getAllBooking();
+        List<BookingDetails> listBookingDetails = new BookingDetailDAO().getAllBookingDetails();
+        request.setAttribute("listBookings", listBookings);
+        request.setAttribute("listBookingDetails", listBookingDetails);
         request.getRequestDispatcher("listbooking.jsp").forward(request, response);
     } 
 
