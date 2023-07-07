@@ -22,23 +22,22 @@ public class BookingDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    private final String GET_BOOKING_BY_MENTOR_ID = "SELECT * FROM [dbo].[Booking] WHERE mentorId = ?";
-
-    public ArrayList<Booking> getBookingMentorId(int mentorId) {
-        ArrayList<Booking> list = new ArrayList<>();
+    public List<Booking> getAllBooking() {
+        List<Booking> listBookings = new ArrayList<>();
+        String querry = "select * from Booking";
         try {
             conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(GET_BOOKING_BY_MENTOR_ID);
-            ps.setInt(1, mentorId);
+            ps = conn.prepareStatement(querry);
             rs = ps.executeQuery();
             while (rs.next()) {
-                //Booking(int bookingId, int mentorId, int menteeId, int skillId, String status, boolean getAllInfo)
-                list.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), true));
+                listBookings.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
             }
         } catch (Exception e) {
         }
-        return list;
+        return listBookings;
     }
+
+    private final String GET_BOOKING_BY_MENTOR_ID = "SELECT * FROM [dbo].[Booking] WHERE mentorId = ?";
 
     public List<Booking> getBookingsByMentorId(int mentorId) {
         List<Booking> listBookings = new ArrayList<>();
@@ -57,7 +56,8 @@ public class BookingDAO {
 
     public Booking getBookingLatestbyMenteeId(String menteeId) {
         Booking b = new Booking();
-        String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = " + menteeId + " AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = " + menteeId + ");";
+        String querry = "SELECT * FROM [dbo].[Booking] WHERE menteeId = " + menteeId
+                + " AND bookingId = (SELECT MAX(bookingId) FROM [dbo].[Booking] WHERE menteeId = " + menteeId + ");";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(querry);
@@ -101,7 +101,8 @@ public class BookingDAO {
     }
 
     public int getTotalAcceptedBookingByMenteeId(int menteeId) {
-        String query = "select count(bookingId) as Total from Booking where menteeId =" + menteeId + " and status = 'Accepted'";
+        String query = "select count(bookingId) as Total from Booking where menteeId =" + menteeId
+                + " and status = 'Accepted'";
         try {
             int total = 0;
             conn = new DBContext().getConnection();
@@ -118,7 +119,8 @@ public class BookingDAO {
     }
 
     public int getTotalPendingBookingByMenteeId(int menteeId) {
-        String query = "select count(bookingId) as Total from Booking where menteeId =" + menteeId + " and status = 'Pending'";
+        String query = "select count(bookingId) as Total from Booking where menteeId =" + menteeId
+                + " and status = 'Pending'";
         try {
             int total = 0;
             conn = new DBContext().getConnection();
@@ -138,7 +140,7 @@ public class BookingDAO {
         String query = "select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
                 + "   join Booking b on bd.bookingId = b.bookingId \n"
                 + "   join Mentors m on m.mentorId = b.mentorId\n"
-                + "   where b.menteeId = "+menteeId+" and status = 'Accepted' ";
+                + "   where b.menteeId = " + menteeId + " and status = 'Accepted' ";
         try {
             int total = 0;
             conn = new DBContext().getConnection();
@@ -153,6 +155,5 @@ public class BookingDAO {
         }
         return 0;
     }
-    
-   
+
 }

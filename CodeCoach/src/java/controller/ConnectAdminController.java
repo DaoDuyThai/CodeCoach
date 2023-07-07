@@ -4,10 +4,9 @@
  */
 package controller;
 
-import dal.ExperienceDAO;
-import dal.ExpertiseDAO;
-import dal.MentorDAO;
-import dal.SkillDAO;
+import dal.ChatMessagesDAO;
+import dal.ChatRoomDAO;
+import dal.ChatRoomUsersDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,15 +17,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Skills;
+import model.ChatMessages;
+import model.ChatRoom;
 import model.Users;
 
 /**
  *
  * @author giang
  */
-@WebServlet(name = "MentorRegisterController", urlPatterns = {"/mentorregister"})
-public class MentorRegisterController extends HttpServlet {
+@WebServlet(name = "ConnectAdminController", urlPatterns = {"/connectadmin"})
+public class ConnectAdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +45,10 @@ public class MentorRegisterController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MentorRegisterController</title>");
+            out.println("<title>Servlet ConnectAdminController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MentorRegisterController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ConnectAdminController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,16 +71,37 @@ public class MentorRegisterController extends HttpServlet {
             Users u = (Users) session.getAttribute("users");
             String userId = Integer.toString(u.getUserId());
             if (userId != null && !userId.equals("1")) {
-                List<Skills> listSkill = new SkillDAO().getAllSkill();
-                request.setAttribute("listSkill", listSkill);
-                request.getRequestDispatcher("mentorregister.jsp").forward(request, response);
+                int sharedChatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(u.getUserId(), 1);
+                if (sharedChatRoomId == 0) {
+                    new ChatRoomDAO().insertChatRoom("Admin", u.getfName() + " " + u.getlName());
+                    int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
+                    new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, u.getUserId());
+                    new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, 1);
+                } else {
+                    new ChatMessagesDAO().insertChatMessage(String.valueOf(1), String.valueOf(sharedChatRoomId), "You are connected to admin");
+                    new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the admin");
+                }
+                List<ChatRoom> chatRooms = new ChatRoomDAO().getChatRoombyUserId(userId);
+                request.setAttribute("chatRooms", chatRooms);
+                String selectedChatRoomId = request.getParameter("chatRoomId");
+                if (selectedChatRoomId != null) {
+                    List<ChatMessages> listChatMessages = new ChatMessagesDAO().getChatMessagesbySelectedChatRoomId(selectedChatRoomId);
+                    List<ChatRoom> listChatRooms = new ChatRoomDAO().getAllChatRoom();
+                    List<Users> listUsers = new UserDAO().getAllUser();
+                    request.setAttribute("listChatRooms", listChatRooms);
+                    request.setAttribute("listChatMessages", listChatMessages);
+                    request.setAttribute("selectedChatRoomId", selectedChatRoomId);
+                    request.setAttribute("listUsers", listUsers);
+                    request.setAttribute(userId, this);
+                }
+                request.getRequestDispatcher("connectadmin.jsp").forward(request, response);
             } else {
                 response.sendRedirect("login");
             }
+
         } catch (Exception e) {
             response.sendRedirect("login");
         }
-
     }
 
     /**
@@ -94,28 +115,7 @@ public class MentorRegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String skillId = request.getParameter("skillList");
-            String description = request.getParameter("description");
-            String biography = request.getParameter("biography");
-            String hourlyRate = request.getParameter("hourlyRate");
-            String userid = request.getParameter("userId");
-            int mentorId = 0;
-            mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
-            if (mentorId == 0) {
-                new MentorDAO().registerMentor(userid, biography, hourlyRate);
-                new UserDAO().updateRoleIdUser(userid);
-            }
-            mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
-            if (!description.replaceAll(" ", "").equals("")) {
-                new ExperienceDAO().insertExperience(mentorId, description);
-            }
-            if (new ExpertiseDAO().getExpertiseByMentorIdandSkillId(mentorId, skillId)==null) {
-                new ExpertiseDAO().insertExpertise(mentorId, skillId);
-            }  
-            response.sendRedirect("mentorregister");
-        } catch (Exception e) {
-        }
+        processRequest(request, response);
     }
 
     /**
