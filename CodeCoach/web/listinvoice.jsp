@@ -55,7 +55,7 @@
                         List<BookingDetails> listBookingDetails = (List<BookingDetails>) request.getAttribute("bookingDetails");
                         List<Slot> listSlots = (List<Slot>) request.getAttribute("slots");
                         %>
-                        <table>
+                        <table class="table">
                             <tr style="font-size: 40px;">
                                     <th>Mentor Name</th>
                                     <th>Mentee Name</th>
