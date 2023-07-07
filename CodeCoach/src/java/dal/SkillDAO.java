@@ -54,6 +54,21 @@ public class SkillDAO {
         return list;
     }
     
+    public List<Skills> getAllSkill() {
+        List<Skills> list = new ArrayList<>();
+        String querry = "Select * from skills";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Skills(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
     public List<Skills> getTop8() {
         List<Skills> list = new ArrayList<>();
         String querry = "Select top 8 * from skills order by skillId";
