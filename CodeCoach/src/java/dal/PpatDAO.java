@@ -7,10 +7,10 @@ package dal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Ppat;
-import model.Skills;
 
 /**
  *
@@ -35,6 +35,60 @@ public class PpatDAO {
         } catch (Exception e) {
         }
         return list;
+    }
+    public void insertPrivacyPolicyAndTerms(Ppat ppat) {
+        String query = "INSERT INTO PrivacyPolicyAndTerms (type, summary, content) VALUES (?, ?, ?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, ppat.getType());
+            ps.setString(2, ppat.getSummary());
+            ps.setString(3, ppat.getContent());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updatePrivacyPolicyAndTerms(Ppat ppat) {
+        String query = "UPDATE PrivacyPolicyAndTerms SET summary = ?, content = ? WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, ppat.getSummary());
+            ps.setString(2, ppat.getContent());
+            ps.setInt(3, ppat.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePrivacyPolicyAndTerms(int id) {
+        String query = "DELETE FROM PrivacyPolicyAndTerms WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public String countPpat() {
+        String query = "select count (id) from PrivacyPolicyAndTerms";
+        String count = "None";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return count;
     }
     public static void main(String[] args) {
         PpatDAO d = new PpatDAO();

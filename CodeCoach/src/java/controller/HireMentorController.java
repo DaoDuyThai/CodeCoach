@@ -4,7 +4,7 @@
  */
 package controller;
 
-import dal.BookingsDAO;
+import dal.BookingDAO;
 import dal.MenteeDAO;
 import dal.MentorDAO;
 import dal.SlotDAO;
@@ -94,7 +94,7 @@ public class HireMentorController extends HttpServlet {
 //        processRequest(request, response);
         Users user = (Users) request.getSession().getAttribute("users");
         if (user != null) {
-            BookingsDAO bookingDAO = new BookingsDAO();
+            BookingDAO bookingDAO = new BookingDAO();
             MentorDAO mentorDAO = new MentorDAO();
             MenteeDAO menteeDAO = new MenteeDAO();
             Mentors mentor = mentorDAO.getMentorByUserId(user.getUserId());

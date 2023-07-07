@@ -26,7 +26,7 @@ public class MentorDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public List<Mentors> getAll() {
+    public List<Mentors> getAllMentor() {
         List<Mentors> list = new ArrayList<>();
         String query = "Select * from mentors";
         try {
@@ -167,6 +167,54 @@ public class MentorDAO {
         return mentorId;
     
     }
+    public List<Object[]> getTop5MostBookedMentors() {
+        String query = "SELECT TOP 5 m.mentorId, m.userId, u.fName, u.lName, COUNT(m.mentorId) AS mentorOccurrence\n"
+                + "FROM booking b\n"
+                + "JOIN mentors m ON b.mentorId = m.mentorId\n"
+                + "JOIN users u ON m.userId = u.userId\n"
+                + "GROUP BY m.mentorId, u.fName, u.lName, m.userId\n"
+                + "ORDER BY mentorOccurrence DESC;";
+        List<Object[]> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Object[] mentorOccurrence = new Object[5];
+                mentorOccurrence[0] = rs.getInt(1);
+                mentorOccurrence[1] = rs.getInt(2);
+                mentorOccurrence[2] = rs.getString(3);
+                mentorOccurrence[3] = rs.getString(4);
+                mentorOccurrence[4] = rs.getInt(5);
+                list.add(mentorOccurrence);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
+    public int getTotalMentorNumber() {
+        String query = "select count(mentorid) as Total from mentors";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    
+    //method for getting favorite mentors
+//    public List<Object> getFavMentor(int mentorId){
+//        List<Object> FavoriteList = new ArrayList<>();
+//        String query ="";
+//    }
     
 }

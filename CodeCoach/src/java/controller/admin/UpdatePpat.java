@@ -1,59 +1,53 @@
-package controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-import dal.BookingDAO;
+
+package controller.admin;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Booking;
-import model.Users;
-
+import dal.PpatDAO;
+import model.Ppat;
 /**
  *
- * @author MrTuan
+ * @author ADMIN
  */
-@MultipartConfig
-public class MentorViewBookingController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="UpdatePpat", urlPatterns={"/updateppat"})
+public class UpdatePpat extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MentorViewBookingController</title>");
+            out.println("<title>Servlet UpdatePpat</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MentorViewBookingController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdatePpat at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -61,20 +55,12 @@ public class MentorViewBookingController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Users user = (Users) request.getSession().getAttribute("users");
-        if (user != null) {
-            BookingDAO bookingDAO = new BookingDAO();
-            List<Booking> listBooking = bookingDAO.getAllForMentorId(user.getUserId());
-            request.setAttribute("userInf", user);
-            request.setAttribute("listBooking", listBooking);
-            request.getRequestDispatcher("viewbooking.jsp").forward(request, response);
-        }
-    }
+    throws ServletException, IOException {
+        processRequest(request, response);
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -82,13 +68,31 @@ public class MentorViewBookingController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    throws ServletException, IOException {
+        PpatDAO ppatDao = new PpatDAO();
+        //get id
+        String id_raw = request.getParameter("id");
+        //get type
+        int type = Integer.parseInt(request.getParameter("type"));
+        //get question
+        String summary = request.getParameter("summary");
+        //get answer
+        String content = request.getParameter("content");
+        try {
+            //parse id
+            int id = Integer.parseInt(id_raw);
+            //create new faq
+            Ppat ppat = new Ppat(id, type, summary, content);
+            ppatDao.updatePrivacyPolicyAndTerms(ppat);
+            //return to editfaq
+            response.sendRedirect("editppat");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

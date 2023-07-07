@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>23</h3>
+                                        <h3>${totalMentee}</h3>
                                         <h6>Members</h6>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>33</h3>
+                                        <h3>${totalAppointment}</h3>
                                         <h6>Appointments</h6>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>$14</h3>
+                                        <h3>${totalIncome} VND</h3>
                                         <h6>Total Earned</h6>
                                     </div>
                                 </div>
@@ -104,7 +104,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="mb-4">Mentee Lists</h4>
+                                <h4 class="mb-4">Booking Info Lists</h4>
                                 <div class="card card-table">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -117,26 +117,26 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user2.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Tyrone Roberts<span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="ec98959e8382899e838e899e989fac8d88838e89c28f8381">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        
-                                                        <td class="text-center"><span class="pending">PENDING</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>  
+                                                   <c:forEach var="booking" items="${BookingInfo}">
+                                                        <tr>
+                                                            <td>
+                                                                <h2 class="table-avatar">
+                                                                    <a href="profile.html" class="avatar avatar-sm me-2">
+                                                                        <img class="avatar-img rounded-circle" src="assets/img/user/user2.jpg" alt="User Image">
+                                                                    </a>
+                                                                    <a href="profile.html">${booking[1]} ${booking[2]}</a>
+                                                                </h2>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="status">${booking[3]}</span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="profile.html" class="btn btn-sm bg-info-light">
+                                                                    <i class="far fa-eye"></i> View
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>

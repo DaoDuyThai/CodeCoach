@@ -69,7 +69,7 @@ public class HomeController extends HttpServlet {
         request.setAttribute("skillList", skillList);
         //get mentor list
         MentorDAO mentorDao = new MentorDAO();
-        List<Mentors> mentorList = mentorDao.getAll();
+        List<Mentors> mentorList = mentorDao.getAllMentor();
         request.setAttribute("mentorList", mentorList);
         //get Mentor user's info list
         UserDAO userDao = new UserDAO();

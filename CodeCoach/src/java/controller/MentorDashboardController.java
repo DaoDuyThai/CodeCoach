@@ -5,7 +5,9 @@
 
 package controller;
 
-import dal.UserDAO;
+import dal.BookingDAO;
+import dal.BookingDetailDAO;
+import dal.MenteeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,6 +15,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Users;
+import dal.MentorDAO;
 import java.util.List;
 
 /**
@@ -57,7 +62,45 @@ public class MentorDashboardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("mentordashboard.jsp").forward(request, response);
+        //get session
+        HttpSession session = request.getSession();
+        //create daos
+        MenteeDAO menteeDao = new MenteeDAO();
+        BookingDAO bookingDao = new BookingDAO();
+        BookingDetailDAO bookingDetailDao = new BookingDetailDAO();
+        MentorDAO mentorDao = new MentorDAO();
+
+        //get user from login session
+        Users user = (Users) session.getAttribute("users");
+        int userId = user.getUserId();
+        try {
+            if (user == null) {
+                response.sendRedirect("accessdeniedfull.jsp");
+            } else {
+                //get menteeId from user id 
+                int mentorId = mentorDao.getMentorIdByUserId(userId, 0);
+                //get total number of mentees
+                int menteeNumber = menteeDao.getTotalMenteeByMentorId(mentorId);
+                //get total accepted booking
+                int totalAppointment = bookingDao.getTotalBookingByMentorId(mentorId);
+                //get total spendings
+                int totalIncome = bookingDao.getTotalMoneyEarnByMentorId(mentorId);
+                //get booking info
+                List<Object> infoList = bookingDao.getBookingInfoByMentorId(mentorId);
+                //set data to jsp
+                request.setAttribute("totalMentee", menteeNumber);
+                request.setAttribute("totalAppointment", totalAppointment);
+                request.setAttribute("totalIncome", totalIncome);
+                request.setAttribute("BookingInfo", infoList);
+
+
+                //send data to jsp
+                request.getRequestDispatcher("mentordashboard.jsp").forward(request, response);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     } 
 
     /** 
@@ -70,10 +113,7 @@ public class MentorDashboardController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        UserDAO userDAO = new UserDAO();
-        
-
-        //request.setAttribute("menteeList", menteeList);
+       
     }
 
     /** 
