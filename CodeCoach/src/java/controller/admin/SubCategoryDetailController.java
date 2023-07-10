@@ -37,8 +37,8 @@ public class SubCategoryDetailController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String subCategoryId = request.getParameter("subCategoryId");
             List<Skills> listsk = new SkillDAO().getSkillBySubCategoryId(subCategoryId);
-            int getTotalSkill = new SkillDAO().getTotalSkill();
-            request.setAttribute("countCategory", getTotalSkill);
+            String countSkill = new SkillDAO().countSkill();
+            request.setAttribute("countSkill", countSkill);
             request.setAttribute("listsk", listsk);
             request.getRequestDispatcher("subcategorydetail.jsp").forward(request, response);
         
