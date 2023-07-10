@@ -35,5 +35,5 @@ We welcome contributions from the community to make CodeCoach even better! If yo
 We would like to express our gratitude to all the contributors, open source libraries, and resources that have helped in the development of CodeCoach. Thank you for your support and dedication!
 
 # Author
-Dao Duy Thai - FPT University    
+Dao Duy Thai - FPT University     
  
