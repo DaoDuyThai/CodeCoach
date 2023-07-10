@@ -151,12 +151,13 @@ public class SkillDAO {
             }
             return listS;
         }
-    public String countSkill() {
-        String query = "select count (skillId) from Skills";
+    public String countSkill(String subCategoryId) {
+        String query = "select count (skillId) from Skills where subCategoryId = ?";
         String count = "None";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
+            ps.setString(1, subCategoryId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 count = rs.getString(1);
