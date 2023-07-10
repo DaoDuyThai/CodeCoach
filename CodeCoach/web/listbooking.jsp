@@ -16,8 +16,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="utf-8">
+        <title>Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -26,7 +28,6 @@
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
         <link rel="stylesheet" href="assets/css/style.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </head>
     <body>
         <%
@@ -36,6 +37,7 @@
             List<Mentors> listMentors = (List<Mentors>) request.getAttribute("listMentors");
             List<Mentees> listMentees = (List<Mentees>) request.getAttribute("listMentees");
         %>
+
         <div class="main-wrapper">
             <!-- Header is placed here -->
             <%@include file="header.jsp" %>
@@ -112,8 +114,7 @@
                                     %>
                                 </td>
                                 <td>
-                                    <%                                        
-                                        for (int n = listBookingDetails.size() - 1; n >= 0; n--) {
+                                    <%                                        for (int n = listBookingDetails.size() - 1; n >= 0; n--) {
                                             if (listBookingDetails.get(n).getBookingId() == listBookings.get(i).getBookingId()) {
                                                 DateTimeFormatter initialFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                                                 LocalDate date = LocalDate.parse(listBookingDetails.get(n).getDate(), initialFormatter);
