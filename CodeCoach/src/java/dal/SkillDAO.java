@@ -136,6 +136,20 @@ public class SkillDAO {
             }
             return listS;
         }
-    
+    public String countSkill() {
+        String query = "select count (skillId) from Skills";
+        String count = "None";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return count;
+    }
 
 }
