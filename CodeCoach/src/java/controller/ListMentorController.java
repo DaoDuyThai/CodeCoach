@@ -30,7 +30,10 @@ public class ListMentorController extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO dao = new UserDAO();
+        MentorDAO d = new MentorDAO();
         List<Object[]> list = dao.getAllUserInfoOfMentor(); 
+        String countMentor = d.countMentor();
+        request.setAttribute("countMentor", countMentor);
         request.setAttribute("listM", list);
         request.getRequestDispatcher("listmentor.jsp").forward(request, response);
     } 
