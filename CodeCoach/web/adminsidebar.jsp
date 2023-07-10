@@ -21,7 +21,7 @@
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="invoices.html"><i class="fas fa-list-alt"></i>List Categories <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="reviews.html"><i class="fas fa-file-invoice"></i>View Transactions <span><i
+                    <li><a href="viewtransaction"><i class="fas fa-file-invoice"></i>View Transactions <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="editfaq"><i class="fas fa-question-circle"></i>FAQ <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
