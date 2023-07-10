@@ -68,9 +68,9 @@
                                             </div>
                                             <div class="dash-widget-info">
                                                 <%
-                                                    String getTotalSkill = (String) request.getAttribute("getTotalSkill");
+                                                    String countSkill = (String) request.getAttribute("countSkill");
                                                 %>
-                                                <h3><%= getTotalSkill%></h3>
+                                                <h3><%= countSkill%></h3>
                                                 <h6>Frequent Skill</h6>
                                             </div>
                                         </div>
