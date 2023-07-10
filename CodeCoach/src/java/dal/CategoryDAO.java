@@ -65,12 +65,13 @@ public class CategoryDAO {
         }
         return count;
     }
-     public String countSubCategory() {
-        String query = "select count (subCategoryId) from SubCategories";
+     public String countSubCategory(String categoryId) {
+        String query = "select count (subCategoryId) from SubCategories where categoryId = ?";
         String count = "None";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
+            ps.setString(1, categoryId);
             rs = ps.executeQuery();
             while (rs.next()) {
                 count = rs.getString(1);
