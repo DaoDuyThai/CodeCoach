@@ -81,7 +81,7 @@ public class UpdatePpat extends HttpServlet {
         try {
             //parse id
             int id = Integer.parseInt(id_raw);
-            //create new faq
+            //create new ppat
             Ppat ppat = new Ppat(id, type, summary, content);
             ppatDao.updatePrivacyPolicyAndTerms(ppat);
             //return to editfaq

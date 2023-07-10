@@ -86,15 +86,19 @@
                                             <div class="card card-form">
                                                 <div class="card-body">
                                                     <h4 class="card-title">Add PPAT</h4>
-                                                    <form action="privacy-policy-terms" method="POST">
+                                                    <form action="editppat" method="POST">
                                                         <!-- Form fields -->
+                                                        <div class="form-group">
+                                                            <label for="type">Type:</label>
+                                                            <input type="text" class="form-control" id="type" name="type" required>
+                                                        </div>
                                                         <div class="form-group">
                                                             <label for="summary">Summary:</label>
                                                             <input type="text" class="form-control" id="summary" name="summary" required>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="answer">Content:</label>
-                                                            <textarea class="form-control" id="answer" name="answer" rows="3" required></textarea>
+                                                            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
                                                         </div>
                                                         <input type="hidden" name="action" value="add">
                                                         <button type="submit" class="btn btn-primary">Save</button>
@@ -104,7 +108,7 @@
                                             </div>
                                         </div>
                                         <!-- addForm end here -->
-                                        <!--add faq end-->
+                                        <!--add PPAT end-->
 
                                         <!--table start-->
                                         <div class="card card-table">
@@ -131,14 +135,18 @@
                                                                     <td style="width: 100px; white-space: pre-wrap;">${ppat.content}</td>
                                                                     <td style="width: 100px;">
                                                                         <button class="btn btn-primary" onclick="toggleEditForm(this)">Edit</button>
-                                                                        <a href="privacy-policy-terms?action=delete&id=${ppat.id}"><button class="btn btn-danger">Delete</button></a>
+                                                                        <a><button onclick="doDelete(${ppat.id})" class="btn btn-danger">Delete</button></a>
                                                                     </td>
                                                                 </tr>
                                                                 <%-- Hidden row for the edit form start--%>
                                                                 <tr class="edit-row" style="display: none;">
                                                                     <td colspan="4">
-                                                                        <form action="privacy-policy-terms" method="POST">
+                                                                        <form action="updateppat" method="POST">
                                                                             <input type="hidden" name="id" value="${ppat.id}">
+                                                                            <div class="form-group">
+                                                                                <label for="type">Type:</label>
+                                                                                <input type="text" class="form-control" id="type" name="type" value="${ppat.type}" required>
+                                                                            </div>
                                                                             <div class="form-group">
                                                                                 <label for="summary">Summary:</label>
                                                                                 <input type="text" class="form-control" id="summary" name="summary" value="${ppat.summary}" required>
@@ -197,7 +205,7 @@
         <script type="text/javascript">
             // prompt if you want to delete
             function doDelete(id) {
-                if (confirm("Are you sure to delete this question")) {
+                if (confirm("Are you sure to delete this?:")) {
                     window.location = "deleteppat?id=" + id;
                 }
             }

@@ -72,16 +72,12 @@ public class PpatController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //get type
         int type = Integer.parseInt(request.getParameter("type"));
-        //get summary
         String summary = request.getParameter("summary");
-        //get content
         String content = request.getParameter("content");
         Ppat ppat = new Ppat(type, summary, content);
-        //add ppat to db
+        PpatDAO ppatDAO = new PpatDAO();
         ppatDAO.insertPrivacyPolicyAndTerms(ppat);
-        //go to editppat
         response.sendRedirect("editppat");
 
         

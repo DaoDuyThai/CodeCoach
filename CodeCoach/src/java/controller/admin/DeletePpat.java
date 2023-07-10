@@ -61,7 +61,7 @@ public class DeletePpat extends HttpServlet {
             id = Integer.parseInt(id_raw);
             PpatDAO ppatDao = new PpatDAO();
             ppatDao.deletePrivacyPolicyAndTerms(id);
-            response.sendRedirect("deleteppat");
+            response.sendRedirect("editppat");
         } catch (Exception e) {
             System.out.println(e);
         }

@@ -36,6 +36,21 @@ public class PpatDAO {
         }
         return list;
     }
+    public Ppat getPrivacyPolicyAndTermsById(int id) {
+        String query = "select * from PrivacyPolicyAndTerms where id =?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Ppat ppat = new Ppat(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
+                return ppat;
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
     public void insertPrivacyPolicyAndTerms(Ppat ppat) {
         String query = "INSERT INTO PrivacyPolicyAndTerms (type, summary, content) VALUES (?, ?, ?)";
         try {
