@@ -40,10 +40,10 @@
                                             </div>
                                             <div class="dash-widget-info">
                                                 <%
-                                                    String countCategory = (String) request.getAttribute("countCategory");
+                                                    String countMentor = (String) request.getAttribute("countMentor");
                                                 %>
-                                                <h3><%= countCategory%></h3>
-                                                <h6>Frequent Categories</h6>
+                                                <h3><%= countMentor%></h3>
+                                                <h6>Mentors</h6>
                                             </div>
                                         </div>
                                     </div>
