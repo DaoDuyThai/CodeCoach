@@ -38,7 +38,7 @@ public class SubCategoryController extends HttpServlet {
         String categoryId = request.getParameter("categoryId");   
         List<SubCategories> listS = new CategoryDAO().getSubCategorybyCategoryId(categoryId);
         String countSubCategory = new CategoryDAO().countSubCategory();
-        request.setAttribute("countCategory", countSubCategory);
+        request.setAttribute("countSubCategory", countSubCategory);
         request.setAttribute("listS", listS);      
         request.getRequestDispatcher("subcategory.jsp").forward(request, response);
     } 
