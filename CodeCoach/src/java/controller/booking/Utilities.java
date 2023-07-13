@@ -12,15 +12,13 @@ public class Utilities {
         return pattern.matcher(decomposed).replaceAll("");
     }
 
-    public static int getStartDayOfWeek(Calendar calendar){
+    public static Date getStartDateOfWeek(Calendar calendar){
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        return calendar.get(Calendar.DAY_OF_MONTH);
+        return calendar.getTime();
     }
 
     public static void main(String[] args) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        System.out.println("Current date: " + calendar.getTime());
-        System.out.println(getStartDayOfWeek(calendar));
+        Date date = new Date("2021/05/10");
+        System.out.println();
     }
 }

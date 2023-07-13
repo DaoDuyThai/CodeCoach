@@ -13,15 +13,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import model.QuanHuyen;
+import model.TinhThanhPho;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import model.QuanHuyen;
-import model.Roles;
-import model.TinhThanhPho;
 
 /**
  *
@@ -33,9 +32,7 @@ public class TinhThanhPhoDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public static void main(String[] args) {
-        System.out.println(new TinhThanhPhoDAO().getTTPNameAndQHName(1));
-    }
+
 
     private final String GET_TTPNAME_QHNAME_BY_USER_ID = "select qh_name.name as qh_name, ttp.name as tp_name from (SELECT qh.name, qh.mattp\n" +
             "FROM Users u\n" +
@@ -56,7 +53,7 @@ public class TinhThanhPhoDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Utilities.convertToNonDiacritics(result);
+        return result;
     }
 
     public List<TinhThanhPho> getAllTinhThanhPho() {

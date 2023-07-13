@@ -174,7 +174,7 @@
                         <c:forEach items="${skillList}" var="s">
                             <div class="countskills col-12 col-md-4 col-lg-3">
                                 <div class="large-col aos" data-aos="fade-up">
-                                    <a href="search?searchTxt=${s.skillName}" class="large-col-image">
+                                    <a href="" class="large-col-image">
                                         <div class="image-col-merge">
                                             <img src="assets/images/skills/${s.skillId}.png" alt>
                                             <div class="text-col">

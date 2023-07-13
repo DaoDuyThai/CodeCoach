@@ -36,7 +36,7 @@
                                 <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
                             </a>
                             <p class="text-muted">Contact CodeCoach if you have any questions <br> or story which you want to share</p>
-                            
+
                         </div>
                         <div class="footer-address">
                             <span><i class="fas fa-map-marker-alt"></i></span>
@@ -96,7 +96,9 @@
                                                     ${c.getInfor()}
                                                 </c:if>
                                             </c:forEach> </a>    
-                                    </div>
+                                    </div><br/>
+                                    
+
                                     </div>
                                     </div>
                                     </div>

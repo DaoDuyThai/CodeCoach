@@ -214,11 +214,20 @@ public class MentorDAO {
         return list;
     }
 
-    public static void main(String[] args) {
-        MentorDAO dao = new MentorDAO();
-        List<Object[]> list = dao.getTop5MostBookedMentors();
-        for (Object[] objects : list) {
-            System.out.println(objects[0] + " " + objects[1]+ " " + objects[2]+ " " + objects[3]+ " " + objects[4]);
+    public int getTotalMentorNumber() {
+        String query = "select count(mentorid) as Total from mentors";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
+        return 0;
     }
 }

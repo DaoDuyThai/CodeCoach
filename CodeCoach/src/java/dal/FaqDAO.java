@@ -113,7 +113,5 @@ public class FaqDAO {
         }
     }
 
-    public static void main(String[] args) {
-        FaqDAO d = new FaqDAO();
-    }
+
 }

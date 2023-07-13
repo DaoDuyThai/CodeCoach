@@ -30,11 +30,6 @@ public class MenteeDAO {
             "JOIN Mentees ON Users.userId = Mentees.userId\n" +
             "WHERE Mentees.menteeId = ?";
 
-    public static void main(String[] args) {
-        //Test getUserByMenteeId (int menteeId)
-        Users user = new MenteeDAO().getUserByMenteeId(1);
-        System.out.println(user);
-    }
 
     public Users getUserByMenteeId (int menteeId) {
         Users user = new Users();
@@ -81,5 +76,22 @@ public class MenteeDAO {
         }
 
         return listMentees;
+    }
+
+    public int getTotalMenteeNumber() {
+        String query = "select count(menteeid) as Total from mentees";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
     }
 }

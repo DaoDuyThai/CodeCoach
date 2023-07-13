@@ -39,13 +39,7 @@ public class ExperienceDAO {
         return list;
     }
     
-    public static void main(String[] args) {
-        ExperienceDAO dao = new ExperienceDAO();
-        List<Experience> list = dao.getExperienceByMentorId(1);
-        for (Experience experience : list) {
-            System.out.println(experience);
-        }
-    }
+
 }
 
 

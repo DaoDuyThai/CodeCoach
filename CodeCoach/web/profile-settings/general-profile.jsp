@@ -56,7 +56,7 @@
 
           <div class="profile-sidebar">
             <div class="user-widget">
-              <div class="pro-avatar"><c:out value="${users.fName.charAt(0)}" /><c:out value="${users.lName.charAt(0)}" />
+              <div class="pro-avatar"><c:out value="${users.fName.charAt(0)}" /><c:out value="${users.lName.charAt(1)}" />
               </div>
             </div>
             <div class="custom-sidebar-nav">
@@ -159,7 +159,7 @@
                       <label>State</label>
                       <label class="form-control-label">District</label>
                       <select class="form-select" name="district" id="district" style="display: none" required>
-
+                        <option value="${sessionScope.users.maqh}">${sessionScope.users.maqh}</option>
                       </select>
                     </div>
                   </div>

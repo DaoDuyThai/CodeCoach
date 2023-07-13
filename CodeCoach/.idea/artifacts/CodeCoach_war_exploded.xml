@@ -6,7 +6,6 @@
         <element id="directory" name="classes">
           <element id="module-output" name="CodeCoach" />
         </element>
-        <element id="directory" name="lib" />
       </element>
       <element id="javaee-facet-resources" facet="CodeCoach/web/Web" />
       <element id="javaee-facet-resources" facet="CodeCoach/web/Web2" />
