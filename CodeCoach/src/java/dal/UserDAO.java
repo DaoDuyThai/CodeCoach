@@ -248,6 +248,7 @@ public class UserDAO extends DBContext {
                 list.add(userInfo);
             }
         } catch (Exception e) {
+            System.out.println(e);
         }
         return list;
     }
@@ -280,7 +281,7 @@ public class UserDAO extends DBContext {
                 o[16] = rs.getString(17); //ttp name
             }
         } catch (Exception e) {
-
+            System.out.println(e);
         }
         return o;
     }

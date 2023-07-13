@@ -18,6 +18,7 @@ import model.Users;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -47,7 +48,7 @@ public class MentorBookingController extends HttpServlet {
 
         Mentors mentor = new MentorDAO().getMentorByUserId(Integer.toString(user.getUserId()));
 
-        ArrayList<Booking> mentorBookings = new BookingDAO().getBookingMentorId(mentor.getMentorId());
+        List<Booking> mentorBookings = new BookingDAO().getBookingsByMentorId(mentor.getMentorId());
 
         request.setAttribute("mentorBookings", mentorBookings);
 

@@ -61,295 +61,58 @@
                                         <table class="datatable table table-hover table-center mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th>Invoice Number</th>
-                                                    <th>Mentee ID</th>
-                                                    <th>Mentee Name</th>
-                                                    <th>Total Amount</th>
+                                                    <th class="text-center">No</th>
+                                                    <th class="text-center">Mentee</th>
+                                                    <th class="text-center">Mentor</th>
+                                                    <th class="text-center">Total Amount</th>
                                                     <th class="text-center">Status</th>
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0001</a></td>
-                                                    <td>#01</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Jonathan Doe </a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$100.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0002</a></td>
-                                                    <td>#02</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user1.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Julie Pennington </a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$200.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0003</a></td>
-                                                    <td>#03</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user2.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Tyrone Roberts</a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$250.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0004</a></td>
-                                                    <td>#04</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user3.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Allen Davis </a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$150.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0005</a></td>
-                                                    <td>#05</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user4.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Patricia Manzi </a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$350.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0006</a></td>
-                                                    <td>#06</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user5.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Elsie Gilley</a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$300.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0007</a></td>
-                                                    <td>#07</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user11.jpg" alt="User Image"></a>
-                                                            <a href="profile.html"> Joan Gardner</a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$250.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0008</a></td>
-                                                    <td>#08</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user12.jpg" alt="User Image"></a>
-                                                            <a href="profile.html"> Daniel Griffing</a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$150.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0009</a></td>
-                                                    <td>#09</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user8.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Walter Roberson</a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$100.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="invoice.html">#IN0010</a></td>
-                                                    <td>#10</td>
-                                                    <td>
-                                                        <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
-                                                                    class="avatar-img rounded-circle"
-                                                                    src="assets/img/user/user9.jpg" alt="User Image"></a>
-                                                            <a href="profile.html">Robert Rhodes </a>
-                                                        </h2>
-                                                    </td>
-                                                    <td>$120.00</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-pill bg-success inv-badge">Paid</span>
-                                                    </td>
-                                                    <td class="text-end">
-                                                        <div class="actions">
-                                                            <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                               class="btn btn-sm bg-success-light me-2">
-                                                                <i class="fe fe-pencil"></i> Edit
-                                                            </a>
-                                                            <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                               href="#delete_modal">
-                                                                <i class="fe fe-trash"></i> Delete
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                <%int count = 1;%>
+                                                <c:forEach items="${listAcceptedTransactions}" var="lat">
+                                                    <tr>
+                                                        <td class="text-center" ><a href=""><%=count%></a></td>
+                                                            <%count++;%>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                        class="avatar-img rounded-circle"
+                                                                        src="assets/images/users/${lat[2]}.png" alt="User Image"></a>
+                                                                <a href="profile.html">${lat[3]} ${lat[4]}</a>
+                                                            </h2>
+                                                        </td>
+                                                        <td>
+                                                            <h2 class="table-avatar">
+                                                                <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                        class="avatar-img rounded-circle"
+                                                                        src="assets/images/users/${lat[6]}.png" alt="User Image"></a>
+                                                                <a href="profile.html">${lat[7]} ${lat[8]}</a>
+                                                            </h2>
+                                                        </td>
+                                                        <td class="text-center">${lat[14]}</td>
+                                                        <td class="text-center">
+                                                            <span class="badge badge-pill bg-success inv-badge">Paid</span>
+                                                        </td>
+                                                        <td class="text-end text-center" >
+                                                            <div class="actions">
+                                                                <a data-bs-toggle="modal" href="#edit_invoice_report"
+                                                                   class="btn btn-sm bg-success-light me-2">
+                                                                    <i class="fe fe-pencil"></i> Edit
+                                                                </a>
+                                                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
+                                                                   href="#delete_modal">
+                                                                    <i class="fe fe-trash"></i> Delete
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+
+                                                </c:forEach>
+
+
                                             </tbody>
                                         </table>
                                     </div>
