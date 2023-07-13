@@ -5,8 +5,8 @@
 
 package controller;
 
+import dal.FeedbackDAO;
 import dal.MentorDAO;
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +14,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.Mentors;
+import model.Feedback;
+import model.Users;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="SearchMentorController", urlPatterns={"/search"})
-public class SearchController extends HttpServlet {
+@WebServlet(name="FeedbackController", urlPatterns={"/feedback"})
+public class FeedbackController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,7 +37,18 @@ public class SearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet FeedbackController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet FeedbackController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,7 +62,7 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("search.jsp").forward(request, response);
+        doPost(request, response);
     } 
 
     /** 
@@ -62,26 +75,19 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String searchTxt = request.getParameter("searchTxt");
-        MentorDAO mentorDAO = new MentorDAO();
-        List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
-
-        List<Object> mentorInformationList = new ArrayList<>();
-        try{
-        if (searchTxt!= null){
-        for (Integer mentorId : mentorIds) {
-             List<Object> mentorInformation = mentorDAO.getMentorInformationById(mentorId);
-            mentorInformationList.add(mentorInformation);
-        }
-        request.setAttribute("mentors", mentorInformationList);
-        request.getRequestDispatcher("search.jsp").forward(request, response);
-        }
-        else {response.sendRedirect(request.getContextPath());}
-        
-        }
-        catch (Exception e){
-            System.err.println(e);
-        }
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            MentorDAO mentorDAO = new MentorDAO();
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("users");
+            int userId = user.getUserId();
+            try {
+                int mentorId = mentorDAO.getMentorIdByUserId(userId, 0);
+                List<Object> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
+                request.setAttribute("feedbackList", feedbackList);
+                request.getRequestDispatcher("feedback.jsp").forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
     }
 
     /** 
@@ -92,5 +98,6 @@ public class SearchController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
 
 }

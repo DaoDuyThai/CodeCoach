@@ -155,5 +155,62 @@ public class BookingDAO {
         }
         return 0;
     }
+    public int getTotalBookingByMentorId(int mentorId) {
+        String query = "select count(bookingId) as Total from Booking where mentorId =" + mentorId + "";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    public int getTotalMoneyEarnByMentorId(int mentorId) {
+        String query = "select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
+                + "   join Booking b on bd.bookingId = b.bookingId \n"
+                + "   join Mentors m on m.mentorId = b.mentorId\n"
+                + "   where b.mentorId = " + mentorId + " and status = 'Accepted' ";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+    public List<Object> getBookingInfoByMentorId(int mentorId){
+        List<Object> infoList = new ArrayList<>();
+        String query = "select distinct u.userId, u.fName, u.lName, b.status\n" +
+                        "from Booking b join Mentees m on b.menteeId = m.menteeId join Users u on m.userId = u.userId\n" +
+                        "where mentorId = "+mentorId+""; 
+         try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Object[] bookingInfo = new Object[4];
+                bookingInfo[0] = rs.getInt("userId");
+                bookingInfo[1] = rs.getString("fName");
+                bookingInfo[2] = rs.getString("lName");
+                bookingInfo[3] = rs.getString("status");
+                infoList.add(bookingInfo);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return infoList;
+    }
 
 }

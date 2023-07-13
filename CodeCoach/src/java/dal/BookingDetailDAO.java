@@ -186,5 +186,20 @@ public class BookingDetailDAO {
 
         return list;
     }
+    public List<BookingDetails> getBookingDetailbyMentorId(int mentorId) {
+        List<BookingDetails> listBookingDetails = new ArrayList<>();
+        String query = "SELECT bd.bookingdetailId, bd.bookingId, slotId,date FROM BookingDetails bd join Booking b on bd.bookingId = b.bookingId\n" +
+                       "WHERE b.mentorId = "+ mentorId +" and b.status = 'Accepted'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookingDetails.add(new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return listBookingDetails;
+    }
     
 }

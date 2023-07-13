@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.admin;
 
-import dal.MentorDAO;
-import dal.UserDAO;
+import dal.ContactUsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +13,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Mentors;
+import model.ContactUs;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="SearchMentorController", urlPatterns={"/search"})
-public class SearchController extends HttpServlet {
+@WebServlet(name="UpdateInfo", urlPatterns={"/updateinfo"})
+public class UpdateInfo extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,7 +32,18 @@ public class SearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateInfo</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateInfo at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,7 +57,7 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("search.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -62,25 +70,23 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String searchTxt = request.getParameter("searchTxt");
-        MentorDAO mentorDAO = new MentorDAO();
-        List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
-
-        List<Object> mentorInformationList = new ArrayList<>();
-        try{
-        if (searchTxt!= null){
-        for (Integer mentorId : mentorIds) {
-             List<Object> mentorInformation = mentorDAO.getMentorInformationById(mentorId);
-            mentorInformationList.add(mentorInformation);
-        }
-        request.setAttribute("mentors", mentorInformationList);
-        request.getRequestDispatcher("search.jsp").forward(request, response);
-        }
-        else {response.sendRedirect(request.getContextPath());}
-        
-        }
-        catch (Exception e){
-            System.err.println(e);
+        ContactUsDAO contactUsDao = new ContactUsDAO();
+        //get id
+        String id_raw = request.getParameter("id");
+        //get infor
+        String infor = request.getParameter("infor");
+        //get href
+        String href = request.getParameter("href");
+        try {
+            //parse id
+            int id = Integer.parseInt(id_raw);
+            //create new faq
+            ContactUs cUs  = new ContactUs(id, infor, href);
+            contactUsDao.updateInfo(cUs);
+            //return to page
+            response.sendRedirect("viewandeditsettings");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

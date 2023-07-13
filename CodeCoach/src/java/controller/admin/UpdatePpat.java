@@ -3,10 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.admin;
 
-import dal.MentorDAO;
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
-import model.Mentors;
-
+import dal.PpatDAO;
+import model.Ppat;
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="SearchMentorController", urlPatterns={"/search"})
-public class SearchController extends HttpServlet {
+@WebServlet(name="UpdatePpat", urlPatterns={"/updateppat"})
+public class UpdatePpat extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,7 +31,18 @@ public class SearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdatePpat</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdatePpat at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -49,7 +56,7 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("search.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -62,25 +69,25 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String searchTxt = request.getParameter("searchTxt");
-        MentorDAO mentorDAO = new MentorDAO();
-        List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
-
-        List<Object> mentorInformationList = new ArrayList<>();
-        try{
-        if (searchTxt!= null){
-        for (Integer mentorId : mentorIds) {
-             List<Object> mentorInformation = mentorDAO.getMentorInformationById(mentorId);
-            mentorInformationList.add(mentorInformation);
-        }
-        request.setAttribute("mentors", mentorInformationList);
-        request.getRequestDispatcher("search.jsp").forward(request, response);
-        }
-        else {response.sendRedirect(request.getContextPath());}
-        
-        }
-        catch (Exception e){
-            System.err.println(e);
+        PpatDAO ppatDao = new PpatDAO();
+        //get id
+        String id_raw = request.getParameter("id");
+        //get type
+        int type = Integer.parseInt(request.getParameter("type"));
+        //get question
+        String summary = request.getParameter("summary");
+        //get answer
+        String content = request.getParameter("content");
+        try {
+            //parse id
+            int id = Integer.parseInt(id_raw);
+            //create new ppat
+            Ppat ppat = new Ppat(id, type, summary, content);
+            ppatDao.updatePrivacyPolicyAndTerms(ppat);
+            //return to editfaq
+            response.sendRedirect("editppat");
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

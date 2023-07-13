@@ -43,31 +43,13 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-7 col-12">
-                        <nav aria-label="breadcrumb" class="page-breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            </ol>
-                        </nav>
-         
                     </div>
                     <div class="col-md-5 col-12 d-md-block d-none">
                         <div class="search-box">
-                        <form action="search" method="post">
-                          <input name="searchTxt" type="text" id="search-input" class="form-control" placeholder="Search">
-                           <button type="submit" id="search-button" class="btn btn-primary">Search</button>
-                        </form>
-                    </div>
-                        <div class="sort-by">
-                            <span class="sort-title">Sort by</span>
-                            <span class="sortby-fliter">
-                                <select class="select">
-                                    <option>Select</option>
-                                    <option class="sorting">Rating</option>
-                                    <option class="sorting">Popular</option>
-                                    <option class="sorting">Latest</option>
-                                    <option class="sorting">Free</option>
-                                </select>
-                            </span>
+                            <form action="search" method="post">
+                                <input name="searchTxt" type="text" id="search-input" class="form-control" placeholder="Search">
+                                <button type="submit" id="search-button" class="btn btn-primary">Search</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -160,7 +142,7 @@
                                     <div class="user-info-left">
                                         <div class="mentor-img">
                                             <a href="profile.html">
-                                                <img src="assets/img/user/${mInfo[1]}.jpg" class="img-fluid" alt="User Image">
+                                                <img src="assets/images/users/${mInfo[1]}.png" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
@@ -168,14 +150,6 @@
                                             <c:forEach var="skill" items="${mInfo}" begin="17" end="26">
                                             <span class="badge badge-primary">${skill}</span>
                                             </c:forEach>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(17)</span>
-                                            </div>
                                             <div class="mentor-details">
                                                 <p class="user-location"><i class="fas fa-map-marker-alt"></i>${mInfo[15]},
                                                     ${mInfo[16]}</p>
@@ -185,7 +159,6 @@
                                     <div class="user-info-right">
                                         <div class="user-infos">
                                             <ul>
-                                                <li><i class="far fa-comment"></i> 17 Feedback</li>
                                                 <li><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}, ${mInfo[16]}</li>
                                                 <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"

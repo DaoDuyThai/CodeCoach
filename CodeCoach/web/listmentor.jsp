@@ -1,37 +1,57 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="model.Mentors"%>
+<%@page import="java.util.List"%>
+<%@page import="dal.MentorDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Privacy Policy & Terms</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCoach - List of Mentors</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/feathericon.min.css">
+    <link rel="stylesheet" href="assets/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <script src="assets/js/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/script.js"></script>
-    </head>
-    <body class="account-page">
-        <!-- Header is placed here -->
-        <%@include file="header.jsp" %>
-        <!-- End of header -->
 
-        <div class="main-wrapper">
-            <div class="content">
-                <h2 style="font-weight: bold; text-align: center;">List Mentor</h2>
-                
-                <div class="account-box">              
-                    <div class="login-right">
-                        <div class="content">
-                            <div class="container-fluid">
-                                <div class="row">
-                                <div class="row">
-                                    <div class="col-md-12 col-lg-2 dash-board-list pink"></div>
-                                    <div class="col-md-12 col-lg-8 dash-board-list blue">
+        <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+             <!-- Header is placed here -->
+            <%@include file="header.jsp" %>
+            <!--End of header-->
+
+            <c:if test="${users.roleId == 1}">
+                <div class="breadcrumb-bar">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-12">
+                                <h2 class="breadcrumb-title">List of Mentors</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- mentee side bar start -->
+                            <%@include file="adminsidebar.jsp" %>
+                            <!-- mentee side bar end -->
+
+
+
+                        <div class="col-md-7 col-lg-8 col-xl-9">
+                                <div class="col-md-12 col-lg-8 dash-board-list blue">
                                         <div class="dash-widget">
                                             <div class="circle-bar">
                                                 <div class="icon-col">
@@ -42,59 +62,76 @@
                                                 <%
                                                     String countMentor = (String) request.getAttribute("countMentor");
                                                 %>
-                                                <h3><%= countMentor%></h3>
+                                                <h3><%= countMentor %></h3>
                                                 <h6>Mentors</h6>
                                             </div>
                                         </div>
                                     </div>
+                        <div class="card">
+                            
 
-                                    <div class="col-md-12 col-lg-2 dash-board-list pink"></div>
-                                </div>
-                                    <div class="col-md-12 col-lg-8 col-xl-9">
-                                        <c:forEach items="${listM}" var="m">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="mentor-widget">
-                                                        <div class="user-info-left">
-                                                            <div class="mentor-img">
-                                                                <a href="profile.html">
-                                                                    <img src="assets/images/users/${m[0]}.png" class="img-fluid" alt="User Image">
-                                                                </a>
-                                                            </div>
-                                                            <div class="user-info-cont">
-                                                                <h4 class="usr-name"><a href="profile.html">${m[6]} ${m[7]}</a></h4>
-                                                                <p class="mentor-type">${m[2]}</p>
-                                                                <div class="mentor-details">
-                                                                    <p class="user-location">
-                                                                        <i class="fas fa-map-marker-alt"></i> ${m[12]}  
-                                                                        <br> ${m[16]} 
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-info-right">
-                                                            <div class="user-infos">
-                                                                <ul>
-                                                                    <li><i class="far fa-money-bill-alt"></i>${m[3]}<i class="fas fa-info-circle" data-bs-toggle="tooltip" title="Lorem Ipsum"></i> </li>
-                                                                </ul>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </c:forEach>
-                                    </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="datatable table table-hover table-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Mentor Name</th>
+                                                
+                                                <th>Biography</th>
+                                                <th>Hourly Rate</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        
+                                        <tbody>
+                                           <% int counter =  1; %>
+                                            <c:forEach var="mentor" items="${mentorList}">
+                                                <tr>
+                                                    <td><%= counter %></td>
+                                                    <td>
+                                                        <h2 class="table-avatar">
+                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                    class="avatar-img rounded-circle"
+                                                                    src="assets/images/users/${mentor[1]}.png"
+                                                                    alt="User Image"></a>
+                                                            ${mentor[6]} ${mentor[7]}
+                                                        </h2>
+                                                    </td>
+                                                    
+                                                    <td>${mentor[4]}</td>
+                                                    <td>${mentor[3]}</td>
+                                                    
+                                                </tr>
+                                                <% counter++; %>
+                                            </c:forEach>
+                                                
+                                        </tbody>
+                                        
+                                    </table>
                                 </div>
                             </div>
+                                                    <div class="pagination justify-content-center">
+           
+        </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
+        </c:if>
 
-        <!-- End of Pre footer -->
         <%@include file="footer.jsp" %>
-        <!-- End of footer -->
-    </body>
+
+    </div>
+
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/feather.min.js"></script>
+    <script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/plugins/datatables/datatables.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+</body>
+
 </html>

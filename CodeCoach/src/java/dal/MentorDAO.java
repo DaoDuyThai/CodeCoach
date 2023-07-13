@@ -224,4 +224,23 @@ public class MentorDAO {
         }
         return count;
     }
+
+    public int getMentorIdByUserId(int userId, int mentorId){
+        String query = "select mentorId from Mentors m join Users u on m.userId=u.userId\n" +
+                   "where u.userId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                mentorId = rs.getInt("mentorId");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return mentorId;
+    
+    }
 }
