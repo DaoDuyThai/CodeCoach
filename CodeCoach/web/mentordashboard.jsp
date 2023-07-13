@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +23,10 @@
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 </head>
 
 <body>
@@ -53,48 +58,13 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+                    
 
-                        <div class="profile-sidebar">
-                            <div class="user-widget">
-                                <div class="pro-avatar">JD</div>
-                                <div class="rating">
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <c:if test="${users.roleId == 2}">
-                                <div class="user-info-cont">
-                                    <h4 class="usr-name">${users.lName} ${users.fName}</h4>
-                                    <p class="mentor-type"></p>
-                                </div>
-                                </c:if>
-                            </div>
-                            <div class="custom-sidebar-nav">
-                                <ul>
-                                    <li><a href="dashboard.html" class="active"><i class="fas fa-home"></i>Dashboard
-                                            <span><i class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="bookings.html"><i class="fas fa-clock"></i>Bookings <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="schedule-timings.html"><i class="fas fa-hourglass-start"></i>Schedule
-                                            Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="chat.html"><i class="fas fa-comments"></i>Messages <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="invoices.html"><i class="fas fa-file-invoice"></i>Invoices <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="reviews.html"><i class="fas fa-eye"></i>Reviews <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>                                  
-                                    <li><a href="profile.html"><i class="fas fa-user-cog"></i>Profile <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                    <li><a href="login"><i class="fas fa-sign-out-alt"></i>Logout <span><i
-                                                    class="fas fa-chevron-right"></i></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <!-- mentor sidebar start -->
+                    <%@include file="mentorsidebar.jsp" %>
+                    <!-- mentor sidebar end -->
 
-                    </div>
+                    
                     <div class="col-md-7 col-lg-8 col-xl-9">
                         <div class="row">
                             <div class="col-md-12 col-lg-4 dash-board-list blue">
@@ -105,7 +75,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>23</h3>
+                                        <h3>${totalMentee}</h3>
                                         <h6>Members</h6>
                                     </div>
                                 </div>
@@ -118,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>33</h3>
+                                        <h3>${totalAppointment}</h3>
                                         <h6>Appointments</h6>
                                     </div>
                                 </div>
@@ -131,7 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>$14</h3>
+                                        <h3><fmt:formatNumber value="${totalIncome}" type="currency" currencyCode="VND" /></h3>
                                         <h6>Total Earned</h6>
                                     </div>
                                 </div>
@@ -139,7 +109,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="mb-4">Mentee Lists</h4>
+                                <h4 class="mb-4">Booking Info Lists</h4>
                                 <div class="card card-table">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -152,26 +122,26 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <h2 class="table-avatar">
-                                                                <a href="profile.html"
-                                                                    class="avatar avatar-sm me-2"><img
-                                                                        class="avatar-img rounded-circle"
-                                                                        src="assets/img/user/user2.jpg"
-                                                                        alt="User Image"></a>
-                                                                <a href="profile.html">Tyrone Roberts<span><span
-                                                                            class="__cf_email__"
-                                                                            data-cfemail="ec98959e8382899e838e899e989fac8d88838e89c28f8381">[email&#160;protected]</span></span></a>
-                                                            </h2>
-                                                        </td>
-                                                        
-                                                        <td class="text-center"><span class="pending">PENDING</span>
-                                                        </td>
-                                                        <td class="text-center"><a href="profile.html"
-                                                                class="btn btn-sm bg-info-light"><i
-                                                                    class="far fa-eye"></i> View</a></td>
-                                                    </tr>  
+                                                   <c:forEach var="booking" items="${BookingInfo}">
+                                                        <tr>
+                                                            <td>
+                                                                <h2 class="table-avatar">
+                                                                    <a href="profile.html" class="avatar avatar-sm me-2">
+                                                                        <img class="avatar-img rounded-circle" src="assets/img/user/user2.jpg" alt="User Image">
+                                                                    </a>
+                                                                    <a href="profile.html">${booking[1]} ${booking[2]}</a>
+                                                                </h2>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="status">${booking[3]}</span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="profile.html" class="btn btn-sm bg-info-light">
+                                                                    <i class="far fa-eye"></i> View
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -179,6 +149,59 @@
                                 </div>
                             </div>
                         </div>
+                          <div class="row">
+  <div class="col-md-12">
+    <h4 class="mb-4">Booking Details</h4>
+    <div class="card card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-center mb-0">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Time</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <% int counter = 1; %>
+            <tbody>
+              <c:forEach var="bookingDetail" items="${bookingDetails}">
+                <tr>
+                  <td><%= counter %></td>
+                  <td>
+                <c:if test="${bookingDetail.slotId == 1}">
+                    08:00 AM - 10:00 AM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 2}">
+                    10:00 AM - 12:00 AM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 3}">
+                    13:00 PM - 15:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 4}">
+                    15:00 PM - 17:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 5}">
+                    17:00 PM - 19:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 6}">
+                    19:00 PM - 21:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 7}">
+                    21:00 PM - 23:00 PM
+                </c:if>
+            </td>
+                  <td>${bookingDetail.date}</td>
+                </tr>
+                <% counter++; %>
+              </c:forEach>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                 </div>
             </div>

@@ -94,4 +94,21 @@ public class MenteeDAO {
         }
         return 0;
     }
+
+    public int getTotalMenteeByMentorId(int mentorId) {
+        String query = "select count(distinct menteeId) as Total from Booking where mentorId =" + mentorId + "";
+        try {
+            int total = 0;
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                total = rs.getInt("Total");
+                return total;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 }

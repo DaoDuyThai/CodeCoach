@@ -133,7 +133,7 @@ String[] arr = date.split("/");
         }
         return 0;
     }
-    
+
     public int getTotalBookingSlotByMenteeId(int menteeId) {
         String query = "  select count(bd.bookingDetailId) as Total from BookingDetails bd join Booking b on bd.bookingId = b.bookingId where b.menteeId = "+menteeId+" and status = 'Accepted'";
         try {
@@ -171,7 +171,69 @@ String[] arr = date.split("/");
         return 0;
     }
 
+    public List<Object[]> getListAcceptedTransactions() {
+        List<Object[]> list = new ArrayList<>();
+        String query = "SELECT b.bookingId, \n"
+                + "    mentees.menteeId, menteeUsers.userId AS menteeUserId, menteeUsers.fName AS menteeFName, menteeUsers.lName AS menteeLName,\n"
+                + "    mentors.mentorId, mentorUsers.userId AS mentorUserId, mentorUsers.fName AS mentorFName, mentorUsers.lName AS mentorLName, mentors.hourlyRate,\n"
+                + "    s.skillName AS skill,\n"
+                + "    b.status,\n"
+                + "    COUNT(bd.bookingDetailId) AS bookingDetailCount,\n"
+                + "	mentors.hourlyRate * 2 * COUNT(bd.bookingDetailId) AS totalCost\n"
+                + "FROM bookingdetails bd\n"
+                + "JOIN booking b ON bd.bookingId = b.bookingId\n"
+                + "JOIN mentees ON b.menteeId = mentees.menteeId\n"
+                + "JOIN mentors ON b.mentorId = mentors.mentorId\n"
+                + "JOIN Users menteeUsers ON mentees.userId = menteeUsers.userId\n"
+                + "JOIN Users mentorUsers ON mentors.userId = mentorUsers.userId\n"
+                + "JOIN Skills s ON b.skillId = s.skillId\n"
+                + "where b.status = 'Accepted'\n"
+                + "GROUP BY b.bookingId, mentees.menteeId, menteeUsers.userId, menteeUsers.fName, menteeUsers.lName,\n"
+                + "    mentors.mentorId, mentorUsers.userId, mentorUsers.fname, mentorUsers.lName, s.skillName, b.status, mentors.hourlyRate;";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            DecimalFormat formatter = new DecimalFormat("#,###");
+            while (rs.next()) {
+                Object[] transactionInfo = new Object[15];
+                transactionInfo[0] = rs.getInt("bookingId");
+                transactionInfo[1] = rs.getInt("menteeId");
+                transactionInfo[2] = rs.getInt("menteeUserId");
+                transactionInfo[3] = rs.getString("menteeFName");
+                transactionInfo[4] = rs.getString("menteeLName");
+                transactionInfo[5] = rs.getInt("mentorId");
+                transactionInfo[6] = rs.getInt("mentorUserId");
+                transactionInfo[7] = rs.getString("mentorFName");
+                transactionInfo[8] = rs.getString("mentorLName");
+                transactionInfo[9] = rs.getString("hourlyRate");
+                transactionInfo[10] = rs.getString("skill");
+                transactionInfo[11] = rs.getString("status");
+                transactionInfo[12] = rs.getString("bookingDetailCount");
+                transactionInfo[13] = rs.getInt("totalCost");
+                transactionInfo[14] = formatter.format(transactionInfo[13]) + " VND";
+                list.add(transactionInfo);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-
+        return list;
+    }
+    public List<BookingDetails> getBookingDetailbyMentorId(int mentorId) {
+        List<BookingDetails> listBookingDetails = new ArrayList<>();
+        String query = "SELECT bd.bookingdetailId, bd.bookingId, slotId,date FROM BookingDetails bd join Booking b on bd.bookingId = b.bookingId\n" +
+                       "WHERE b.mentorId = "+ mentorId +" and b.status = 'Accepted'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookingDetails.add(new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return listBookingDetails;
+    }
 
 }

@@ -22,6 +22,11 @@ public class ContactUs {
         this.href = href;
     }
 
+    public ContactUs(String infor, String href) {
+        this.infor = infor;
+        this.href = href;
+    }
+
     public int getId() {
         return id;
     }

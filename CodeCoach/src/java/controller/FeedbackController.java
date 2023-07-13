@@ -5,9 +5,8 @@
 
 package controller;
 
-import dal.BookingDAO;
-import dal.BookingDetailDAO;
-import dal.MenteeDAO;
+import dal.FeedbackDAO;
+import dal.MentorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,21 +15,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Users;
-import dal.MentorDAO;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import model.BookingDetails;
+import model.Feedback;
+import model.Users;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="MentorDashboardController", urlPatterns={"/mentordashboard"})
-public class MentorDashboardController extends HttpServlet {
+@WebServlet(name="FeedbackController", urlPatterns={"/feedback"})
+public class FeedbackController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +42,10 @@ public class MentorDashboardController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MentorDashboardController</title>");  
+            out.println("<title>Servlet FeedbackController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MentorDashboardController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet FeedbackController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,55 +59,10 @@ public class MentorDashboardController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //get session
-        HttpSession session = request.getSession();
-        //create daos
-        MenteeDAO menteeDao = new MenteeDAO();
-        BookingDAO bookingDao = new BookingDAO();
-        BookingDetailDAO bookingDetailDao = new BookingDetailDAO();
-        MentorDAO mentorDao = new MentorDAO();
-
-        //get user from login session
-        Users user = (Users) session.getAttribute("users");
-        int userId = user.getUserId();
-        try {
-            if (user == null) {
-                response.sendRedirect("accessdeniedfull.jsp");
-            } else {
-                //get menteeId from user id 
-                int mentorId = mentorDao.getMentorIdByUserId(userId, 0);
-                //get total number of mentees
-                int menteeNumber = menteeDao.getTotalMenteeByMentorId(mentorId);
-                //get total accepted booking
-                int totalAppointment = bookingDao.getTotalBookingByMentorId(mentorId);
-                //get total spendings
-                int totalIncome = bookingDao.getTotalMoneyEarnByMentorId(mentorId);
-                //get booking info
-                List<Object> infoList = bookingDao.getBookingInfoByMentorId(mentorId);
-                //set data to jsp
-                request.setAttribute("totalMentee", menteeNumber);
-                request.setAttribute("totalAppointment", totalAppointment);
-                request.setAttribute("totalIncome", totalIncome);
-                request.setAttribute("BookingInfo", infoList);
-                
-                 // Retrieve booking details for the mentor
-                List<BookingDetails> bookingDetails = bookingDetailDao.getBookingDetailbyMentorId(mentorId);
-
-                // Set booking details in the request attributes
-                request.setAttribute("bookingDetails", bookingDetails);
-
-
-                //send data to jsp
-                request.getRequestDispatcher("mentordashboard.jsp").forward(request, response);
-            }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        doPost(request, response);
     } 
 
     /** 
@@ -125,7 +75,19 @@ public class MentorDashboardController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       
+            FeedbackDAO feedbackDAO = new FeedbackDAO();
+            MentorDAO mentorDAO = new MentorDAO();
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("users");
+            int userId = user.getUserId();
+            try {
+                int mentorId = mentorDAO.getMentorIdByUserId(userId, 0);
+                List<Object> feedbackList = feedbackDAO.getAllFeedbackOfMentor(mentorId);
+                request.setAttribute("feedbackList", feedbackList);
+                request.getRequestDispatcher("feedback.jsp").forward(request, response);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
     }
 
     /** 
@@ -136,5 +98,6 @@ public class MentorDashboardController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
 
 }
