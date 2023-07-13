@@ -85,10 +85,10 @@
                                                         </td>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                <a href="viewmentorprofile?mentorId=${lat[5]}" class="avatar avatar-sm me-2"><img
                                                                         class="avatar-img rounded-circle"
                                                                         src="assets/images/users/${lat[6]}.png" alt="User Image"></a>
-                                                                <a href="profile.html">${lat[7]} ${lat[8]}</a>
+                                                                <a href="viewmentorprofile?mentorId=${lat[5]}">${lat[7]} ${lat[8]}</a>
                                                             </h2>
                                                         </td>
                                                         <td class="text-center">${lat[14]}</td>
