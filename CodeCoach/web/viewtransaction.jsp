@@ -65,7 +65,7 @@
                                                     <th class="text-center">Mentee</th>
                                                     <th class="text-center">Mentor</th>
                                                     <th class="text-center">Total Amount</th>
-                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Skill</th>
                                                     <th class="text-center">Actions</th>
                                                 </tr>
                                             </thead>
@@ -77,7 +77,7 @@
                                                             <%count++;%>
                                                         <td>
                                                             <h2 class="table-avatar">
-                                                                <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                <a href="" class="avatar avatar-sm me-2"><img
                                                                         class="avatar-img rounded-circle"
                                                                         src="assets/images/users/${lat[2]}.png" alt="User Image"></a>
                                                                 <a href="profile.html">${lat[3]} ${lat[4]}</a>
@@ -93,7 +93,7 @@
                                                         </td>
                                                         <td class="text-center">${lat[14]}</td>
                                                         <td class="text-center">
-                                                            <span class="badge badge-pill bg-success inv-badge">Paid</span>
+                                                            <span class="text-center">${lat[10]}</span>
                                                         </td>
                                                         <td class="text-end text-center" >
                                                             <div class="actions">
