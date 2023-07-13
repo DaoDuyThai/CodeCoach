@@ -176,7 +176,7 @@ CREATE TABLE Feedback (
   rating INT NOT NULL,
   reviewText VARCHAR(MAX) NOT NULL,
   reviewDateTime DATETIME NOT NULL,
-  FOREIGN KEY (userId) REFERENCES Users(userId),
+  FOREIGN KEY (menteeId) REFERENCES Users(userId),
   FOREIGN KEY (mentorId) REFERENCES Mentors(mentorId),
   FOREIGN KEY (bookingId) REFERENCES Booking(bookingId)
 );
@@ -232,5 +232,6 @@ CREATE TABLE ContactUs (
   id INT IDENTITY(1,1) PRIMARY KEY,
   infor VARCHAR(255),
   href VARCHAR(255)
+
 
 );

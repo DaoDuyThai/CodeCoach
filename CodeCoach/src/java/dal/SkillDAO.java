@@ -138,4 +138,38 @@ public class SkillDAO {
         }
         return skillId;
     }
+
+    public List<Skills> getSkillBySubCategoryId(String subCategoryId){
+        List<Skills> listS = new ArrayList<>();
+        String query = "select * from Skills where subCategoryId = ?";
+        try{
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, subCategoryId);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                listS.add(new Skills(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+            }
+        }
+        catch(Exception e){
+        }
+        return listS;
+    }
+
+    public String countSkill(String subCategoryId) {
+        String query = "select count (skillId) from Skills where subCategoryId = ?";
+        String count = "None";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, subCategoryId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return count;
+    }
 }

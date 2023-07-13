@@ -30,6 +30,9 @@ public class MenteeDAO {
             "JOIN Mentees ON Users.userId = Mentees.userId\n" +
             "WHERE Mentees.menteeId = ?";
 
+    public static void main(String[] args) {
+        System.out.println(new MenteeDAO().getMenteeIdbyUserId("3"));
+    }
 
     public Users getUserByMenteeId (int menteeId) {
         Users user = new Users();
