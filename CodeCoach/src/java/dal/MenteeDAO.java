@@ -91,7 +91,7 @@ public class MenteeDAO {
         return 0;
     }
     public int getTotalMenteeByMentorId(int mentorId) {
-        String query = "select count(menteeId) as Total from Booking where mentorId =" + mentorId + "";
+        String query = "select count(distinct menteeId) as Total from Booking where mentorId =" + mentorId + "";
         try {
             int total = 0;
             conn = new DBContext().getConnection();

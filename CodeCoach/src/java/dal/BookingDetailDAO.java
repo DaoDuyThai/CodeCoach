@@ -134,7 +134,46 @@ public class BookingDetailDAO {
         }
         return 0;
     }
-    
+    public List<BookingDetails> getBookingDetailbyMentorId(int mentorId) {
+        List<BookingDetails> listBookingDetails = new ArrayList<>();
+        String query = "SELECT bd.bookingdetailId, bd.bookingId, slotId,date FROM BookingDetails bd join Booking b on bd.bookingId = b.bookingId\n" +
+                       "WHERE b.mentorId = "+ mentorId +" and b.status = 'Accepted'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookingDetails.add(new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return listBookingDetails;
+    }
+
+   public List<String> getBookedSlotsByWeekday(int mentorId, int weekday) {
+        List<String> bookedSlots = new ArrayList<>();
+        String query = "SELECT DISTINCT s.startTime, s.endTime FROM BookingDetails bd " +
+                       "JOIN Booking b ON bd.bookingId = b.bookingId " +
+                       "JOIN Slot s ON bd.slotId = s.slotId " +
+                       "WHERE b.mentorId = ? AND DATEPART(WEEKDAY, bd.date) = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, mentorId);
+            ps.setInt(2, weekday);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String startTime = rs.getString("startTime");
+                String endTime = rs.getString("endTime");
+                String slot = startTime + " - " + endTime;
+                bookedSlots.add(slot);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return bookedSlots;
+    }
+
 
     
    

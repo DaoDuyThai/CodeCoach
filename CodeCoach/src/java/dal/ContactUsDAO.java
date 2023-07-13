@@ -35,7 +35,59 @@ public class ContactUsDAO {
         }
         return list;
     }
-    
+    public void insertInfo(ContactUs contactUs) {
+        String query = "INSERT INTO ContactUs (infor, href) VALUES (?, ?)";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, contactUs.getInfor());
+            ps.setString(2, contactUs.getHref());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateInfo(ContactUs contactUs) {
+        String query = "UPDATE ContactUs SET infor = ?, href = ? WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, contactUs.getInfor());
+            ps.setString(2, contactUs.getHref());
+            ps.setInt(3, contactUs.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteInfo(int id) {
+        String query = "DELETE FROM ContactUs WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public String countInfo() {
+        String query = "select count (id) from ContactUs";
+        String count = "None";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                count = rs.getString(1);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return count;
+    }
     
     public static void main(String[] args) {
         ContactUsDAO d = new ContactUsDAO();

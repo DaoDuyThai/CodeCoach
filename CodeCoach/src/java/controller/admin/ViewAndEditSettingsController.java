@@ -5,7 +5,7 @@
 
 package controller.admin;
 
-import dal.MentorDAO;
+import dal.ContactUsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
+import model.ContactUs;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="ListMentorController", urlPatterns={"/listmentor"})
-public class ListMentorController extends HttpServlet {
+@WebServlet(name="ViewAndEditSettingsController", urlPatterns={"/viewandeditsettings"})
+public class ViewAndEditSettingsController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,10 @@ public class ListMentorController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListMentorController</title>");  
+            out.println("<title>Servlet ViewAndEditSettingsController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListMentorController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ViewAndEditSettingsController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,19 +57,15 @@ public class ListMentorController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        MentorDAO mentorDAO = new MentorDAO();
-        List<Integer> mentorIdList = mentorDAO.getAllMentorId();
-        List<Object> mentorInformationList = new ArrayList<>();
-        String countMentor = mentorDAO.countMentor();
-        for (Integer mentorId : mentorIdList) {
-             List<Object> mentorInformation = mentorDAO.getMentorInformationById(mentorId);
-            mentorInformationList.add(mentorInformation);
-        }
-        request.setAttribute("countMentor", countMentor);
-        request.setAttribute("mentorList", mentorInformationList);
-        request.getRequestDispatcher("listmentor.jsp").forward(request, response);
-    }
+    throws ServletException, IOException {
+        ContactUsDAO contactUsDAO = new ContactUsDAO();
+        List<ContactUs> cUsList = contactUsDAO.getAll();
+        request.setAttribute("cUsList", cUsList);
+        String countInfo = contactUsDAO.countInfo();
+        //set attribute
+        request.setAttribute("countInfo", countInfo);
+        request.getRequestDispatcher("viewandeditsettings.jsp").forward(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -81,7 +77,16 @@ public class ListMentorController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        doGet(request, response);
+        //get infor
+        String infor = request.getParameter("infor");
+        //get href
+        String href = request.getParameter("href");
+        ContactUs contactUs = new ContactUs(infor, href);
+        ContactUsDAO contactUsDAO = new ContactUsDAO();
+        //add info to db
+        contactUsDAO.insertInfo(contactUs);
+        //go to page
+        response.sendRedirect("viewandeditsettings");
     }
 
     /** 

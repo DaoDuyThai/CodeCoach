@@ -1,10 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <title>Edit Privacy Policy and Terms</title>
+        <title>View and Edit Settings</title>
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 
@@ -34,7 +36,7 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-12 col-12">
-                                <h2 class="breadcrumb-title">Edit Privacy Policy and Terms</h2>
+                                <h2 class="breadcrumb-title">View and Edit Settings</h2>
                             </div>
                         </div>
                     </div>
@@ -50,7 +52,7 @@
 
                             <div class="col-md-7 col-lg-8 col-xl-9">
 
-                                <!--count faq number start-->
+                                <!--count info number start-->
                                 <div class="row">
                                     <div class="col-md-12 col-lg-2 dash-board-list pink"></div>
                                     <div class="col-md-12 col-lg-8 dash-board-list blue">
@@ -62,10 +64,10 @@
                                             </div>
                                             <div class="dash-widget-info">
                                                 <%
-                                                    String countPpat = (String) request.getAttribute("countPpat");
+                                                    String countInfo = (String) request.getAttribute("countInfo");
                                                 %>
-                                                <h3><%= countPpat%></h3>
-                                                <h6>Private policies and terms</h6>
+                                                <h3><%= countInfo%></h3>
+                                                <h6>Info</h6>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +79,7 @@
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4 class="mb-4">Privacy Policy and Terms List</h4>
+                                        <h4 class="mb-4">Info List</h4>
 
                                         <!--add faq start-->
                                         <button onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more PPAT</button>
@@ -85,20 +87,17 @@
                                         <div id="addFormContainer" style="display: none;">
                                             <div class="card card-form">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Add PPAT</h4>
-                                                    <form action="editppat" method="POST">
+                                                    <h4 class="card-title">Add Info</h4>
+                                                    <form action="viewandeditsettings" method="POST">
                                                         <!-- Form fields -->
+                                                        
                                                         <div class="form-group">
-                                                            <label for="type">Type:</label>
-                                                            <input type="text" class="form-control" id="type" name="type" required>
+                                                            <label for="info">Info:</label>
+                                                            <input type="text" class="form-control" id="infor" name="infor" required>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="summary">Summary:</label>
-                                                            <input type="text" class="form-control" id="summary" name="summary" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="answer">Content:</label>
-                                                            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                                                            <label for="href">Link:</label>
+                                                            <input class="form-control" id="href" name="href" rows="2" ></input>
                                                         </div>
                                                         <input type="hidden" name="action" value="add">
                                                         <button type="submit" class="btn btn-primary">Save</button>
@@ -119,41 +118,36 @@
                                                         <thead>
                                                             <tr>
                                                                 <th style="width: 100px;">No.</th>
-                                                                <th style="width: 100px;">Type</th>
-                                                                <th style="width: 100px;">Summary</th>
-                                                                <th style="width: 100px;">Content</th>
+                                                                <th style="width: 100px;">Info</th>
+                                                                <th style="width: 100px;">Link</th>
                                                                 <th style="width: 100px;">ACTION</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <% int counter = 1; %>
-                                                            <c:forEach items="${ppatList}" var="ppat">
+                                                            <c:forEach items="${cUsList}" var="cUsList">
                                                                 <tr>
                                                                     <td style="width: 10px; white-space: pre-wrap;"><%= counter %></td>
-                                                                    <th style="width: 100px;white-space: pre-wrap;">${ppat.type}</th>
-                                                                    <td style="width: 100px; white-space: pre-wrap;">${ppat.summary}</td>
-                                                                    <td style="width: 100px; white-space: pre-wrap;">${ppat.content}</td>
+                                                                    <td style="width: 100px; white-space: pre-wrap;">${cUsList.infor}</td>
+                                                                    <td style="width: 100px; white-space: pre-wrap;">${cUsList.href}</td>
                                                                     <td style="width: 100px;">
                                                                         <button class="btn btn-primary" onclick="toggleEditForm(this)">Edit</button>
-                                                                        <a><button onclick="doDelete(${ppat.id})" class="btn btn-danger">Delete</button></a>
+                                                                        <a><button onclick="doDelete(${cUsList.id})" class="btn btn-danger">Delete</button></a>
                                                                     </td>
                                                                 </tr>
                                                                 <%-- Hidden row for the edit form start--%>
                                                                 <tr class="edit-row" style="display: none;">
                                                                     <td colspan="4">
-                                                                        <form action="updateppat" method="POST">
-                                                                            <input type="hidden" name="id" value="${ppat.id}">
+                                                                        <form action="updateinfo" method="POST">
+                                                                            <input type="hidden" name="id" value="${cUsList.id}">
+                                                                            
                                                                             <div class="form-group">
-                                                                                <label for="type">Type:</label>
-                                                                                <input type="text" class="form-control" id="type" name="type" value="${ppat.type}" required>
+                                                                                <label for="infor">Info:</label>
+                                                                                <input type="text" class="form-control" id="infor" name="infor" value="${cUsList.infor}" required>
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="summary">Summary:</label>
-                                                                                <input type="text" class="form-control" id="summary" name="summary" value="${ppat.summary}" required>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="content">Content:</label>
-                                                                                <textarea class="form-control" id="content" rows="3" name="content" required>${ppat.content}</textarea>
+                                                                                <label for="content">Link:</label>
+                                                                                <textarea class="form-control" id="href" rows="2" name="href" >${cUsList.href}</textarea>
                                                                             </div>
                                                                             <input type="hidden" name="action" value="update">
                                                                             <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -206,7 +200,7 @@
             // prompt if you want to delete
             function doDelete(id) {
                 if (confirm("Are you sure to delete this?:")) {
-                    window.location = "deleteppat?id=" + id;
+                    window.location = "deleteinfo?id=" + id;
                 }
             }
             //show add faq form

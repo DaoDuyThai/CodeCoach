@@ -5,7 +5,7 @@
 
 package controller.admin;
 
-import dal.PpatDAO;
+import dal.ContactUsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Ppat;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="PpatController", urlPatterns={"/editppat"})
-public class PpatController extends HttpServlet {
+@WebServlet(name="DeleteInfo", urlPatterns={"/deleteinfo"})
+public class DeleteInfo extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,20 +36,14 @@ public class PpatController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet EditPPAT</title>");  
+            out.println("<title>Servlet DeleteInfo</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet EditPPAT at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet DeleteInfo at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     } 
-    private PpatDAO ppatDAO;
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        ppatDAO = new PpatDAO();
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -62,26 +54,31 @@ public class PpatController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Ppat> ppatList = ppatDAO.getAll();
-        request.setAttribute("ppatList", ppatList);
-        String countPpat = ppatDAO.countPpat();
-        //set attribute
-        request.setAttribute("countPpat", countPpat);
-        request.getRequestDispatcher("editppat.jsp").forward(request, response);
-    }
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        String id_raw = request.getParameter("id");
+        int id;
+        try {
+            id = Integer.parseInt(id_raw);
+            ContactUsDAO contactUsDao = new ContactUsDAO();
+            contactUsDao.deleteInfo(id);
+            response.sendRedirect("viewandeditsettings");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    } 
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int type = Integer.parseInt(request.getParameter("type"));
-        String summary = request.getParameter("summary");
-        String content = request.getParameter("content");
-        Ppat ppat = new Ppat(type, summary, content);
-        PpatDAO ppatDAO = new PpatDAO();
-        ppatDAO.insertPrivacyPolicyAndTerms(ppat);
-        response.sendRedirect("editppat");
-
-        
-        
+    /** 
+     * Handles the HTTP <code>POST</code> method.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
     /** 
@@ -92,4 +89,5 @@ public class PpatController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

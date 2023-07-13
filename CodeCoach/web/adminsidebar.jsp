@@ -8,7 +8,7 @@
                 <ul>
                     <li><a href="admindashboard"><i class="fas fa-chart-pie"></i>Admin Dashboard
                             <span><i class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="bookings.html"><i class="fas fa-list-alt"></i>List Mentors <span><i
+                    <li><a href="listmentor"><i class="fas fa-list-alt"></i>List Mentors <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="schedule-timings.html"><i class="fas fa-list-alt"></i>List Mentees<span><i class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="listbooking"><i class="fas fa-list-alt"></i>List Booking <span><i
@@ -23,7 +23,7 @@
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="profile.html"><i class="fas fa-user-cog"></i>Admin Profile <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="login.html"><i class="fas fa-cog"></i>CodeCoach Settings <span><i
+                    <li><a href="viewandeditsettings"><i class="fas fa-cog"></i>CodeCoach Settings <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                 </ul>
             </div>

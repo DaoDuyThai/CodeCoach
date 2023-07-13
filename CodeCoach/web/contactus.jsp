@@ -97,6 +97,20 @@
                                                 </c:if>
                                             </c:forEach> </a>    
                                     </div>
+                                    <br>
+                                        <div class="footer-address">
+                                        <span><i class="fa fa-book-open"></i></span>Additional Information<br>
+                                        <a style="color: blue;text-decoration: underline" href="<c:forEach items="${ctact}" var="c">
+                                        <c:if test="${c.getId()==3}">
+                                            ${c.getHref()}
+                                        </c:if>
+                                        </c:forEach>"><c:forEach items="${ctact}" var="c">
+                                         <c:if test="${c.getId()>4}">
+                                             ${c.getInfor()}
+                                         </c:if>
+                                         </c:forEach> </a> 
+                                    </div>
+                                         <br>
                                     </div>
                                     </div>
                                     </div>

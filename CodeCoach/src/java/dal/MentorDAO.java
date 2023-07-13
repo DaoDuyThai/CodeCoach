@@ -113,7 +113,7 @@ public class MentorDAO {
         }
         return list;
     }
-  public List<Object> getMentorInformationByIdFromSearch(int mentorId) {
+  public List<Object> getMentorInformationById(int mentorId) {
     MentorDAO mentorDAO = new MentorDAO();
     ExpertiseDAO expertiseDAO = new ExpertiseDAO();
     UserDAO userDAO = new UserDAO();
@@ -122,14 +122,14 @@ public class MentorDAO {
 
     // Get mentor's user information
     Object[] userInfo = userDAO.getUserInfoByMentorId(mentorId);
-    mentorInformation.add(userInfo[0]);
-    mentorInformation.add(userInfo[1]);
-    mentorInformation.add(userInfo[2]);
-    mentorInformation.add(userInfo[3]);
-    mentorInformation.add(userInfo[4]);
-    mentorInformation.add(userInfo[5]);
-    mentorInformation.add(userInfo[6]);
-    mentorInformation.add(userInfo[7]);
+    mentorInformation.add(userInfo[0]);//mentorId
+    mentorInformation.add(userInfo[1]);//userId
+    mentorInformation.add(userInfo[2]);//bio
+    mentorInformation.add(userInfo[3]);//hourlyRate
+    mentorInformation.add(userInfo[4]);//email
+    mentorInformation.add(userInfo[5]);// password
+    mentorInformation.add(userInfo[6]); //fname
+    mentorInformation.add(userInfo[7]);//lname
     mentorInformation.add(userInfo[8]);
     mentorInformation.add(userInfo[9]);
     mentorInformation.add(userInfo[10]);
@@ -211,10 +211,56 @@ public class MentorDAO {
         return 0;
     }
     
-    //method for getting favorite mentors
-//    public List<Object> getFavMentor(int mentorId){
-//        List<Object> FavoriteList = new ArrayList<>();
-//        String query ="";
-//    }
     
+    public List<Integer> getAllMentorId(){
+        List<Integer> mentorIdList = new ArrayList<>();
+        String query = "Select mentorId from Mentors";
+        try{
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                mentorIdList.add(rs.getInt(1));
+            }
+    }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return mentorIdList;
+    
+}
+    public String countMentor(){
+        String count ="None";
+        String query = "select count(mentorId) from Mentors";
+        try{
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                count=(rs.getString(1));
+            }
+    }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+    public List<Mentors> getPaginatedMentors(int offset, int limit) {
+    List<Mentors> mentorList = new ArrayList<>();
+    String query = "SELECT * FROM mentors ORDER BY mentorId OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+    try {
+        conn = new DBContext().getConnection();
+        ps = conn.prepareStatement(query);
+        ps.setInt(1, offset);
+        ps.setInt(2, limit);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            mentorList.add(new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return mentorList;
+}
+
 }

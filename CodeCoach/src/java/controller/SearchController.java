@@ -70,7 +70,7 @@ public class SearchController extends HttpServlet {
         try{
         if (searchTxt!= null){
         for (Integer mentorId : mentorIds) {
-             List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
+             List<Object> mentorInformation = mentorDAO.getMentorInformationById(mentorId);
             mentorInformationList.add(mentorInformation);
         }
         request.setAttribute("mentors", mentorInformationList);

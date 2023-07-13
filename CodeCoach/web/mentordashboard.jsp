@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +23,10 @@
     <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
 </head>
 
 <body>
@@ -96,7 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3>${totalIncome} VND</h3>
+                                        <h3><fmt:formatNumber value="${totalIncome}" type="currency" currencyCode="VND" /></h3>
                                         <h6>Total Earned</h6>
                                     </div>
                                 </div>
@@ -144,6 +149,59 @@
                                 </div>
                             </div>
                         </div>
+                          <div class="row">
+  <div class="col-md-12">
+    <h4 class="mb-4">Booking Details</h4>
+    <div class="card card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-center mb-0">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Time</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <% int counter = 1; %>
+            <tbody>
+              <c:forEach var="bookingDetail" items="${bookingDetails}">
+                <tr>
+                  <td><%= counter %></td>
+                  <td>
+                <c:if test="${bookingDetail.slotId == 1}">
+                    08:00 AM - 10:00 AM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 2}">
+                    10:00 AM - 12:00 AM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 3}">
+                    13:00 PM - 15:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 4}">
+                    15:00 PM - 17:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 5}">
+                    17:00 PM - 19:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 6}">
+                    19:00 PM - 21:00 PM
+                </c:if>
+                <c:if test="${bookingDetail.slotId == 7}">
+                    21:00 PM - 23:00 PM
+                </c:if>
+            </td>
+                  <td>${bookingDetail.date}</td>
+                </tr>
+                <% counter++; %>
+              </c:forEach>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
                     </div>
                 </div>
             </div>

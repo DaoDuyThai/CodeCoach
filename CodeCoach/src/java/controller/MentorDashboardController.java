@@ -18,7 +18,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Users;
 import dal.MentorDAO;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import model.BookingDetails;
 
 /**
  *
@@ -59,6 +64,7 @@ public class MentorDashboardController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
@@ -92,6 +98,12 @@ public class MentorDashboardController extends HttpServlet {
                 request.setAttribute("totalAppointment", totalAppointment);
                 request.setAttribute("totalIncome", totalIncome);
                 request.setAttribute("BookingInfo", infoList);
+                
+                 // Retrieve booking details for the mentor
+                List<BookingDetails> bookingDetails = bookingDetailDao.getBookingDetailbyMentorId(mentorId);
+
+                // Set booking details in the request attributes
+                request.setAttribute("bookingDetails", bookingDetails);
 
 
                 //send data to jsp
