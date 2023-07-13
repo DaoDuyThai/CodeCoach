@@ -243,4 +243,21 @@ public class MentorDAO {
         return mentorId;
     
     }
+    public List<Integer> getAllMentorId(){
+        List<Integer> mentorIdList = new ArrayList<>();
+        String query = "Select mentorId from Mentors";
+        try{
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                mentorIdList.add(rs.getInt(1));
+            }
+    }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return mentorIdList;
+    
+}
 }

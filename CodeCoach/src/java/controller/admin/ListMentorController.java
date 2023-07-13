@@ -63,7 +63,7 @@ public class ListMentorController extends HttpServlet {
         List<Object> mentorInformationList = new ArrayList<>();
         String countMentor = mentorDAO.countMentor();
         for (Integer mentorId : mentorIdList) {
-             List<Object> mentorInformation = mentorDAO.getMentorInformationById(mentorId);
+             List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
             mentorInformationList.add(mentorInformation);
         }
         request.setAttribute("countMentor", countMentor);
