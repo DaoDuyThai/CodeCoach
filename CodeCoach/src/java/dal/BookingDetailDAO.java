@@ -186,15 +186,5 @@ public class BookingDetailDAO {
 
         return list;
     }
-
-    public static void main(String[] args) {
-        BookingDetailDAO dao = new BookingDetailDAO();
-        List<Object[]> list = dao.getListAcceptedTransactions();
-        for (Object[] transaction : list) {
-            for (Object element : transaction) {
-                System.out.print(element + " ");
-            }
-            System.out.println("");
-        }
-    }
+    
 }
