@@ -98,13 +98,10 @@
                                                         <td class="text-end text-center" >
                                                             <div class="actions">
                                                                 <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                                   class="btn btn-sm bg-success-light me-2">
-                                                                    <i class="fe fe-pencil"></i> Edit
+                                                                   class="btn btn-sm bg-primary-light me-2">
+                                                                    <i class="fe fe-pencil fa fa-eye"></i>Details
                                                                 </a>
-                                                                <a class="btn btn-sm bg-danger-light" data-bs-toggle="modal"
-                                                                   href="#delete_modal">
-                                                                    <i class="fe fe-trash"></i> Delete
-                                                                </a>
+                                                                
                                                             </div>
                                                         </td>
                                                     </tr>
