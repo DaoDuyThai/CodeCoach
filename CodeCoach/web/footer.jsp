@@ -62,7 +62,7 @@
                                     ${sessionScope.email}
                                 </p>
                                 <p>
-                                    <i class="fas fa-whatsapp-square"></i>
+                                    <i class="fas fa fa-globe"></i>
                                     ${sessionScope.website}
                                 </p>
 
