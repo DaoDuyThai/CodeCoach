@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.ContactUsDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.ContactUs;
 import model.Users;
 
 /**
@@ -72,7 +74,15 @@ public class LoginController extends HttpServlet {
             if (u != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("users", u);
-                
+                List<ContactUs> listContactUs = new ContactUsDAO().getAll();
+                String location = listContactUs.get(0).getInfor();
+                String tel = listContactUs.get(1).getInfor();
+                String wemail = listContactUs.get(2).getInfor();
+                String website = listContactUs.get(3).getInfor();
+                session.setAttribute("location", location);
+                session.setAttribute("tel", tel);
+                session.setAttribute("email", wemail);
+                session.setAttribute("website", website);
                 response.sendRedirect(request.getContextPath() + "/home");
             } else {
                 request.setAttribute("error", "Unable to login. Check your password or email address");
