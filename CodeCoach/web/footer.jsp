@@ -58,7 +58,7 @@
                                     ${sessionScope.tel}
                                 </p>
                                 <p>
-                                    <i class="fas fa-mail-bulk"></i>
+                                    <i class="fas fa-envelope"></i>
                                     ${sessionScope.email}
                                 </p>
                                 <p>
