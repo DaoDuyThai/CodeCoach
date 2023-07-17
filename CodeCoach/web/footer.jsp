@@ -51,16 +51,20 @@
                             <div class="footer-contact-info">
                                 <div class="footer-address">
                                     <span><i class="fas fa-map-marker-alt"></i></span>
-                                    <p>FPT University<br>Thach That, Hanoi, Vietnam</p>
+                                    <p>${sessionScope.location}</p>
                                 </div>
                                 <p>
                                     <i class="fas fa-phone-alt"></i>
-                                    +84 79 6428 094
+                                    ${sessionScope.tel}
                                 </p>
-                                <ul>
-                                    <li class="list-unstyled "><p></p>Email</li>
-                                    <li class="list-unstyled"><p>codecoach.project@gmail.com</p></li>
-                                </ul>
+                                <p>
+                                    <i class="fas fa-envelope"></i>
+                                    ${sessionScope.email}
+                                </p>
+                                <p>
+                                    <i class="fas fa fa-globe"></i>
+                                    ${sessionScope.website}
+                                </p>
 
 
                             </div>

@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -88,7 +89,10 @@
                                         </div>
                                         <div class="user-info-right d-flex align-items-end flex-wrap">
                                             <div class="hireme-btn text-center">
-                                                <span class="hire-rate">${mentor.hourlyRate}VND/Hour</span>
+                                                <span class="hire-rate">
+                                                        <fmt:formatNumber value="${mentor.hourlyRate}" type="number" var="formattedAmount" />
+                                                        ${formattedAmount} VND/Hour
+                                                </span>
                                                 <a class="blue-btn-radius" href="book?mentor-id=${mentor.mentorId}&user-id=${mentor.userId}&skill=${expertiseList[0][3]}">Hire Me</a>
                                             </div>
                                         </div>

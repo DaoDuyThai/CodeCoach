@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <head>
     <meta charset="utf-8">
@@ -137,8 +139,10 @@
                                     <h3 class="title"><a href="profile.html">${mInfo[6]} ${mInfo[7]}</a></h3>
                                     <div class="author-info">
                                         <div class="author-name">
-                                            ${mInfo[3]} VND/Slot
+                                            <fmt:formatNumber value="${mInfo[3]}" type="number" var="formattedAmount" />
+                                            ${formattedAmount} VND/Hour
                                         </div>
+
                                     </div>
 
                                     <div class="author-country">

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.ContactUsDAO;
 import dal.MentorDAO;
 import dal.SkillDAO;
 import dal.UserDAO;
@@ -14,7 +15,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.ContactUs;
 import model.Mentors;
 import model.Skills;
 
@@ -74,6 +77,16 @@ public class HomeController extends HttpServlet {
         //get Mentor user's info list
         UserDAO userDao = new UserDAO();
         List<Object[]> mentorInfoList = userDao.getAllUserInfoOfMentor();
+        HttpSession session = request.getSession();
+        List<ContactUs> listContactUs = new ContactUsDAO().getAll();
+        String location = listContactUs.get(0).getInfor();
+        String tel = listContactUs.get(1).getInfor();
+        String email = listContactUs.get(2).getInfor();
+        String website = listContactUs.get(3).getInfor();
+        session.setAttribute("location", location);
+        session.setAttribute("tel", tel);
+        session.setAttribute("email", email);
+        session.setAttribute("website", website);
         //set attribute and push to the page
         request.setAttribute("mentorInfoList", mentorInfoList);
         request.getRequestDispatcher("home.jsp").forward(request, response);
