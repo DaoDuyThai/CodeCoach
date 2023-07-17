@@ -53,13 +53,14 @@ public class PpatDAO {
         return null;
     }
     public void insertPrivacyPolicyAndTerms(Ppat ppat) {
-        String query = "INSERT INTO PrivacyPolicyAndTerms (type, summary, content) VALUES (?, ?, ?)";
+        String query = "INSERT INTO PrivacyPolicyAndTerms (id, type, summary, content) VALUES (?, ?, ?, ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setInt(1, ppat.getType());
-            ps.setString(2, ppat.getSummary());
-            ps.setString(3, ppat.getContent());
+            ps.setInt(2, ppat.getType());
+            ps.setString(3, ppat.getSummary());
+            ps.setString(4, ppat.getContent());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

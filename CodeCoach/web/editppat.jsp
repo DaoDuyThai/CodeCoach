@@ -89,6 +89,10 @@
                                                     <form action="editppat" method="POST">
                                                         <!-- Form fields -->
                                                         <div class="form-group">
+                                                            <label for="id">Id:</label>
+                                                            <input type="text" class="form-control" id="id" name="id" required>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <label for="type">Type:</label>
                                                             <input type="text" class="form-control" id="type" name="type" required>
                                                         </div>

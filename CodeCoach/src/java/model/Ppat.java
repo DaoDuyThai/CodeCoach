@@ -24,11 +24,7 @@ public class Ppat {
         this.content = content;
     }
 
-    public Ppat(int type, String summary, String content) {
-        this.type = type;
-        this.summary = summary;
-        this.content = content;
-    }
+    
     
 
     public int getId() {
