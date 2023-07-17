@@ -65,7 +65,7 @@
                                                     <i class="fas fa-star"></i>
                                                 </div>
                                                 <div class="mentor-details m-0">
-                                                    <p class="user-location m-0 "> <span class="fas fa-map-marker-alt"></span> ${mentorInfo[15]}, ${mentorInfo[16]}</p>
+                                                    <p class="user-location m-0"><i class="fas fa-map-marker-alt"> ${mentorInfo[15]}, ${mentorInfo[16]}</i></p>
                                                 </div>
                                             </div>
                                             <div class="user-info-cont">
@@ -93,7 +93,7 @@
                                                         <fmt:formatNumber value="${mentor.hourlyRate}" type="number" var="formattedAmount" />
                                                         ${formattedAmount} VND/Hour
                                                 </span>
-                                                <a class="blue-btn-radius" href="">Hire Me</a>
+                                                <a class="blue-btn-radius" href="book?mentor-id=${mentor.mentorId}&user-id=${mentor.userId}&skill=${expertiseList[0][3]}">Hire Me</a>
                                             </div>
                                         </div>
                                     </div>

@@ -22,6 +22,9 @@ VALUES
   ('mentee@mentee.com','123456', 'Mentee', 'User', 'Male', '345678', 3, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/'),
   ('thaiddhe176315@fpt.edu.vn','123456', N'Đào', N'Duy Thái', 'Male', '0796428094', 2, 1, 'FPT', '276', 'www.facebook.com/duythai.ddt/');
 
+INSERT INTO Mentees (Mentees.userId)
+VALUES
+	(3)
 -- Insert data into Categories table
 INSERT INTO Categories (categoryName) VALUES
 ('Web Development'),
