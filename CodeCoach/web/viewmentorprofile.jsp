@@ -57,13 +57,7 @@
                                                 <div class="pro-avatar avatar avatar-xxl">
                                                     <img class="avatar-img rounded-circle" src="assets/images/users/${mentorInfo[1]}.png" alt="alt" onerror=this.src="assets/images/users/default.png"/>
                                                 </div>
-                                                <div class="rating text-center">
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star filled"></i>
-                                                    <i class="fas fa-star"></i>
-                                                </div>
+                                                
                                                 <div class="mentor-details m-0">
                                                     <p class="user-location m-0"><i class="fas fa-map-marker-alt"> ${mentorInfo[15]}, ${mentorInfo[16]}</i></p>
                                                 </div>
