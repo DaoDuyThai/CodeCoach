@@ -68,22 +68,6 @@
                                                 %></h2>
                                         </div>    
 
-                                        <div class="col-sm" style="text-align: right">
-                                            <div class="chat-options">
-                                                <a href="" data-bs-toggle="modal"
-                                                   data-bs-target="#voice_call">
-                                                    <i class="material-icons">local_phone</i>
-                                                </a>
-                                                <a href="" data-bs-toggle="modal"
-                                                   data-bs-target="#video_call">
-                                                    <i class="material-icons">videocam</i>
-                                                </a>
-                                                <a href="">
-                                                    <i class="material-icons">more_vert</i>
-                                                </a>
-                                            </div>  
-                                        </div>
-
                                     </div>    
                                     <hr>    
                                     <div class="chat-messages">
