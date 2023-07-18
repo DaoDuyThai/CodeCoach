@@ -136,7 +136,7 @@
                                                                 <span class="status">${booking[3]}</span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <a href="profile.html" class="btn btn-sm bg-info-light">
+                                                                <a href="profile" class="btn btn-sm bg-info-light">
                                                                     <i class="far fa-eye"></i> View
                                                                 </a>
                                                             </td>

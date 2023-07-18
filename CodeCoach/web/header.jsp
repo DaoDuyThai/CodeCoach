@@ -40,7 +40,7 @@
                                         <li><a href="mentordashboard">Mentor Dashboard</a></li>
                                         <li><a href="mentornotifications">Notification</a></li>
                                         <li><a href="">View Booking</a></li>
-                                        <li><a href="">Review</a></li>
+                                        <li><a href="feedback">Review</a></li>
                                         <li><a href="listinvoice">Invoices</a></li>
                                         <li><a href="">Profile Settings</a></li>                                      
                                     </ul>
