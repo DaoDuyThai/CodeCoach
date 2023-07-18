@@ -60,6 +60,8 @@ public class ListMenteesController extends HttpServlet {
         MenteeDAO menteeDao = new MenteeDAO();
         List<Object[]> listMentee = menteeDao.getAllMenteeInfo();
         request.setAttribute("listMentee", listMentee);
+        int total = menteeDao.getTotalMenteeNumber();
+        request.setAttribute("total", total);
         request.getRequestDispatcher("listmentees.jsp").forward(request, response);
     } 
 

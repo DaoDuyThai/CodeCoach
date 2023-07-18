@@ -1,6 +1,6 @@
-<%@page import="model.Mentors"%>
+<%@page import="model.Mentees"%>
 <%@page import="java.util.List"%>
-<%@page import="dal.MentorDAO"%>
+<%@page import="dal.MenteeDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@
 
 
                             <div class="col-md-7 col-lg-8 col-xl-9">
-                                <div class="col-md-12 col-lg-8 dash-board-list blue">
+                                <div class="col-md-12 col-lg-3 dash-board-list blue">
                                     <div class="dash-widget">
                                         <div class="circle-bar">
                                             <div class="icon-col">
@@ -58,10 +58,8 @@
                                             </div>
                                         </div>
                                         <div class="dash-widget-info">
-                                            <%
-                                                String countMentor = (String) request.getAttribute("countMentor");
-                                            %>
-                                            <h3><%= countMentor%></h3>
+                                            <%int total = (int) request.getAttribute("total");%>
+                                            <h3><%= total%></h3>
                                             <h6>Mentees</h6>
                                         </div>
                                     </div>
@@ -79,28 +77,26 @@
 
                                                         <th>Email</th>
                                                         <th>Phone Number</th>
-
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     <% int counter = 1;%>
-                                                    <c:forEach var="mentor" items="${mentorList}">
+                                                    <c:forEach var="mentee" items="${listMentee}">
                                                         <tr>
                                                             <td><%= counter%></td>
                                                             <td>
                                                                 <h2 class="table-avatar">
-                                                                    <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                    <a href="" class="avatar avatar-sm me-2"><img
                                                                             class="avatar-img rounded-circle"
-                                                                            src="assets/images/users/${mentor[1]}.png"
+                                                                            src="assets/images/users/${mentee[1]}.png"
                                                                             alt="User Image"></a>
-                                                                        ${mentor[6]} ${mentor[7]}
+                                                                        ${mentee[3]} ${mentee[4]}
                                                                 </h2>
                                                             </td>
 
-                                                            <td>${mentor[4]}</td>
-                                                            <td>${mentor[3]}</td>
-
+                                                            <td>${mentee[2]}</td>
+                                                            <td>${mentee[5]}</td>
                                                         </tr>
                                                         <% counter++;%>
                                                     </c:forEach>

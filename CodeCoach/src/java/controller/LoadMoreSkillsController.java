@@ -47,7 +47,7 @@ public class LoadMoreSkillsController extends HttpServlet {
             for (Skills s : skillList) {
                 out.println("<div class=\"countskills col-12 col-md-4 col-lg-3\">\n"
                         + "                                <div class=\"large-col aos aos-init aos-animate\" data-aos=\"fade-up\">\n"
-                        + "                                    <a href=\"\" class=\"large-col-image\">\n"
+                        + "                                    <a href=\"search?searchTxt="+s.getSkillName()+"\" class=\"large-col-image\">\n"
                         + "                                        <div class=\"image-col-merge\">\n"
                         + "                                            <img src=\"assets/images/skills/" + s.getSkillId() + ".png\" alt>\n"
                         + "                                            <div class=\"text-col\">\n"

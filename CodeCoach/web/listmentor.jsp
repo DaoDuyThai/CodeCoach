@@ -50,7 +50,7 @@
 
 
                             <div class="col-md-7 col-lg-8 col-xl-9">
-                                <div class="col-md-12 col-lg-8 dash-board-list blue">
+                                <div class="col-md-12 col-lg-3 dash-board-list blue">
                                     <div class="dash-widget">
                                         <div class="circle-bar">
                                             <div class="icon-col">
@@ -90,11 +90,11 @@
                                                             <td><%= counter%></td>
                                                             <td>
                                                                 <h2 class="table-avatar">
-                                                                    <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                                    <a href="viewmentorprofile?mentorId=${mentor[0]}" class="avatar avatar-sm me-2"><img
                                                                             class="avatar-img rounded-circle"
                                                                             src="assets/images/users/${mentor[1]}.png"
-                                                                            alt="User Image"></a>
-                                                                        ${mentor[6]} ${mentor[7]}
+                                                                            alt="User Image">
+                                                                        ${mentor[6]} ${mentor[7]}</a>
                                                                 </h2>
                                                             </td>
 
