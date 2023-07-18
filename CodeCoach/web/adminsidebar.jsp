@@ -16,7 +16,7 @@
                             <span><i class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="listmentor"><i class="fas fa-list-alt"></i>List Mentors <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="schedule-timings.html"><i class="fas fa-list-alt"></i>List Mentees<span><i class="fas fa-chevron-right"></i></span></a></li>
+                    <li><a href="listmentee"><i class="fas fa-list-alt"></i>List Mentees<span><i class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="listbooking"><i class="fas fa-list-alt"></i>List Booking <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="listcategory"><i class="fas fa-list-alt"></i>List Categories <span><i

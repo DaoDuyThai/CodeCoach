@@ -7,7 +7,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>List Mentors</title>
+        <title>List Mentees</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -33,7 +33,7 @@
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <div class="col-md-12 col-12">
-                                <h2 class="breadcrumb-title">List of Mentors</h2>
+                                <h2 class="breadcrumb-title">List of Mentees</h2>
                             </div>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                                                 String countMentor = (String) request.getAttribute("countMentor");
                                             %>
                                             <h3><%= countMentor%></h3>
-                                            <h6>Mentors</h6>
+                                            <h6>Mentees</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -77,8 +77,8 @@
                                                         <th>No.</th>
                                                         <th>Mentor Name</th>
 
-                                                        <th>Biography</th>
-                                                        <th>Hourly Rate</th>
+                                                        <th>Email</th>
+                                                        <th>Phone Number</th>
 
                                                     </tr>
                                                 </thead>

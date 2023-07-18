@@ -21,20 +21,17 @@ import java.sql.ResultSet;
  * @author giang
  */
 public class MenteeDAO {
+
     Connection conn = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    private final String GET_USER_BY_MENTEE_ID = " SELECT *\n" +
-            "FROM Users\n" +
-            "JOIN Mentees ON Users.userId = Mentees.userId\n" +
-            "WHERE Mentees.menteeId = ?";
+    private final String GET_USER_BY_MENTEE_ID = " SELECT *\n"
+            + "FROM Users\n"
+            + "JOIN Mentees ON Users.userId = Mentees.userId\n"
+            + "WHERE Mentees.menteeId = ?";
 
-    public static void main(String[] args) {
-        System.out.println(new MenteeDAO().getMenteeIdbyUserId("3"));
-    }
-
-    public Users getUserByMenteeId (int menteeId) {
+    public Users getUserByMenteeId(int menteeId) {
         Users user = new Users();
         try {
             conn = new DBContext().getConnection();
@@ -43,7 +40,7 @@ public class MenteeDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 //Users(String fName, String lName, String gender, String email, String phoneNum, String address, String facebook,String password)
-                user = new Users(rs.getString("fName"), rs.getString("lName"), rs.getString("gender"), rs.getString("email"), rs.getString("PhoneNum"), rs.getString("address"),rs.getString("facebook"),rs.getString("password"));
+                user = new Users(rs.getString("fName"), rs.getString("lName"), rs.getString("gender"), rs.getString("email"), rs.getString("PhoneNum"), rs.getString("address"), rs.getString("facebook"), rs.getString("password"));
             }
         } catch (Exception e) {
         }
@@ -51,8 +48,8 @@ public class MenteeDAO {
     }
 
     public String getMenteeIdbyUserId(String userId) {
-        String menteeId ="";
-        String query = "Select menteeId from Mentees where userId="+userId+"";
+        String menteeId = "";
+        String query = "Select menteeId from Mentees where userId=" + userId + "";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -114,4 +111,29 @@ public class MenteeDAO {
         }
         return 0;
     }
+
+    public List<Object[]> getAllMenteeInfo() {
+        String query = "select m.menteeId, u.* from mentees m join users u on m.userId = u.userId";
+        List<Object[]> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Object[] menteeInfo = new Object[6];
+                menteeInfo[0] = rs.getInt("menteeId");
+                menteeInfo[1] = rs.getInt("userId");
+                menteeInfo[2] = rs.getString("email");
+                menteeInfo[3] = rs.getString("fName");
+                menteeInfo[4] = rs.getString("lName");
+                menteeInfo[5] = rs.getString("phoneNum");
+
+                list.add(menteeInfo);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
 }
