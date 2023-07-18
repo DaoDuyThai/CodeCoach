@@ -164,7 +164,7 @@ String[] arr = date.split("/");
             rs = ps.executeQuery();
             while (rs.next()) {
                 total = rs.getInt("Total");
-                return total;
+                return total*2;
             }
         } catch (Exception e) {
             System.out.println(e);
