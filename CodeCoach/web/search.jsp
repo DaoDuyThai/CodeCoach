@@ -42,13 +42,13 @@
         <div class="breadcrumb-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="col-md-7 col-12">
+                    <div class="col-md-3 col-12">
                     </div>
                     <div class="col-md-5 col-12 d-md-block d-none">
                         <div class="search-box">
                             <form action="search" method="post">
                                 <input name="searchTxt" type="text" id="search-input" class="form-control" placeholder="Search">
-                                <button type="submit" id="search-button" class="btn btn-primary">Search</button>
+                                <button type="submit" id="search-button" class="btn btn-primary" style="margin-left: 50px">Search</button>
                             </form>
                         </div>
                     </div>

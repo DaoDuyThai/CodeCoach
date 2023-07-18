@@ -65,7 +65,7 @@
                                 </li>
                             </c:if>
                             <li class="has-submenu">
-                                <a href='search'>Search mentor <i class="fas"></i></a>
+                                <a href='search?searchTxt='>Search mentor <i class="fas"></i></a>
 
                             </li>
                             <li class="has-submenu">
