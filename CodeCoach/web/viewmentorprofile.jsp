@@ -59,7 +59,7 @@
                                                 </div>
                                                 
                                                 <div class="mentor-details m-0">
-                                                    <p class="user-location m-0"><i class="fas fa-map-marker-alt"> ${mentorInfo[15]}, ${mentorInfo[16]}</i></p>
+                                                    <p class="user-location m-0" ><i class="fas fa-map-marker-alt"><span class="font-monospace"> ${mentorInfo[15]}, ${mentorInfo[16]}</span> </i></p>
                                                 </div>
                                             </div>
                                             <div class="user-info-cont">
