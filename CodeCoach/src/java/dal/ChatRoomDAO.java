@@ -36,6 +36,11 @@ public class ChatRoomDAO extends DBContext{
         return chatRooms;
     }
     
+    public static void main(String[] args) {
+         List<ChatRoom> listChatRoom =  new ChatRoomDAO().getChatRoombyUserId("3");
+         System.out.println(listChatRoom.size());
+    }
+    
     public List<ChatRoom> getAllChatRoom() {
         List<ChatRoom> chatRooms = new ArrayList<>();
         String query = "Select * From ChatRoom";
