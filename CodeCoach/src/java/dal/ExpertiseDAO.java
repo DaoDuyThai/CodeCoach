@@ -39,21 +39,34 @@ public class ExpertiseDAO {
         return list;
     }
 
-      public Expertise getExpertiseByMentorIdandSkillId(int mentorId, String skillId) {
-        String query = "select * from Expertise where mentorId ="+mentorId+" and skillId="+skillId+"";      
+      public List<Expertise> getExpertiseByMentorIdandSkillId(int mentorId, String skillId) {
+        List<Expertise> listExpertises = new ArrayList<>();
+        String querry = "select * from Expertise where mentorId = "+mentorId+" and skillId= "+skillId+"";
         try {
             conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setInt(1, mentorId);
+            ps = conn.prepareStatement(querry);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Expertise e = new Expertise(rs.getInt(1), rs.getInt(2), rs.getInt(3));
-                return e;
+                listExpertises.add(new Expertise(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
-        return null;
+        return listExpertises;
+    }
+      
+      public List<Expertise> getAllBooking(int mentorId, String skillId) {
+        List<Expertise> listBookings = new ArrayList<>();
+        String querry = "select * from Expertise where mentorId = "+mentorId+" and skillId= "+skillId+"";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookings.add(new Expertise(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
+            }
+        } catch (Exception e) {
+        }
+        return listBookings;
     }
     
     public List<Object[]> getExpertiseDetailsByMentorId(int mentorId) {
@@ -92,5 +105,10 @@ public class ExpertiseDAO {
            
         } catch (Exception e) {
         }
+    }
+    
+    public static void main(String[] args) {
+        List<Expertise> e = new ExpertiseDAO().getAllBooking(1,"10");
+        System.out.println(e.size() ==0);
     }
 }

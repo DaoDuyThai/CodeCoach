@@ -104,15 +104,15 @@ public class MentorRegisterController extends HttpServlet {
             mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
             if (mentorId == 0) {
                 new MentorDAO().registerMentor(userid, biography, hourlyRate);
-                new UserDAO().updateRoleIdUser(userid);
+                new UserDAO().updateRoleIdUser(userid); 
+                mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
+                if (!description.replaceAll(" ", "").equals("")) {
+                    new ExperienceDAO().insertExperience(mentorId, description);
+                }
             }
-            mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
-            if (!description.replaceAll(" ", "").equals("")) {
-                new ExperienceDAO().insertExperience(mentorId, description);
-            }
-            if (new ExpertiseDAO().getExpertiseByMentorIdandSkillId(mentorId, skillId)==null) {
+            if (new ExpertiseDAO().getExpertiseByMentorIdandSkillId(mentorId, skillId).size() == 0) {
                 new ExpertiseDAO().insertExpertise(mentorId, skillId);
-            }  
+            }
             response.sendRedirect("mentorregister");
         } catch (Exception e) {
         }
