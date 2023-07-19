@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Notifications;
+import model.Users;
 
 /**
  *
@@ -58,8 +59,9 @@ public class MenteeNotificationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        Users u = (Users) request.getSession().getAttribute("users");
         MenteeNotificationDAO d = new MenteeNotificationDAO();
-        List<Notifications> listN = d.getAll();
+        List<Notifications> listN = d.getNotificationsByMenteeID(u.getUserId());
         request.setAttribute("listN", listN);
         request.getRequestDispatcher("menteenotification.jsp").forward(request, response);
     } 
