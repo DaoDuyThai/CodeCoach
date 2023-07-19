@@ -72,5 +72,23 @@ public class SlotDAO extends DBContext{
         return slot;
     }
     
+    public List<Slot> getAllSlot() {
+        List<Slot> list = new ArrayList<>();
+        String query = "select * from Slot";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Slot slot = new Slot();
+                slot.setSlotId(rs.getInt("slotId"));
+                slot.setStartTime(rs.getString("startTime"));
+                slot.setEndTime(rs.getString("endTime"));
+                list.add(slot);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
 }

@@ -266,7 +266,7 @@ public class BookingDAO {
 
     public List<Booking> getBookingsByMentorId(int mentorId) {
         List<Booking> list = new ArrayList<>();
-        String query = "select * from Booking where mentorId = " + mentorId;
+        String query = "select * from Booking where mentorId = " + mentorId+ " AND status='Accepted'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -278,5 +278,20 @@ public class BookingDAO {
             System.out.println(e);
         }
         return list;
+    }
+    
+    public List<Booking> getAllBooking() {
+        List<Booking> listBookings = new ArrayList<>();
+        String querry = "select * from Booking";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listBookings.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
+            }
+        } catch (Exception e) {
+        }
+        return listBookings;
     }
 }

@@ -28,8 +28,11 @@
                 <div class="container-fluid">
                     <div class="settings-back mb-3">
                         <a href="home">
-                            <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span>
+                            <i class="fas fa-long-arrow-alt-left"></i> <span>Back</span> 
                         </a>
+                        <br>
+                        <button class="btn btn-primary"><a href="connectadmin"><span> Connect with Admin</span></a></button> 
+
                     </div>
                     <div class="row">
                         <div class="col-sm-12 mb-4">
@@ -38,6 +41,7 @@
                                     <div class="chat-header">
                                         <span>Chat</span>
                                     </div>
+
                                     <div class="chat-users-list">
                                         <div class="chat-scroll">
                                             <% List<ChatRoom> chatRooms = (List<ChatRoom>) request.getAttribute("chatRooms"); %> 

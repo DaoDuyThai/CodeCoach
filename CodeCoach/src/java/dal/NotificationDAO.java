@@ -4,32 +4,20 @@ import model.Notifications;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationDAO {
-    /*
-    CREATE TABLE Notifications (
-  notificationId INT IDENTITY(1,1) PRIMARY KEY,
-  userId INT NOT NULL,
-  bookingId INT NOT NULL,
-  content VARCHAR(MAX) NOT NULL,
-  dateTime DATETIME NOT NULL,
-  type VARCHAR(50) NOT NULL,
-  status VARCHAR(50) NOT NULL,
-  FOREIGN KEY (userId) REFERENCES Users(userId),
-  FOREIGN KEY (bookingId) REFERENCES Booking(bookingId)
-);
-     */
 
-    public static void main(String[] args) {
-        NotificationDAO notificationDAO = new NotificationDAO();
-        Notifications notifications = new Notifications(1, 1, "Hello", "2021-05-05 12:00:00", "Booking", "Unread");
-        notificationDAO.addNotification(notifications);
-    }
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
 
     private static final String ADD_NOTIFICATION = "INSERT INTO Notifications (userId, bookingId, content, dateTime, type, status) VALUES (?,?,?,?,?,?)";
-    public void addNotification(Notifications notifications){
-        try(Connection conn = new DBContext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(ADD_NOTIFICATION)) {
+
+    public void addNotification(Notifications notifications) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(ADD_NOTIFICATION)) {
             ps.setInt(1, notifications.getUserId());
             ps.setInt(2, notifications.getBookingId());
             ps.setString(3, notifications.getContent());
@@ -40,5 +28,21 @@ public class NotificationDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Notifications> getNotificationbyUserId(String userId) {
+        List<Notifications> listNotifications = new ArrayList<>();
+        String querry = "select * from Notifications Where userId=" + userId + "";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                listNotifications.add(new Notifications(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+            }
+        } catch (Exception e) {
+        }
+
+        return listNotifications;
     }
 }
