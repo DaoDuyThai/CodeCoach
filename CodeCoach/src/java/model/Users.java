@@ -152,4 +152,8 @@ public class Users {
     public void setFacebook(String facebook) {
         this.facebook = facebook;
     }
+    
+    public String getFullName(){
+        return fName + " " + lName;
+    }
 }
