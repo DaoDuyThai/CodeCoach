@@ -4,7 +4,10 @@
  */
 package controller;
 
+import dal.ExperienceDAO;
+import dal.ExpertiseDAO;
 import dal.MentorDAO;
+import dal.SkillDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,6 +16,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Skills;
+import model.Users;
 
 /**
  *
@@ -59,7 +66,21 @@ public class MentorRegisterController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("mentorregister.jsp").forward(request, response);
+        try {
+            HttpSession session = request.getSession();
+            Users u = (Users) session.getAttribute("users");
+            String userId = Integer.toString(u.getUserId());
+            if (userId != null && !userId.equals("1")) {
+                List<Skills> listSkill = new SkillDAO().getAllSkill();
+                request.setAttribute("listSkill", listSkill);
+                request.getRequestDispatcher("mentorregister.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("login");
+            }
+        } catch (Exception e) {
+            response.sendRedirect("login");
+        }
+
     }
 
     /**
@@ -74,12 +95,25 @@ public class MentorRegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String skillId = request.getParameter("skillList");
+            String description = request.getParameter("description");
             String biography = request.getParameter("biography");
             String hourlyRate = request.getParameter("hourlyRate");
             String userid = request.getParameter("userId");
-            new MentorDAO().registerMentor(userid, biography, hourlyRate);
-            new UserDAO().updateRoleIdUser(userid);
-            response.sendRedirect("home");
+            int mentorId = 0;
+            mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
+            if (mentorId == 0) {
+                new MentorDAO().registerMentor(userid, biography, hourlyRate);
+                new UserDAO().updateRoleIdUser(userid); 
+                mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
+                if (!description.replaceAll(" ", "").equals("")) {
+                    new ExperienceDAO().insertExperience(mentorId, description);
+                }
+            }
+            if (new ExpertiseDAO().getExpertiseByMentorIdandSkillId(mentorId, skillId).size() == 0) {
+                new ExpertiseDAO().insertExpertise(mentorId, skillId);
+            }
+            response.sendRedirect("mentorregister");
         } catch (Exception e) {
         }
     }
