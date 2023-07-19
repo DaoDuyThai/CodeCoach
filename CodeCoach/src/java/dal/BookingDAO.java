@@ -27,24 +27,22 @@ public class BookingDAO {
 
     private final String GET_BOOKINGID_BY_BOOKING = "SELECT * FROM [dbo].[Booking] WHERE mentorId = ? AND menteeId = ? AND skillId = ? AND status = ?";
 
-    private final String GET_LATEST_BOOKING_ID = "SELECT TOP 1 bookingId\n" +
-            "FROM Booking\n" +
-            "ORDER BY bookingId DESC;";
+    private final String GET_LATEST_BOOKING_ID = "SELECT TOP 1 bookingId\n"
+            + "FROM Booking\n"
+            + "ORDER BY bookingId DESC;";
 
-    public int getLatestBookingID(){
-        try (Connection conn = new DBContext().getConnection();
-             PreparedStatement ps = conn.prepareStatement(GET_LATEST_BOOKING_ID)) {
+    public int getLatestBookingID() {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(GET_LATEST_BOOKING_ID)) {
             rs = ps.executeQuery();
             if (rs.next()) {
                 return rs.getInt("bookingId");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return -1;
     }
-
 
     public static void main(String[] args) {
         Booking booking = new Booking(1, 2, 1, "Pending");
@@ -53,8 +51,7 @@ public class BookingDAO {
     }
 
     public int getBookingIdByBooking(Booking booking) {
-        try (Connection conn = new DBContext().getConnection();
-             PreparedStatement ps = conn.prepareStatement(GET_BOOKINGID_BY_BOOKING)) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(GET_BOOKINGID_BY_BOOKING)) {
             ps.setInt(1, booking.getMentorId());
             ps.setInt(2, booking.getMenteeId());
             ps.setInt(3, booking.getSkillId());
@@ -63,31 +60,28 @@ public class BookingDAO {
             if (rs.next()) {
                 return rs.getInt("bookingId");
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return 0;
     }
 
-
-
     public int addBooking(Booking booking) {
-        try (Connection conn = new DBContext().getConnection();
-             PreparedStatement ps = conn.prepareStatement(ADD_BOOKING)) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(ADD_BOOKING)) {
             ps.setInt(1, booking.getMentorId());
             ps.setInt(2, booking.getMenteeId());
             ps.setInt(3, booking.getSkillId());
             ps.setString(4, booking.getStatus());
             return ps.executeUpdate();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return 0;
     }
 
-        public ArrayList<Booking> getBookingMentorId(int mentorId) {
+    public ArrayList<Booking> getBookingMentorId(int mentorId) {
         ArrayList<Booking> list = new ArrayList<>();
         try {
             conn = new DBContext().getConnection();
@@ -219,11 +213,11 @@ public class BookingDAO {
         return 0;
     }
 
-    public List<Object> getBookingInfoByMentorId(int mentorId){
+    public List<Object> getBookingInfoByMentorId(int mentorId) {
         List<Object> infoList = new ArrayList<>();
-        String query = "select distinct u.userId, u.fName, u.lName, b.status\n" +
-                "from Booking b join Mentees m on b.menteeId = m.menteeId join Users u on m.userId = u.userId\n" +
-                "where mentorId = "+mentorId+"";
+        String query = "select distinct u.userId, u.fName, u.lName, b.status\n"
+                + "from Booking b join Mentees m on b.menteeId = m.menteeId join Users u on m.userId = u.userId\n"
+                + "where mentorId = " + mentorId + "";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -246,7 +240,7 @@ public class BookingDAO {
         String query = "select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
                 + "   join Booking b on bd.bookingId = b.bookingId \n"
                 + "   join Mentors m on m.mentorId = b.mentorId\n"
-                + "   where b.menteeId = "+menteeId+" and status = 'Accepted' ";
+                + "   where b.menteeId = " + menteeId + " and status = 'Accepted' ";
         try {
             int total = 0;
             conn = new DBContext().getConnection();
@@ -254,15 +248,13 @@ public class BookingDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 total = rs.getInt("Total");
-                return total*2;
+                return total * 2;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         return 0;
     }
-
-
 
     public List<Booking> getBookingsByMentorId(int mentorId) {
         List<Booking> list = new ArrayList<>();
@@ -278,5 +270,41 @@ public class BookingDAO {
             System.out.println(e);
         }
         return list;
+    }
+
+    public List<Booking> getBookingsByMenteeId(int menteeId) {
+        List<Booking> listBookings = new ArrayList<>();
+        String querry = "Select * From Booking Where menteeId =" + menteeId + " AND status='Accepted'";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Booking b = new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                b.setMentee(new MenteeDAO().getMenteeIdbyMentees(rs.getInt(3)));
+                b.setMentor(new MentorDAO().getMentorByMentorId(rs.getInt(2)));
+                listBookings.add(b);
+            }
+        } catch (Exception e) {
+        }
+        return listBookings;
+    }
+
+    public Booking getBookingbyId(int id) {
+        Booking b = new Booking();
+        String querry = "Select * from Booking where bookingId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                b = new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                b.setMentee(new MenteeDAO().getMenteebyUserId(rs.getInt(3)));
+                b.setMentor(new MentorDAO().getMentorByMentorId(rs.getInt(2)));
+            }
+        } catch (Exception e) {
+        }
+        return b;
     }
 }
