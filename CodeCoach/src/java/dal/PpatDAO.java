@@ -93,7 +93,7 @@ public class PpatDAO {
         }
     }
     public String countPpat() {
-        String query = "select count (id) from PrivacyPolicyAndTerms";
+        String query = "select count (summary) from PrivacyPolicyAndTerms";
         String count = "None";
         try {
             conn = new DBContext().getConnection();

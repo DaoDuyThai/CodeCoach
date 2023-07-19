@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page import="dal.MentorDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,7 +92,7 @@
                                                     <td><%= counter %></td>
                                                     <td>
                                                         <h2 class="table-avatar">
-                                                            <a href="profile.html" class="avatar avatar-sm me-2"><img
+                                                            <a href="viewmentorprofile?mentorId=${mentor[0]}" class="avatar avatar-sm me-2"><img
                                                                     class="avatar-img rounded-circle"
                                                                     src="assets/images/users/${mentor[1]}.png"
                                                                     alt="User Image"></a>
@@ -100,7 +101,7 @@
                                                     </td>
                                                     
                                                     <td>${mentor[4]}</td>
-                                                    <td>${mentor[3]}</td>
+                                                    <td><fmt:formatNumber value="${mentor[3]}" pattern="¤#,##0" currencyCode="VND" /></td>
                                                     
                                                 </tr>
                                                 <% counter++; %>

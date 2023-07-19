@@ -4,8 +4,19 @@
     Author     : ADMIN
 --%>
 
+
+
+<%@page import="model.Skills"%>
+<%@page import="java.util.List"%>
+<%@page import="dal.SkillDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+    SkillDAO skillDAO = new SkillDAO();
+    List<Skills> skills = skillDAO.getAll();
+    request.setAttribute("skills", skills);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -73,62 +84,18 @@
                                             placeholder="Select Date">
                                     </div>
                                 </div>
-                                <div class="filter-widget">
-                                    <h4>Gender</h4>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="gender_type" checked>
-                                            <span class="checkmark"></span> Male
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="gender_type">
-                                            <span class="checkmark"></span> Female
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="filter-widget">
-                                    <h4>Select Courses</h4>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist" checked>
-                                            <span class="checkmark"></span> Digital Marketer
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist" checked>
-                                            <span class="checkmark"></span> UNIX, Calculus, Trigonometry
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> Computer Programming
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> ASP.NET,Computer Gaming
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> HTML, Css
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> VB, VB.net
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="btn-search">
-                                    <button type="button" class="btn btn-block w-100">Search</button>
+                                <div class="filter-options">
+                                    <form action="search" method="post">
+                                        <h4>Skills</h4>
+                                        <c:forEach var="skills" items="${skills}">
+                                            <div>
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="filterOption" value="${skill.skillId}">
+                                                    <span class="checkmark"></span> ${skills.skillName}
+                                                </label>
+                                            </div>
+                                        </c:forEach>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -141,12 +108,12 @@
                                 <div class="mentor-widget">
                                     <div class="user-info-left">
                                         <div class="mentor-img">
-                                            <a href="profile.html">
+                                            <a href="viewmentorprofile?mentorId=${mInfo[0]}">
                                                 <img src="assets/images/users/${mInfo[1]}.png" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">${mInfo[6]} ${mInfo[7]}</a></h4>
+                                            <h4 class="usr-name"><a href="viewmentorprofile?mentorId=${mInfo[0]}">${mInfo[6]} ${mInfo[7]}</a></h4>
                                             <c:forEach var="skill" items="${mInfo}" begin="17" end="26">
                                             <span class="badge badge-primary">${skill}</span>
                                             </c:forEach>
@@ -160,7 +127,7 @@
                                         <div class="user-infos">
                                             <ul>
                                                 <li><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}, ${mInfo[16]}</li>
-                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
+                                                <li><i class="far fa-money-bill-alt"></i> <fmt:formatNumber value="${mInfo[3]}" pattern="¤#,##0" currencyCode="VND" /> <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
                                             </ul>
@@ -216,6 +183,46 @@
             }
         });
     });
+</script>
+<script>
+$(document).ready(function() {
+  // Handle checkbox change event
+  $('input[name="filterOption"]').on('change', function() {
+    applyFilter();
+  });
+
+  // Function to apply the filter
+  function applyFilter() {
+    var filterOptions = [];
+    $('input[name="filterOption"]:checked').each(function() {
+      filterOptions.push($(this).val());
+    });
+
+    // Retrieve the search query from the input field
+    var searchTxt = $('#search-input').val();
+
+    // Prepare the filter data to send to the server
+    var filterData = {
+      searchTxt: searchTxt,
+      filterOptions: filterOptions
+    };
+
+    // Send an AJAX request to the server to retrieve the filtered search results
+    $.ajax({
+      type: 'POST',
+      url: 'search',
+      data: filterData,
+      success: function(response) {
+        // Update the search results section with the filtered results
+        $('#search-results').html(response);
+      },
+      error: function(xhr, status, error) {
+        // Handle the error if the AJAX request fails
+        console.log(error);
+      }
+    });
+  }
+});
 </script>
 
 

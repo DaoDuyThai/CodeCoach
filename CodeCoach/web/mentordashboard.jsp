@@ -101,7 +101,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3><fmt:formatNumber value="${totalIncome}" type="currency" currencyCode="VND" /></h3>
+                                        <h3><fmt:formatNumber value="${totalIncome}" pattern="¤#,##0" currencyCode="VND" /></h3>
                                         <h6>Total Earned</h6>
                                     </div>
                                 </div>
