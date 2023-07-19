@@ -57,12 +57,12 @@ public class MentorDAO {
         }
         return null;
     }
-    
+
     public Mentors getMentorByUserId(String userId) {
-        String query = "select * from mentors where userId ="+userId+"";
+        String query = "select * from mentors where userId =" + userId + "";
         try {
             conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);          
+            ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Mentors mentor = new Mentors(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4));
@@ -73,7 +73,7 @@ public class MentorDAO {
         }
         return null;
     }
-    
+
     public void registerMentor(String userId, String biography, String hourlyRate) {
         String query = "INSERT INTO [dbo].[Mentors]([userId],bio,[hourlyRate]) VALUES(" + userId + ",'" + biography + "'," + hourlyRate + ")";
         try {
@@ -209,6 +209,7 @@ public class MentorDAO {
         }
         return 0;
     }
+
     public String countMentor() {
         String query = "select count (mentorId) from Mentors";
         String count = "None";
@@ -225,39 +226,42 @@ public class MentorDAO {
         return count;
     }
 
-    public int getMentorIdByUserId(int userId, int mentorId){
-        String query = "select mentorId from Mentors m join Users u on m.userId=u.userId\n" +
-                   "where u.userId = ?";
+    public int getMentorIdByUserId(int userId, int mentorId) {
+        String query = "select mentorId from Mentors m join Users u on m.userId=u.userId\n"
+                + "where u.userId = ?";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             ps.setInt(1, userId);
             rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 mentorId = rs.getInt("mentorId");
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mentorId;
-    
+
     }
-    public List<Integer> getAllMentorId(){
+
+    public List<Integer> getAllMentorId() {
         List<Integer> mentorIdList = new ArrayList<>();
         String query = "Select mentorId from Mentors";
-        try{
+        try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 mentorIdList.add(rs.getInt(1));
             }
-    }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return mentorIdList;
+    }
     
-}
+    public static void main(String[] args) {
+        Mentors m = new MentorDAO().getMentorByUserId("6");
+        System.out.println(m.getMentorId());
+    }
 }

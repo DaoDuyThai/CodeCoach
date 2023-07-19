@@ -101,15 +101,14 @@ public class MentorRegisterController extends HttpServlet {
             String hourlyRate = request.getParameter("hourlyRate");
             String userid = request.getParameter("userId");
             int mentorId = 0;
-            mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
-            if (mentorId == 0) {
+            if (new MentorDAO().getMentorByUserId(userid) == null) {
                 new MentorDAO().registerMentor(userid, biography, hourlyRate);
                 new UserDAO().updateRoleIdUser(userid); 
-                mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();
-                if (!description.replaceAll(" ", "").equals("")) {
+                mentorId = new MentorDAO().getMentorByUserId(userid).getMentorId();              
+            }
+            if (!description.replaceAll(" ", "").equals("")) {
                     new ExperienceDAO().insertExperience(mentorId, description);
                 }
-            }
             if (new ExpertiseDAO().getExpertiseByMentorIdandSkillId(mentorId, skillId).size() == 0) {
                 new ExpertiseDAO().insertExpertise(mentorId, skillId);
             }
