@@ -123,6 +123,7 @@
                                             %>
                                             <%out.print(invoice);%>
                                         </th>
+                                         <th><a onclick="window.location.href='<%="ViewInvoice?id=" + listBookings.get(i).getBookingId()%>'" href="<%="ViewInvoice?id=" + listBookings.get(i).getBookingId()%>">View</a></th>
                                     </tr>
                                 </table>
                             </button>
