@@ -26,6 +26,8 @@ public class Booking {
     private String menteeName;
     private String skillName;
     private String date;
+    private Mentees mentee;
+    private Mentors mentor;
 
     public String getDate() {
         return date;
@@ -160,4 +162,36 @@ public class Booking {
         this.status = status;
     }
 
+    public Booking(int bookingId, int mentorId, int menteeId, int skillId, String status, String startTime, String endTime, String menteeName, String skillName, String date, Mentees mentee, Mentors mentor) {
+        this.bookingId = bookingId;
+        this.mentorId = mentorId;
+        this.menteeId = menteeId;
+        this.skillId = skillId;
+        this.status = status;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.menteeName = menteeName;
+        this.skillName = skillName;
+        this.date = date;
+        this.mentee = mentee;
+        this.mentor = mentor;
+    }
+
+    public Mentees getMentee() {
+        return mentee;
+    }
+
+    public void setMentee(Mentees mentee) {
+        this.mentee = mentee;
+    }
+
+    public Mentors getMentor() {
+        return mentor;
+    }
+
+    public void setMentor(Mentors mentor) {
+        this.mentor = mentor;
+    }
+
+    
 }
