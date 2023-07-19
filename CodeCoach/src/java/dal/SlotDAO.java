@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import model.SlotDTO;
 
 public class SlotDAO extends DBContext{
     Connection conn = null;
@@ -70,6 +71,20 @@ public class SlotDAO extends DBContext{
         } catch (Exception e) {
         }
         return slot;
+    }
+
+    public SlotDTO getDataByBookingID(int bookingID) {
+        String query = "Select count(*) as totalSlot,2 * count(*) as totalHours from Booking b join Mentors m on b.mentorId = m.mentorId join BookingDetails bd on b.bookingId = bd.bookingId where b.bookingId = " + bookingID;
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new SlotDTO(rs.getInt(1), rs.getInt(2));
+            }
+        } catch (Exception e) {
+        }
+        return null;
     }
     
 
