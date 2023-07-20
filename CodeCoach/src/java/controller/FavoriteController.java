@@ -5,6 +5,8 @@
 
 package controller;
 
+import dal.MenteeDAO;
+import dal.MentorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,12 +14,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import model.Users;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name="FavoriteController", urlPatterns={"/favorite"})
+@WebServlet(name="FavoriteController", urlPatterns={"/favourite"})
 public class FavoriteController extends HttpServlet {
    
     /** 
@@ -55,7 +61,27 @@ public class FavoriteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+            MentorDAO mentorDAO = new MentorDAO();
+            MenteeDAO menteeDAO = new MenteeDAO();
+            HttpSession session = request.getSession();
+            Users user = (Users) session.getAttribute("users");
+            int userId = user.getUserId();
+            int menteeId = menteeDAO.getMenteeIdByUserId(userId);
+            List<Integer> mentorIdList = menteeDAO.getMentorIdByMenteeInterest(menteeId);
+            List<Object> mentorInformationList = new ArrayList<>();
+           PrintWriter out = response.getWriter();
+            try {
+                for (Integer mentorId : mentorIdList) {
+                    List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
+                    mentorInformationList.add(mentorInformation);
+                }
+                request.setAttribute("mentorList", mentorInformationList);
+                request.getRequestDispatcher("favourite.jsp").forward(request, response);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+            
     } 
 
     /** 

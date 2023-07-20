@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.CategoryDAO;
 import dal.MentorDAO;
 import dal.UserDAO;
 import java.io.IOException;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import model.Categories;
 import model.Mentors;
 
 /**
@@ -65,7 +63,7 @@ public class SearchController extends HttpServlet {
         catch(Exception e){
             System.err.println(e);
         }
-        }
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -78,26 +76,25 @@ public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String searchTxt = request.getParameter("searchTxt");
-    String[] filterOptions = request.getParameterValues("filterOption");
+        MentorDAO mentorDAO = new MentorDAO();
+        List<Integer> mentorIds = mentorDAO.getMentorIdBySearch(searchTxt);
 
-    MentorDAO mentorDAO = new MentorDAO();
-    List<Integer> mentorIds = mentorDAO.getMentorIdBySearchAndFilter(searchTxt, filterOptions);
-
-    List<Object> mentorInformationList = new ArrayList<>();
-    try {
-        if (searchTxt != null) {
-            for (Integer mentorId : mentorIds) {
-                List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
-                mentorInformationList.add(mentorInformation);
-            }
-            request.setAttribute("mentors", mentorInformationList);
-            request.getRequestDispatcher("search.jsp").forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath());
+        List<Object> mentorInformationList = new ArrayList<>();
+        try{
+        if (searchTxt!= null){
+        for (Integer mentorId : mentorIds) {
+             List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
+            mentorInformationList.add(mentorInformation);
         }
-    } catch (Exception e) {
-        System.err.println(e);
-    }
+        request.setAttribute("mentors", mentorInformationList);
+        request.getRequestDispatcher("search.jsp").forward(request, response);
+        }
+        else {response.sendRedirect(request.getContextPath());}
+        
+        }
+        catch (Exception e){
+            System.err.println(e);
+        }
     }
 
     /** 

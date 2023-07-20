@@ -54,7 +54,7 @@
                                         <li><a href="menteedashboard">Mentee Dashboard</a></li>
                                         <li><a href="">Notification</a></li>
                                         <li><a href="booking.jsp">Booking</a></li>
-                                        <li><a href="">Favourites</a></li>
+                                        <li><a href="favourite">Favourites</a></li>
                                         <li><a href="">Invoices</a></li>
                                         <li><a href="mentee-profile?go=edit-profile">Profile Settings</a></li>
 

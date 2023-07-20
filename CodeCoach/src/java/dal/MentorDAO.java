@@ -8,13 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.List;
 import model.Mentors;
-import model.Skills;
-import java.util.HashMap;
-import java.util.Map;
-import model.Users;
 
 /**
  *
@@ -101,52 +96,33 @@ public class MentorDAO {
         return list;
     }
 
-   public List<Integer> getMentorIdBySearchAndFilter(String searchTxt, String[] filterOptions) {
-    List<Integer> list = new ArrayList<>();
-    StringBuilder query = new StringBuilder("SELECT DISTINCT m.mentorId FROM Mentors m ");
-    query.append("INNER JOIN Users u ON m.userId = u.userId ");
-    query.append("INNER JOIN Expertise e ON m.mentorId = e.mentorId ");
-    query.append("INNER JOIN Skills s ON e.skillId = s.skillId ");
-    query.append("INNER JOIN SubCategories sc ON s.subCategoryId = sc.subCategoryId ");
-    query.append("INNER JOIN Categories c ON sc.categoryId = c.categoryId ");
-    query.append("WHERE (u.fName LIKE ? OR u.lName LIKE ? OR s.skillName LIKE ? OR sc.subCategoryName LIKE ? OR c.categoryName LIKE ?)");
-
-    if (filterOptions != null && filterOptions.length > 0) {
-        query.append(" AND s.skillId IN (");
-        for (int i = 0; i < filterOptions.length; i++) {
-            query.append("?");
-            if (i < filterOptions.length - 1) {
-                query.append(",");
+    public List<Integer> getMentorIdBySearch(String searchTxt) {
+        List<Integer> list = new ArrayList<>();
+        String query = "select distinct m.mentorId \n"
+                + "from Users u left join Mentors m \n"
+                + "on u.userId = m.userId inner join quanhuyen qh on u.maqh = qh.maqh inner join tinhthanhpho ttp on qh.mattp = ttp.mattp join Expertise e \n"
+                + "on m.mentorId = e.mentorId  join Skills sk\n"
+                + "on e.skillId = sk.skillId  join SubCategories sc\n"
+                + "on sk.subCategoryId = sc.subCategoryId join Categories c \n"
+                + "on sc.categoryId = c.categoryId\n"
+                + "where u.fName like ? or u.lName like ? or sk.skillName like ? or sc.subCategoryName like ? or c.categoryName like ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, "%" + searchTxt + "%");
+            ps.setString(2, "%" + searchTxt + "%");
+            ps.setString(3, "%" + searchTxt + "%");
+            ps.setString(4, "%" + searchTxt + "%");
+            ps.setString(5, "%" + searchTxt + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getInt(1));
             }
+        } catch (Exception e) {
+            System.out.println(e);
         }
-        query.append(")");
+        return list;
     }
-
-    try {
-        conn = new DBContext().getConnection();
-        ps = conn.prepareStatement(query.toString());
-
-        ps.setString(1, "%" + searchTxt + "%");
-        ps.setString(2, "%" + searchTxt + "%");
-        ps.setString(3, "%" + searchTxt + "%");
-        ps.setString(4, "%" + searchTxt + "%");
-        ps.setString(5, "%" + searchTxt + "%");
-
-        if (filterOptions != null && filterOptions.length > 0) {
-            for (int i = 0; i < filterOptions.length; i++) {
-                ps.setString(i + 6, filterOptions[i]);
-            }
-        }
-
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            list.add(rs.getInt(1));
-        }
-    } catch (Exception e) {
-        System.out.println(e);
-    }
-    return list;
-}
 
     public List<Object> getMentorInformationByIdFromSearch(int mentorId) {
         MentorDAO mentorDAO = new MentorDAO();

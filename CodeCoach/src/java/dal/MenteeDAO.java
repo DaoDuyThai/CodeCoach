@@ -4,6 +4,7 @@
  */
 package dal;
 
+import jakarta.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,5 +107,61 @@ public class MenteeDAO {
             System.out.println(e);
         }
         return 0;
+    }
+    public int getMenteeIdByUserId(int userId){
+        int menteeId = 0;
+        String query = "select menteeId from Mentees m join Users u on m.userId=u.userId\n" +
+                   "where u.userId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()){
+                menteeId = rs.getInt(1);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return menteeId;
+    
+    }
+    public List<Integer> getMentorIdByMenteeInterest(int menteeId){
+        List<Integer> list = new ArrayList<>();
+        String query = "select distinct mt.mentorId from MenteeInterests mi join Mentees m on mi.menteeId= m.menteeId\n" +
+"			join Categories c on c.categoryId = mi.categoryId\n" +
+"			join SubCategories sc on sc.subCategoryId = mi.subCategoryId\n" +
+"			join Skills sk on sk.skillId = mi.skillId\n" +
+"			join Expertise e on sk.skillId = e.skillId\n" +
+"			join Mentors mt on e.mentorId = mt.mentorId \n"
+                +       "where m.menteeId=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, menteeId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               list.add(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+    public static void main(String[] args) {
+            MentorDAO mentorDAO = new MentorDAO();
+            MenteeDAO menteeDAO = new MenteeDAO();
+            
+           
+            int userId = 3;
+                int menteeId = menteeDAO.getMenteeIdByUserId(userId);
+                List<Integer> mentorIdList = menteeDAO.getMentorIdByMenteeInterest(menteeId);
+                List<Object> mentorInformationList = new ArrayList<>();
+                for (Integer mentorId : mentorIdList) {
+                    List<Object> mentorInformation = mentorDAO.getMentorInformationByIdFromSearch(mentorId);
+                    mentorInformationList.add(mentorInformation);
+                }
+                System.out.println(mentorInformationList);
     }
 }
