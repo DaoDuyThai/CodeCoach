@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
-                        <h2 class="breadcrumb-title">Booking</h2>
+                        <h2 class="breadcrumb-title">Booking Successful</h2>
                     </div>
                 </div>
             </div>
@@ -48,10 +48,12 @@
                                 <div class="success-cont">
                                     <i class="fas fa-check"></i>
                                     <h3>Appointment booked Successfully!</h3>
-                                    <p>Appointment booked with <strong><%out.print(request.getAttribute("mentorName"));%>
+                                    <h3>Please wait for the mentor to consider your request</h3>
+                                    <p>If mentor accept, first appointment booked with <strong><%out.print(request.getAttribute("mentorName"));%>
                                         </strong><br> on <strong><%out.print(bookingdetail.getDate());%> 
                                             </strong>from <strong><%out.print(slot.getStartTime().substring(0, 8));%> 
                                             to <%out.print(slot.getEndTime().substring(0, 8));%></strong></p>
+                                            <h4>Click chat to discuss with the mentor</h4>
                                     <a href="home" class="btn btn-primary view-inv-btn">Ok</a>
                                 </div>
                             </div>
