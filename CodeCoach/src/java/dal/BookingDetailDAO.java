@@ -58,9 +58,9 @@ String[] arr = date.split("/");
         return 0;
     }
 
-    public BookingDetails getBookingDetailFirstByBookingId(int bookingId) {
+    public BookingDetails getBookingDetailbyBookingId(int bookingId) {
         BookingDetails bookingdetail = new BookingDetails();
-        String query = "SELECT TOP 1 * FROM BookingDetails WHERE bookingId = '"+bookingId+"';";
+        String query = "SELECT * FROM BookingDetails Where bookingId=" + bookingId + "";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -72,6 +72,7 @@ String[] arr = date.split("/");
         }
         return bookingdetail;
     }
+    
     public List<BookingDetails> getAllBookingDetails() {
         List<BookingDetails> listBookingDetails = new ArrayList<>();
         String query = "Select * from BookingDetails";
@@ -237,4 +238,19 @@ String[] arr = date.split("/");
         return listBookingDetails;
     }
 
+         public BookingDetails getBookingDetailFirstByBookingId(int bookingId) {
+        BookingDetails bookingdetail = new BookingDetails();
+        String query = "SELECT TOP 1 * FROM BookingDetails WHERE bookingId = '"+bookingId+"';";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                bookingdetail = new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
+            }
+        } catch (Exception e) {
+        }
+        return bookingdetail;
+    }
+    
 }
