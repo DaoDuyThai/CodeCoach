@@ -16,6 +16,17 @@ import model.Users;
 import jakarta.servlet.annotation.WebServlet;
 import java.util.List;
 import model.TinhThanhPho;
+import java.util.Properties;
+import java.util.Random;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 
 /**
  *
@@ -94,10 +105,84 @@ public class RegisterController extends HttpServlet {
         Users user = new Users(fName, lName, gender, email, phoneNum, address, facebook, password);
         user.setMaqh(maqh);
         if (create != null) {
-            cdb.insert(user);
+//          cdb.insert(user);
+            // Generate random code
+            String verificationCode = generateVerificationCode(6);
+
+            // Send verification code to the user's email
+            try {
+                sendVerificationCode(email, verificationCode);
+            } catch (Exception e) {
+                response.sendRedirect("404error.jsp");
+                return;
+            }
+
+            // Save the verification code in the session
+            request.getSession().setAttribute("verificationCode", verificationCode);
+            // Save the Users object in the session
+            request.getSession().setAttribute("userRegister", user);
+
+            request.getSession().setAttribute("verify", "true");
+            request.getRequestDispatcher("verifycode").forward(request, response);
+
         }
         response.sendRedirect("login");
     }
+    
+    private String generateVerificationCode(int length) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder code = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(chars.length());
+            code.append(chars.charAt(index));
+        }
+
+        return code.toString();
+    }
+
+    private void sendVerificationCode(String email, String verificationCode) {
+        final String from = "codecoach.project@gmail.com";
+        final String password = "phtycutgjbgukddr";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            private final String username = from;
+            private final String userPassword = password;
+
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, userPassword);
+            }
+        });
+
+        try {
+            String subject = "Verification of CodeCoach";
+            String body = "Verification code of CodeCoach app is: " + verificationCode;
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            message.setSubject(subject);
+            message.setText(body);
+
+            // Gửi email
+            Transport.send(message);
+            System.out.println("Verification code of CodeCoach app is sent to email: " + email);
+        } catch (MessagingException e) {
+            // Xử lý ngoại lệ nếu có lỗi xảy ra trong quá trình gửi email
+            System.err.println("Error sending verification code to email: " + email);
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     /**
      * Returns a short description of the servlet.

@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
     <head>
         <meta charset="utf-8">
         <title>Mentoring</title>
@@ -32,7 +31,6 @@
                 margin-top: 10px;
                 color: red;
             }
-
         </style>
     </head>
 
@@ -42,7 +40,6 @@
 
             <div class="bg-pattern-style bg-pattern-style-register">
                 <center>
-
                 </center>
                 <div class="w-100 p-3 d-flex align-items-center justify-content-center">
                     <div class="account-content">
@@ -53,13 +50,14 @@
                                     <p class="text-muted">Access to our dashboard</p>
                                 </div>
 
-                                <form class="form" action="register" method="post" onsubmit="return validatePassword()" id="form"> 
+                                <form class="form" action="register" method="post" onsubmit="return validatePassword()" id="form">
+                                    <input type="hidden" name="verifyjsp" value="true">
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">First Name</label>
-                                                <input id="first-name" type="text" class="form-control" name="first_name" required
-                                                       autofocus>
+                                                <input id="first-name" type="text" class="form-control" name="first_name"
+                                                       required autofocus>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -69,10 +67,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group" >
-                                        Gender :
+                                    <div class="form-group">
+                                        Gender:
                                         <label for="male">Male</label>
-                                        <input class="form-check-input" type="radio" id="male" name="gender" value="Male" checked >
+                                        <input class="form-check-input" type="radio" id="male" name="gender" value="Male" checked>
 
                                         <label for="female">Female</label>
                                         <input class="form-check-input" type="radio" id="female" name="gender" value="Female">
@@ -129,35 +127,27 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label class="form-control-label">Confirm Password</label>
-                                                <input id="password-confirm" type="password" class="form-control"
-                                                       name="password_confirmation"  required>
+                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check form-check-xs custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" name="agreeCheckboxUser"
-                                                   id="agree_checkbox_user" required>
-                                            <label class="form-check-label" for="agree_checkbox_user">I agree to
-                                                CodeCoach</label> <a tabindex="-1" href="privacypolicyandterms" style="color: blue;text-decoration: underline">Privacy
-                                                Policy and Terms </a> 
+                                            <input type="checkbox" class="form-check-input" name="agreeCheckboxUser" id="agree_checkbox_user" required>
+                                            <label class="form-check-label" for="agree_checkbox_user">I agree to CodeCoach <a tabindex="-1" href="privacypolicyandterms" style="color: blue;text-decoration: underline">Privacy Policy and Terms</a></label>
                                         </div>
                                     </div>
-                                    <button  class="btn btn-primary login-btn" type="submit" name="create" id="submit">Create
-                                        Account</button>
-                                    <p id="message"></p>
+                                    <button class="btn btn-primary login-btn" type="submit" name="create" id="submit">Create Account</button>
+
                                     <div class="account-footer text-center mt-3">
                                         Already have an account? <a class="forgot-link mb-0" href="login">Login</a>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
 
         <script type="text/javascript">
@@ -176,8 +166,7 @@
                         }
                         $('#district').html(data)
                     }
-                }
-                )
+                });
             }
 
             function checkEmailExisted() {
@@ -188,45 +177,39 @@
                     },
                     url: '${pageContext.request.contextPath}/checkEmailExisted',
                     success: function (data, textStatus, jqXHR) {
-                        if(data){
+                        if (data) {
                             $('#error').html(data);
-                            $('#submit').prop('disabled',true);
-                        }
-                        else {
+                            $('#submit').prop('disabled', true);
+                        } else {
                             $('#error').html('');
                             $('#submit').removeAttr('disabled')
                         }
                     }
-                }
-                )
+                });
             }
-        </script>
 
-        <script>
             function validatePassword() {
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("password-confirm").value;
                 var message = document.getElementById("message");
-                
+
                 if (password !== confirmPassword) {
                     message.style.color = "red";
                     message.innerHTML = "Password Confirm is not match  ! Please re-enter.";
-                    return false; // Ng?n ch?n g?i form
-                } 
-                else{
+                    return false;
+                } else {
                     message.innerHTML = '';
                     return true;
                 }
-                
             }
+
         </script>
+
         <script src="assets/js/jquery-3.6.0.min.js"></script>
-
         <script src="assets/js/bootstrap.bundle.min.js"></script>
-
         <script src="assets/js/script.js"></script>
-
     </body>
-
-
 </html>
+
+
+

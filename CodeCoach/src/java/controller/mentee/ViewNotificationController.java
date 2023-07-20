@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.mentee;
 
-import dal.MentorDAO;
+import dal.BookingDAO;
+import dal.MenteeNotificationDAO;
 import dal.SkillDAO;
 import dal.UserDAO;
 import java.io.IOException;
@@ -15,27 +16,47 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Mentors;
-
+import jakarta.servlet.http.HttpSession;
+import model.Booking;
+import model.Skills;
+import model.Users;
 
 /**
  *
- * @author hoang
+ * @author kienb
  */
-@WebServlet(name="ListMentorController", urlPatterns={"/listmentor"})
-public class ListMentorController extends HttpServlet {
+@WebServlet(name="ViewNotificationController", urlPatterns={"/ViewNotification"})
+public class ViewNotificationController extends HttpServlet {
    
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        UserDAO dao = new UserDAO();
-        MentorDAO d = new MentorDAO();
-        List<Object[]> list = dao.getAllUserInfoOfMentor(); 
-        String countMentor = d.countMentor();
-        request.setAttribute("countMentor", countMentor);
-        request.setAttribute("listM", list);
-        request.getRequestDispatcher("listmentor.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession();
+            Users u = (Users) session.getAttribute("users");
+            String id = request.getParameter("id");
+            BookingDAO bookingDAO = new BookingDAO();
+            Booking booking = bookingDAO.getBookingbyId(Integer.parseInt(id));
+            SkillDAO skillDAO = new SkillDAO();
+            Skills skill = skillDAO.getSkillBySkillId(booking.getSkillId());
+            Users sender = u.getUserId() == booking.getMentee().getUserId()? new UserDAO().getUserById(booking.getMentor().getUserId()) : 
+                    new UserDAO().getUserById(booking.getMenteeId());
+            int status = booking.getStatus().equals("Accepted") ? 1 : (booking.getStatus().equals("Rejected") ? 2 : 3);
+            String name = sender.getfName() + " " + sender.getlName();
+            request.setAttribute("name", name);
+            request.setAttribute("status", status);
+            request.setAttribute("booking", booking);
+            request.setAttribute("skill", skill);
+            request.setAttribute("sender", sender);
+            request.getRequestDispatcher("ViewNotification.jsp").forward(request, response);
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,3 +96,6 @@ public class ListMentorController extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+

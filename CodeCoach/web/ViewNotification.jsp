@@ -1,15 +1,12 @@
 <%-- 
-    Document   : About Us
-    Created on : May 27, 2023, 8:22:44 PM
-    Author     : hoang
+    Document   : ViewNotification
+    Created on : Jul 13, 2023, 10:41:17 AM
+    Author     : kienb
 --%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
     <head>
         <meta charset="utf-8">
         <title>Notification</title>
@@ -33,7 +30,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12 col-8 ">
                         <center>
-                            <h2 class="breadcrumb-title">Notification</h2>
+                            <h2 class="breadcrumb-title">Notification Detail</h2>
                         </center>
                     </div>
                 </div>
@@ -43,28 +40,18 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-hover table-center mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">STT</th>
-                                                <th class="text-center">Receive Date</th>
-                                                <th class="text-center">Title</th>
-                                                <th class="text-center">ACTION</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${requestScope.listN}" var="i" varStatus="idx">
-                                                <tr>
-                                                    <td class="text-center">
-                                                        ${idx.index + 1}
-                                                    </td>
-                                                    <fmt:parseDate pattern="yyyy-MM-dd HH:mm:ss" value="${i.dateTime}" var="date" />
-                                                    <td class="text-center">${date}</td>
-                                            <td class="text-center">${i.content}</td>
-                                            <td class="text-center"><a href="ViewNotification?id=${i.bookingId}" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-                                            </tr>
-                                        </c:forEach>
-                                        <!-- More table rows... -->
-                                        </tbody>
+                                        <c:if test="${requestScope.status == 1}">
+                                            <tr><td>Người gửi : ${requestScope.name}</td></tr>
+                                            <tr><td>Môn học : ${requestScope.skill.skillName}</td></tr>
+                                            <tr><td>You are booking successful!</td></tr>
+                                        </c:if>
+
+                                        <c:if test="${requestScope.status == 2}">
+                                            <tr><td>Hello, your request has been sent, please wait for a response from the system</td></tr>
+                                        </c:if>
+                                        <c:if test="${requestScope.status == 3}">
+                                            <tr><td>I regret to inform you that your booking with the mentor has been declined. We apologize for any inconvenience this may cause</td></tr>
+                                        </c:if>
                                     </table>
                                 </div>
                             </div>
@@ -83,7 +70,7 @@
 
         <script src="assets/js/script.js"></script>
     </body>
-
 </html>
+
 
 

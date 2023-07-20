@@ -52,7 +52,7 @@
                                     <a href>Mentee <i class="fas fa-chevron-down"></i></a>
                                     <ul class="submenu">
                                         <li><a href="menteedashboard">Mentee Dashboard</a></li>
-                                        <li><a href="">Notification</a></li>
+                                        <li><a href="menteenotification">Notification</a></li>
                                         <li><a href="booking.jsp">Booking</a></li>
                                         <li><a href="">Favourites</a></li>
                                         <li><a href="">Invoices</a></li>

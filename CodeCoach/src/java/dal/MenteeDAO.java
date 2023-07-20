@@ -136,4 +136,21 @@ public class MenteeDAO {
         return list;
     }
     
+    public Mentees getMenteebyUserId(int userID) {
+        String query = "Select * from Mentees where menteeId = " + userID;
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return new Mentees(rs.getInt(1), rs.getInt(2));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+
+
+    
 }

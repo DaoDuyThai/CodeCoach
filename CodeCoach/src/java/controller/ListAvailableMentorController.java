@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.mentee;
+package controller;
 
-import dal.MenteeNotificationDAO;
+import dal.MentorDAO;
+import dal.SkillDAO;
+import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +16,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Notifications;
-import model.Users;
+import model.Mentors;
+
 
 /**
  *
  * @author hoang
  */
-@WebServlet(name="MenteeNotificationController", urlPatterns={"/menteenotification"})
-public class MenteeNotificationController extends HttpServlet {
+
+@WebServlet(name="ListAvailableMentorController", urlPatterns={"/listavailablementor"})
+public class ListAvailableMentorController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,18 +37,13 @@ public class MenteeNotificationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet MenteeNotificationController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet MenteeNotificationController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        UserDAO dao = new UserDAO();
+        MentorDAO d = new MentorDAO();
+        List<Object[]> list = dao.getAllUserInfoOfMentor(); 
+        String countMentor = d.countMentor();
+        request.setAttribute("countMentor", countMentor);
+        request.setAttribute("listM", list);
+        request.getRequestDispatcher("listavailablementor.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,11 +57,7 @@ public class MenteeNotificationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        Users u = (Users) request.getSession().getAttribute("users");
-        MenteeNotificationDAO d = new MenteeNotificationDAO();
-        List<Notifications> listN = d.getNotificationsByMenteeID(u.getUserId());
-        request.setAttribute("listN", listN);
-        request.getRequestDispatcher("menteenotification.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -89,6 +83,3 @@ public class MenteeNotificationController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-

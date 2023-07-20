@@ -14,6 +14,8 @@
                 <ul>
                     <li><a href="admindashboard"><i class="fas fa-chart-pie"></i>Admin Dashboard
                             <span><i class="fas fa-chevron-right"></i></span></a></li>
+                    <li><a href="AdminNotificationController"><i class="fas fa-bell"></i>Admin Notification
+                            <span><i class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="listmentor"><i class="fas fa-list-alt"></i>List Mentors <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="listmentee"><i class="fas fa-list-alt"></i>List Mentees<span><i class="fas fa-chevron-right"></i></span></a></li>

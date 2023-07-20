@@ -298,5 +298,26 @@ public class BookingDAO {
             throw new RuntimeException(e);
         }
     }
+    
+    public Booking getBookingbyId(int id) {
+        Booking b = new Booking();
+        String querry = "Select * from Booking where bookingId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                b = new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5));
+                b.setMentee(new MenteeDAO().getMenteebyUserId(rs.getInt(3)));
+                b.setMentor(new MentorDAO().getMentorByMentorId(rs.getInt(2)));
+            }
+        } catch (Exception e) {
+        }
+        return b;
+    }
+
+
+
 
 }
