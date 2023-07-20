@@ -46,7 +46,7 @@
                                                 if (chatRoom.getChatRoomName().contains("Admin")) {
                                                 %>
                                                 <li class="list-group-item">
-                                                    <a href="listchat?chatRoomId=<%= chatRoom.getChatRoomId()%>"><%= chatRoom.getChatRoomName()%></a>
+                                                    <a href="connectadmin?chatRoomId=<%= chatRoom.getChatRoomId()%>"><%= chatRoom.getChatRoomName()%></a>
                                                 </li>
                                                 <% }} %>
                                             </ul>
@@ -68,9 +68,7 @@
                                                     }
                                                 }
                                                 %></h2>
-                                        </div>    
-
-                                    
+                                        </div>     
 
                                     </div>    
                                     <hr>    
