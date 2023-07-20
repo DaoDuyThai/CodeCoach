@@ -57,8 +57,9 @@
                                         <li><a href="">Favourites</a></li>
                                         <li><a href="">Invoices</a></li>
                                         <li><a href="mentee-profile?go=edit-profile">Profile Settings</a></li>
-
-                                        <li><a href="mentorregister">Mentor Register</a></li>
+                                            <c:if test="${users.roleId != 2}">
+                                            <li><a href="mentorregister">Mentor Register</a></li>
+                                            </c:if>
 
 
                                     </ul>
@@ -112,7 +113,7 @@
                                             <p class="text-muted mb-0"><c:if test="${users.roleId == 1}">Admin</c:if><c:if test="${users.roleId == 2}">Mentor</c:if><c:if test="${users.roleId == 3}">Mentee</c:if></p>
                                             </div>
                                         </div>
-                                        
+
                                         <a class="dropdown-item" href="general-profile?go=edit-profile&user-id">Profile Settings</a>
                                         <a class="dropdown-item" href="changepassword.jsp">Change Password</a>
                                         <a class="dropdown-item" href="logout">Logout</a>
