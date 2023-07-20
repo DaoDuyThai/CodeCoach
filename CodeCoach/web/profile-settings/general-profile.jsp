@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from mentoring.dreamguystech.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:21 GMT -->
 
 <head>
   <meta charset="utf-8">
@@ -36,12 +35,7 @@
     <div class="container-fluid">
       <div class="row align-items-center">
         <div class="col-md-12 col-12">
-          <nav aria-label="breadcrumb" class="page-breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Profile Settings</li>
-            </ol>
-          </nav>
+          
           <h2 class="breadcrumb-title">Profile Settings</h2>
         </div>
       </div>
@@ -146,7 +140,7 @@
                   <div class="col-12 col-md-6">
                     <div class="form-group">
                       <label>City</label>
-                      <select class="form-select" name="" id="cityList" onchange="changeCity()" required>
+                      <select class="form-select" name="" id="cityList" onchange="changeCity()">
                         <option value="" selected=""></option>
                         <c:forEach items="${requestScope.listCity}" var="i">
                           <option value="${i.mattp}">${i.name}</option>
@@ -257,3 +251,5 @@
 <!-- Mirrored from mentoring.dreamguystech.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:22 GMT -->
 
 </html>
+
+

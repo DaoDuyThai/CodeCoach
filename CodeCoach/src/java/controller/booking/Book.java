@@ -6,15 +6,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Booking;
-import model.BookingDetails;
-import model.Notifications;
-import model.Users;
+import model.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,14 +36,16 @@ public class Book extends HttpServlet {
 
         String mentorId = request.getParameter("mentor-id");
         String userId = request.getParameter("user-id");
-        String skill = request.getParameter("skill");
+
+        ArrayList<Skills> skills = new SkillDAO().getSkillByMentorID(mentorId);
+
         Calendar calendar = Calendar.getInstance();
         Date now = calendar.getTime();
         request.setAttribute("now", now);
         request.setAttribute("startDate", Utilities.getStartDateOfWeek(calendar));
         request.setAttribute("mentorId", mentorId);
         request.setAttribute("userId", userId);
-        request.setAttribute("skill", skill);
+        request.setAttribute("skills", skills);
         request.getRequestDispatcher("booking/book.jsp").forward(request, response);
 
     }
@@ -344,8 +344,7 @@ public class Book extends HttpServlet {
         else if("book-time".equals(go)){
             String mentorId = request.getParameter("mentor-id");
             int userId = ((Users) request.getSession().getAttribute("users")).getUserId();
-            String skill = request.getParameter("skill");
-            int skillId = new SkillDAO().getSkillIdByName(skill);
+            int skillId = Integer.parseInt(request.getParameter("skill"));
             String menteeId = new MenteeDAO().getMenteeIdbyUserId(String.valueOf(userId));
 
             Booking booking = new Booking(Integer.parseInt(mentorId), Integer.parseInt(menteeId) , skillId, "Pending");
@@ -357,7 +356,16 @@ public class Book extends HttpServlet {
                     String slot = request.getParameter(day + "-" + i);
                     if(slot != null){
                         BookingDetails bookingDetails = new BookingDetails(bookingId, i, BookingDetailDAO.formatDate(slot));
-                        System.out.println(new BookingDetailDAO().addBookingDetail(bookingDetails) + " rows affected");
+                        if(new BookingDetailDAO().isBookingDetailsExisted(bookingDetails, Integer.parseInt(mentorId)))
+                        {
+                            System.out.println("booking existed" + bookingDetails + " " + mentorId);
+                            System.out.println(new BookingDetailDAO().deleteByBookingDetailsID(bookingId) + " booking details deleted");
+                            System.out.println(new BookingDAO().deleteBooking(bookingId) + " booking deleted");
+                            request.getSession().setAttribute("error", "Booking existed Date: " + bookingDetails.getDate() + " Slot: " + bookingDetails.getSlotId());
+                            response.sendRedirect("book?mentor-id=" + mentorId + "&user-id=" + userId);
+                            return;
+                        }
+                        int result = new BookingDetailDAO().addBookingDetail(bookingDetails);
                     }
                 }
             }
@@ -389,3 +397,4 @@ public class Book extends HttpServlet {
     }// </editor-fold>
 
 }
+

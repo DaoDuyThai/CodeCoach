@@ -236,5 +236,52 @@ String[] arr = date.split("/");
         }
         return listBookingDetails;
     }
+    
+     private final String CHECK_BOOKING_DETAILS_EXISTED = "SELECT *\n" +
+            "FROM BookingDetails\n" +
+            "WHERE slotId = ?\n" +
+            "  AND [date] = ?\n" +
+            "  AND bookingId IN (\n" +
+            "    SELECT bookingId\n" +
+            "    FROM Booking\n" +
+            "    WHERE mentorId = ?\n" +
+            ");";
+
+
+
+    
+     public boolean isBookingDetailsExisted(BookingDetails bookingDetails, int mentorId){
+        try(Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(CHECK_BOOKING_DETAILS_EXISTED)) {
+            ps.setInt(1, bookingDetails.getSlotId());
+            ps.setString(2, bookingDetails.getDate());
+            ps.setInt(3, mentorId);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return false;
+    }
+
+     public int deleteByBookingDetailsID(int bookingId) {
+        String query = "delete from BookingDetails where bookingId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, bookingId);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
+
 
 }

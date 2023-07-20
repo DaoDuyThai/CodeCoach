@@ -187,4 +187,28 @@ public class SkillDAO {
         }
         return list;
     }
+    
+     public ArrayList<Skills> getSkillByMentorID(String mentorId) {
+        ArrayList<Skills> list = new ArrayList<>();
+        String query = "SELECT s.*\n" +
+                "FROM Mentors m\n" +
+                "         JOIN Expertise e ON m.mentorId = e.mentorId\n" +
+                "         JOIN Skills s ON e.skillId = s.skillId\n" +
+                "WHERE m.mentorId = ?;";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, mentorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Skills(rs.getInt(1), rs.getString(2), rs.getInt(3)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+
 }

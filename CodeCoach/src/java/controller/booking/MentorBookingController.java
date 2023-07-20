@@ -55,7 +55,7 @@ public class MentorBookingController extends HttpServlet {
 
             request.getRequestDispatcher("booking/mentor-booking.jsp").forward(request, response);
         }
-        else if("change-status".equals(go)){
+        else if("accept".equals(go)){
             int bookingId = Integer.parseInt(request.getParameter("booking-id"));
             String status = request.getParameter("status");
             BookingDAO bookingDAO = new BookingDAO();
@@ -87,3 +87,6 @@ public class MentorBookingController extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
+
