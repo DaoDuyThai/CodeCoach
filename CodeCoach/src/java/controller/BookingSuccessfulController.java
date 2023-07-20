@@ -78,7 +78,7 @@ public class BookingSuccessfulController extends HttpServlet {
             Booking b = new BookingDAO().getBookingLatestbyMenteeId(menteeId);
             Mentors m = new MentorDAO().getMentorByMentorId(b.getMentorId());
             String mentorName = new UserDAO().getUserNameByUserId(m.getUserId());
-            BookingDetails bookingdetail = new BookingDetailDAO().getBookingDetailbyBookingId(b.getBookingId());
+            BookingDetails bookingdetail = new BookingDetailDAO().getBookingDetailFirstByBookingId(b.getBookingId());
             Slot slot = new SlotDAO().getSlotbySlotId(bookingdetail.getSlotId());
             request.setAttribute("mentorName", mentorName);
             request.setAttribute("bookingdetail", bookingdetail);

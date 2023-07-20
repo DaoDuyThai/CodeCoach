@@ -58,9 +58,9 @@ String[] arr = date.split("/");
         return 0;
     }
 
-    public BookingDetails getBookingDetailbyBookingId(int bookingId) {
+    public BookingDetails getBookingDetailFirstByBookingId(int bookingId) {
         BookingDetails bookingdetail = new BookingDetails();
-        String query = "SELECT * FROM BookingDetails Where bookingId=" + bookingId + "";
+        String query = "SELECT TOP 1 * FROM BookingDetails WHERE bookingId = '"+bookingId+"';";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
