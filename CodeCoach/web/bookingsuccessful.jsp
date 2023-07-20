@@ -50,11 +50,11 @@
                                         <i class="fas fa-check"></i>
                                         <h3>Appointment booked Successfully!</h3>
                                         <p>Appointment booked with <strong><%out.print(request.getAttribute("mentorName"));%>
-                                                <br>
+                                                <br><br>
                                                 <%
                                                     for (int i = 0; i < bookingdetails.size(); i++) {
                                                 %>
-                                                        </strong><br> on <strong><%out.print(bookingdetails.get(i).getDate());%>  
+                                                        </strong> on <strong><%out.print(bookingdetails.get(i).getDate());%>  
                                                         <%
                                                             for (int j =0; j< slots.size();j++) {
                                                                 if (bookingdetails.get(i).getSlotId() == slots.get(j).getSlotId()) {
