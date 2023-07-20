@@ -32,19 +32,15 @@ public class BookingDetailDAO {
     }
 
     //10/07/2023 to 2023-07-10
-    public static String formatDate(String date){
-String[] arr = date.split("/");
+    public static String formatDate(String date) {
+        String[] arr = date.split("/");
         return arr[2] + "-" + arr[1] + "-" + arr[0];
     }
 
-
-
-
     private final String ADD_BOOKING_DETAIL = "INSERT INTO [dbo].[BookingDetails] (bookingId, slotId, date) VALUES (?,?,?)";
 
-    public int addBookingDetail(BookingDetails bookingDetails){
-        try(Connection conn = new DBContext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(ADD_BOOKING_DETAIL)) {
+    public int addBookingDetail(BookingDetails bookingDetails) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(ADD_BOOKING_DETAIL)) {
             ps.setInt(1, bookingDetails.getBookingId());
             ps.setInt(2, bookingDetails.getSlotId());
             ps.setString(3, bookingDetails.getDate());
@@ -72,6 +68,7 @@ String[] arr = date.split("/");
         }
         return bookingdetail;
     }
+
     public List<BookingDetails> getAllBookingDetails() {
         List<BookingDetails> listBookingDetails = new ArrayList<>();
         String query = "Select * from BookingDetails";
@@ -116,7 +113,7 @@ String[] arr = date.split("/");
         return listCount;
     }
 
-    public int countBookingsByYearAndMonth(int year, int month){
+    public int countBookingsByYearAndMonth(int year, int month) {
         String query = "select count(bookingDetailId) as Total from bookingdetails where YEAR(date) = ? and month(date) = ?";
         try {
             int total = 0;
@@ -136,7 +133,7 @@ String[] arr = date.split("/");
     }
 
     public int getTotalBookingSlotByMenteeId(int menteeId) {
-        String query = "  select count(bd.bookingDetailId) as Total from BookingDetails bd join Booking b on bd.bookingId = b.bookingId where b.menteeId = "+menteeId+" and status = 'Accepted'";
+        String query = "  select count(bd.bookingDetailId) as Total from BookingDetails bd join Booking b on bd.bookingId = b.bookingId where b.menteeId = " + menteeId + " and status = 'Accepted'";
         try {
             int total = 0;
             conn = new DBContext().getConnection();
@@ -156,7 +153,7 @@ String[] arr = date.split("/");
         String query = "select  sum(cast(m.hourlyRate as int)) as Total  from BookingDetails bd \n"
                 + "   join Booking b on bd.bookingId = b.bookingId \n"
                 + "   join Mentors m on m.mentorId = b.mentorId\n"
-                + "   where b.menteeId = "+menteeId+" and status = 'Accepted' and YEAR(bd.date) = "+year+" and month(bd.date) = "+ month+"";
+                + "   where b.menteeId = " + menteeId + " and status = 'Accepted' and YEAR(bd.date) = " + year + " and month(bd.date) = " + month + "";
         try {
             int total = 0;
             conn = new DBContext().getConnection();
@@ -164,7 +161,7 @@ String[] arr = date.split("/");
             rs = ps.executeQuery();
             while (rs.next()) {
                 total = rs.getInt("Total");
-                return total*2;
+                return total * 2;
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -221,10 +218,11 @@ String[] arr = date.split("/");
 
         return list;
     }
+
     public List<BookingDetails> getBookingDetailbyMentorId(int mentorId) {
         List<BookingDetails> listBookingDetails = new ArrayList<>();
-        String query = "SELECT bd.bookingdetailId, bd.bookingId, slotId,date FROM BookingDetails bd join Booking b on bd.bookingId = b.bookingId\n" +
-                       "WHERE b.mentorId = "+ mentorId +" and b.status = 'Accepted'";
+        String query = "SELECT bd.bookingdetailId, bd.bookingId, slotId,date FROM BookingDetails bd join Booking b on bd.bookingId = b.bookingId\n"
+                + "WHERE b.mentorId = " + mentorId + " and b.status = 'Accepted'";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
@@ -236,23 +234,19 @@ String[] arr = date.split("/");
         }
         return listBookingDetails;
     }
-    
-     private final String CHECK_BOOKING_DETAILS_EXISTED = "SELECT *\n" +
-            "FROM BookingDetails\n" +
-            "WHERE slotId = ?\n" +
-            "  AND [date] = ?\n" +
-            "  AND bookingId IN (\n" +
-            "    SELECT bookingId\n" +
-            "    FROM Booking\n" +
-            "    WHERE mentorId = ?\n" +
-            ");";
 
+    private final String CHECK_BOOKING_DETAILS_EXISTED = "SELECT *\n"
+            + "FROM BookingDetails\n"
+            + "WHERE slotId = ?\n"
+            + "  AND [date] = ?\n"
+            + "  AND bookingId IN (\n"
+            + "    SELECT bookingId\n"
+            + "    FROM Booking\n"
+            + "    WHERE mentorId = ?\n"
+            + ");";
 
-
-    
-     public boolean isBookingDetailsExisted(BookingDetails bookingDetails, int mentorId){
-        try(Connection conn = new DBContext().getConnection();
-            PreparedStatement ps = conn.prepareStatement(CHECK_BOOKING_DETAILS_EXISTED)) {
+    public boolean isBookingDetailsExisted(BookingDetails bookingDetails, int mentorId) {
+        try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(CHECK_BOOKING_DETAILS_EXISTED)) {
             ps.setInt(1, bookingDetails.getSlotId());
             ps.setString(2, bookingDetails.getDate());
             ps.setInt(3, mentorId);
@@ -267,7 +261,7 @@ String[] arr = date.split("/");
         return false;
     }
 
-     public int deleteByBookingDetailsID(int bookingId) {
+    public int deleteByBookingDetailsID(int bookingId) {
         String query = "delete from BookingDetails where bookingId = ?";
         try {
             conn = new DBContext().getConnection();
@@ -280,8 +274,19 @@ String[] arr = date.split("/");
         return 0;
     }
 
-
-
-
+    public List<BookingDetails> getBookingDetailByBookingId(int bookingId) {
+        List<BookingDetails> bookingdetails = new ArrayList<>();
+        String query = "SELECT * FROM BookingDetails WHERE bookingId = '" + bookingId + "';";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                bookingdetails.add(new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4)));
+            }
+        } catch (Exception e) {
+        }
+        return bookingdetails;
+    }
 
 }
