@@ -238,19 +238,23 @@ String[] arr = date.split("/");
         return listBookingDetails;
     }
 
-         public BookingDetails getBookingDetailFirstByBookingId(int bookingId) {
-        BookingDetails bookingdetail = new BookingDetails();
-        String query = "SELECT TOP 1 * FROM BookingDetails WHERE bookingId = '"+bookingId+"';";
+         public List<BookingDetails> getBookingDetailByBookingId(int bookingId) {
+        List<BookingDetails> bookingdetails = new ArrayList<>();
+        String query = "SELECT * FROM BookingDetails WHERE bookingId = '"+bookingId+"';";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                bookingdetail = new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4));
+                bookingdetails.add(new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4))) ;
             }
         } catch (Exception e) {
         }
-        return bookingdetail;
+        return bookingdetails;
     }
     
+    public static void main(String[] args) {
+        List<BookingDetails> l = new BookingDetailDAO().getBookingDetailByBookingId(1);
+        System.out.println(l.size());
+    }
 }

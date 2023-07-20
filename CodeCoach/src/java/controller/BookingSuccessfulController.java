@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Booking;
 import model.BookingDetails;
 import model.Mentors;
@@ -78,11 +79,11 @@ public class BookingSuccessfulController extends HttpServlet {
             Booking b = new BookingDAO().getBookingLatestbyMenteeId(menteeId);
             Mentors m = new MentorDAO().getMentorByMentorId(b.getMentorId());
             String mentorName = new UserDAO().getUserNameByUserId(m.getUserId());
-            BookingDetails bookingdetail = new BookingDetailDAO().getBookingDetailFirstByBookingId(b.getBookingId());
-            Slot slot = new SlotDAO().getSlotbySlotId(bookingdetail.getSlotId());
+            List<BookingDetails> bookingdetails = new BookingDetailDAO().getBookingDetailByBookingId(b.getBookingId());
+            List<Slot> slots = new SlotDAO().getAllSlot();
             request.setAttribute("mentorName", mentorName);
-            request.setAttribute("bookingdetail", bookingdetail);
-            request.setAttribute("slot", slot);
+            request.setAttribute("bookingdetails", bookingdetails);
+            request.setAttribute("slots", slots);
             int sharedChatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(u.getUserId(), m.getUserId());
             if (sharedChatRoomId==0) {
                 new ChatRoomDAO().insertChatRoom(mentorName, u.getfName()+" "+u.getlName());

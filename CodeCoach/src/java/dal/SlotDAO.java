@@ -90,5 +90,9 @@ public class SlotDAO extends DBContext{
         }
         return list;
     }
-
+    
+    public static void main(String[] args) {
+        List<Slot> s = new SlotDAO().getAllSlot();
+        System.out.println(s.size());
+    }
 }
