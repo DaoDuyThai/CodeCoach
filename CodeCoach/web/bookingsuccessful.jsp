@@ -1,17 +1,6 @@
-  public List<BookingDetails> getBookingDetailByBookingId(int bookingId) {
-        List<BookingDetails> bookingdetails = new ArrayList<>();
-        String query = "SELECT * FROM BookingDetails WHERE bookingId = '"+bookingId+"';";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                bookingdetails.add(new BookingDetails(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4))) ;
-            }
-        } catch (Exception e) {
-        }
-        return bookingdetails;
-    }
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+
 <%@page import="java.util.List"%>
 <%@page import="model.Slot"%>
 <%@page import="model.BookingDetails"%>
@@ -40,7 +29,7 @@
         <%@include file="header.jsp" %>
         <!--End of header-->
         <%List<BookingDetails> bookingdetails = (List<BookingDetails>) request.getAttribute("bookingdetails");
-            List<Slot> slots = (List<Slot>) request.getAttribute("slots"); %>
+                    List<Slot> slots = (List<Slot>) request.getAttribute("slots"); %>
         <div class="main-wrapper">
             <div class="breadcrumb-bar">
                 <div class="container-fluid">
@@ -68,24 +57,30 @@
                                                 <%
                                                     for (int i = 0; i < bookingdetails.size(); i++) {
                                                 %>
-                                                        </strong> on <strong><%out.print(bookingdetails.get(i).getDate());%>  
-                                                        <%
-                                                            for (int j =0; j< slots.size();j++) {
-                                                                if (bookingdetails.get(i).getSlotId() == slots.get(j).getSlotId()) {
-                                                                %>
-                                                                
-                                                        </strong>from <strong><%out.print(slots.get(j).getStartTime().substring(0, 8));%> 
-                                                            to <%out.print(slots.get(j).getEndTime().substring(0, 8));%></strong></p>
-                                                            <%
-                                                            }
-                                                            }
-                                                        %>    
-                                                <%                                    
+                                            </strong> on <strong><%
+                                                DateTimeFormatter initialFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                                LocalDate date = LocalDate.parse(bookingdetails.get(i).getDate(), initialFormatter);
+                                                // ??nh d?ng m?i
+                                                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                                                String newDateString = date.format(newFormatter);
+                                                out.print(newDateString);%>  
+                                                <%
+                                                    for (int j = 0; j < slots.size(); j++) {
+                                                        if (bookingdetails.get(i).getSlotId() == slots.get(j).getSlotId()) {
+                                                %>
+
+                                            </strong>from <strong><%out.print(slots.get(j).getStartTime().substring(0, 8));%> 
+                                                to <%out.print(slots.get(j).getEndTime().substring(0, 8));%></strong></p>
+                                                <%
+                                                        }
+                                                    }
+                                                %>    
+                                                <%
                                                     }
                                                 %>
-                                                
-                                                <a href="home" class="btn btn-primary view-inv-btn">Ok</a>
-                                            
+
+                                        <a href="home" class="btn btn-primary view-inv-btn">Ok</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -108,6 +103,3 @@
     <!-- footer is place here -->
 
 </html>
-
-
-
