@@ -4,8 +4,15 @@
     Author     : ADMIN
 --%>
 
+
+
+<%@page import="model.Skills"%>
+<%@page import="java.util.List"%>
+<%@page import="dal.SkillDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +55,7 @@
                         <div class="search-box">
                             <form action="search" method="post">
                                 <input name="searchTxt" type="text" id="search-input" class="form-control" placeholder="Search">
-                                <button type="submit" id="search-button" class="btn btn-primary" style="margin-left: 50px">Search</button>
+                                <button type="submit" id="search-button" class="btn btn-primary">Search</button>
                             </form>
                         </div>
                     </div>
@@ -60,93 +67,20 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-
-                        <div class="card search-filter">
-                            <div class="card-header">
-                                <h4 class="card-title mb-0">Search Filter</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="filter-widget">
-                                    <div class="cal-icon">
-                                        <input type="text" class="form-control datetimepicker"
-                                            placeholder="Select Date">
-                                    </div>
-                                </div>
-                                <div class="filter-widget">
-                                    <h4>Gender</h4>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="gender_type" checked>
-                                            <span class="checkmark"></span> Male
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="gender_type">
-                                            <span class="checkmark"></span> Female
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="filter-widget">
-                                    <h4>Select Courses</h4>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist" checked>
-                                            <span class="checkmark"></span> Digital Marketer
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist" checked>
-                                            <span class="checkmark"></span> UNIX, Calculus, Trigonometry
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> Computer Programming
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> ASP.NET,Computer Gaming
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> HTML, Css
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <label class="custom_check">
-                                            <input type="checkbox" name="select_specialist">
-                                            <span class="checkmark"></span> VB, VB.net
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="btn-search">
-                                    <button type="button" class="btn btn-block w-100">Search</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-md-12 col-lg-8 col-xl-9">
+                  
+                    <div class="col-md-12 col-lg-12 col-xl-12">
                         <c:forEach items="${mentors}" var="mInfo">
                         <div class="card">
                             <div class="card-body">
                                 <div class="mentor-widget">
                                     <div class="user-info-left">
                                         <div class="mentor-img">
-                                            <a href="profile.html">
+                                            <a href="viewmentorprofile?mentorId=${mInfo[0]}">
                                                 <img src="assets/images/users/${mInfo[1]}.png" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="user-info-cont">
-                                            <h4 class="usr-name"><a href="profile.html">${mInfo[6]} ${mInfo[7]}</a></h4>
+                                            <h4 class="usr-name"><a href="viewmentorprofile?mentorId=${mInfo[0]}">${mInfo[6]} ${mInfo[7]}</a></h4>
                                             <c:forEach var="skill" items="${mInfo}" begin="17" end="26">
                                             <span class="badge badge-primary">${skill}</span>
                                             </c:forEach>
@@ -160,13 +94,13 @@
                                         <div class="user-infos">
                                             <ul>
                                                 <li><i class="fas fa-map-marker-alt"></i> ${mInfo[12]}, ${mInfo[16]}</li>
-                                                <li><i class="far fa-money-bill-alt"></i> ${mInfo[3]} <i
+                                                <li><i class="far fa-money-bill-alt"></i> <fmt:formatNumber value="${mInfo[3]}" pattern="¤#,##0" currencyCode="VND" /> <i
                                                         class="fas fa-info-circle" data-bs-toggle="tooltip"
                                                         title="Lorem Ipsum"></i> </li>
                                             </ul>
                                         </div>
                                         <div class="mentor-booking">
-                                            <a class="apt-btn" href="booking.html">Book Appointment</a>
+                                            <a class="apt-btn" href="book?mentor-id=${mInfo[0]}">Book Appointment</a>
                                         </div>
                                     </div>
                                 </div>
@@ -219,6 +153,7 @@
 </script>
 
 
+
     <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="assets/js/jquery-3.6.0.min.js"></script>
 
@@ -233,6 +168,8 @@
     <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 
     <script src="assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
+
