@@ -31,7 +31,7 @@ Welcome to CodeCoach! This project aims to provide a comprehensive platform for 
 ## Contributing
 We welcome contributions from the community to make CodeCoach even better! If you have any suggestions, bug reports, or feature requests, please open an issue in the GitHub repository. If you would like to contribute code changes, feel free to fork the repository, make your changes, and submit a pull request.
 
-##Acknowledgments
+## Acknowledgments
 We would like to express our gratitude to all the contributors, open source libraries, and resources that have helped in the development of CodeCoach. Thank you for your support and dedication!
 
 # Author
