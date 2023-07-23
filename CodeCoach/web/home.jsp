@@ -131,8 +131,7 @@
                             <div class="product">
                                 <div class="product-img">
                                     <a href="viewmentorprofile?mentorId=${mInfo[0]}">
-                                        <img class="img-fluid" alt src="assets/images/users/${mInfo[1]}.png" width="600"
-                                             height="300">
+                                        <img class="img-fluid" alt src="assets/images/users/${mInfo[1]}.png" style="height: 300px">
                                     </a>
                                 </div>
                                 <div class="product-content">

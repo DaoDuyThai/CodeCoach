@@ -12,16 +12,16 @@
         <div class="profile-sidebar">
             <div class="custom-sidebar-nav">
                 <ul>
-                    <li><a href="dashboard.html"><i class="fas fa-chart-pie"></i>Mentee Dashboard
+                    <li><a href="menteedashboard"><i class="fas fa-chart-pie"></i>Mentee Dashboard
                             <span><i class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="bookings.html"><i class="fas fa-list-alt"></i>Notification <span><i
+                    <li><a href="menteenotification"><i class="fas fa-list-alt"></i>Notification <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                     <li><a href="schedule-timings.html"><i class="fas fa-list-alt"></i>Booking<span><i class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="chat.html"><i class="fas fa-list-alt"></i>Favourites<span><i
+                    <li><a href="favourite"><i class="fas fa-list-alt"></i>Favourites<span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="invoices.html"><i class="fas fa-list-alt"></i>Invoices<span><i
+                    <li><a href="listinvoice"><i class="fas fa-list-alt"></i>Invoices<span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
-                    <li><a href="reviews.html"><i class="fas fa-file-invoice"></i>Profile Settings<span><i
+                    <li><a href="logout"><i class="fas fa-sign-out-alt"></i>Logout <span><i
                                     class="fas fa-chevron-right"></i></span></a></li>
                 </ul>
             </div>

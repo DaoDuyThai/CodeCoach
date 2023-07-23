@@ -101,9 +101,10 @@
                     cache: false,
                     type: "POST",
                     success: function (data) {
-                        var container = document.getElementById("slotForm");
+                        var container = document.getElementById("slot-select");
                         container.innerHTML = data;
                         $('#slotForm').css('display', 'block');
+                        $('#proceed-btn').css('display', 'flex');
                     },
                     error: function (xhr) {
 
@@ -126,12 +127,7 @@
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-md-12 col-12">
-                            <nav aria-label="breadcrumb" class="page-breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Booking</li>
-                                </ol>
-                            </nav>
+                            
                             <h2 class="breadcrumb-title">Booking</h2>
                         </div>
                     </div>
@@ -175,28 +171,16 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="booking-user-info">
-                                        <a href="profile.html" class="booking-user-img">
-                                            <img src="assets/img/user/user2.jpg" alt="User Image">
-                                        </a>
+                                        
                                         <div class="booking-info">
-                                            <h4><a href="profile.html">${users.lName} ${users.fName}</a></h4>
+                                            <h4><a href="">${requestScope.mentor.fName} ${requestScope.mentor.lName}</a></h4>
                                             <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i><%=new TinhThanhPhoDAO().getTTPNameAndQHName(((Users) session.getAttribute("users")).getUserId())%>
 
                                                 <br>
                                                 <br>
-                                                <form action="book" method="post">
-                                                <c:forEach items="${requestScope.skills}" var="skill">
-                                                <div class="form-check">
-                                                    <input checked="" class="form-check-input" type="radio" name="skill" id="${skill.skillId}" value="${skill.skillId}" >
-                                                    <label class="form-check-label" for="${skill.skillId}">
-                                                        ${skill.skillName}
-                                                    </label>
-                                                </div>
-                                            </c:forEach>
-                                            <input type="hidden" name="go" value="book-time">
-                                            <input type="hidden" name="userId" value="${users.userId}">
-                                            <input type="hidden" name="mentor-id" value="${mentorId}">
-                                            <input type="hidden" name="skill" value="${skill}">
+
+
+
                                             </p>
                                         </div>
                                     </div>
@@ -276,248 +260,266 @@
 
 
                                 <div id="slotForm">
-                                    
 
-                                        <div class="schedule-cont">
-                                            <div class="row">
-                                                <div class="col-md-12">
+                                    <form action="book" method="post">
+                                        <input type="hidden" name="go" value="book-time">
+                                        <input type="hidden" name="mentor-id" value="${requestScope.mentorId}">
+                                        <div id="slot-select">
+                                            <div class="schedule-cont">
+                                                <div class="row">
+                                                    <div class="col-md-12">
 
-                                                    <div class="time-slot">
-                                                        <ul class="clearfix" style="text-align: center">
-                                                            <li>
-                                                                <%--                          1,08:00:00,10:00:00--%>
-                                                                <%--                          2,10:00:00,12:00:00--%>
-                                                                <%--                          3,13:00:00,15:00:00--%>
-                                                                <%--                          4,15:00:00,17:00:00--%>
-                                                                <%--                          5,17:00:00,19:00:00--%>
-                                                                <%--                          6,19:00:00,21:00:00--%>
-                                                                <%--                          7,21:00:00,23:00:00--%>
+                                                        <div class="time-slot">
+                                                            <ul class="clearfix" style="text-align: center">
+                                                                <li>
+                                                                    <%--                          1,08:00:00,10:00:00--%>
+                                                                    <%--                          2,10:00:00,12:00:00--%>
+                                                                    <%--                          3,13:00:00,15:00:00--%>
+                                                                    <%--                          4,15:00:00,17:00:00--%>
+                                                                    <%--                          5,17:00:00,19:00:00--%>
+                                                                    <%--                          6,19:00:00,21:00:00--%>
+                                                                    <%--                          7,21:00:00,23:00:00--%>
 
-                                                                <input type="checkbox" name="mon-1" id="mon-1" value="${mon}">
-                                                                <label for="mon-1">8:00 - 10:00 AM</label>
-                                                                <br>
-                                                                <input type="checkbox" name="mon-2" id="mon-2" value="${mon}">
-                                                                <label for="mon-2">10:00 - 12:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="mon-1" id="mon-1" value="${mon}">
+                                                                    <label for="mon-1">8:00 - 10:00 AM</label>
+                                                                    <br>
+                                                                    <input type="checkbox" name="mon-2" id="mon-2" value="${mon}">
+                                                                    <label for="mon-2">10:00 - 12:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="mon-3" id="mon-3" value="${mon}">
-                                                                <label for="mon-3">1:00 - 3:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="mon-3" id="mon-3" value="${mon}">
+                                                                    <label for="mon-3">1:00 - 3:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="mon-4" id="mon-4" value="${mon}">
-                                                                <label for="mon-4">3:00 - 5:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="mon-4" id="mon-4" value="${mon}">
+                                                                    <label for="mon-4">3:00 - 5:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="mon-5" id="mon-5" value="${mon}">
-                                                                <label for="mon-5">5:00 - 7:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="mon-5" id="mon-5" value="${mon}">
+                                                                    <label for="mon-5">5:00 - 7:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="mon-6" id="mon-6" value="${mon}">
-                                                                <label for="mon-6">7:00 - 9:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="mon-6" id="mon-6" value="${mon}">
+                                                                    <label for="mon-6">7:00 - 9:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="mon-7" id="mon-7" value="${mon}">
-                                                                <label for="mon-7">9:00 - 11:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="mon-7" id="mon-7" value="${mon}">
+                                                                    <label for="mon-7">9:00 - 11:00 PM</label>
+                                                                    <br>
 
-                                                            </li>
-                                                            <li>
+                                                                </li>
+                                                                <li>
 
-                                                                <input type="checkbox" name="tue-1" id="tue-1" value="${tue}">
-                                                                <label for="tue-1">8:00 - 10:00 AM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-1" id="tue-1" value="${tue}">
+                                                                    <label for="tue-1">8:00 - 10:00 AM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="tue-2" id="tue-2" value="${tue}">
-                                                                <label for="tue-2">10:00 - 12:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-2" id="tue-2" value="${tue}">
+                                                                    <label for="tue-2">10:00 - 12:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="tue-3" id="tue-3" value="${tue}">
-                                                                <label for="tue-3">1:00 - 3:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-3" id="tue-3" value="${tue}">
+                                                                    <label for="tue-3">1:00 - 3:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="tue-4" id="tue-4" value="${tue}">
-                                                                <label for="tue-4">3:00 - 5:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-4" id="tue-4" value="${tue}">
+                                                                    <label for="tue-4">3:00 - 5:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="tue-5" id="tue-5" value="${tue}">
-                                                                <label for="tue-5">5:00 - 7:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-5" id="tue-5" value="${tue}">
+                                                                    <label for="tue-5">5:00 - 7:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="tue-6" id="tue-6" value="${tue}">
-                                                                <label for="tue-6">7:00 - 9:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-6" id="tue-6" value="${tue}">
+                                                                    <label for="tue-6">7:00 - 9:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="tue-7" id="tue-7" value="${tue}">
-                                                                <label for="tue-7">9:00 - 11:00 PM</label>
-                                                                <br>
-
-
-                                                            </li>
-                                                            <li>
-
-                                                                <input type="checkbox" name="wed-1" id="wed-1" value="${wed}">
-                                                                <label for="wed-1">8:00 - 10:00 AM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="wed-2" id="wed-2" value="${wed}">
-                                                                <label for="wed-2">10:00 - 12:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="wed-3" id="wed-3" value="${wed}">
-                                                                <label for="wed-3">1:00 - 3:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="wed-4" id="wed-4" value="${wed}">
-                                                                <label for="wed-4">3:00 - 5:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="wed-5" id="wed-5" value="${wed}">
-                                                                <label for="wed-5">5:00 - 7:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="wed-6" id="wed-6" value="${wed}">
-                                                                <label for="wed-6">7:00 - 9:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="wed-7" id="wed-7" value="${wed}">
-                                                                <label for="wed-7">9:00 - 11:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="tue-7" id="tue-7" value="${tue}">
+                                                                    <label for="tue-7">9:00 - 11:00 PM</label>
+                                                                    <br>
 
 
-                                                            </li>
-                                                            <li>
+                                                                </li>
+                                                                <li>
 
-                                                                <input type="checkbox" name="thu-1" id="thu-1" value="${thu}">
-                                                                <label for="thu-1">8:00 - 10:00 AM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-1" id="wed-1" value="${wed}">
+                                                                    <label for="wed-1">8:00 - 10:00 AM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="thu-2" id="thu-2" value="${thu}">
-                                                                <label for="thu-2">10:00 - 12:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-2" id="wed-2" value="${wed}">
+                                                                    <label for="wed-2">10:00 - 12:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="thu-3" id="thu-3" value="${thu}">
-                                                                <label for="thu-3">1:00 - 3:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-3" id="wed-3" value="${wed}">
+                                                                    <label for="wed-3">1:00 - 3:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="thu-4" id="thu-4" value="${thu}">
-                                                                <label for="thu-4">3:00 - 5:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-4" id="wed-4" value="${wed}">
+                                                                    <label for="wed-4">3:00 - 5:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="thu-5" id="thu-5" value="${thu}">
-                                                                <label for="thu-5">5:00 - 7:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-5" id="wed-5" value="${wed}">
+                                                                    <label for="wed-5">5:00 - 7:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="thu-6" id="thu-6" value="${thu}">
-                                                                <label for="thu-6">7:00 - 9:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-6" id="wed-6" value="${wed}">
+                                                                    <label for="wed-6">7:00 - 9:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="thu-7" id="thu-7" value="${thu}">
-                                                                <label for="thu-7">9:00 - 11:00 PM</label>
-                                                                <br>
-
-
-                                                            </li>
-                                                            <li>
-
-                                                                <input type="checkbox" name="fri-1" id="fri-1" value="${fri}">
-                                                                <label for="fri-1">8:00 - 10:00 AM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="fri-2" id="fri-2" value="${fri}">
-                                                                <label for="fri-2">10:00 - 12:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="fri-3" id="fri-3" value="${fri}">
-                                                                <label for="fri-3">1:00 - 3:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="fri-4" id="fri-4" value="${fri}">
-                                                                <label for="fri-4">3:00 - 5:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="fri-5" id="fri-5" value="${fri}">
-                                                                <label for="fri-5">5:00 - 7:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="fri-6" id="fri-6" value="${fri}">
-                                                                <label for="fri-6">7:00 - 9:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="fri-7" id="fri-7" value="${fri}">
-                                                                <label for="fri-7">9:00 - 11:00 PM</label>
-                                                                <br>
-
-                                                            </li>
-                                                            <li>
-
-                                                                <input type="checkbox" name="sat-1" id="sat-1" value="${sat}">
-                                                                <label for="sat-1">8:00 - 10:00 AM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="sat-2" id="sat-2" value="${sat}">
-                                                                <label for="sat-2">10:00 - 12:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="sat-3" id="sat-3" value="${sat}">
-                                                                <label for="sat-3">1:00 - 3:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="sat-4" id="sat-4" value="${sat}">
-                                                                <label for="sat-4">3:00 - 5:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="sat-5" id="sat-5" value="${sat}">
-                                                                <label for="sat-5">5:00 - 7:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="sat-6" id="sat-6" value="${sat}">
-                                                                <label for="sat-6">7:00 - 9:00 PM</label>
-                                                                <br>
-
-                                                                <input type="checkbox" name="sat-7" id="sat-7" value="${sat}">
-                                                                <label for="sat-7">9:00 - 11:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="wed-7" id="wed-7" value="${wed}">
+                                                                    <label for="wed-7">9:00 - 11:00 PM</label>
+                                                                    <br>
 
 
-                                                            </li>
-                                                            <li>
+                                                                </li>
+                                                                <li>
 
-                                                                <input type="checkbox" name="sun-1" id="sun-1" value="${sun}">
-                                                                <label for="sun-1">8:00 - 10:00 AM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="thu-1" id="thu-1" value="${thu}">
+                                                                    <label for="thu-1">8:00 - 10:00 AM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="sun-2" id="sun-2" value="${sun}">
-                                                                <label for="sun-2">10:00 - 12:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="thu-2" id="thu-2" value="${thu}">
+                                                                    <label for="thu-2">10:00 - 12:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="sun-3" id="sun-3" value="${sun}">
-                                                                <label for="sun-3">1:00 - 3:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="thu-3" id="thu-3" value="${thu}">
+                                                                    <label for="thu-3">1:00 - 3:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="sun-4" id="sun-4" value="${sun}">
-                                                                <label for="sun-4">3:00 - 5:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="thu-4" id="thu-4" value="${thu}">
+                                                                    <label for="thu-4">3:00 - 5:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="sun-5" id="sun-5" value="${sun}">
-                                                                <label for="sun-5">5:00 - 7:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="thu-5" id="thu-5" value="${thu}">
+                                                                    <label for="thu-5">5:00 - 7:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="sun-6" id="sun-6" value="${sun}">
-                                                                <label for="sun-6">7:00 - 9:00 PM</label>
-                                                                <br>
+                                                                    <input type="checkbox" name="thu-6" id="thu-6" value="${thu}">
+                                                                    <label for="thu-6">7:00 - 9:00 PM</label>
+                                                                    <br>
 
-                                                                <input type="checkbox" name="sun-7" id="sun-7" value="${sun}">
-                                                                <label for="sun-7">9:00 - 11:00 PM</label>
-                                                                <br>
-                                                            </li>
-                                                        </ul>
+                                                                    <input type="checkbox" name="thu-7" id="thu-7" value="${thu}">
+                                                                    <label for="thu-7">9:00 - 11:00 PM</label>
+                                                                    <br>
+
+
+                                                                </li>
+                                                                <li>
+
+                                                                    <input type="checkbox" name="fri-1" id="fri-1" value="${fri}">
+                                                                    <label for="fri-1">8:00 - 10:00 AM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="fri-2" id="fri-2" value="${fri}">
+                                                                    <label for="fri-2">10:00 - 12:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="fri-3" id="fri-3" value="${fri}">
+                                                                    <label for="fri-3">1:00 - 3:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="fri-4" id="fri-4" value="${fri}">
+                                                                    <label for="fri-4">3:00 - 5:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="fri-5" id="fri-5" value="${fri}">
+                                                                    <label for="fri-5">5:00 - 7:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="fri-6" id="fri-6" value="${fri}">
+                                                                    <label for="fri-6">7:00 - 9:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="fri-7" id="fri-7" value="${fri}">
+                                                                    <label for="fri-7">9:00 - 11:00 PM</label>
+                                                                    <br>
+
+                                                                </li>
+                                                                <li>
+
+                                                                    <input type="checkbox" name="sat-1" id="sat-1" value="${sat}">
+                                                                    <label for="sat-1">8:00 - 10:00 AM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sat-2" id="sat-2" value="${sat}">
+                                                                    <label for="sat-2">10:00 - 12:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sat-3" id="sat-3" value="${sat}">
+                                                                    <label for="sat-3">1:00 - 3:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sat-4" id="sat-4" value="${sat}">
+                                                                    <label for="sat-4">3:00 - 5:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sat-5" id="sat-5" value="${sat}">
+                                                                    <label for="sat-5">5:00 - 7:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sat-6" id="sat-6" value="${sat}">
+                                                                    <label for="sat-6">7:00 - 9:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sat-7" id="sat-7" value="${sat}">
+                                                                    <label for="sat-7">9:00 - 11:00 PM</label>
+                                                                    <br>
+
+
+                                                                </li>
+                                                                <li>
+
+                                                                    <input type="checkbox" name="sun-1" id="sun-1" value="${sun}">
+                                                                    <label for="sun-1">8:00 - 10:00 AM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sun-2" id="sun-2" value="${sun}">
+                                                                    <label for="sun-2">10:00 - 12:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sun-3" id="sun-3" value="${sun}">
+                                                                    <label for="sun-3">1:00 - 3:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sun-4" id="sun-4" value="${sun}">
+                                                                    <label for="sun-4">3:00 - 5:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sun-5" id="sun-5" value="${sun}">
+                                                                    <label for="sun-5">5:00 - 7:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sun-6" id="sun-6" value="${sun}">
+                                                                    <label for="sun-6">7:00 - 9:00 PM</label>
+                                                                    <br>
+
+                                                                    <input type="checkbox" name="sun-7" id="sun-7" value="${sun}">
+                                                                    <label for="sun-7">9:00 - 11:00 PM</label>
+                                                                    <br>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
+                                        <h5 class="p-3">
+                                            Choose a skill to book
+                                        </h5>
+                                        <div class="row p-3">
+                                            <c:forEach items="${requestScope.skills}" var="skill">
+                                                <div class="col-md-1">
+                                                    <div class="form-check">
+                                                        <input checked="" class="form-check-input" type="radio" name="skill" id="${skill.skillId}" value="${skill.skillId}" >
+                                                        <label class="form-check-label" for="${skill.skillId}">
+                                                                ${skill.skillName}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
 
-
+                                        </div>
 
                                         <div id="proceed-btn" class="submit-section proceed-btn text-end">
                                             <button type="submit" class="btn btn-primary submit-btn">Proceed to Pay</button>
@@ -559,6 +561,8 @@
     <!-- Mirrored from mentoring.dreamguystech.com/html/template/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:33:03 GMT -->
 
 </html>
+
+
 
 
 

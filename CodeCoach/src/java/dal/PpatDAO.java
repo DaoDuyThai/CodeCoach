@@ -30,7 +30,7 @@ public class PpatDAO {
             ps = conn.prepareStatement(querry);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Ppat(rs.getInt(1),rs.getInt(2), rs.getString(3), rs.getString(4)));
+                list.add(new Ppat(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4)));
             }
         } catch (Exception e) {
         }
@@ -52,19 +52,24 @@ public class PpatDAO {
         }
         return null;
     }
+
     public void insertPrivacyPolicyAndTerms(Ppat ppat) {
-        String query = "INSERT INTO PrivacyPolicyAndTerms (type, summary, content) VALUES (?, ?, ?)";
+        String query = "INSERT INTO PrivacyPolicyAndTerms (id, type, summary, content) VALUES (?, ?, ?, ?)";
         try {
             conn = new DBContext().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setInt(1, ppat.getType());
-            ps.setString(2, ppat.getSummary());
-            ps.setString(3, ppat.getContent());
+            ps.setInt(1, ppat.getId());
+            ps.setInt(2, ppat.getType());
+            ps.setString(3, ppat.getSummary());
+            ps.setString(4, ppat.getContent());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
 
     public void updatePrivacyPolicyAndTerms(Ppat ppat) {
         String query = "UPDATE PrivacyPolicyAndTerms SET summary = ?, content = ? WHERE id = ?";
@@ -91,6 +96,7 @@ public class PpatDAO {
             e.printStackTrace();
         }
     }
+
     public String countPpat() {
         String query = "select count (id) from PrivacyPolicyAndTerms";
         String count = "None";
@@ -105,6 +111,23 @@ public class PpatDAO {
             System.out.println(e);
         }
         return count;
+    }
+
+    public int getBottomId() {
+        int id = 0;
+        String query = "select top 1 id from PrivacyPolicyAndTerms\n"
+                + "order by id desc";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
     }
 
 }

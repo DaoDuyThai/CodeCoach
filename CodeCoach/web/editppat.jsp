@@ -29,7 +29,7 @@
             <!--End of header-->
 
             <!--Admin user start-->
-             <c:if test="${users.roleId == 1}">
+            <c:if test="${users.roleId == 1}">
                 <div class="breadcrumb-bar">
                     <div class="container-fluid">
                         <div class="row align-items-center">
@@ -90,7 +90,10 @@
                                                         <!-- Form fields -->
                                                         <div class="form-group">
                                                             <label for="type">Type:</label>
-                                                            <input type="text" class="form-control" id="type" name="type" required>
+                                                            <select class="form-control" name="type" id="type">
+                                                                <option value="1" selected>Policy</option>
+                                                                <option value="2">Terms</option>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="summary">Summary:</label>
@@ -126,10 +129,10 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <% int counter = 1; %>
+                                                            <% int counter = 1;%>
                                                             <c:forEach items="${ppatList}" var="ppat">
                                                                 <tr>
-                                                                    <td style="width: 10px; white-space: pre-wrap;"><%= counter %></td>
+                                                                    <td style="width: 10px; white-space: pre-wrap;"><%= counter%></td>
                                                                     <th style="width: 100px;white-space: pre-wrap;">${ppat.type}</th>
                                                                     <td style="width: 100px; white-space: pre-wrap;">${ppat.summary}</td>
                                                                     <td style="width: 100px; white-space: pre-wrap;">${ppat.content}</td>
@@ -161,7 +164,7 @@
                                                                         </form>
                                                                     </td>
                                                                 </tr>
-                                                                <% counter++; %>
+                                                                <% counter++;%>
                                                             </c:forEach>
                                                         </tbody>
                                                     </table>
@@ -203,35 +206,36 @@
 
         <script src="assets/js/script.js"></script>
         <script type="text/javascript">
-            // prompt if you want to delete
-            function doDelete(id) {
-                if (confirm("Are you sure to delete this?:")) {
-                    window.location = "deleteppat?id=" + id;
-                }
-            }
-            //show add faq form
-            function showAddForm() {
-                document.getElementById('addFormContainer').style.display = 'block';
-            }
-            //hide add faq form
-            function hideAddForm() {
-                document.getElementById('addFormContainer').style.display = 'none';
-            }
-            //show and hide edit faq form
-            function toggleEditForm(button) {
-                var editRow = button.parentNode.parentNode.nextElementSibling;
-                var display = editRow.style.display;
-                if (display === 'none' || display === '') {
-                    // Show the edit form
-                    editRow.style.display = 'table-row';
-                    button.innerText = 'Cancel';
-                } else {
-                    // Hide the edit form
-                    editRow.style.display = 'none';
-                    button.innerText = 'Edit';
-                }
-            }
+                                                                                // prompt if you want to delete
+                                                                                function doDelete(id) {
+                                                                                    if (confirm("Are you sure to delete this?:")) {
+                                                                                        window.location = "deleteppat?id=" + id;
+                                                                                    }
+                                                                                }
+                                                                                //show add faq form
+                                                                                function showAddForm() {
+                                                                                    document.getElementById('addFormContainer').style.display = 'block';
+                                                                                }
+                                                                                //hide add faq form
+                                                                                function hideAddForm() {
+                                                                                    document.getElementById('addFormContainer').style.display = 'none';
+                                                                                }
+                                                                                //show and hide edit faq form
+                                                                                function toggleEditForm(button) {
+                                                                                    var editRow = button.parentNode.parentNode.nextElementSibling;
+                                                                                    var display = editRow.style.display;
+                                                                                    if (display === 'none' || display === '') {
+                                                                                        // Show the edit form
+                                                                                        editRow.style.display = 'table-row';
+                                                                                        button.innerText = 'Cancel';
+                                                                                    } else {
+                                                                                        // Hide the edit form
+                                                                                        editRow.style.display = 'none';
+                                                                                        button.innerText = 'Edit';
+                                                                                    }
+                                                                                }
         </script>
 
     </body>
 </html>
+

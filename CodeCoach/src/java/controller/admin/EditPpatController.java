@@ -71,11 +71,13 @@ public class EditPpatController extends HttpServlet {
         int type = Integer.parseInt(request.getParameter("type"));
         String summary = request.getParameter("summary");
         String content = request.getParameter("content");
-        Ppat ppat = new Ppat(type, summary, content);
-        PpatDAO ppatDAO = new PpatDAO();
+         PpatDAO ppatDAO = new PpatDAO();
+        int lastId = ppatDAO.getBottomId();
+        int id = lastId + 1;
+        Ppat ppat = new Ppat(id, type, summary, content);
         ppatDAO.insertPrivacyPolicyAndTerms(ppat);
         response.sendRedirect("editppat");
-
+            
         
         
     }
@@ -89,3 +91,6 @@ public class EditPpatController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 }
+
+
+

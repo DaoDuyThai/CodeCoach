@@ -135,7 +135,7 @@ public class MenteeDAO {
         }
         return list;
     }
-    
+
     public Mentees getMenteebyUserId(int userID) {
         String query = "Select * from Mentees where menteeId = " + userID;
         try {
@@ -150,7 +150,44 @@ public class MenteeDAO {
         return null;
     }
 
+    public int getMenteeIdByUserId(int userId) {
+        int menteeId = 0;
+        String query = "select menteeId from Mentees m join Users u on m.userId=u.userId\n"
+                + "where u.userId = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                menteeId = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return menteeId;
 
+    }
 
-    
+    public List<Integer> getMentorIdByMenteeInterest(int menteeId) {
+        List<Integer> list = new ArrayList<>();
+        String query = "select distinct mt.mentorId from MenteeInterests mi join Mentees m on mi.menteeId= m.menteeId\n"
+                + "			join Skills sk on sk.skillId = mi.skillId\n"
+                + "			join Expertise e on sk.skillId = e.skillId\n"
+                + "			join Mentors mt on e.mentorId = mt.mentorId \n"
+                + "where m.menteeId=?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, menteeId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return list;
+    }
+
 }
