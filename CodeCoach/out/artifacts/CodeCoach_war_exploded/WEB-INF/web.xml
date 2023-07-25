@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>checkEmailExisted</servlet-name>
+        <servlet-class>controller.CheckEmailExisted</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactUsController</servlet-name>
+        <servlet-class>controller.ContactUsController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>checkEmailExisted</servlet-name>
+        <url-pattern>/checkEmailExisted</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactUsController</servlet-name>
+        <url-pattern>/contactus</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>home</welcome-file>
+    </welcome-file-list>
+</web-app>

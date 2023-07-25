@@ -36,7 +36,7 @@ public class MenteeNotificationDAO {
         return list;
     }
 
-    public List<Notifications> getNotificationsByMenteeID(int id) {
+   public List<Notifications> getNotificationsByMenteeID(int id) {
         List<Notifications> list = new ArrayList<>();
         String querry = "Select * from Notifications where userId = ? order by [dateTime] desc";
         try {
@@ -45,7 +45,7 @@ public class MenteeNotificationDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Notifications(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                list.add(new Notifications(rs.getInt(1),rs.getInt(2),rs.getInt(3), rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
             }
         } catch (Exception e) {
         }

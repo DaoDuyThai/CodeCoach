@@ -5,13 +5,18 @@
 
 package controller.mentor;
 
+import dal.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.*;
 
 import java.io.IOException;
+import java.util.List;
+
+import static controller.mentee.MenteeProfileController.updateGeneralProfile;
 
 /**
  *
@@ -31,6 +36,24 @@ public class MentorProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String go = request.getParameter("go");
+        if("edit-profile".equals(go)){
+            TinhThanhPhoDAO dao = new TinhThanhPhoDAO();
+            List<TinhThanhPho> list = dao.getAllTinhThanhPho();
+            request.setAttribute("listCity", list);
+            if(request.getSession().getAttribute("error") != null)
+            {
+                request.setAttribute("error", request.getSession().getAttribute("error"));
+                request.getSession().removeAttribute("error");
+            }
+            request.getRequestDispatcher("profile-settings/mentor-profile.jsp").forward(request, response);
+        }else if("delete".equals(go)){
+            int expertiseID = Integer.parseInt(request.getParameter("expertise-id"));
+            new ExpertiseDAO().removeExpertise(expertiseID);
+            System.out.println("Deleted expertise: " + expertiseID);
+            request.getSession().setAttribute("error", "Deleted expertise: " + expertiseID);
+            request.getRequestDispatcher("mentor-profile?go=edit-profile").forward(request, response);
+        }
     }
 
     /**
@@ -43,6 +66,39 @@ public class MentorProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        updateGeneralProfile(request);
+        String experience = request.getParameter("experience");
+        int userID = ((Users) request.getSession().getAttribute("users")).getUserId();
+        int mentorID = new MentorDAO().getMentorIdByUser(userID);
+        new ExperienceDAO().insertExperience(mentorID, experience);
+        Mentors mentor = new MentorDAO().getMentorByUserId(userID);
+        String bio = request.getParameter("bio");
+        String hourlyRate = request.getParameter("hourly-rate");
+        mentor.setBio(bio);
+        mentor.setHourlyRate(hourlyRate);
+
+        new MentorDAO().updateMentor(mentor);
+        System.out.println(mentor + " Updated");
+
+        System.out.println("Edited experience: " + experience);
+
+
+        List<Skills> skills = new SkillDAO().getAllSkill();
+
+        for(Skills skill : skills){
+            String skillIDString = request.getParameter(String.valueOf(skill.getSkillId()));
+            if(skillIDString != null){
+                Expertise expertise = new Expertise();
+                expertise.setMentorId(mentorID);
+                expertise.setSkillId(skill.getSkillId());
+                new ExpertiseDAO().addExpertise(expertise);
+                System.out.println("Added expertise: " + expertise);
+            }
+        }
+
+        request.getSession().setAttribute("error", "Edited profile successfully");
+
+        response.sendRedirect("mentor-profile?go=edit-profile");
     }
 
     /**

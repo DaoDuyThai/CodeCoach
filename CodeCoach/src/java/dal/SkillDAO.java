@@ -208,6 +208,24 @@ public class SkillDAO {
         }
         return list;
     }
+      
+     public void insertSkill(Skills skill) {
+        String query = "INSERT INTO [dbo].[Skills]\n"
+                + "           ([skillName]\n"
+                + "           ,[subCategoryId])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?)";
+        try {
+            conn = new DBContext().getConnection();
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setString(1, skill.getSkillName());
+            st.setInt(2, skill.getSubCategoryId());
+            st.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 
 

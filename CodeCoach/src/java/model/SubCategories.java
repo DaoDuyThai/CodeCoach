@@ -21,7 +21,15 @@ public class SubCategories {
         this.categoryId = categoryId;
         this.subCategoryName = subCategoryName;
     }
-
+    public SubCategories(int categoryId, String subCategoryName) {
+        this.categoryId = categoryId;
+        this.subCategoryName = subCategoryName;
+    }
+    public SubCategories(  String subCategoryName, int subCategoryId, int categoryId) {
+        this.subCategoryName = subCategoryName;
+        this.subCategoryId = subCategoryId;
+        this.categoryId = categoryId;
+     }
     public int getSubCategoryId() {
         return subCategoryId;
     }

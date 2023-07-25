@@ -89,17 +89,14 @@
                                         <div id="addFormContainer" style="display: none;">
                                             <div class="card card-form">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Add FAQ</h4>
-                                                    <form action="editfaq" method="POST">
+                                                    <h4 class="card-title">Add Category</h4>
+                                                    <form action="listcategory" method="POST">
                                                         <!-- Form fields -->
                                                         <div class="form-group">
-                                                            <label for="question">Question:</label>
-                                                            <input type="text" class="form-control" id="question" name="question" required>
+                                                            <label for="categoryName">Name</label>
+                                                            <input type="text" class="form-control" id="categoryName" name="categoryName" required>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="answer">Answer:</label>
-                                                            <textarea class="form-control" id="answer" name="answer" rows="3" required></textarea>
-                                                        </div>
+            
                                                         <button type="submit" class="btn btn-primary">Save</button>
                                                         <button type="button" class="btn btn-secondary" onclick="hideAddForm()">Cancel</button>
                                                     </form>
@@ -135,22 +132,19 @@
                                                                     </td>
                                                                     <td style="width: 100px;">                                              
                                                                         <button class="btn btn-primary" onclick="toggleEditForm(this)">Edit</button>
-                                                                        <a><button onclick="doDelete(${fl.id})" class="btn btn-danger">Delete</button></a>
+                                                                        
                                                                     </td>
                                                                 </tr>
                                                                 <%-- Hidden row for the edit form start--%>
                                                                 <tr class="edit-row" style="display: none;">
                                                                     <td colspan="4">
-                                                                        <form action="updatefaq" method="POST">
-                                                                            <input type="hidden" name="id" value="${fl.id}">
+                                                                        <form action="updatecategory" method="POST">
+                                                                            <input type="hidden" name="categoryId" value="${c.categoryId}">
                                                                             <div class="form-group">
-                                                                                <label for="question">Question:</label>
-                                                                                <input type="text" class="form-control" id="question" name="question" value="${fl.question}" required>
+                                                                                <label for="categoryName">Name:</label>
+                                                                                <input type="text" class="form-control" id="categoryName" name="categoryName" value="${c.categoryName}" required>
                                                                             </div>
-                                                                            <div class="form-group">
-                                                                                <label for="answer">Answer:</label>
-                                                                                <textarea type="text" class="form-control" id="answer" rows="3" name="answer" value="${fl.answer}" required></textarea>
-                                                                            </div>
+                                                                            
                                                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                                                         </form>
                                                                     </td>

@@ -133,7 +133,7 @@
                                                             <c:forEach items="${ppatList}" var="ppat">
                                                                 <tr>
                                                                     <td style="width: 10px; white-space: pre-wrap;"><%= counter%></td>
-                                                                    <th style="width: 100px;white-space: pre-wrap;">${ppat.type}</th>
+                                                                    <th style="width: 100px;white-space: pre-wrap;">${ppat.type==1?'Policy':'Terms'}</th>
                                                                     <td style="width: 100px; white-space: pre-wrap;">${ppat.summary}</td>
                                                                     <td style="width: 100px; white-space: pre-wrap;">${ppat.content}</td>
                                                                     <td style="width: 100px;">
@@ -160,7 +160,6 @@
                                                                             </div>
                                                                             <input type="hidden" name="action" value="update">
                                                                             <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                                            <button type="button" class="btn btn-secondary" onclick="toggleEditForm(this)">Cancel</button>
                                                                         </form>
                                                                     </td>
                                                                 </tr>
@@ -238,4 +237,6 @@
 
     </body>
 </html>
+
+
 

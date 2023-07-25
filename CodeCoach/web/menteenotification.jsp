@@ -28,17 +28,25 @@
         <!-- Header is placed here -->
         <%@include file="header.jsp" %>
         <!--End of header-->
-        <div class="main-wrapper">
+        <div class="breadcrumb-bar">
             <div class="container-fluid">
                 <div class="row align-items-center">
-                    <div class="col-md-12 col-8 ">
-                        <center>
-                            <h2 class="breadcrumb-title">Notification</h2>
-                        </center>
+                    <div class="col-md-12 col-12">
+                        <h2 class="breadcrumb-title">Notification</h2>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="main-wrapper">
+            <div class="container-fluid">
+
+
                 <div class="row">
-                    <div class="col-md-8 offset-md-2">
+
+                    
+
+                    <div class="col-md-12 col-lg-12 col-xl-12">
+
                         <div class="card card-table">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -48,6 +56,7 @@
                                                 <th class="text-center">STT</th>
                                                 <th class="text-center">Receive Date</th>
                                                 <th class="text-center">Title</th>
+                                                <th class="text-center">Status</th>
                                                 <th class="text-center">ACTION</th>
                                             </tr>
                                         </thead>
@@ -59,11 +68,12 @@
                                                     </td>
                                                     <fmt:parseDate pattern="yyyy-MM-dd HH:mm:ss" value="${i.dateTime}" var="date" />
                                                     <td class="text-center">${date}</td>
-                                            <td class="text-center">${i.content}</td>
-                                            <td class="text-center"><a href="ViewNotification?id=${i.bookingId}" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
-                                            </tr>
-                                        </c:forEach>
-                                        <!-- More table rows... -->
+                                                    <td class="text-center">${i.content}</td>
+                                                    <td class="text-center"><span class="pending">${i.status}</span></td>
+                                                    <td class="text-center"><a href="ViewNotification?id=${i.bookingId}" class="btn btn-sm bg-info-light"><i class="far fa-eye"></i> View</a></td>
+                                                </tr>
+                                            </c:forEach>
+                                            <!-- More table rows... -->
                                         </tbody>
                                     </table>
                                 </div>

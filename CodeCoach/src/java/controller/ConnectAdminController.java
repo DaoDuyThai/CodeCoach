@@ -79,7 +79,8 @@ public class ConnectAdminController extends HttpServlet {
                     new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, 1);
                     sharedChatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(u.getUserId(), 1);
                     new ChatMessagesDAO().insertChatMessage(String.valueOf(1), String.valueOf(sharedChatRoomId), "You are connected to admin");
-                    new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the admin"); 
+                    new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the admin");
+
                 } else {
                     new ChatMessagesDAO().insertChatMessage(String.valueOf(1), String.valueOf(sharedChatRoomId), "You are connected to admin");
                     new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the admin");
@@ -132,6 +133,3 @@ public class ConnectAdminController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-

@@ -44,7 +44,7 @@ public class AdminNotificationController extends HttpServlet {
             throws ServletException, IOException {
         Users u = (Users) request.getSession().getAttribute("users");
         MenteeNotificationDAO d = new MenteeNotificationDAO();
-        List<Notifications> listN = d.getNotificationsByMenteeID(u.getUserId());
+        List<Notifications> listN = d.getAll();
 
         List<Notifications> list = new ArrayList<Notifications>();
         for (Notifications t : listN) {

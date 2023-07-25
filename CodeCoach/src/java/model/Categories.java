@@ -20,6 +20,9 @@ public class Categories {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
+    public Categories(String categoryName){
+        this.categoryName = categoryName;
+    }
 
     public int getCategoryId() {
         return categoryId;

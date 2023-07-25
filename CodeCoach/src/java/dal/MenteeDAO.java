@@ -46,6 +46,26 @@ public class MenteeDAO {
         }
         return user;
     }
+    
+    public int getUserIdByMenteeId(int menteeId) {
+        int userId=0;
+        String querry = "select userId from [dbo].[Mentees] Where menteeId = "+menteeId+"";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(querry);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                userId = rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return userId;
+    }
+    
+    public static void main(String[] args) {
+        int userId  = new MenteeDAO().getUserIdByMenteeId(7);
+        System.out.println(userId);
+    }
 
     public String getMenteeIdbyUserId(String userId) {
         String menteeId = "";

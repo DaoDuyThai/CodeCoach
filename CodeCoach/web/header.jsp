@@ -42,6 +42,8 @@
                                         <li><a href="mentor-booking">View Booking</a></li>
                                         <li><a href="feedback">Feedback</a></li>
                                         <li><a href="listinvoice">Invoices</a></li>
+                                        <li><a href="mentor-profile?go=edit-profile">Profile Settings</a></li>                                        
+
                                     </ul>
                                 </li>
                             </c:if>
@@ -52,9 +54,10 @@
                                     <ul class="submenu">
                                         <li><a href="menteedashboard">Mentee Dashboard</a></li>
                                         <li><a href="menteenotification">Notification</a></li>
-                                        <li><a href="booking.jsp">Booking</a></li>
+                                        <li><a href="mentee-bookings">Booking</a></li>
                                         <li><a href="favourite">Favourites</a></li>
-                                        <li><a href="">Invoices</a></li>
+                                        
+                                        <li><a href="mentee-profile?go=edit-profile">Profile Settings</a></li>
                                             <c:if test="${users.roleId != 2}">
                                             <li><a href="mentorregister">Mentor Register</a></li>
                                             </c:if>

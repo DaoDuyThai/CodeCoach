@@ -77,8 +77,14 @@ public class CategoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        //get question
+        String categoryName = request.getParameter("categoryName");       
+        Categories category= new Categories(categoryName);
+        CategoryDAO categoryDao = new CategoryDAO();
+        categoryDao.InsertCategory(category);
+        response.sendRedirect("listcategory");
     }
+    
 
     /** 
      * Returns a short description of the servlet.

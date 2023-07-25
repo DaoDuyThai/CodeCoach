@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Experience;
 import model.Roles;
+import model.Users;
 
 /**
  *
@@ -49,6 +50,27 @@ public class ExperienceDAO {
         }
     }
 
+    public static final String GET_EXPERIENCE_BY_USER_ID = "SELECT e.*\n" +
+            "FROM Users u\n" +
+            "         JOIN Mentors m ON u.userId = m.userId\n" +
+            "         JOIN Experience e ON m.mentorId = e.mentorId\n" +
+            "WHERE u.userId = ?;\n";
+    public Experience getExperienceByUserID(int userId) {
+        Experience experience = new Experience();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(GET_EXPERIENCE_BY_USER_ID);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                experience = new Experience(rs.getInt("experienceId"), rs.getInt("mentorId"), rs.getString("description"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return experience;
+
+    }
 }
 
 

@@ -66,7 +66,7 @@
                                                     <th class="text-center">Mentor</th>
                                                     <th class="text-center">Total Amount</th>
                                                     <th class="text-center">Skill</th>
-                                                    <th class="text-center">Actions</th>
+                                                    <!--<th class="text-center">Actions</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -95,21 +95,19 @@
                                                         <td class="text-center">
                                                             <span class="text-center">${lat[10]}</span>
                                                         </td>
-                                                        <td class="text-end text-center" >
+<!--                                                        <td class="text-end text-center" >
                                                             <div class="actions">
-                                                                <a data-bs-toggle="modal" href="#edit_invoice_report"
-                                                                   class="btn btn-sm bg-primary-light me-2">
-                                                                    <i class="fe fe-pencil fa fa-eye"></i>Details
+                                                                <a href="invoice-controller?booking-id=${lat[0]}&mentor-id=${lat[5]}">
+                                                                    <div class="btn btn-sm bg-primary-light"><span class="fe fe-pencil fa fa-eye"></span> Details</div>
                                                                 </a>
+                                                               
                                                                 
                                                             </div>
-                                                        </td>
+                                                        </td>-->
                                                     </tr>
 
 
                                                 </c:forEach>
-
-
                                             </tbody>
                                         </table>
                                     </div>

@@ -86,23 +86,29 @@
                                         <h4 class="mb-4">Frequent SubCategory Lists</h4>
 
                                         <!--add faq start-->
-                                        <button  onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more FAQ</button>
+                                        <button  onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more SubCategory</button>
                                         <!-- addForm start here -->
                                         <div id="addFormContainer" style="display: none;">
                                             <div class="card card-form">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Add FAQ</h4>
-                                                    <form action="editfaq" method="POST">
+                                                    <h4 class="card-title">Add SubCategory</h4>
+                                                    <form action="subcategory" method="POST">
                                                         <!-- Form fields -->
                                                         <div class="form-group">
-                                                            <label for="question">Question:</label>
-                                                            <input type="text" class="form-control" id="question" name="question" required>
-                                                        </div>
+                                <label>Category</label>
+                                <select name="categoryId" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${listCategories}" var="o">
+                                        <option value="${o.categoryId}">${o.categoryName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                                                        
                                                         <div class="form-group">
-                                                            <label for="answer">Answer:</label>
-                                                            <textarea class="form-control" id="answer" name="answer" rows="3" required></textarea>
+                                                            <label for="subCategoryName">Name</label>
+                                                            <input type="text" class="form-control" id="subCategoryName" name="subCategoryName" required>
                                                         </div>
-                                                        <button type="submit" class="btn btn-primary">Save</button>
+                        
+                                                        <button type="submit" class="btn btn-primary" onclick="reloadPage()">Save</button>
                                                         <button type="button" class="btn btn-secondary" onclick="hideAddForm()">Cancel</button>
                                                     </form>
                                                 </div>
@@ -137,23 +143,25 @@
                                                                     </td>
                                                                     <td style="width: 100px;">
                                                                         <button class="btn btn-primary" onclick="toggleEditForm(this)">Edit</button>
-                                                                        <a><button onclick="doDelete(${fl.id})" class="btn btn-danger">Delete</button></a>
+                                                                        
                                                                     </td>
                                                                     
                                                                 </tr>
                                                                 <%-- Hidden row for the edit form start--%>
                                                                 <tr class="edit-row" style="display: none;">
                                                                     <td colspan="4">
-                                                                        <form action="updatefaq" method="POST">
-                                                                            <input type="hidden" name="id" value="${fl.id}">
+                                                                        <form action="updatesubcategory" method="POST">
+                                                                            <input type="hidden" name="subCategoryId" value="${s.subCategoryId}">
+<!--                                                                            <div class="form-group">
+                                                                                <label for="categoryId">Category:</label>
+                                                                                <input type="text" class="form-control" id="categoryId" name="categoryId" value="${s.categoryId}" required>
+                                                                            </div>-->
+                                                                            <input type="hidden" name="categoryId" value="${s.categoryId}">
                                                                             <div class="form-group">
-                                                                                <label for="question">Question:</label>
-                                                                                <input type="text" class="form-control" id="question" name="question" value="${fl.question}" required>
+                                                                                <label for="subCategoryName">Name:</label>
+                                                                                <input type="text" class="form-control" id="subCategoryName" name="subCategoryName" value="${s.subCategoryName}" required>
                                                                             </div>
-                                                                            <div class="form-group">
-                                                                                <label for="answer">Answer:</label>
-                                                                                <textarea type="text" class="form-control" id="answer" rows="3" name="answer" value="${fl.answer}" required></textarea>
-                                                                            </div>
+                                                                            
                                                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                                                         </form>
                                                                     </td>
@@ -217,6 +225,10 @@
                                                                             function hideAddForm() {
                                                                                 document.getElementById('addFormContainer').style.display = 'none';
                                                                             }
+                                                                            function reloadPage() {
+                                                                              location.reload(); // Tải lại trang trong trình duyệt
+                                                                            }
+                                                                            
                                                                             //show and hide edit faq form
                                                                             function toggleEditForm(button) {
                                                                                 var editRow = button.parentNode.parentNode.nextElementSibling;

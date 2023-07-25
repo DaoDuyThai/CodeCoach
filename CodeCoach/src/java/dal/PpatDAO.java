@@ -68,9 +68,6 @@ public class PpatDAO {
         }
     }
 
-
-
-
     public void updatePrivacyPolicyAndTerms(Ppat ppat) {
         String query = "UPDATE PrivacyPolicyAndTerms SET summary = ?, content = ? WHERE id = ?";
         try {

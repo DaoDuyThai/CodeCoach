@@ -5,6 +5,7 @@
 
 package controller.admin;
 
+import dal.CategoryDAO;
 import dal.SkillDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Categories;
 import model.Skills;
+import model.SubCategories;
 
 /**
  *
@@ -40,6 +43,8 @@ public class SubCategoryDetailController extends HttpServlet {
             String countSkill = new SkillDAO().countSkill(subCategoryId);
             request.setAttribute("countSkill", countSkill);
             request.setAttribute("listsk", listsk);
+            List<SubCategories> listSubCategories = new CategoryDAO().getAllSubCategories();
+            request.setAttribute("listSubCategories", listSubCategories);
             request.getRequestDispatcher("subcategorydetail.jsp").forward(request, response);
         
     } 
@@ -68,7 +73,14 @@ public class SubCategoryDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int subCategoryId = Integer.parseInt(request.getParameter("subCategoryId"));
+        String skillName = request.getParameter("skillName");
+        Skills skill = new Skills(skillName, subCategoryId);
+        SkillDAO skillDao = new SkillDAO();
+        skillDao.insertSkill(skill); 
+        String redirectURL = "subcategorydetail?subCategoryId=" + subCategoryId;
+//        subcategorydetail?subCategoryId=${s.subCategoryId}
+    response.sendRedirect(redirectURL);
     }
 
     /** 

@@ -21,6 +21,16 @@ public class Skills {
         this.skillName = skillName;
         this.subCategoryId = subCategoryId;
     }
+    public Skills(String skillName, int subCategoryId) {
+        this.skillName = skillName;
+        this.subCategoryId = subCategoryId;
+    }
+    public Skills(String skillName,int subCategoryId, int skillId) {
+        this.skillName = skillName;
+        this.subCategoryId = subCategoryId;
+        this.skillId = skillId;        
+        
+    }
 
     public int getSkillId() {
         return skillId;

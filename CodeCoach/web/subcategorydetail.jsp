@@ -86,21 +86,25 @@
                                         <h4 class="mb-4">Frequent Skill Lists</h4>
 
                                         <!--add faq start-->
-                                        <button  onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more FAQ</button>
+                                        <button  onclick="showAddForm()" type="button" data-bs-toggle="modal" data-bs-target="#addModal" class="btn btn-success">Add more Skill</button>
                                         <!-- addForm start here -->
                                         <div id="addFormContainer" style="display: none;">
                                             <div class="card card-form">
                                                 <div class="card-body">
-                                                    <h4 class="card-title">Add FAQ</h4>
-                                                    <form action="editfaq" method="POST">
+                                                    <h4 class="card-title">Add Skill</h4>
+                                                    <form action="subcategorydetail" method="POST">
                                                         <!-- Form fields -->
                                                         <div class="form-group">
-                                                            <label for="question">Question:</label>
-                                                            <input type="text" class="form-control" id="question" name="question" required>
-                                                        </div>
+                                <label>SubCategory</label>
+                                <select name="subCategoryId" class="form-select" aria-label="Default select example">
+                                    <c:forEach items="${listSubCategories}" var="o">
+                                        <option value="${o.subCategoryId}">${o.subCategoryName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                                                         <div class="form-group">
-                                                            <label for="answer">Answer:</label>
-                                                            <textarea class="form-control" id="answer" name="answer" rows="3" required></textarea>
+                                                            <label for="skillName">Name</label>
+                                                            <textarea class="form-control" id="skillName" name="skillName" rows="3" required></textarea>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary">Save</button>
                                                         <button type="button" class="btn btn-secondary" onclick="hideAddForm()">Cancel</button>
@@ -122,7 +126,7 @@
                                                                 <th style="width: 100px;">No.</th>
                                                                 <th style="width: 100px;">Image</th>
                                                                 <th style="width: 100px;">Name</th>
-                                                                <th style="width: 100px;">Action</th>
+<!--                                                                <th style="width: 100px;">Action</th>-->
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -135,25 +139,33 @@
                                                                     <img src="assets/images/skills/${skill.skillId}.png" class="img-fluid" alt="Skill Image">                                              
                                                                     </td>
                                                                     <td style="width: 100px; white-space: pre-wrap;">${skill.skillName}</td>
-                                                                    <td style="width: 100px;">
+<!--                                                                    <td style="width: 100px;">
                                                                         <button class="btn btn-primary" onclick="toggleEditForm(this)">Edit</button>
-                                                                        <a><button onclick="doDelete(${fl.id})" class="btn btn-danger">Delete</button></a>
-                                                                    </td>
+                                                                        
+                                                                    </td>-->
                                                                     
                                                                 </tr>
                                                                 <%-- Hidden row for the edit form start--%>
                                                                 <tr class="edit-row" style="display: none;">
                                                                     <td colspan="4">
-                                                                        <form action="updatefaq" method="POST">
-                                                                            <input type="hidden" name="id" value="${fl.id}">
+                                                                        <form action="updatesubcategorydetail" method="POST">
+                                                                            <input type="hidden" name="subCategoryId" value="${s.subCategoryId}">
+<!--                                                                            <div class="form-group">
+                                                                                <label for="categoryId">Category:</label>
+                                                                                <input type="text" class="form-control" id="categoryId" name="categoryId" value="${s.categoryId}" required>
+                                                                            </div>-->
+
+                                                                            <input type="hidden" name="skillId" value="${skill.skillId}"><!--
+                                                                            <input type="hidden" name="subCategoryId" value="${skill.subCategoryId}">-->
                                                                             <div class="form-group">
-                                                                                <label for="question">Question:</label>
-                                                                                <input type="text" class="form-control" id="question" name="question" value="${fl.question}" required>
+                                                                                <label for="subCategoryId">SubCategory:</label>
+                                                                                <input type="text" class="form-control" id="subCategoryId" name="subCategoryId" value="${skill.subCategoryId}" required>
                                                                             </div>
                                                                             <div class="form-group">
-                                                                                <label for="answer">Answer:</label>
-                                                                                <textarea type="text" class="form-control" id="answer" rows="3" name="answer" value="${fl.answer}" required></textarea>
+                                                                                <label for="skillName">Name:</label>
+                                                                                <input type="text" class="form-control" id="skillName" name="skillName" value="${skill.skillName}" required>
                                                                             </div>
+                                                                            
                                                                             <button type="submit" class="btn btn-primary">Save Changes</button>
                                                                         </form>
                                                                     </td>

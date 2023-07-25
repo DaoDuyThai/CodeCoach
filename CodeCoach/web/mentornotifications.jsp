@@ -47,44 +47,53 @@
         %>
         <div class="container">
             <div class="card">
-                <div class="card-header">
-                    <h1>Notification</h1>
-                </div>
-                <%
-                    if (listNotifications.size() == 0) {
-                        out.print("You don't have any notifications!");
-                    } else {
-                        for (int i = listNotifications.size() - 1; i >= 0; i--) {
-                %>
-                <div class="card-body">
-                    <div class="alert alert-primary" role="alert">
+                <div class="row">
+
+
+                    <!-- mentor sidebar start -->
+                    <%@include file="mentorsidebar.jsp" %>
+                    <!-- mentor sidebar end -->
+
+
+                    <div class="col-md-7 col-lg-8 col-xl-9">
+                        <div class="card-header">
+                            <h1>Notification</h1>
+                        </div>
                         <%
-                            for (int j = 0; j < listBookings.size(); j++) {
-                                if (listNotifications.get(i).getBookingId() == listBookings.get(j).getBookingId()) {
-                                    menteeId = listBookings.get(j).getMenteeId();
-                                }
-                            }
-                            for (int k = 0; k < listMentees.size(); k++) {
-                                if (menteeId == listMentees.get(k).getMenteeId()) {
-                                    userId = listMentees.get(k).getUserId();
-                                }
-                            }
-                            for (int l = 0; l < listUsers.size(); l++) {
-                                if (userId == listUsers.get(l).getUserId()) {
-                                    menteeName = listUsers.get(l).getfName() + " " + listUsers.get(l).getlName();
+                            if (listNotifications.size() == 0) {
+                                out.print("You don't have any notifications!");
+                            } else {
+                                for (int i = listNotifications.size() - 1; i >= 0; i--) {
+                        %>
+                        <div class="card-body">
+                            <div class="alert alert-primary" role="alert">
+                                <%
+                                    for (int j = 0; j < listBookings.size(); j++) {
+                                        if (listNotifications.get(i).getBookingId() == listBookings.get(j).getBookingId()) {
+                                            menteeId = listBookings.get(j).getMenteeId();
+                                        }
+                                    }
+                                    for (int k = 0; k < listMentees.size(); k++) {
+                                        if (menteeId == listMentees.get(k).getMenteeId()) {
+                                            userId = listMentees.get(k).getUserId();
+                                        }
+                                    }
+                                    for (int l = 0; l < listUsers.size(); l++) {
+                                        if (userId == listUsers.get(l).getUserId()) {
+                                            menteeName = listUsers.get(l).getfName() + " " + listUsers.get(l).getlName();
+                                        }
+                                    }
+                                %>
+                                You have a request to be a Mentor for <%out.print(menteeName);%>!
+                            </div>                
+                        </div>
+                        <%
                                 }
                             }
                         %>
-                        You have a request to be a Mentor for <%out.print(menteeName);%>!
-                    </div>                
+                    </div>
                 </div>
-                <%
-                        }
-                    }
-                %>
-
             </div>
-        </div>
     </body>
     <!-- end of Pre footer -->
     <%@include file="footer.jsp" %>

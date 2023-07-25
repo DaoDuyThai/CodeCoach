@@ -73,7 +73,7 @@ public class Book extends HttpServlet {
             calendar.setTime(date);
             // set the day to next week
             calendar.add(Calendar.DATE, incrementNumber);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
             try(PrintWriter out = response.getWriter()){
                 out.println("<ul>\n" +
@@ -137,7 +137,7 @@ public class Book extends HttpServlet {
             calendar.setTime(date);
             // set the day to next week
             calendar.add(Calendar.DATE, incrementNumber);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
             try(PrintWriter out = response.getWriter()){
 
@@ -389,9 +389,9 @@ public class Book extends HttpServlet {
             int mentorId = Integer.parseInt(request.getParameter("mentor-id"));
             int userId = ((Users) request.getSession().getAttribute("users")).getUserId();
             int skillId = Integer.parseInt(request.getParameter("skill"));
-            String menteeId = new MenteeDAO().getMenteeIdbyUserId(String.valueOf(userId));
+            int menteeId = ((Users) request.getSession().getAttribute("users")).getUserId();
 
-            Booking booking = new Booking(mentorId, Integer.parseInt(menteeId) , skillId, "Pending");
+            Booking booking = new Booking(mentorId, menteeId, skillId, "Pending");
 
             System.out.println(new BookingDAO().addBooking(booking) + " rows affected");
             int bookingId = new BookingDAO().getBookingIdByBooking(booking);
@@ -415,16 +415,20 @@ public class Book extends HttpServlet {
             }
 
             Notifications notification = new Notifications();
-            notification.setUserId(mentorId);
+            int userId1 = new MentorDAO().getUserByMentorID(String.valueOf(mentorId)).getUserId();
+            notification.setUserId(userId1);
             notification.setContent("You have a new booking request");
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             notification.setDateTime(dateFormat.format(new Date()));
             notification.setStatus("Pending");
             notification.setType("Booking");
             notification.setBookingId(new BookingDAO().getLatestBookingID());
-            new NotificationDAO().addNotification(notification);
+            new NotificationDAO().addNotification(notification);       
+        
+            notification.setUserId(new MenteeDAO().getUserIdByMenteeId(menteeId));
+            new NotificationDAO().addNotification(notification);   
 
-            response.sendRedirect("home");
+            response.sendRedirect("invoice-controller?booking-id=" + bookingId + "&mentor-id=" + mentorId);
         }
 
 
@@ -441,6 +445,4 @@ public class Book extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
 

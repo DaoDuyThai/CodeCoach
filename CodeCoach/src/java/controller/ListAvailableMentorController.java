@@ -6,7 +6,6 @@
 package controller;
 
 import dal.MentorDAO;
-import dal.SkillDAO;
 import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,14 +15,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Mentors;
-
 
 /**
  *
  * @author hoang
  */
-
 @WebServlet(name="ListAvailableMentorController", urlPatterns={"/listavailablementor"})
 public class ListAvailableMentorController extends HttpServlet {
    
@@ -34,9 +30,10 @@ public class ListAvailableMentorController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String mentorId = request.getParameter("mentorId");
         UserDAO dao = new UserDAO();
         MentorDAO d = new MentorDAO();
         List<Object[]> list = dao.getAllUserInfoOfMentor(); 

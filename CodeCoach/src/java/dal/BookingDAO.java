@@ -25,7 +25,8 @@ public class BookingDAO {
     private final String GET_BOOKING_BY_MENTOR_ID = "SELECT * FROM [dbo].[Booking] WHERE mentorId = ?";
     private final String ADD_BOOKING = "INSERT INTO [dbo].[Booking] (mentorId, menteeId, skillId, status) VALUES (?,?,?,?)";
 
-    private final String GET_BOOKINGID_BY_BOOKING = "SELECT * FROM [dbo].[Booking] WHERE mentorId = ? AND menteeId = ? AND skillId = ? AND status = ?";
+    private final String GET_BOOKINGID_BY_BOOKING = "SELECT MAX(bookingId) AS newest_booking_id\n" +
+            "FROM Booking;";
 
     private final String GET_LATEST_BOOKING_ID = "SELECT TOP 1 bookingId\n"
             + "FROM Booking\n"
@@ -52,13 +53,9 @@ public class BookingDAO {
 
     public int getBookingIdByBooking(Booking booking) {
         try ( Connection conn = new DBContext().getConnection();  PreparedStatement ps = conn.prepareStatement(GET_BOOKINGID_BY_BOOKING)) {
-            ps.setInt(1, booking.getMentorId());
-            ps.setInt(2, booking.getMenteeId());
-            ps.setInt(3, booking.getSkillId());
-            ps.setString(4, booking.getStatus());
             rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getInt("bookingId");
+                return rs.getInt(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -317,7 +314,20 @@ public class BookingDAO {
         return b;
     }
 
-
-
-
+    private static final String GET_BOOKINGS_BY_MENTEE_ID = "SELECT * FROM [dbo].[Booking] WHERE menteeId = ?";
+    public List<Booking> getBookingsByMenteeId(int users) {
+        List<Booking> list = new ArrayList<>();
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(GET_BOOKINGS_BY_MENTEE_ID);
+            ps.setInt(1, users);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Booking(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }

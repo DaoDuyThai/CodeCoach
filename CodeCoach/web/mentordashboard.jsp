@@ -42,7 +42,6 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-md-12 col-12">
-                        
                         <h2 class="breadcrumb-title">Dashboard</h2>
                     </div>
                 </div>
@@ -96,7 +95,7 @@
                                         </div>
                                     </div>
                                     <div class="dash-widget-info">
-                                        <h3><fmt:formatNumber value="${totalIncome}" pattern="¤#,##0" currencyCode="VND" /></h3>
+                                        <h3><fmt:formatNumber value="${totalIncome}" type="currency" currencyCode="VND" /></h3>
                                         <h6>Total Earned</h6>
                                     </div>
                                 </div>
@@ -131,7 +130,7 @@
                                                                 <span class="status">${booking[3]}</span>
                                                             </td>
                                                             <td class="text-center">
-                                                                <a href="profile" class="btn btn-sm bg-info-light">
+                                                                <a href="profile.html" class="btn btn-sm bg-info-light">
                                                                     <i class="far fa-eye"></i> View
                                                                 </a>
                                                             </td>
@@ -224,5 +223,3 @@
 
 
 </html>
-
-

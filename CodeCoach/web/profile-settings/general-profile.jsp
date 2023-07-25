@@ -46,30 +46,9 @@
     <div class="container-fluid">
       <div class="row">
 
-        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+        
 
-          <div class="profile-sidebar">
-            <div class="user-widget">
-              <div class="pro-avatar"><c:out value="${users.fName.charAt(0)}" /><c:out value="${users.lName.charAt(1)}" />
-              </div>
-            </div>
-            <div class="custom-sidebar-nav">
-              <ul>
-                <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard <span><i
-                        class="fas fa-chevron-right"></i></span></a></li>
-                <li><a href="bookings.html"><i class="fas fa-clock"></i>Bookings <span><i
-                        class="fas fa-chevron-right"></i></span></a></li>
-                <li><a href="schedule-timings.html"><i class="fas fa-hourglass-start"></i>Schedule
-                  Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-                <li><a href="logout"><i class="fas fa-sign-out-alt"></i>Logout <span><i
-                        class="fas fa-chevron-right"></i></span></a></li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-md-7 col-lg-8 col-xl-9">
+        <div class="col-md12 col-lg-12 col-xl-12">
           <div class="card">
             <div class="card-body">
               <form action="general-profile" method="post">

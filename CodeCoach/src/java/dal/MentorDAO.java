@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import static java.sql.DriverManager.getConnection;
 import static java.util.Collections.list;
 import java.util.List;
 import model.Mentors;
@@ -22,7 +24,7 @@ import model.Users;
  *
  * @author Duy Thai
  */
-public class MentorDAO {
+public class MentorDAO extends DBContext{
 
     Connection conn = null;
     PreparedStatement ps = null;
@@ -281,4 +283,57 @@ public class MentorDAO {
         return mentorIdList;
 
 }
+
+
+    private static final String GET_MENTOR_ID_BY_USER = "SELECT m.mentorId\n" +
+            "FROM Users u\n" +
+            "         JOIN Mentors m ON u.userId = m.userId\n" +
+            "WHERE u.userId = ?;";
+    public int getMentorIdByUser(int users) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(GET_MENTOR_ID_BY_USER);
+            preparedStatement.setInt(1, users);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("mentorId");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+
+    private static final String UPDATE_MENTOR = "UPDATE Mentors\n" +
+            "SET bio = ?, hourlyRate = ?\n" +
+            "WHERE mentorId = ?;";
+    public void updateMentor(Mentors mentor) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_MENTOR);
+            preparedStatement.setString(1, mentor.getBio());
+            preparedStatement.setString(2, mentor.getHourlyRate());
+            preparedStatement.setInt(3, mentor.getMentorId());
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static final String GET_USER_BY_MENTOR_ID = "SELECT u.*\n" +
+            "FROM Users u\n" +
+            "         JOIN Mentors m ON u.userId = m.userId\n" +
+            "WHERE m.mentorId = ?;";
+    public Users getUserByMentorID(String attribute) {
+        try(PreparedStatement preparedStatement = getConnection().prepareStatement(GET_USER_BY_MENTOR_ID)){
+            preparedStatement.setString(1, attribute);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()){
+                return new Users(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

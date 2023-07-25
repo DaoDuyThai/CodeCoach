@@ -51,87 +51,92 @@
                     </div>
                 </div>
             </div>
-            <div class="content">
-                <div class="container-fluid">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">UserId of Mentor</th>
-                                <th scope="col">UserId of Mentee</th>
-                                <th scope="col">Skill</th>
-                                <th scope="col">Start Date</th>
-                                <th scope="col">End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                for (int i = 0; i < listBookings.size(); i++) {
-                            %>
-                            <tr>
-                                <th scope="row"><%out.print(i + 1);%></th>
-                                <td>
-                                    <%
-                                        for (int j = 0; j < listMentors.size(); j++) {
-                                            if (listMentors.get(j).getMentorId() == listBookings.get(i).getMentorId()) {
-                                                out.print(listMentors.get(j).getUserId());
+            <div class="row">
+                <!-- mentee side bar start -->
+                <%@include file="adminsidebar.jsp" %>
+                <!-- mentee side bar end -->
+                <div class="content col-md-7 col-lg-8 col-xl-9">
+                    <div class="container-fluid">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">UserId of Mentor</th>
+                                    <th scope="col">UserId of Mentee</th>
+                                    <th scope="col">Skill</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    for (int i = 0; i < listBookings.size(); i++) {
+                                %>
+                                <tr>
+                                    <th scope="row"><%out.print(i + 1);%></th>
+                                    <td>
+                                        <%
+                                            for (int j = 0; j < listMentors.size(); j++) {
+                                                if (listMentors.get(j).getMentorId() == listBookings.get(i).getMentorId()) {
+                                                    out.print(listMentors.get(j).getUserId());
+                                                }
                                             }
-                                        }
-                                    %>
-                                </td>
-                                <td>
-                                    <%
-                                        for (int k = 0; k < listMentees.size(); k++) {
-                                            if (listMentees.get(k).getMenteeId() == listBookings.get(i).getMenteeId()) {
-                                                out.print(listMentees.get(k).getUserId());
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            for (int k = 0; k < listMentees.size(); k++) {
+                                                if (listMentees.get(k).getMenteeId() == listBookings.get(i).getMenteeId()) {
+                                                    out.print(listMentees.get(k).getUserId());
+                                                }
                                             }
-                                        }
-                                    %>
-                                </td>
-                                <td>
-                                    <%
-                                        for (int l = 0; l < listSkills.size(); l++) {
-                                            if (listSkills.get(l).getSkillId() == listBookings.get(i).getSkillId()) {
-                                                out.print(listSkills.get(l).getSkillName());
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            for (int l = 0; l < listSkills.size(); l++) {
+                                                if (listSkills.get(l).getSkillId() == listBookings.get(i).getSkillId()) {
+                                                    out.print(listSkills.get(l).getSkillName());
+                                                }
                                             }
-                                        }
-                                    %>
-                                </td>
-                                <td>
-                                    <%
-                                        for (int m = 0; m < listBookingDetails.size(); m++) {
-                                            if (listBookingDetails.get(m).getBookingId() == listBookings.get(i).getBookingId()) {
-                                                DateTimeFormatter initialFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                                                LocalDate date = LocalDate.parse(listBookingDetails.get(m).getDate(), initialFormatter);
-                                                // Định dạng mới
-                                                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                                                String newDateString = date.format(newFormatter);
-                                                out.print(newDateString);
-                                                break;
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%
+                                            for (int m = 0; m < listBookingDetails.size(); m++) {
+                                                if (listBookingDetails.get(m).getBookingId() == listBookings.get(i).getBookingId()) {
+                                                    DateTimeFormatter initialFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                                    LocalDate date = LocalDate.parse(listBookingDetails.get(m).getDate(), initialFormatter);
+                                                    // Định dạng mới
+                                                    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                                                    String newDateString = date.format(newFormatter);
+                                                    out.print(newDateString);
+                                                    break;
+                                                }
                                             }
-                                        }
 
-                                    %>
-                                </td>
-                                <td>
-                                    <%                                        for (int n = listBookingDetails.size() - 1; n >= 0; n--) {
-                                            if (listBookingDetails.get(n).getBookingId() == listBookings.get(i).getBookingId()) {
-                                                DateTimeFormatter initialFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                                                LocalDate date = LocalDate.parse(listBookingDetails.get(n).getDate(), initialFormatter);
-                                                // Định dạng mới
-                                                DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                                                String newDateString = date.format(newFormatter);
-                                                out.print(newDateString);
-                                                break;
+                                        %>
+                                    </td>
+                                    <td>
+                                        <%                                        for (int n = listBookingDetails.size() - 1; n >= 0; n--) {
+                                                if (listBookingDetails.get(n).getBookingId() == listBookings.get(i).getBookingId()) {
+                                                    DateTimeFormatter initialFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                                    LocalDate date = LocalDate.parse(listBookingDetails.get(n).getDate(), initialFormatter);
+                                                    // Định dạng mới
+                                                    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                                                    String newDateString = date.format(newFormatter);
+                                                    out.print(newDateString);
+                                                    break;
+                                                }
                                             }
-                                        }
-                                    %>
-                                </td>
-                            </tr>
-                            <%                                }
-                            %>                         
-                        </tbody>
-                    </table>
+                                        %>
+                                    </td>
+                                </tr>
+                                <%                                }
+                                %>                         
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>    
         </div>        

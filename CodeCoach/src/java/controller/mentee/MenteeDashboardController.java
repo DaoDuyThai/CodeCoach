@@ -123,7 +123,7 @@ public class MenteeDashboardController extends HttpServlet {
             }
 
         } catch (Exception e) {
-            response.sendRedirect("accessdeniedfull.jsp");
+            System.out.println(e);
         }
     }
 

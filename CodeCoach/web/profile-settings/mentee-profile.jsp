@@ -1,30 +1,12 @@
 <%@ page import="model.Users" %>
-<%@ page import="model.Expertise" %>
+<%@ page import="dal.TinhThanhPhoDAO" %>
+<%@ page import="dal.MenteeInterestDAO" %>
+<%@ page import="dal.SkillDAO" %>
+<%@ page import="model.MenteeInterests" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dal.*" %>
 <%@ page import="model.Skills" %>
 <!DOCTYPE html>
 <html lang="en">
-<%
-  List<Skills> allSkills = new SkillDAO().getAllSkill();
-  int mentorID = new MentorDAO().getMentorByUserId(((Users) session.getAttribute("users")).getUserId()).getMentorId();
-  List<Expertise> mentorExpertise = new ExpertiseDAO().getExpertiseByMentorId(mentorID);
-
-  for(Expertise expertise : mentorExpertise){
-    for(Skills skills : allSkills){
-      if(skills.getSkillId() == expertise.getSkillId()){
-        allSkills.remove(skills);
-        break;
-      }
-    }
-  }
-
-  request.setAttribute("allSkills", allSkills);
-  request.setAttribute("mentorExpertise", mentorExpertise);
-
-  request.setAttribute("skillDAO", new SkillDAO());
-
-%>
 
 
 <head>
@@ -52,6 +34,23 @@
   <!-- Header is placed here -->
   <%@include file="../header.jsp" %>
   <!--End of header-->
+  <%
+    List<MenteeInterests> menteeInterests = new MenteeInterestDAO().getMenteeInterestsByUserId(((Users) session.getAttribute("users")).getUserId());
+
+    List<Skills> skills = new SkillDAO().getAllSkill();
+    for(MenteeInterests menteeInterest : menteeInterests){
+      for(Skills skill : skills){
+        if(menteeInterest.getSkillId() == skill.getSkillId()){
+          skills.remove(skill);
+          break;
+        }
+      }
+    }
+
+    request.setAttribute("interests", menteeInterests);
+    request.setAttribute("allSkills", skills);
+    request.setAttribute("DAOSkills", new SkillDAO());
+  %>
 
 
   <div class="breadcrumb-bar">
@@ -66,67 +65,17 @@
   </div>
 
   <div class="content">
-
-    <c:if test="${requestScope.error != null}">
-      <div class="container mt-4">
-        <div class="alert alert-danger" role="alert">
-          ${requestScope.error}
-        </div>
-      </div>
-    </c:if>
-
     <div class="container-fluid">
       <div class="row">
 
-        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-
-          <div class="profile-sidebar">
-            <div class="user-widget">
-              <div class="pro-avatar"><c:out value="${users.fName.charAt(0)}" /><c:out value="${users.lName.charAt(1)}" />
-              </div>
-            </div>
-            <div class="custom-sidebar-nav">
-              <ul>
-                <li><a href="dashboard.html"><i class="fas fa-home"></i>Dashboard <span><i
-                        class="fas fa-chevron-right"></i></span></a></li>
-                <li><a href="bookings.html"><i class="fas fa-clock"></i>Bookings <span><i
-                        class="fas fa-chevron-right"></i></span></a></li>
-                <li><a href="schedule-timings.html"><i class="fas fa-hourglass-start"></i>Schedule
-                  Timings <span><i class="fas fa-chevron-right"></i></span></a></li>
-                <li><a href="logout"><i class="fas fa-sign-out-alt"></i>Logout <span><i
-                        class="fas fa-chevron-right"></i></span></a></li>
-              </ul>
-              <h5>Your expertise</h5>
-              <div class="row">
-
-                <c:forEach var="expertise" items="${mentorExpertise}">
-                  <div class="col-md-6 card">
-                    <div class="card-body justify-content-between align-content-center">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <p>${skillDAO.getSkillBySkillId(expertise.skillId).skillName}</p>
-                        </div>
-                        <div class="col-md-6">
-                          <a href="mentor-profile?go=delete&expertise-id=${expertise.expertiseId}">
-                            <button class="btn btn-danger">
-                              Delete
-                            </button>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </c:forEach>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        <!-- mentee side bar start -->
+                    <%@include file="../menteesidebar.jsp" %>
+                    <!-- mentee side bar end -->
 
         <div class="col-md-7 col-lg-8 col-xl-9">
           <div class="card">
             <div class="card-body">
-              <form action="mentor-profile" method="post">
+              <form action="mentee-profile" method="post">
                 <div class="row form-row">
 
                   <div class="col-12 col-md-6">
@@ -212,47 +161,43 @@
                     </div>
                   </div>
 
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label>Experience</label>
-                      <input name="experience" type="text" class="form-control"
-                             value="<%=new ExperienceDAO().getExperienceByUserID(((Users) session.getAttribute("users")).getUserId()).getDescription()%>">
-                    </div>
-                  </div>
+                  <h1 class="mt-3">
+                    Your interests:
+                  </h1>
+                  <div class="row mt-4 mb-3">
 
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label>Bio</label>
-                      <input name="bio" type="text" class="form-control"
-                             value="<%=new MentorDAO().getMentorByUserId(((Users) session.getAttribute("users")).getUserId()).getBio()%>">
-                    </div>
-                  </div>
-
-                  <div class="col-12">
-                    <div class="form-group">
-                      <label>Hourly rate</label>
-                      <input style="width: 50%" name="hourly-rate" type="number" class="form-control"
-                             value="<%=new MentorDAO().getMentorByUserId(((Users) session.getAttribute("users")).getUserId()).getHourlyRate()%>" min="0" max="100000000000000" step="1000">
-                    </div>
-                  </div>
-
-
-
-
-                  <h5>Add another expertise</h5>
-                  <div class="row">
-
-                    <c:forEach var="skill" items="${allSkills}">
-                      <div class="col-md-4">
-                        <div class="form-control">
-                          <input class="form-label" type="checkbox" name="${skill.skillId}" id="${skill.skillId}" value="${skill.skillId}">
-                          <label class="form-check" for="${skill.skillId}">${skill.skillName}</label>
+                      <c:forEach items="${interests}" var="interest">
+                        <div class="col-md-3">
+                        <div class="card-body">
+                          <p>${DAOSkills.getSkillBySkillId(interest.skillId).skillName}</p>
+                          <button class="ml-2 btn btn-danger btn-sm">
+                            <a href="mentee-profile?go=delete&interest-id=${interest.menteeInterestId}">Delete</a>
+                          </button>
                         </div>
-                      </div>
-                    </c:forEach>
-
+                        </div>
+                      </c:forEach>
+                    </div>
                   </div>
 
+                  <div class="card-body mt-3">
+                    <h1 class="mt-2">
+                      Add more interests:
+                    </h1>
+
+                    <div class="row">
+
+                        <c:forEach var="skill" items="${allSkills}">
+                          <div class="col-md-4">
+                          <div class="form-control">
+                            <input class="form-label" type="checkbox" name="${skill.skillId}" id="${skill.skillId}" value="${skill.skillId}">
+                            <label class="form-check" for="${skill.skillId}">${skill.skillName}</label>
+                          </div>
+                          </div>
+                        </c:forEach>
+
+                    </div>
+
+                  </div>
 
                 </div>
                 <div class="submit-section">
@@ -347,7 +292,5 @@
 <!-- Mirrored from mentoring.dreamguystech.com/html/template/profile-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:32:22 GMT -->
 
 </html>
-
-
 
 

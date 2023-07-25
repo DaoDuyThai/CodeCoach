@@ -127,7 +127,6 @@
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <div class="col-md-12 col-12">
-                            
                             <h2 class="breadcrumb-title">Booking</h2>
                         </div>
                     </div>
@@ -163,6 +162,7 @@
                     <c:if test="${sessionScope.error != null}">
                         <div class="alert alert-danger" role="alert">
                             ${sessionScope.error}
+                            ${sessionScope.remove("error")}
                         </div>
                     </c:if>
 
@@ -171,9 +171,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="booking-user-info">
-                                        
                                         <div class="booking-info">
-                                            <h4><a href="">${requestScope.mentor.fName} ${requestScope.mentor.lName}</a></h4>
+                                            <h4><a href="viewmentorprofile?mentorId=${mentorId}">${requestScope.mentor.fName} ${requestScope.mentor.lName}</a></h4>
                                             <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i><%=new TinhThanhPhoDAO().getTTPNameAndQHName(((Users) session.getAttribute("users")).getUserId())%>
 
                                                 <br>
@@ -561,8 +560,6 @@
     <!-- Mirrored from mentoring.dreamguystech.com/html/template/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 14 May 2023 10:33:03 GMT -->
 
 </html>
-
-
 
 
 

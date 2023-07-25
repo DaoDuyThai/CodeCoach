@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import model.Categories;
 import model.Skills;
 import model.SubCategories;
 
@@ -40,7 +41,10 @@ public class SubCategoryController extends HttpServlet {
         String countSubCategory = new CategoryDAO().countSubCategory(categoryId);
         request.setAttribute("countSubCategory", countSubCategory);
         request.setAttribute("listS", listS);      
+        List<Categories> listCategories = new CategoryDAO().getAll();
+        request.setAttribute("listCategories", listCategories);
         request.getRequestDispatcher("subcategory.jsp").forward(request, response);
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +71,15 @@ public class SubCategoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+        String subCategoryName = request.getParameter("subCategoryName");
+        SubCategories sub = new SubCategories(categoryId, subCategoryName);
+        CategoryDAO categoryDao = new CategoryDAO();
+        categoryDao.insertSubCategory(sub); 
+        String redirectURL = "subcategory?categoryId=" + categoryId;
+        response.sendRedirect(redirectURL);
+
     }
 
     /** 

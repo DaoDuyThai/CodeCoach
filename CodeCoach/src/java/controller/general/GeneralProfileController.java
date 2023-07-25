@@ -5,6 +5,7 @@
 
 package controller.general;
 
+import controller.mentee.MenteeProfileController;
 import dal.TinhThanhPhoDAO;
 import dal.UserDAO;
 import jakarta.servlet.ServletException;
@@ -56,33 +57,7 @@ public class GeneralProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String fName = request.getParameter("first_name");
-        String lName = request.getParameter("last_name");
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String phoneNum = request.getParameter("phone_number");
-        String address = request.getParameter("address");
-        String facebook = request.getParameter("facebook");
-        String maqh = request.getParameter("district");
-        Users user = new Users();
-        if("".equals(maqh) || maqh == null)
-            maqh = ((Users) request.getSession().getAttribute("users")).getMaqh();
-        user.setMaqh(maqh);
-        user.setfName(fName);
-        user.setlName(lName);
-        user.setPhoneNum(phoneNum);
-        user.setAddress(address);
-        user.setGender(gender);
-        user.setEmail(email);
-        user.setFacebook(facebook);
-        user.setPassword(((Users) request.getSession().getAttribute("users")).getPassword());
-        user.setUserId(((Users) request.getSession().getAttribute("users")).getUserId());
-        user.setRoleId(((Users) request.getSession().getAttribute("users")).getRoleId());
-        user.setStatusId(((Users) request.getSession().getAttribute("users")).getStatusId());
-        UserDAO dao = new UserDAO();
-        dao.updateUsers(user);
-        HttpSession session = request.getSession();
-        session.setAttribute("users", user);
+        MenteeProfileController.updateGeneralProfile(request);
 
         response.sendRedirect(request.getContextPath() + "/home");
     }
