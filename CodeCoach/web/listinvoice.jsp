@@ -81,7 +81,7 @@
                                     <th>Mentor Name</th>
                                     <th>Mentee Name</th>
                                     <th>Skill</th>
-                                    <th>Invoice</th>
+                                    <th>Invoice(VND)</th>
                                 </tr>                                   
                             </table>
                             <%

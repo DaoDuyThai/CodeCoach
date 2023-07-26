@@ -90,6 +90,9 @@ public class BookingSuccessfulController extends HttpServlet {
                 int chatRoomId = new ChatRoomDAO().getLatestChatRoomId();
                 new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, u.getUserId());
                 new ChatRoomUsersDAO().insertChatRoomUser(chatRoomId, m.getUserId());
+                sharedChatRoomId = new ChatRoomUsersDAO().getSharedChatRoomIdbyId(u.getUserId(), m.getUserId());
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(m.getUserId()), String.valueOf(sharedChatRoomId), "You have successfully submitted your application, please wait for the mentor to review your request. During that time you can communicate with your mentor here");
+                new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
             }else {
                 new ChatMessagesDAO().insertChatMessage(String.valueOf(m.getUserId()), String.valueOf(sharedChatRoomId), "You have successfully submitted your application, please wait for the mentor to review your request. During that time you can communicate with your mentor here");
                 new ChatMessagesDAO().insertChatMessage(String.valueOf(u.getUserId()), String.valueOf(sharedChatRoomId), "Enter the message below to chat with the mentor");
@@ -122,5 +125,7 @@ public class BookingSuccessfulController extends HttpServlet {
     }// </editor-fold>
 
 }
+
+
 
 
