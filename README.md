@@ -46,7 +46,7 @@ Follow the steps below to set up the project:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/DuyThaiddt/CodeCoach
+    git clone https://github.com/DaoDuyThai/CodeCoach
     ```
 
 2. **Open Netbeans:**
